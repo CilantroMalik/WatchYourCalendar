@@ -1,0 +1,850 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5C91878827A35B990097DCB0 /* CalendarTest WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 5C91878727A35B990097DCB0 /* CalendarTest WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5C91878D27A35B9C0097DCB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C91878C27A35B9C0097DCB0 /* Assets.xcassets */; };
+		5C91879427A35B9C0097DCB0 /* CalendarTest WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5C91879327A35B9C0097DCB0 /* CalendarTest WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5C91879927A35B9C0097DCB0 /* CalendarTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91879827A35B9C0097DCB0 /* CalendarTestApp.swift */; };
+		5C91879B27A35B9C0097DCB0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91879A27A35B9C0097DCB0 /* ContentView.swift */; };
+		5C91879D27A35B9C0097DCB0 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91879C27A35B9C0097DCB0 /* NotificationController.swift */; };
+		5C91879F27A35B9C0097DCB0 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91879E27A35B9C0097DCB0 /* NotificationView.swift */; };
+		5C9187A127A35B9C0097DCB0 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9187A027A35B9C0097DCB0 /* ComplicationController.swift */; };
+		5C9187A327A35B9D0097DCB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C9187A227A35B9D0097DCB0 /* Assets.xcassets */; };
+		5C9187A627A35B9D0097DCB0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C9187A527A35B9D0097DCB0 /* Preview Assets.xcassets */; };
+		5C9187B227A35B9D0097DCB0 /* CalendarTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9187B127A35B9D0097DCB0 /* CalendarTestTests.swift */; };
+		5C9187BD27A35B9D0097DCB0 /* CalendarTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9187BC27A35B9D0097DCB0 /* CalendarTestUITests.swift */; };
+		5C91885227A363000097DCB0 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885127A363000097DCB0 /* DayView.swift */; };
+		5C91885427A363610097DCB0 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885327A363610097DCB0 /* Day.swift */; };
+		5C91885627A3681B0097DCB0 /* DayView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885527A3681B0097DCB0 /* DayView1.swift */; };
+		5C91885827A368250097DCB0 /* DayView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885727A368250097DCB0 /* DayView2.swift */; };
+		5C91885A27A368300097DCB0 /* DayView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885927A368300097DCB0 /* DayView3.swift */; };
+		5C91885C27A3683A0097DCB0 /* DayView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885B27A3683A0097DCB0 /* DayView4.swift */; };
+		5C91885E27A368410097DCB0 /* DayView5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885D27A368410097DCB0 /* DayView5.swift */; };
+		5C91886027A368490097DCB0 /* DayView6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885F27A368490097DCB0 /* DayView6.swift */; };
+		5C91886227A368520097DCB0 /* DayView7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91886127A368520097DCB0 /* DayView7.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5C91878927A35B990097DCB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C91877D27A35B990097DCB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C91878627A35B990097DCB0;
+			remoteInfo = "CalendarTest WatchKit App";
+		};
+		5C91879527A35B9C0097DCB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C91877D27A35B990097DCB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C91879227A35B9C0097DCB0;
+			remoteInfo = "CalendarTest WatchKit Extension";
+		};
+		5C9187AE27A35B9D0097DCB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C91877D27A35B990097DCB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C91879227A35B9C0097DCB0;
+			remoteInfo = "CalendarTest WatchKit Extension";
+		};
+		5C9187B927A35B9D0097DCB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C91877D27A35B990097DCB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C91878627A35B990097DCB0;
+			remoteInfo = "CalendarTest WatchKit App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5C9187C427A35B9D0097DCB0 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5C91879427A35B9C0097DCB0 /* CalendarTest WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C9187C827A35B9D0097DCB0 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				5C91878827A35B990097DCB0 /* CalendarTest WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		5C91878327A35B990097DCB0 /* CalendarTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C91878727A35B990097DCB0 /* CalendarTest WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CalendarTest WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C91878C27A35B9C0097DCB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5C91878E27A35B9C0097DCB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C91879327A35B9C0097DCB0 /* CalendarTest WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "CalendarTest WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C91879827A35B9C0097DCB0 /* CalendarTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTestApp.swift; sourceTree = "<group>"; };
+		5C91879A27A35B9C0097DCB0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5C91879C27A35B9C0097DCB0 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		5C91879E27A35B9C0097DCB0 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		5C9187A027A35B9C0097DCB0 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		5C9187A227A35B9D0097DCB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5C9187A527A35B9D0097DCB0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5C9187A727A35B9D0097DCB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C9187A827A35B9D0097DCB0 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		5C9187AD27A35B9D0097DCB0 /* CalendarTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalendarTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C9187B127A35B9D0097DCB0 /* CalendarTestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTestTests.swift; sourceTree = "<group>"; };
+		5C9187B327A35B9D0097DCB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C9187B827A35B9D0097DCB0 /* CalendarTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalendarTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C9187BC27A35B9D0097DCB0 /* CalendarTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTestUITests.swift; sourceTree = "<group>"; };
+		5C9187BE27A35B9D0097DCB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C91885127A363000097DCB0 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		5C91885327A363610097DCB0 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		5C91885527A3681B0097DCB0 /* DayView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView1.swift; sourceTree = "<group>"; };
+		5C91885727A368250097DCB0 /* DayView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView2.swift; sourceTree = "<group>"; };
+		5C91885927A368300097DCB0 /* DayView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView3.swift; sourceTree = "<group>"; };
+		5C91885B27A3683A0097DCB0 /* DayView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView4.swift; sourceTree = "<group>"; };
+		5C91885D27A368410097DCB0 /* DayView5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView5.swift; sourceTree = "<group>"; };
+		5C91885F27A368490097DCB0 /* DayView6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView6.swift; sourceTree = "<group>"; };
+		5C91886127A368520097DCB0 /* DayView7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView7.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5C91879027A35B9C0097DCB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C9187AA27A35B9D0097DCB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C9187B527A35B9D0097DCB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5C91877C27A35B990097DCB0 = {
+			isa = PBXGroup;
+			children = (
+				5C91878B27A35B990097DCB0 /* CalendarTest WatchKit App */,
+				5C91879727A35B9C0097DCB0 /* CalendarTest WatchKit Extension */,
+				5C9187B027A35B9D0097DCB0 /* CalendarTestTests */,
+				5C9187BB27A35B9D0097DCB0 /* CalendarTestUITests */,
+				5C91878427A35B990097DCB0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5C91878427A35B990097DCB0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C91878327A35B990097DCB0 /* CalendarTest.app */,
+				5C91878727A35B990097DCB0 /* CalendarTest WatchKit App.app */,
+				5C91879327A35B9C0097DCB0 /* CalendarTest WatchKit Extension.appex */,
+				5C9187AD27A35B9D0097DCB0 /* CalendarTestTests.xctest */,
+				5C9187B827A35B9D0097DCB0 /* CalendarTestUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5C91878B27A35B990097DCB0 /* CalendarTest WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				5C91878C27A35B9C0097DCB0 /* Assets.xcassets */,
+				5C91878E27A35B9C0097DCB0 /* Info.plist */,
+			);
+			path = "CalendarTest WatchKit App";
+			sourceTree = "<group>";
+		};
+		5C91879727A35B9C0097DCB0 /* CalendarTest WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5C91879827A35B9C0097DCB0 /* CalendarTestApp.swift */,
+				5C91879A27A35B9C0097DCB0 /* ContentView.swift */,
+				5C91885127A363000097DCB0 /* DayView.swift */,
+				5C91885527A3681B0097DCB0 /* DayView1.swift */,
+				5C91885727A368250097DCB0 /* DayView2.swift */,
+				5C91885927A368300097DCB0 /* DayView3.swift */,
+				5C91885B27A3683A0097DCB0 /* DayView4.swift */,
+				5C91885D27A368410097DCB0 /* DayView5.swift */,
+				5C91885F27A368490097DCB0 /* DayView6.swift */,
+				5C91886127A368520097DCB0 /* DayView7.swift */,
+				5C91885327A363610097DCB0 /* Day.swift */,
+				5C91879C27A35B9C0097DCB0 /* NotificationController.swift */,
+				5C91879E27A35B9C0097DCB0 /* NotificationView.swift */,
+				5C9187A027A35B9C0097DCB0 /* ComplicationController.swift */,
+				5C9187A227A35B9D0097DCB0 /* Assets.xcassets */,
+				5C9187A727A35B9D0097DCB0 /* Info.plist */,
+				5C9187A827A35B9D0097DCB0 /* PushNotificationPayload.apns */,
+				5C9187A427A35B9D0097DCB0 /* Preview Content */,
+			);
+			path = "CalendarTest WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		5C9187A427A35B9D0097DCB0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				5C9187A527A35B9D0097DCB0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5C9187B027A35B9D0097DCB0 /* CalendarTestTests */ = {
+			isa = PBXGroup;
+			children = (
+				5C9187B127A35B9D0097DCB0 /* CalendarTestTests.swift */,
+				5C9187B327A35B9D0097DCB0 /* Info.plist */,
+			);
+			path = CalendarTestTests;
+			sourceTree = "<group>";
+		};
+		5C9187BB27A35B9D0097DCB0 /* CalendarTestUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5C9187BC27A35B9D0097DCB0 /* CalendarTestUITests.swift */,
+				5C9187BE27A35B9D0097DCB0 /* Info.plist */,
+			);
+			path = CalendarTestUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5C91878227A35B990097DCB0 /* CalendarTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C9187C927A35B9D0097DCB0 /* Build configuration list for PBXNativeTarget "CalendarTest" */;
+			buildPhases = (
+				5C91878127A35B990097DCB0 /* Resources */,
+				5C9187C827A35B9D0097DCB0 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5C91878A27A35B990097DCB0 /* PBXTargetDependency */,
+			);
+			name = CalendarTest;
+			productName = CalendarTest;
+			productReference = 5C91878327A35B990097DCB0 /* CalendarTest.app */;
+			productType = "com.apple.product-type.application.watchapp2-container";
+		};
+		5C91878627A35B990097DCB0 /* CalendarTest WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C9187C527A35B9D0097DCB0 /* Build configuration list for PBXNativeTarget "CalendarTest WatchKit App" */;
+			buildPhases = (
+				5C91878527A35B990097DCB0 /* Resources */,
+				5C9187C427A35B9D0097DCB0 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5C91879627A35B9C0097DCB0 /* PBXTargetDependency */,
+			);
+			name = "CalendarTest WatchKit App";
+			productName = "CalendarTest WatchKit App";
+			productReference = 5C91878727A35B990097DCB0 /* CalendarTest WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		5C91879227A35B9C0097DCB0 /* CalendarTest WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C9187C127A35B9D0097DCB0 /* Build configuration list for PBXNativeTarget "CalendarTest WatchKit Extension" */;
+			buildPhases = (
+				5C91878F27A35B9C0097DCB0 /* Sources */,
+				5C91879027A35B9C0097DCB0 /* Frameworks */,
+				5C91879127A35B9C0097DCB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CalendarTest WatchKit Extension";
+			productName = "CalendarTest WatchKit Extension";
+			productReference = 5C91879327A35B9C0097DCB0 /* CalendarTest WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		5C9187AC27A35B9D0097DCB0 /* CalendarTestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C9187CC27A35B9D0097DCB0 /* Build configuration list for PBXNativeTarget "CalendarTestTests" */;
+			buildPhases = (
+				5C9187A927A35B9D0097DCB0 /* Sources */,
+				5C9187AA27A35B9D0097DCB0 /* Frameworks */,
+				5C9187AB27A35B9D0097DCB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5C9187AF27A35B9D0097DCB0 /* PBXTargetDependency */,
+			);
+			name = CalendarTestTests;
+			productName = CalendarTestTests;
+			productReference = 5C9187AD27A35B9D0097DCB0 /* CalendarTestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5C9187B727A35B9D0097DCB0 /* CalendarTestUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C9187CF27A35B9D0097DCB0 /* Build configuration list for PBXNativeTarget "CalendarTestUITests" */;
+			buildPhases = (
+				5C9187B427A35B9D0097DCB0 /* Sources */,
+				5C9187B527A35B9D0097DCB0 /* Frameworks */,
+				5C9187B627A35B9D0097DCB0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5C9187BA27A35B9D0097DCB0 /* PBXTargetDependency */,
+			);
+			name = CalendarTestUITests;
+			productName = CalendarTestUITests;
+			productReference = 5C9187B827A35B9D0097DCB0 /* CalendarTestUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5C91877D27A35B990097DCB0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					5C91878227A35B990097DCB0 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					5C91878627A35B990097DCB0 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					5C91879227A35B9C0097DCB0 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					5C9187AC27A35B9D0097DCB0 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 5C91879227A35B9C0097DCB0;
+					};
+					5C9187B727A35B9D0097DCB0 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 5C91878627A35B990097DCB0;
+					};
+				};
+			};
+			buildConfigurationList = 5C91878027A35B990097DCB0 /* Build configuration list for PBXProject "CalendarTest" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5C91877C27A35B990097DCB0;
+			productRefGroup = 5C91878427A35B990097DCB0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5C91878227A35B990097DCB0 /* CalendarTest */,
+				5C91878627A35B990097DCB0 /* CalendarTest WatchKit App */,
+				5C91879227A35B9C0097DCB0 /* CalendarTest WatchKit Extension */,
+				5C9187AC27A35B9D0097DCB0 /* CalendarTestTests */,
+				5C9187B727A35B9D0097DCB0 /* CalendarTestUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5C91878127A35B990097DCB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C91878527A35B990097DCB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C91878D27A35B9C0097DCB0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C91879127A35B9C0097DCB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C9187A627A35B9D0097DCB0 /* Preview Assets.xcassets in Resources */,
+				5C9187A327A35B9D0097DCB0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C9187AB27A35B9D0097DCB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C9187B627A35B9D0097DCB0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5C91878F27A35B9C0097DCB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C91885427A363610097DCB0 /* Day.swift in Sources */,
+				5C91886027A368490097DCB0 /* DayView6.swift in Sources */,
+				5C91879D27A35B9C0097DCB0 /* NotificationController.swift in Sources */,
+				5C91885C27A3683A0097DCB0 /* DayView4.swift in Sources */,
+				5C91885227A363000097DCB0 /* DayView.swift in Sources */,
+				5C91885627A3681B0097DCB0 /* DayView1.swift in Sources */,
+				5C91885827A368250097DCB0 /* DayView2.swift in Sources */,
+				5C91879B27A35B9C0097DCB0 /* ContentView.swift in Sources */,
+				5C91885E27A368410097DCB0 /* DayView5.swift in Sources */,
+				5C9187A127A35B9C0097DCB0 /* ComplicationController.swift in Sources */,
+				5C91885A27A368300097DCB0 /* DayView3.swift in Sources */,
+				5C91879927A35B9C0097DCB0 /* CalendarTestApp.swift in Sources */,
+				5C91879F27A35B9C0097DCB0 /* NotificationView.swift in Sources */,
+				5C91886227A368520097DCB0 /* DayView7.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C9187A927A35B9D0097DCB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C9187B227A35B9D0097DCB0 /* CalendarTestTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C9187B427A35B9D0097DCB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C9187BD27A35B9D0097DCB0 /* CalendarTestUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5C91878A27A35B990097DCB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5C91878627A35B990097DCB0 /* CalendarTest WatchKit App */;
+			targetProxy = 5C91878927A35B990097DCB0 /* PBXContainerItemProxy */;
+		};
+		5C91879627A35B9C0097DCB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5C91879227A35B9C0097DCB0 /* CalendarTest WatchKit Extension */;
+			targetProxy = 5C91879527A35B9C0097DCB0 /* PBXContainerItemProxy */;
+		};
+		5C9187AF27A35B9D0097DCB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5C91879227A35B9C0097DCB0 /* CalendarTest WatchKit Extension */;
+			targetProxy = 5C9187AE27A35B9D0097DCB0 /* PBXContainerItemProxy */;
+		};
+		5C9187BA27A35B9D0097DCB0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5C91878627A35B990097DCB0 /* CalendarTest WatchKit App */;
+			targetProxy = 5C9187B927A35B9D0097DCB0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		5C9187BF27A35B9D0097DCB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5C9187C027A35B9D0097DCB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5C9187C227A35B9D0097DCB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"CalendarTest WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 72S2H2ZD48;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "CalendarTest WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.CalendarTest.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Debug;
+		};
+		5C9187C327A35B9D0097DCB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"CalendarTest WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 72S2H2ZD48;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "CalendarTest WatchKit Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.CalendarTest.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Release;
+		};
+		5C9187C627A35B9D0097DCB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72S2H2ZD48;
+				IBSC_MODULE = CalendarTest_WatchKit_Extension;
+				INFOPLIST_FILE = "CalendarTest WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = me.CalendarTest.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Debug;
+		};
+		5C9187C727A35B9D0097DCB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72S2H2ZD48;
+				IBSC_MODULE = CalendarTest_WatchKit_Extension;
+				INFOPLIST_FILE = "CalendarTest WatchKit App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = me.CalendarTest.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Release;
+		};
+		5C9187CA27A35B9D0097DCB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 72S2H2ZD48;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.CalendarTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		5C9187CB27A35B9D0097DCB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 72S2H2ZD48;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = me.CalendarTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		5C9187CD27A35B9D0097DCB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72S2H2ZD48;
+				INFOPLIST_FILE = CalendarTestTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.CalendarTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CalendarTest WatchKit Extension.appex/CalendarTest WatchKit Extension";
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Debug;
+		};
+		5C9187CE27A35B9D0097DCB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72S2H2ZD48;
+				INFOPLIST_FILE = CalendarTestTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.CalendarTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CalendarTest WatchKit Extension.appex/CalendarTest WatchKit Extension";
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Release;
+		};
+		5C9187D027A35B9D0097DCB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72S2H2ZD48;
+				INFOPLIST_FILE = CalendarTestUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.CalendarTestUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "CalendarTest WatchKit App";
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Debug;
+		};
+		5C9187D127A35B9D0097DCB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72S2H2ZD48;
+				INFOPLIST_FILE = CalendarTestUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = me.CalendarTestUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "CalendarTest WatchKit App";
+				WATCHOS_DEPLOYMENT_TARGET = 7.4;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5C91878027A35B990097DCB0 /* Build configuration list for PBXProject "CalendarTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C9187BF27A35B9D0097DCB0 /* Debug */,
+				5C9187C027A35B9D0097DCB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C9187C127A35B9D0097DCB0 /* Build configuration list for PBXNativeTarget "CalendarTest WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C9187C227A35B9D0097DCB0 /* Debug */,
+				5C9187C327A35B9D0097DCB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C9187C527A35B9D0097DCB0 /* Build configuration list for PBXNativeTarget "CalendarTest WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C9187C627A35B9D0097DCB0 /* Debug */,
+				5C9187C727A35B9D0097DCB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C9187C927A35B9D0097DCB0 /* Build configuration list for PBXNativeTarget "CalendarTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C9187CA27A35B9D0097DCB0 /* Debug */,
+				5C9187CB27A35B9D0097DCB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C9187CC27A35B9D0097DCB0 /* Build configuration list for PBXNativeTarget "CalendarTestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C9187CD27A35B9D0097DCB0 /* Debug */,
+				5C9187CE27A35B9D0097DCB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C9187CF27A35B9D0097DCB0 /* Build configuration list for PBXNativeTarget "CalendarTestUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C9187D027A35B9D0097DCB0 /* Debug */,
+				5C9187D127A35B9D0097DCB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5C91877D27A35B990097DCB0 /* Project object */;
+}
