@@ -4,16 +4,28 @@ A minimal watch app that makes the flow of the school day conveniently available
 
 
 what’s next?
+
 -swiping
+
 -complications
+
 -notifications (next class is in `time`)
+
 -(settings)
+
 -meetings/tests
+
 -removing classes from "up next" after done?
+
+-organization of code
+
 
 
 utilities:
+
 day, minute, hour
-morning act
+
+morning actitivies
+
 big dictionaries (classes)
 
