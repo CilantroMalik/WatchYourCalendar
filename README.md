@@ -5,7 +5,7 @@ A minimal watch app that makes the flow of the school day conveniently available
 
 what’s next?
 
--swiping
+-swiping / SCROLLING
 
 -complications
 
@@ -21,7 +21,7 @@ what’s next?
 
 
 
-utilities:
+utilities: DONE
 
 day, minute, hour
 
