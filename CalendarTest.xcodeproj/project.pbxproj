@@ -20,14 +20,7 @@
 		5C9187B227A35B9D0097DCB0 /* CalendarTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9187B127A35B9D0097DCB0 /* CalendarTestTests.swift */; };
 		5C9187BD27A35B9D0097DCB0 /* CalendarTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9187BC27A35B9D0097DCB0 /* CalendarTestUITests.swift */; };
 		5C91885227A363000097DCB0 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885127A363000097DCB0 /* DayView.swift */; };
-		5C91885427A363610097DCB0 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885327A363610097DCB0 /* Day.swift */; };
-		5C91885627A3681B0097DCB0 /* DayView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885527A3681B0097DCB0 /* DayView1.swift */; };
-		5C91885827A368250097DCB0 /* DayView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885727A368250097DCB0 /* DayView2.swift */; };
-		5C91885A27A368300097DCB0 /* DayView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885927A368300097DCB0 /* DayView3.swift */; };
-		5C91885C27A3683A0097DCB0 /* DayView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885B27A3683A0097DCB0 /* DayView4.swift */; };
-		5C91885E27A368410097DCB0 /* DayView5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885D27A368410097DCB0 /* DayView5.swift */; };
-		5C91886027A368490097DCB0 /* DayView6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885F27A368490097DCB0 /* DayView6.swift */; };
-		5C91886227A368520097DCB0 /* DayView7.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91886127A368520097DCB0 /* DayView7.swift */; };
+		5CDF9C9027A7231F00B608C2 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDF9C8F27A7231F00B608C2 /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,14 +101,7 @@
 		5C9187BC27A35B9D0097DCB0 /* CalendarTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTestUITests.swift; sourceTree = "<group>"; };
 		5C9187BE27A35B9D0097DCB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C91885127A363000097DCB0 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
-		5C91885327A363610097DCB0 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
-		5C91885527A3681B0097DCB0 /* DayView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView1.swift; sourceTree = "<group>"; };
-		5C91885727A368250097DCB0 /* DayView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView2.swift; sourceTree = "<group>"; };
-		5C91885927A368300097DCB0 /* DayView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView3.swift; sourceTree = "<group>"; };
-		5C91885B27A3683A0097DCB0 /* DayView4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView4.swift; sourceTree = "<group>"; };
-		5C91885D27A368410097DCB0 /* DayView5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView5.swift; sourceTree = "<group>"; };
-		5C91885F27A368490097DCB0 /* DayView6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView6.swift; sourceTree = "<group>"; };
-		5C91886127A368520097DCB0 /* DayView7.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView7.swift; sourceTree = "<group>"; };
+		5CDF9C8F27A7231F00B608C2 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,14 +167,7 @@
 				5C91879827A35B9C0097DCB0 /* CalendarTestApp.swift */,
 				5C91879A27A35B9C0097DCB0 /* ContentView.swift */,
 				5C91885127A363000097DCB0 /* DayView.swift */,
-				5C91885527A3681B0097DCB0 /* DayView1.swift */,
-				5C91885727A368250097DCB0 /* DayView2.swift */,
-				5C91885927A368300097DCB0 /* DayView3.swift */,
-				5C91885B27A3683A0097DCB0 /* DayView4.swift */,
-				5C91885D27A368410097DCB0 /* DayView5.swift */,
-				5C91885F27A368490097DCB0 /* DayView6.swift */,
-				5C91886127A368520097DCB0 /* DayView7.swift */,
-				5C91885327A363610097DCB0 /* Day.swift */,
+				5CDF9C8F27A7231F00B608C2 /* Utilities.swift */,
 				5C91879C27A35B9C0097DCB0 /* NotificationController.swift */,
 				5C91879E27A35B9C0097DCB0 /* NotificationView.swift */,
 				5C9187A027A35B9C0097DCB0 /* ComplicationController.swift */,
@@ -412,20 +391,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C91885427A363610097DCB0 /* Day.swift in Sources */,
-				5C91886027A368490097DCB0 /* DayView6.swift in Sources */,
 				5C91879D27A35B9C0097DCB0 /* NotificationController.swift in Sources */,
-				5C91885C27A3683A0097DCB0 /* DayView4.swift in Sources */,
 				5C91885227A363000097DCB0 /* DayView.swift in Sources */,
-				5C91885627A3681B0097DCB0 /* DayView1.swift in Sources */,
-				5C91885827A368250097DCB0 /* DayView2.swift in Sources */,
 				5C91879B27A35B9C0097DCB0 /* ContentView.swift in Sources */,
-				5C91885E27A368410097DCB0 /* DayView5.swift in Sources */,
 				5C9187A127A35B9C0097DCB0 /* ComplicationController.swift in Sources */,
-				5C91885A27A368300097DCB0 /* DayView3.swift in Sources */,
 				5C91879927A35B9C0097DCB0 /* CalendarTestApp.swift in Sources */,
+				5CDF9C9027A7231F00B608C2 /* Utilities.swift in Sources */,
 				5C91879F27A35B9C0097DCB0 /* NotificationView.swift in Sources */,
-				5C91886227A368520097DCB0 /* DayView7.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
