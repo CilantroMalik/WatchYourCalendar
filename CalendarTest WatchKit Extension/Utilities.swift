@@ -85,7 +85,12 @@ func isAfter(hour1:Int,minute1: Int,hour2:Int ,minute2:Int) -> Bool{ //is time2 
 }
 
 func isSchool() -> Bool{
+    let date = Date()
+    let cal = Calendar.current
+    let hour = cal.component(.hour, from: date)
     if cycleDay != 0 {
+        return true
+    } else if hour < 17{
         return true
     } else {
         return false
