@@ -35,8 +35,6 @@ var cycleDay : Int {
         if let cycleDay = optionalCycle {
             return cycleDay
         } else { return 0 }
-//        return 6
-        
     }
 }
 

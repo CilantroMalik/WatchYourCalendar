@@ -104,7 +104,7 @@ func getNextClass() -> Text {
     if cycleDay == 0{
         return Text("")
     } else if nowIsBeforeBlockBegins(block: 0){
-        return Text("First Class: ") + Text(classes[cycleDay]![0]).foregroundColor(.red)
+        return Text("First: ") + Text(classes[cycleDay]![0]).foregroundColor(.red)
     } else if nowIsBeforeBlockBegins(block: 1){
         return Text("Next: ") + Text(getMorningActivity()).foregroundColor(.red)
     } else if (nowIsBeforeBlockBegins(block: 2)){
@@ -131,17 +131,24 @@ func getClasses() -> String {
 }
 
 var order: [Int: [String]] = [
-    0:["----No school!","","","",""],
+    0:["No school!","","","",""],
     1:["C","E","D","A","B"], 2:["F","G","H","A","B"], 3:["C","D","F","E","G"], 4:["H","A","B","C","D"], 5:["G","A","H","E","F"], 6:["B","C","D","E","F"], 7:["A","H","G","B","C"], 8:["D","E","F","G","H"]
 ]
- 
+func cycleDayDay() -> Text {
+    if cycleDay == 0{
+        return Text("No School!")
+    }else{
+        return Text("Day " + String(cycleDay))
+    }
+    
+}
  
 struct ContentView: View {
     @State var updation = Text("error")
     var body: some View {
         VStack{
             Spacer()
-        Text("Day \(cycleDay)")
+        cycleDayDay()
             .font(.title)
             .fontWeight(.heavy)
             .multilineTextAlignment(.center)
@@ -152,9 +159,9 @@ struct ContentView: View {
             if isSchool() {
                 Text("In: ") + Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)}
             Text("\(getDate())")
-    
+            if isSchool() {
             getOrder()
-            
+            }
 
             Spacer()
             if isSchool() {
