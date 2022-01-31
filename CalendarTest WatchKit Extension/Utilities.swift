@@ -90,7 +90,7 @@ func isSchool() -> Bool{
     let hour = cal.component(.hour, from: date)
     if cycleDay != 0 {
         return true
-    } else if hour < 17{
+    } else if hour < 18{
         return true
     } else {
         return false

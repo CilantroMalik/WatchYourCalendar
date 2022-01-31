@@ -49,7 +49,20 @@ func getTimeUntilNextClass(dc: DateComponents) -> DateComponents {
     return diff
 }
 func getTime(dc: DateComponents) -> String {
-    return String(dc.hour!) + ":" + String(dc.minute!) + ":" + String(dc.second!)
+    var hr = String(dc.hour!)
+    if hr.count == 1 {
+        hr = "0" + hr
+    }
+    var mn = String(dc.minute!)
+    if mn.count == 1 {
+        mn = "0" + mn
+    }
+    var sc = String(dc.second!)
+    if sc.count == 1 {
+        sc = "0" + sc
+    }
+    
+    return hr + ":" + mn + ":" + sc
 }
 
 func getDate() -> String {
@@ -124,22 +137,26 @@ var order: [Int: [String]] = [
  
  
 struct ContentView: View {
-     
+    @State var updation = Text("error")
     var body: some View {
- 
         VStack{
             Spacer()
         Text("Day \(cycleDay)")
             .font(.title)
             .fontWeight(.heavy)
             .multilineTextAlignment(.center)
-            
+        }
+        VStack{
             getNextClass().fontWeight(.heavy)
+//            while isSchool(){
+//            self.updation = Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)
+//            }
             if isSchool() {
-                Text (getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)}
+                Text("In: ") + Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)}
             Text("\(getDate())")
             
-            
+        }
+        VStack{
             getOrder()
             
 
