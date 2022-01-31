@@ -91,24 +91,45 @@ func isSchool() -> Bool{
         return false
     }
 }
-func nowIsAfterBlock(block:Int) -> Bool{
-    if block == 6 {
+func nowIsAfterBlockEnds(block:Int) -> Bool{
+    if block == 7 { //go home
         return isAfter(hour1: 15,minute1: 20,hour2: getHour(),minute2: getMinute())
-    } else if block == 5 {
+    } else if block == 6 { //sports or go home
         return isAfter(hour1: 14,minute1: 30,hour2: getHour(),minute2: getMinute())
-    } else if block == 4 {
+    } else if block == 5 { //next: last block
         return isAfter(hour1: 13,minute1: 20,hour2: getHour(),minute2: getMinute())
-    } else if block == 3 {
+    } else if block == 4 {// next: afterlunch block
         return isAfter(hour1: 12,minute1: 30,hour2: getHour(),minute2: getMinute())
-    } else if block == 2 {
+    } else if block == 3 {// next: lunch
         return isAfter(hour1: 11,minute1: 25,hour2: getHour(),minute2: getMinute())
-    } else if block == 1 { //morning activity
+    } else if block == 2 { //next: block 3
         return isAfter(hour1: 10,minute1: 35,hour2: getHour(),minute2: getMinute())
-    }else if block == 0 {
+    }else if block == 1 { //next: block 2
             return isAfter(hour1: 10,minute1: 00,hour2: getHour(),minute2: getMinute())
-    } else {
-        return false
+    } else if block == 0 { //next: morning Activity
+        return isAfter(hour1: 9, minute1: 55, hour2: getHour(), minute2: getMinute())
     }
+    return false
+}
+func nowIsBeforeBlockBegins(block: Int) -> Bool{
+    if block == 7 { //
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 15,minute2: 15)
+    } else if block == 6 { //
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 30)
+    } else if block == 5 { //before
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 20)
+    } else if block == 4 {//before lunch
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 12,minute2: 30)
+    } else if block == 3 {//
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 11,minute2: 25)
+    } else if block == 2 { //
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 35)
+    }else if block == 1 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 00)
+    } else if block == 0 { //before first block
+        return isAfter(hour1: getHour(), minute1: getMinute(), hour2: 8, minute2: 55)
+    }
+    return false
 }
 func getMorningActivity() -> String {
     // TODO
