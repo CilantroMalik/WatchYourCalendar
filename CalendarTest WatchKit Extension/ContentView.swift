@@ -29,19 +29,13 @@ func getColor(Blk: Int) -> Text {
 func blockToBlock(bb: Int) -> Int {
     if bb == 0{
         return 0
-    } else if bb == 1 {
-        return 0
     } else if bb == 2 {
         return 1
     } else if bb == 3 {
         return 2
-    } else if bb == 4 {
-        return 2
     } else if bb == 5 {
         return 3
     } else if bb == 6 {
-        return 4
-    } else if bb == 7 {
         return 4
     } else {
         return 99

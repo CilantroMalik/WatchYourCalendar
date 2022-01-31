@@ -140,9 +140,13 @@ func getMorningActivity() -> String {
     case 1:
         return "None"
     case 2:
-        return "Community Meeting"
-    case 3:
         return "Clubs"
+    case 3:
+        return "Community Meeting"
+//    case 2:
+//        return "Community Meeting"
+//    case 3:
+//        return "Clubs"
     case 4:
         return "Advisory"
     case 5:
