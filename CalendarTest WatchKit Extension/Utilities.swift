@@ -73,7 +73,7 @@ var classes: [Int: [String]] = [
     8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Fitness Center"]
 ]
 
-func isAfter(hour1:Int,minute1: Int,hour2:Int ,minute2:Int) -> Bool{
+func isAfter(hour1:Int,minute1: Int,hour2:Int ,minute2:Int) -> Bool{ //is time2 after time1
     if hour2>hour1{
         return true
     } else if hour1>hour2{
@@ -93,19 +93,19 @@ func isSchool() -> Bool{
 }
 func nowIsAfterBlock(block:Int) -> Bool{
     if block == 6 {
-        return isAfter(hour1: 15,minute1: 15,hour2: getHour(),minute2: getMinute())
+        return isAfter(hour1: 15,minute1: 20,hour2: getHour(),minute2: getMinute())
     } else if block == 5 {
-        return isAfter(hour1: 14,minute1: 20,hour2: getHour(),minute2: getMinute())
+        return isAfter(hour1: 14,minute1: 30,hour2: getHour(),minute2: getMinute())
     } else if block == 4 {
-        return isAfter(hour1: 13,minute1: 15,hour2: getHour(),minute2: getMinute())
+        return isAfter(hour1: 13,minute1: 20,hour2: getHour(),minute2: getMinute())
     } else if block == 3 {
-        return isAfter(hour1: 12,minute1: 25,hour2: getHour(),minute2: getMinute())
+        return isAfter(hour1: 12,minute1: 30,hour2: getHour(),minute2: getMinute())
     } else if block == 2 {
-        return isAfter(hour1: 11,minute1: 20,hour2: getHour(),minute2: getMinute())
-    } else if block == 1 {
-        return isAfter(hour1: 10,minute1: 30,hour2: getHour(),minute2: getMinute())
+        return isAfter(hour1: 11,minute1: 25,hour2: getHour(),minute2: getMinute())
+    } else if block == 1 { //morning activity
+        return isAfter(hour1: 10,minute1: 35,hour2: getHour(),minute2: getMinute())
     }else if block == 0 {
-            return isAfter(hour1: 9,minute1: 55,hour2: getHour(),minute2: getMinute())
+            return isAfter(hour1: 10,minute1: 00,hour2: getHour(),minute2: getMinute())
     } else {
         return false
     }

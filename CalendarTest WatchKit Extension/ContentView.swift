@@ -35,20 +35,22 @@ return (Text(order[cycleDay]![0]).foregroundColor(.red).fontWeight(.medium) + Te
 func getNextClass() -> String {
     if cycleDay == 0{
         return ""
-    } else if isAfter(hour1: getHour(),minute1: getMinute(),hour2: 8,minute2: 55){
-        return ("Next: " + classes[cycleDay]![0])
-    } else if isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 00){
-        return ("Next: " + getMorningActivity())
-    } else if isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 35){
-        return ("Next: " + classes[cycleDay]![1])
-    } else if isAfter(hour1: getHour(),minute1: getMinute(),hour2: 11,minute2: 25){
-        return ("Next: " + classes[cycleDay]![2])
-    } else if isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 20){
-        return ("Next: " + classes[cycleDay]![3])
-    } else if isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 30){
-        return ("Next: " + classes[cycleDay]![4])
-    } else if isAfter(hour1: getHour(),minute1: getMinute(),hour2: 15,minute2: 15){
+    } else if nowIsAfterBlock(block: 5){
         return ("Next: " + classes[cycleDay]![5])
+    } else if nowIsAfterBlock(block: 4){
+        return ("Next: " + classes[cycleDay]![4])
+    } else if nowIsAfterBlock(block: 3){
+        return ("Next: " + classes[cycleDay]![3])
+    } else if nowIsAfterBlock(block: 2){
+        return ("Next: Lunch")
+    } else if nowIsAfterBlock(block: 1){
+        return ("Next: " + classes[cycleDay]![2])
+    } else if (nowIsAfterBlock(block: 0)){
+        return ("Next: " + classes[cycleDay]![1])
+    } else if isAfter(hour1: 8, minute1: 55, hour2: getHour(), minute2: getMinute()){
+        return ("Next: " + getMorningActivity())
+    } else if isAfter(hour1: getHour(), minute1: getMinute(), hour2: 8, minute2: 55){
+        return ("First Class: " + classes[cycleDay]![0])
     } else {
         return "Next: Go home!"
     }
