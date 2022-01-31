@@ -145,8 +145,6 @@ struct ContentView: View {
             .font(.title)
             .fontWeight(.heavy)
             .multilineTextAlignment(.center)
-        }
-        VStack{
             getNextClass().fontWeight(.heavy)
 //            while isSchool(){
 //            self.updation = Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)
@@ -154,9 +152,7 @@ struct ContentView: View {
             if isSchool() {
                 Text("In: ") + Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)}
             Text("\(getDate())")
-            
-        }
-        VStack{
+    
             getOrder()
             
 
@@ -168,9 +164,7 @@ struct ContentView: View {
                         }
             }
         }
- 
     }
-}
  
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
@@ -179,3 +173,4 @@ struct ContentView_Previews: PreviewProvider {
 }
  
 
+}
