@@ -62,7 +62,7 @@ func isSports() -> Bool{
 var classes: [Int: [String]] = [
     0: ["","","","","",""],
     1: ["Comp Sci (C)", "English (E)", "Physics (D)", "Free/OPI (A)", "Publ. Sp. (B)","Go Home!"],
-    2: ["Latin (F)", "Spanish (G)", "Precalc (H)", "Math Team (H)", "Publ. Sp. (B)","Go Home!"],
+    2: ["Latin (F)", "Spanish (G)", "Precalc (H)", "Math Team (A)", "Publ. Sp. (B)","Go Home!"],
     3: ["Comp Sci (C)", "Physics (D)", "Latin (F)", "English (E)", "Spanish (G)", "Fitness Center"],
     4: ["Precalc (H)", "Free (A)", "Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)","Go Home!"],
     5: ["Spanish (G)", "Math Team (A)", "Precalc (H)", "English (E)", "Latin (F)","Go Home!"],

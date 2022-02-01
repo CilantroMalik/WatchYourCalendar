@@ -156,8 +156,8 @@ struct ContentView: View {
 //            while isSchool(){
 //            self.updation = Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)
 //            }
-            if isSchool() {
-                Text("In: ") + Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)}
+//            if isSchool() {
+//                Text("In: ") + Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)}
             Text("\(getDate())")
             if isSchool() {
             getOrder()
