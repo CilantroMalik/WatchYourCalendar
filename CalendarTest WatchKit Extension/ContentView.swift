@@ -212,7 +212,17 @@ struct ContentView: View {
                     .fontWeight(.heavy)
                         }
             }
-        }
+        }.animation(nil, value: opacity).gesture(DragGesture(minimumDistance: 50, coordinateSpace: .global).onEnded({ value in
+            let horiz = value.translation.width as CGFloat
+            if horiz > 0 {  // right swipe
+                delayWithSeconds(0.3) { offset -= 1 }
+            } else {  // left swipe
+                delayWithSeconds(0.3) { offset += 1 }
+            }
+            delayWithSeconds(0.2) { opacity = 1 }
+        }).onChanged({value in opacity = max(0, 1.0 - abs(value.translation.width/125))}))
+            .opacity(opacity).animation(.easeInOut, value: opacity)
+            .gesture(TapGesture(count: 2).onEnded({ returnToCurrent() }))
     }
  
 struct ContentView_Previews: PreviewProvider {
