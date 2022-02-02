@@ -37,17 +37,17 @@ func beginningTimeOfBlock() -> DateComponents {
         return comp
     }
 }
-func getTimeUntilNextClass(dc: DateComponents) -> DateComponents {
-    let date = Date()
-    let cal = Calendar.current
-    let hr = dc.hour
-    let mn = dc.minute
-    let sc = dc.second
-    let comp = DateComponents(calendar: cal, hour: hr, minute: mn, second:sc)
-    let time = cal.nextDate(after: date, matching: comp, matchingPolicy: .nextTime)!
-    let diff = cal.dateComponents([.hour, .minute, .second], from: date, to: time)
-    return diff
-}
+//func getTimeUntilNextClass(dc: DateComponents) -> DateComponents {
+//    let date = Date()
+//    let cal = Calendar.current
+//    let hr = dc.hour
+//    let mn = dc.minute
+//    let sc = dc.second
+//    let comp = DateComponents(calendar: cal, hour: hr, minute: mn, second:sc)
+//    let time = cal.nextDate(after: date, matching: comp, matchingPolicy: .nextTime)!
+//    let diff = cal.dateComponents([.hour, .minute, .second], from: date, to: time)
+//    return diff
+//}
 func getTime(dc: DateComponents) -> String {
 //    var min = ((dc.hour!) + dc.minute!)
     
@@ -64,28 +64,36 @@ func getTime(dc: DateComponents) -> String {
         sc = "0" + sc
     }
     
+    if globalOffset != 0 {
+        return "eeeeee"
+    }
+    
     return hr + ":" + mn + ":" + sc
 //    return mn + ":" + sc
 }
 
-func getDate() -> String {
-    let date = Date()
-    let cal = Calendar.current
-    let month = cal.component(.month, from: date)
-    let day = cal.component(.day, from: date)
-    let year = cal.component(.year, from: date)
-    let weekday = cal.component(.weekday, from: date)
-    return "\(cal.shortWeekdaySymbols[weekday-1]), \(cal.shortMonthSymbols[month-1]) \(day), \(year)"
-}
+//func getDate() -> String {
+//    let date = Date()
+//    let cal = Calendar.current
+//    let month = cal.component(.month, from: date)
+//    let day = cal.component(.day, from: date)
+//    let year = cal.component(.year, from: date)
+//    let weekday = cal.component(.weekday, from: date)
+//    return "\(cal.shortWeekdaySymbols[weekday-1]), \(cal.shortMonthSymbols[month-1]) \(day), \(year)"
+//}
  
 func getOrder() -> Text {
     return getColor(Blk: 0) + Text("-") + getColor(Blk: 2) + Text("-") + getColor(Blk: 3) + Text("-") + getColor(Blk: 5) + Text("-") + getColor(Blk: 6)
 }
 func getColor(Blk: Int) -> Text {
-    if nowIsBeforeBlockBegins(block: Blk){
-        return Text(order[cycleDay]![blockToBlock(bb: Blk)]).foregroundColor(.red).fontWeight(.light)
+    if globalOffset == 0{
+        if nowIsBeforeBlockBegins(block: Blk){
+            return Text(order[cycleDay]![blockToBlock(bb: Blk)]).foregroundColor(.red).fontWeight(.light)
+        } else {
+            return Text(order[cycleDay]![blockToBlock(bb: Blk)]).foregroundColor(.blue).fontWeight(.light)
+        }
     } else {
-        return Text(order[cycleDay]![blockToBlock(bb: Blk)]).foregroundColor(.blue).fontWeight(.light)
+        return Text(order[cycleDay]![blockToBlock(bb: Blk)]).foregroundColor(.white).fontWeight(.light)
     }
 }
 func blockToBlock(bb: Int) -> Int {
@@ -146,15 +154,41 @@ func cycleDayDay() -> Text {
     
 }
 
+var globalOffset = 0
 
 struct ContentView: View {
-    @State var timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))
+    @State var timeUntil = "Loading..."
     @Environment(\.scenePhase) private var scenePhase
     @State var timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
     @State var opacity = 1.0
     @State var offset = 0
     
-    
+    func getTimeUntilNextClass(dc: DateComponents) -> DateComponents {
+        var date = Date()
+        let cal = Calendar.current
+        if offset != 0 {
+            date = cal.date(byAdding: .day, value: offset, to: date)!
+        }
+        let hr = dc.hour
+        let mn = dc.minute
+        let sc = dc.second
+        let comp = DateComponents(calendar: cal, hour: hr, minute: mn, second:sc)
+        let time = cal.nextDate(after: date, matching: comp, matchingPolicy: .nextTime)!
+        let diff = cal.dateComponents([.hour, .minute, .second], from: date, to: time)
+        return diff
+    }
+    func getDate() -> String {
+        var date = Date()
+        let cal = Calendar.current
+        if offset != 0 {
+            date = cal.date(byAdding: .day, value: offset, to: date)!
+        }
+        let month = cal.component(.month, from: date)
+        let day = cal.component(.day, from: date)
+        let year = cal.component(.year, from: date)
+        let weekday = cal.component(.weekday, from: date)
+        return "\(cal.shortWeekdaySymbols[weekday-1]), \(cal.shortMonthSymbols[month-1]) \(day), \(year)"
+    }
     // delays the execution of the given code by the given time interval
     func delayWithSeconds(_ seconds: Double, completion: @escaping () -> ()) {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
@@ -168,10 +202,10 @@ struct ContentView: View {
         var initialOffset = offset
         while initialOffset != 0 {
             if initialOffset < 0 {
-                delayWithSeconds(delay) { offset += 1 }
+                delayWithSeconds(delay) { offset += 1; globalOffset += 1 }
                 initialOffset += 1
             } else {
-                delayWithSeconds(delay) { offset -= 1 }
+                delayWithSeconds(delay) { offset -= 1; globalOffset -= 1}
                 initialOffset -= 1
             }
             delay += 0.15
@@ -191,7 +225,7 @@ struct ContentView: View {
 //            self.updation = Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)
 //            }
             if isSchool() {
-                Text(timeUntil).fontWeight(.light).foregroundColor(.gray).onReceive(timer, perform: {_ in timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))}).onChange(of: scenePhase, perform: { phase in
+                Text(timeUntil).fontWeight(.light).foregroundColor(offset == 0 ? .white : .black).onReceive(timer, perform: {_ in timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))}).onChange(of: scenePhase, perform: { phase in
                     if phase == .active {
                         timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))
                         timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
@@ -209,16 +243,16 @@ struct ContentView: View {
             Spacer()
             if isSchool() {
             NavigationLink(destination: DayView()){
-                Text("Today")
+                Text(offset == 0 ? "Today" : "View Day")
                     .fontWeight(.heavy)
                         }
             }
         }.animation(nil, value: opacity).gesture(DragGesture(minimumDistance: 50, coordinateSpace: .global).onEnded({ value in
             let horiz = value.translation.width as CGFloat
             if horiz > 0 {  // right swipe
-                delayWithSeconds(0.3) { offset -= 1 }
+                delayWithSeconds(0.3) { offset -= 1; globalOffset -= 1 }
             } else {  // left swipe
-                delayWithSeconds(0.3) { offset += 1 }
+                delayWithSeconds(0.3) { offset += 1; globalOffset += 1}
             }
             delayWithSeconds(0.2) { opacity = 1 }
         }).onChanged({value in opacity = max(0, 1.0 - abs(value.translation.width/125))}))

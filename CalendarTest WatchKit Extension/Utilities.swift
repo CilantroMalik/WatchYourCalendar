@@ -23,10 +23,13 @@ var dateToCycleDay: [[Int: Int]] = [
 ]
 var cycleDay : Int {
     get {
-        let date = Date()
-        let calendar = Calendar.current
-        var month = calendar.component(.month, from: date)
-        var day = calendar.component(.day, from: date)
+        var date = Date()
+        let cal = Calendar.current
+        if globalOffset != 0 {
+            date = cal.date(byAdding: .day, value: globalOffset, to: date)!
+        }
+        var month = cal.component(.month, from: date)
+        var day = cal.component(.day, from: date)
         if month >= 6 && day >= 8 {
             month = 6
             day = 8
@@ -39,15 +42,21 @@ var cycleDay : Int {
 }
 
 func getHour() -> Int{
-    let date = Date()
+    var date = Date()
     let cal = Calendar.current
+    if globalOffset != 0 {
+        date = cal.date(byAdding: .day, value: globalOffset, to: date)!
+    }
     let hour = (cal.component(.hour, from: date))
     return hour
     
 }
 func getMinute() -> Int{
-    let date = Date()
+    var date = Date()
     let cal = Calendar.current
+    if globalOffset != 0 {
+        date = cal.date(byAdding: .day, value: globalOffset, to: date)!
+    }
     let minute = cal.component(.minute, from: date)
     return minute
 }
@@ -141,8 +150,11 @@ func isNextBlock(bl: Int) -> Bool {
     }
 }
 func isSchool() -> Bool{
-    let date = Date()
+    var date = Date()
     let cal = Calendar.current
+    if globalOffset != 0 {
+        date = cal.date(byAdding: .day, value: globalOffset, to: date)!
+    }
     let hour = cal.component(.hour, from: date)
     if cycleDay != 0 {
         return true
@@ -193,9 +205,11 @@ func nowIsBeforeBlockBegins(block: Int) -> Bool{
     return false
 }
 func getMorningActivity() -> String {
-    // TODO
-    let date = Date()
+    var date = Date()
     let cal = Calendar.current
+    if globalOffset != 0 {
+        date = cal.date(byAdding: .day, value: globalOffset, to: date)!
+    }
     let weekday = cal.component(.weekday, from: date)
     switch weekday {
     case 1:
