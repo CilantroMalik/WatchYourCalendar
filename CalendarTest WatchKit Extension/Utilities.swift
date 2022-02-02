@@ -6,7 +6,7 @@
 //
 
 import Foundation
-   
+public var nextClass = 0
 var dateToCycleDay: [[Int: Int]] = [
     // January
     [1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0, 14:0, 15:0, 16:0, 17:0, 18:0, 19:0, 20:0, 21:0, 22:0, 23:0, 24:7, 25:8, 26:1, 27:2, 28:3, 29:0, 30:0, 31:4],
@@ -81,7 +81,65 @@ func isAfter(hour1:Int,minute1: Int,hour2:Int ,minute2:Int) -> Bool{ //is time2 
     }
     
 }
-
+func isNextBlock(bl: Int) -> Bool {
+    if nowIsBeforeBlockBegins(block: 0){
+        if (bl == 0){
+            return true
+        } else {
+            return false
+        }
+    } else if nowIsBeforeBlockBegins(block: 1){
+        if (bl == 1){
+            return true
+        } else {
+            return false
+        }
+    } else if nowIsBeforeBlockBegins(block: 2){
+        if (bl == 2){
+            return true
+        } else {
+            return false
+        }
+    } else if nowIsBeforeBlockBegins(block: 3){
+        if (bl == 3){
+            return true
+        } else {
+            return false
+        }
+    } else if nowIsBeforeBlockBegins(block: 4){
+        if (bl == 4){
+            return true
+        } else {
+            return false
+        }
+    } else if nowIsBeforeBlockBegins(block: 5){
+        if (bl == 5){
+            return true
+        } else {
+            return false
+        }
+    } else if nowIsBeforeBlockBegins(block: 6){
+        if (bl == 6){
+            return true
+        } else {
+            return false
+        }
+    } else if nowIsBeforeBlockBegins(block: 6){
+        if (bl == 6){
+            return true
+        } else {
+            return false
+        }
+    } else if nowIsBeforeBlockBegins(block: 7){
+        if (bl == 7){
+            return true
+        } else {
+            return false
+        }
+    } else {
+        return false
+    }
+}
 func isSchool() -> Bool{
     let date = Date()
     let cal = Calendar.current

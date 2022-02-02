@@ -49,6 +49,8 @@ func getTimeUntilNextClass(dc: DateComponents) -> DateComponents {
     return diff
 }
 func getTime(dc: DateComponents) -> String {
+//    var min = ((dc.hour!) + dc.minute!)
+    
     var hr = String(dc.hour!)
     if hr.count == 1 {
         hr = "0" + hr
@@ -63,6 +65,7 @@ func getTime(dc: DateComponents) -> String {
     }
     
     return hr + ":" + mn + ":" + sc
+//    return mn + ":" + sc
 }
 
 func getDate() -> String {
@@ -104,21 +107,21 @@ func getNextClass() -> Text {
     if cycleDay == 0{
         return Text("")
     } else if nowIsBeforeBlockBegins(block: 0){
-        return Text("First: ") + Text(classes[cycleDay]![0]).foregroundColor(.red)
+        return Text("First: ") + Text(classes[cycleDay]![0]).foregroundColor(.green)
     } else if nowIsBeforeBlockBegins(block: 1){
-        return Text("Next: ") + Text(getMorningActivity()).foregroundColor(.red)
+        return Text("Next: ") + Text(getMorningActivity()).foregroundColor(.green)
     } else if (nowIsBeforeBlockBegins(block: 2)){
-        return Text("Next: ") + Text(classes[cycleDay]![1]).foregroundColor(.red)
+        return Text("Next: ") + Text(classes[cycleDay]![1]).foregroundColor(.green)
     } else if nowIsBeforeBlockBegins(block: 3){
-        return Text("Next: ") + Text(classes[cycleDay]![2]).foregroundColor(.red)
+        return Text("Next: ") + Text(classes[cycleDay]![2]).foregroundColor(.green)
     } else if nowIsBeforeBlockBegins(block: 4){
-        return Text("Next: ") + Text("Lunch").foregroundColor(.red)
+        return Text("Next: ") + Text("Lunch").foregroundColor(.green)
     } else if nowIsBeforeBlockBegins(block: 5){
-        return Text("Next: ") + Text(classes[cycleDay]![3]).foregroundColor(.red)
+        return Text("Next: ") + Text(classes[cycleDay]![3]).foregroundColor(.green)
     } else if nowIsBeforeBlockBegins(block: 6){
-        return Text("Next: ") + Text(classes[cycleDay]![4]).foregroundColor(.red)
+        return Text("Next: ") + Text(classes[cycleDay]![4]).foregroundColor(.green)
     } else if nowIsBeforeBlockBegins(block: 7){
-        return Text("Next: ") + Text(classes[cycleDay]![5]).foregroundColor(.red)
+        return Text("Next: ") + Text(classes[cycleDay]![5]).foregroundColor(.green)
     } else {
         return Text("Next: Go home!")
     }
@@ -142,11 +145,9 @@ func cycleDayDay() -> Text {
     }
     
 }
-// var timer = Timer()
 
 
 struct ContentView: View {
-//    @State var updation = Text("error")
     @State var timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))
     @Environment(\.scenePhase) private var scenePhase
     @State var timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
@@ -190,7 +191,7 @@ struct ContentView: View {
 //            self.updation = Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)
 //            }
             if isSchool() {
-                Text("In: " + timeUntil).fontWeight(.light).onReceive(timer, perform: {_ in timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))}).onChange(of: scenePhase, perform: { phase in
+                Text(timeUntil).fontWeight(.light).foregroundColor(.gray).onReceive(timer, perform: {_ in timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))}).onChange(of: scenePhase, perform: { phase in
                     if phase == .active {
                         timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))
                         timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
