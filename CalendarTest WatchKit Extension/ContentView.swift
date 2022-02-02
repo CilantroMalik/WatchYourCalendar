@@ -142,9 +142,20 @@ func cycleDayDay() -> Text {
     }
     
 }
- 
+// var timer = Timer()
+
+
 struct ContentView: View {
-    @State var updation = Text("error")
+//    @State var updation = Text("error")
+//    @State var dummy = false
+//    override func willActivate(){
+//        if dummy == false {
+//            dummy = true
+//        } else {
+//            dummy = false
+//        }
+//        super.willActivate()
+//    }
     var body: some View {
         VStack{
             Spacer()
@@ -156,8 +167,9 @@ struct ContentView: View {
 //            while isSchool(){
 //            self.updation = Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)
 //            }
-//            if isSchool() {
-//                Text("In: ") + Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)}
+            if isSchool() {
+                Text("In: ") + Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)}
+            
             Text("\(getDate())")
             if isSchool() {
             getOrder()
