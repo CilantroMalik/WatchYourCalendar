@@ -190,7 +190,15 @@ struct ContentView: View {
 //            self.updation = Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)
 //            }
             if isSchool() {
-                Text("In: ") + Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)}
+                Text("In: " + timeUntil).fontWeight(.light).onReceive(timer, perform: {_ in timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))}).onChange(of: scenePhase, perform: { phase in
+                    if phase == .active {
+                        timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))
+                        timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
+                    } else {
+                        timer.upstream.connect().cancel()
+                    }
+                })
+            }
             
             Text("\(getDate())")
             if isSchool() {
