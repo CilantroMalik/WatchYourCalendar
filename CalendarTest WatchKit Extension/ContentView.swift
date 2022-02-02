@@ -147,15 +147,37 @@ func cycleDayDay() -> Text {
 
 struct ContentView: View {
 //    @State var updation = Text("error")
-//    @State var dummy = false
-//    override func willActivate(){
-//        if dummy == false {
-//            dummy = true
-//        } else {
-//            dummy = false
-//        }
-//        super.willActivate()
-//    }
+    @State var timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))
+    @Environment(\.scenePhase) private var scenePhase
+    @State var timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
+    @State var opacity = 1.0
+    @State var offset = 0
+    
+    
+    // delays the execution of the given code by the given time interval
+    func delayWithSeconds(_ seconds: Double, completion: @escaping () -> ()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
+            completion()
+        }
+    }
+    
+    // returns to the current day after time travel
+    func returnToCurrent() {
+        var delay = 0.2
+        var initialOffset = offset
+        while initialOffset != 0 {
+            if initialOffset < 0 {
+                delayWithSeconds(delay) { offset += 1 }
+                initialOffset += 1
+            } else {
+                delayWithSeconds(delay) { offset -= 1 }
+                initialOffset -= 1
+            }
+            delay += 0.15
+            delayWithSeconds(delay) { opacity = 1 }
+        }
+    }
+    
     var body: some View {
         VStack{
             Spacer()
