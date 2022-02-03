@@ -162,6 +162,7 @@ struct ContentView: View {
     @State var timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
     @State var opacity = 1.0
     @State var offset = 0
+    @State var minOffset = 0.0
     
     func getTimeUntilNextClass(dc: DateComponents) -> DateComponents {
         var date = Date()
@@ -189,6 +190,64 @@ struct ContentView: View {
         let weekday = cal.component(.weekday, from: date)
         return "\(cal.shortWeekdaySymbols[weekday-1]), \(cal.shortMonthSymbols[month-1]) \(day), \(year)"
     }
+    
+    func timeTravelBlockBegin(block: Int) -> Bool{
+        let cal = Calendar.current
+        let date = cal.date(byAdding: .minute, value: Int(floor(minOffset)), to: Date())!
+        let hr = cal.component(.hour, from: date)
+        let min = cal.component(.minute, from: date)
+        if block == 7 { //
+            return isAfter(hour1: hr,minute1: min,hour2: 15,minute2: 15)
+        } else if block == 6 { //
+            return isAfter(hour1: hr,minute1: min,hour2: 14,minute2: 30)
+        } else if block == 5 { //before
+            return isAfter(hour1: hr,minute1: min,hour2: 13,minute2: 20)
+        } else if block == 4 {//before lunch
+            return isAfter(hour1: hr,minute1: min,hour2: 12,minute2: 30)
+        } else if block == 3 {//
+            return isAfter(hour1: hr,minute1: min,hour2: 11,minute2: 25)
+        } else if block == 2 { //
+            return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 35)
+        }else if block == 1 { //
+                return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 00)
+        } else if block == 0 { //before first block
+            return isAfter(hour1: hr, minute1: min, hour2: 8, minute2: 55)
+        }
+        return false
+    }
+    
+    func timeTravelNextClass() -> Text {
+        if cycleDay == 0{
+            return Text("")
+        } else if timeTravelBlockBegin(block: 0){
+            return Text("First: ") + Text(classes[cycleDay]![0]).foregroundColor(.green)
+        } else if timeTravelBlockBegin(block: 1){
+            return Text("Next: ") + Text(getMorningActivity()).foregroundColor(.green)
+        } else if (timeTravelBlockBegin(block: 2)){
+            return Text("Next: ") + Text(classes[cycleDay]![1]).foregroundColor(.green)
+        } else if timeTravelBlockBegin(block: 3){
+            return Text("Next: ") + Text(classes[cycleDay]![2]).foregroundColor(.green)
+        } else if timeTravelBlockBegin(block: 4){
+            return Text("Next: ") + Text("Lunch").foregroundColor(.green)
+        } else if timeTravelBlockBegin(block: 5){
+            return Text("Next: ") + Text(classes[cycleDay]![3]).foregroundColor(.green)
+        } else if timeTravelBlockBegin(block: 6){
+            return Text("Next: ") + Text(classes[cycleDay]![4]).foregroundColor(.green)
+        } else if timeTravelBlockBegin(block: 7){
+            return Text("Next: ") + Text(classes[cycleDay]![5]).foregroundColor(.green)
+        } else {
+            return Text("Next: Go home!")
+        }
+    }
+    
+    func getTimeTravelTime() -> String {
+        let cal = Calendar.current
+        let date = cal.date(byAdding: .minute, value: Int(floor(minOffset)), to: Date())!
+        let hr = cal.component(.hour, from: date)
+        let min = cal.component(.minute, from: date)
+        return "\(hr < 10 ? "0" : "")\(hr):\(min < 10 ? "0" : "")\(min)"
+    }
+    
     // delays the execution of the given code by the given time interval
     func delayWithSeconds(_ seconds: Double, completion: @escaping () -> ()) {
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
