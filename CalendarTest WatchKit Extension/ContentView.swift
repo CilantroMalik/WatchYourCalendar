@@ -329,35 +329,30 @@ struct ContentView: View {
                 if isSchool() {
                 getOrder()
                 }
-            } else if (globalOffset % 7 == 0){
-                Text(String(globalOffset % 7) + " days ago")
+                if globalOffset == 0{
+                Spacer()
                 }
-            }
-            
-            Text("\(getDate())")
-            if isSchool() {
-            getOrder()
-            }
-            if globalOffset == 0{
-            Spacer()
-            }
-            if isSchool() {
-            NavigationLink(destination: DayView()){
-                Text(offset == 0 ? "Today" : "View Day")
-                    .fontWeight(.heavy)
-                        }
+                if isSchool() {
+                NavigationLink(destination: DayView()){
+                    Text(offset == 0 ? "Today" : "View Day")
+                        .fontWeight(.heavy)
+                            }
+                }
             }
         }.animation(nil, value: opacity).gesture(DragGesture(minimumDistance: 50, coordinateSpace: .global).onEnded({ value in
             let horiz = value.translation.width as CGFloat
             if horiz > 0 {  // right swipe
+                opacity = 0
                 delayWithSeconds(0.3) { offset -= 1; globalOffset -= 1 }
             } else {  // left swipe
+                opacity = 0
                 delayWithSeconds(0.3) { offset += 1; globalOffset += 1}
             }
-            delayWithSeconds(0.2) { opacity = 1 }
+            delayWithSeconds(0.35) { opacity = 1 }
         }).onChanged({value in opacity = max(0, 1.0 - abs(value.translation.width/125))}))
             .opacity(opacity).animation(.easeInOut, value: opacity)
             .gesture(TapGesture(count: 2).onEnded({ returnToCurrent() }))
+            .focusable().digitalCrownRotation($minOffset)
     }
  
 struct ContentView_Previews: PreviewProvider {
