@@ -220,7 +220,7 @@ struct ContentView: View {
         if cycleDay == 0{
             return Text("")
         } else if timeTravelBlockBegin(block: 0){
-            return (Text("Before school")).foregroundColor(.purple)
+            return (Text("Before School")).foregroundColor(.purple)
         } else if timeTravelBlockBegin(block: 1){
             return (Text(classes[cycleDay]![0])).foregroundColor(.purple)
         } else if timeTravelBlockBegin(block: 2){
@@ -230,13 +230,13 @@ struct ContentView: View {
         } else if timeTravelBlockBegin(block: 4){
             return (Text(classes[cycleDay]![2])).foregroundColor(.purple)
         } else if timeTravelBlockBegin(block: 5){
-            return (Text("Lunch")).foregroundColor(.green).foregroundColor(.purple)
+            return (Text("Lunch")).foregroundColor(.purple).foregroundColor(.purple)
         } else if timeTravelBlockBegin(block: 6){
             return (Text(classes[cycleDay]![3])).foregroundColor(.purple)
         } else if timeTravelBlockBegin(block: 7){
             return (Text(classes[cycleDay]![4])).foregroundColor(.purple)
         } else {
-            return Text("Next: Go home!")
+            return Text("After School").foregroundColor(.purple)
         }
     }
     
@@ -257,7 +257,7 @@ struct ContentView: View {
     
     // returns to the current day after time travel
     func returnToCurrent() {
-        var delay = 0.2
+        var delay = 0.1
         var initialOffset = offset
         while initialOffset != 0 {
             if initialOffset < 0 {
