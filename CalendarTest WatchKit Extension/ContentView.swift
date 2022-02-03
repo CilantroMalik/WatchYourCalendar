@@ -157,7 +157,7 @@ func cycleDayDay() -> Text {
 var globalOffset = 0
 
 struct ContentView: View {
-    @State var timeUntil = "Loading..."
+    @State var timeUntil = "00:00:00"
     @Environment(\.scenePhase) private var scenePhase
     @State var timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
     @State var opacity = 1.0
@@ -321,14 +321,15 @@ struct ContentView: View {
                     } else {
                         Text(String(globalOffset - globalOffset - globalOffset) + " days ago")
                     }
-                } else if (globalOffset % 7 == 0){
-                    Text(String(globalOffset % 7) + " days ago")
+                } else if ((globalOffset - globalOffset - globalOffset) % 7 == 0){
+                    Text(String(globalOffset / 7) + " week" + ((globalOffset - globalOffset - globalOffset) >= 14 ? "s" : "" + " ago"))
                 }
                 
                 Text("\(getDate())")
-                if isSchool() {
+                
+//                if isSchool() {
                 getOrder()
-                }
+//                }
                 if globalOffset == 0{
                 Spacer()
                 }
@@ -337,7 +338,7 @@ struct ContentView: View {
                     Text(offset == 0 ? "Today" : "View Day")
                         .fontWeight(.heavy)
                             }
-                }
+                    }
             }
         }.animation(nil, value: opacity).gesture(DragGesture(minimumDistance: 50, coordinateSpace: .global).onEnded({ value in
             let horiz = value.translation.width as CGFloat
