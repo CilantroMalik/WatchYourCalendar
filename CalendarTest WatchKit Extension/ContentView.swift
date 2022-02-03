@@ -274,23 +274,44 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
-            Spacer()
-        cycleDayDay()
-            .font(.title)
-            .fontWeight(.heavy)
-            .multilineTextAlignment(.center)
-            if globalOffset == 0{
-            getNextClass().fontWeight(.heavy)
-//            while isSchool(){
-//            self.updation = Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)
-//            }
-            }
-            if globalOffset == 0{
-            if isSchool() {
-                Text(timeUntil).fontWeight(.light).foregroundColor(offset == 0 ? .white : .black).onReceive(timer, perform: {_ in timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))}).onChange(of: scenePhase, perform: { phase in
-                    if phase == .active {
-                        timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))
-                        timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
+            if globalOffset == 0 && minOffset != 0 {
+                // *** TIME TRAVEL VIEW ***
+                Spacer()
+                cycleDayDay().font(.title).fontWeight(.heavy).multilineTextAlignment(.center)
+                timeTravelNextClass().fontWeight(.heavy)
+                Text("Time: " + getTimeTravelTime()).fontWeight(.semibold)
+                Text(getDate())
+                Text("e").foregroundColor(.black)
+                Spacer()
+                Button(action: { opacity = 0; delayWithSeconds(0.3) { opacity = 1 }; delayWithSeconds(0.2) { minOffset = 0 } }) {
+                    Text("Return to Present").fontWeight(.heavy)
+                }
+                // *** END TIME TRAVEL VIEW ***
+            } else {
+                Spacer()
+                cycleDayDay()
+                .font(.title)
+                .fontWeight(.heavy)
+                .multilineTextAlignment(.center)
+                if globalOffset == 0{
+                    getNextClass().fontWeight(.heavy)
+                }
+                if globalOffset == 0{
+                    if isSchool() {
+                        Text(timeUntil).fontWeight(.light).foregroundColor(offset == 0 ? .white : .black).onReceive(timer, perform: {_ in timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))}).onChange(of: scenePhase, perform: { phase in
+                            if phase == .active {
+                                timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))
+                                timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
+                            } else {
+                                timer.upstream.connect().cancel()
+                            }
+                        })
+                    }
+                } else if globalOffset > 0{
+                    if globalOffset == 1 {
+                        Text("Tomorrow")
+                    } else if (globalOffset % 7 == 0){
+                        Text("In " + String(globalOffset / 7) + " week" + (globalOffset >= 14 ? "s" : ""))
                     } else {
                         timer.upstream.connect().cancel()
                     }
