@@ -220,21 +220,21 @@ struct ContentView: View {
         if cycleDay == 0{
             return Text("")
         } else if timeTravelBlockBegin(block: 0){
-            return Text("First: ") + Text(classes[cycleDay]![0]).foregroundColor(.green)
+            return (Text("Before school")).foregroundColor(.purple)
         } else if timeTravelBlockBegin(block: 1){
-            return Text("Next: ") + Text(getMorningActivity()).foregroundColor(.green)
-        } else if (timeTravelBlockBegin(block: 2)){
-            return Text("Next: ") + Text(classes[cycleDay]![1]).foregroundColor(.green)
+            return (Text(classes[cycleDay]![0])).foregroundColor(.purple)
+        } else if timeTravelBlockBegin(block: 2){
+            return (Text(getMorningActivity())).foregroundColor(.purple)
         } else if timeTravelBlockBegin(block: 3){
-            return Text("Next: ") + Text(classes[cycleDay]![2]).foregroundColor(.green)
+            return (Text(classes[cycleDay]![1])).foregroundColor(.purple)
         } else if timeTravelBlockBegin(block: 4){
-            return Text("Next: ") + Text("Lunch").foregroundColor(.green)
+            return (Text(classes[cycleDay]![2])).foregroundColor(.purple)
         } else if timeTravelBlockBegin(block: 5){
-            return Text("Next: ") + Text(classes[cycleDay]![3]).foregroundColor(.green)
+            return (Text("Lunch")).foregroundColor(.green).foregroundColor(.purple)
         } else if timeTravelBlockBegin(block: 6){
-            return Text("Next: ") + Text(classes[cycleDay]![4]).foregroundColor(.green)
+            return (Text(classes[cycleDay]![3])).foregroundColor(.purple)
         } else if timeTravelBlockBegin(block: 7){
-            return Text("Next: ") + Text(classes[cycleDay]![5]).foregroundColor(.green)
+            return (Text(classes[cycleDay]![4])).foregroundColor(.purple)
         } else {
             return Text("Next: Go home!")
         }
@@ -327,27 +327,30 @@ struct ContentView: View {
                 
                 Text("\(getDate())")
                 
-//                if isSchool() {
+                if isSchool() {
                 getOrder()
-//                }
+                }
                 if globalOffset == 0{
                 Spacer()
                 }
                 if isSchool() {
-                NavigationLink(destination: DayView()){
-                    Text(offset == 0 ? "Today" : "View Day")
-                        .fontWeight(.heavy)
-                            }
+                    NavigationLink(destination: DayView()){
+                        Text(offset == 0 ? "Today" : "View Day").fontWeight(.heavy)
                     }
+                } else {
+                    Spacer()
+                    
+
+                }
             }
         }.animation(nil, value: opacity).gesture(DragGesture(minimumDistance: 50, coordinateSpace: .global).onEnded({ value in
             let horiz = value.translation.width as CGFloat
             if horiz > 0 {  // right swipe
                 opacity = 0
-                delayWithSeconds(0.3) { offset -= 1; globalOffset -= 1 }
+                delayWithSeconds(0.3) { minOffset = 0; offset -= 1; globalOffset -= 1 }
             } else {  // left swipe
                 opacity = 0
-                delayWithSeconds(0.3) { offset += 1; globalOffset += 1}
+                delayWithSeconds(0.3) { minOffset = 0; offset += 1; globalOffset += 1}
             }
             delayWithSeconds(0.35) { opacity = 1 }
         }).onChanged({value in opacity = max(0, 1.0 - abs(value.translation.width/125))}))
