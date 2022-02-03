@@ -313,23 +313,21 @@ struct ContentView: View {
                     } else if (globalOffset % 7 == 0){
                         Text("In " + String(globalOffset / 7) + " week" + (globalOffset >= 14 ? "s" : ""))
                     } else {
-                        timer.upstream.connect().cancel()
+                        Text("In " + String(globalOffset) + " days")
                     }
-                })
-            }
-            } else if globalOffset > 0{
-                if globalOffset == 1 {
-                    Text("Tomorrow")
-                } else if (globalOffset % 7 == 0){
-                    Text("In" + String(globalOffset % 7) + " week")
+                } else if globalOffset < 0{
+                    if globalOffset == -1 {
+                        Text("Yesterday")
                     } else {
-                Text("In " + String(globalOffset) + " days")
+                        Text(String(globalOffset - globalOffset - globalOffset) + " days ago")
+                    }
+                } else if (globalOffset % 7 == 0){
+                    Text(String(globalOffset % 7) + " days ago")
                 }
-            } else if globalOffset < 0{
-                if globalOffset == -1 {
-                    Text("Yesterday")
-                } else {
-                Text(String(globalOffset - globalOffset - globalOffset) + " days ago")
+                
+                Text("\(getDate())")
+                if isSchool() {
+                getOrder()
                 }
             } else if (globalOffset % 7 == 0){
                 Text(String(globalOffset % 7) + " days ago")
