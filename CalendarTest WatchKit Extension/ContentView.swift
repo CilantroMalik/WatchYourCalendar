@@ -142,7 +142,7 @@ func getClasses() -> String {
 }
 
 var order: [Int: [String]] = [
-    0:["No school!","","","",""],
+    0:["----No school!","","","",""],
     1:["C","E","D","A","B"], 2:["F","G","H","A","B"], 3:["C","D","F","E","G"], 4:["H","A","B","C","D"], 5:["G","A","H","E","F"], 6:["B","C","D","E","F"], 7:["A","H","G","B","C"], 8:["D","E","F","G","H"]
 ]
 func cycleDayDay() -> Text {
@@ -220,10 +220,13 @@ struct ContentView: View {
             .font(.title)
             .fontWeight(.heavy)
             .multilineTextAlignment(.center)
+            if globalOffset == 0{
             getNextClass().fontWeight(.heavy)
 //            while isSchool(){
 //            self.updation = Text(getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))).fontWeight(.light)
 //            }
+            }
+            if globalOffset == 0{
             if isSchool() {
                 Text(timeUntil).fontWeight(.light).foregroundColor(offset == 0 ? .white : .black).onReceive(timer, perform: {_ in timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))}).onChange(of: scenePhase, perform: { phase in
                     if phase == .active {
@@ -234,13 +237,32 @@ struct ContentView: View {
                     }
                 })
             }
+            } else if globalOffset > 0{
+                if globalOffset == 1 {
+                    Text("Tomorrow")
+                } else if (globalOffset % 7 == 0){
+                    Text("In" + String(globalOffset % 7) + " week")
+                    } else {
+                Text("In " + String(globalOffset) + " days")
+                }
+            } else if globalOffset < 0{
+                if globalOffset == -1 {
+                    Text("Yesterday")
+                } else {
+                Text(String(globalOffset - globalOffset - globalOffset) + " days ago")
+                }
+            } else if (globalOffset % 7 == 0){
+                Text(String(globalOffset % 7) + " days ago")
+                }
+            }
             
             Text("\(getDate())")
             if isSchool() {
             getOrder()
             }
-
+            if globalOffset == 0{
             Spacer()
+            }
             if isSchool() {
             NavigationLink(destination: DayView()){
                 Text(offset == 0 ? "Today" : "View Day")
