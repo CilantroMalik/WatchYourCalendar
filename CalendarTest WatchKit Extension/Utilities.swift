@@ -280,8 +280,39 @@ func timeIsBeforeBlockBegins(date: Date, block: Int) -> Bool{
     return false
 }
 
+func compBeginningTimeOfBlock(now: Date = Date()) -> DateComponents {
+    let cal = Calendar.current
+    if timeIsBeforeBlockBegins(date: now, block: 0){
+        let comp = DateComponents(calendar: cal, hour: 8, minute: 55, second:00)
+        return comp
+    } else if timeIsBeforeBlockBegins(date: now, block: 1){
+        let comp = DateComponents(calendar: cal, hour: 10, minute: 00, second:00)
+        return comp
+    } else if timeIsBeforeBlockBegins(date: now, block: 2){
+        let comp = DateComponents(calendar: cal, hour: 10, minute: 35, second:00)
+        return comp
+    } else if timeIsBeforeBlockBegins(date: now, block: 3){
+        let comp = DateComponents(calendar: cal, hour: 11, minute: 25, second:00)
+        return comp
+    } else if timeIsBeforeBlockBegins(date: now, block: 4){
+        let comp = DateComponents(calendar: cal, hour: 12, minute: 30, second:00)
+        return comp
+    } else if timeIsBeforeBlockBegins(date: now, block: 5){
+        let comp = DateComponents(calendar: cal, hour: 13, minute: 20, second:00)
+        return comp
+    } else if timeIsBeforeBlockBegins(date: now, block: 6){
+        let comp = DateComponents(calendar: cal, hour: 14, minute: 30, second:00)
+        return comp
+    } else if timeIsBeforeBlockBegins(date: now, block: 7){
+        let comp = DateComponents(calendar: cal, hour: 15, minute: 20, second:00)
+        return comp
+    } else {
+        let comp = DateComponents(calendar: cal, hour: 8, minute: 55, second:00)
+        return comp
+    }
+}
+
 func compGetNextBlock(date: Date) -> String{
-    print("Getting next block for time \(Calendar.current.component(.hour, from: date)):\(Calendar.current.component(.minute, from: date))")
     if cycleDay == 0{
         return ""
     } else if timeIsBeforeBlockBegins(date: date, block: 0){
@@ -371,5 +402,5 @@ func compGetTime(dc: DateComponents) -> String {
 }
 
 func compGetTimeUntil(date: Date) -> String {
-    return compGetTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock(), now: date))
+    return compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date))
 }

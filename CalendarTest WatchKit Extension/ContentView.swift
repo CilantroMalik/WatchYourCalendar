@@ -156,7 +156,6 @@ func cycleDayDay() -> Text {
 
 func getTimeUntilNextClass(dc: DateComponents, now: Date = Date()) -> DateComponents {
     var date = now
-    print("Now: \(Calendar.current.component(.hour, from: date)):\(Calendar.current.component(.minute, from: date))")
     let cal = Calendar.current
     if globalOffset != 0 {
         date = cal.date(byAdding: .day, value: globalOffset, to: date)!
@@ -166,9 +165,7 @@ func getTimeUntilNextClass(dc: DateComponents, now: Date = Date()) -> DateCompon
     let sc = dc.second
     let comp = DateComponents(calendar: cal, hour: hr, minute: mn, second:sc)
     let time = cal.nextDate(after: date, matching: comp, matchingPolicy: .nextTime)!
-    print("Time: \(Calendar.current.component(.hour, from: time)):\(Calendar.current.component(.minute, from: time))")
     let diff = cal.dateComponents([.hour, .minute, .second], from: date, to: time)
-    print("Diff: \(diff)")
     return diff
 }
 
