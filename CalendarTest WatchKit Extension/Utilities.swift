@@ -83,7 +83,7 @@ var blocks: [Int: [String]] = [
     0: ["","","","",""], 1: ["C","E","D","A","B"], 2: ["F","G","H","A","B"], 3:["C","D","F","E","G"], 4:["H","A","B","C","D"], 5:["G","A","H","E","F"], 6:["B","C","D","E","F"], 7:["A","H","G","B","C"], 8:["D","E","F","G","H"]
 ]
 var blockOrder: [Int: [String]] = [
-    0: [""], 1: ["CEDAB"], 2: ["FGHAB"], 3:["CDFEG"], 4:["HABCD"], 5:["GAHEF"], 6:["BCDEF"], 7:["AHGBC"], 8:["DEFGH"]
+    0: ["OFF"], 1: ["CEDAB"], 2: ["FGHAB"], 3:["CDFEG"], 4:["HABCD"], 5:["GAHEF"], 6:["BCDEF"], 7:["AHGBC"], 8:["DEFGH"]
 ]
 func isAfter(hour1:Int,minute1: Int,hour2:Int ,minute2:Int) -> Bool{ //is time2 after time1
     if hour2>hour1{
@@ -267,27 +267,68 @@ func compGetOrder() -> String{
     return (blockOrder[cycleDay]![0])
 }
 
+func compLongNextClass() -> String {
+    if cycleDay == 0 {
+        return "None"
+    } else if nowIsBeforeBlockBegins(block: 0){
+        return "First: \(classes[cycleDay]![0])"
+    } else if nowIsBeforeBlockBegins(block: 1){
+        return "Next: \(getMorningActivity())"
+    } else if (nowIsBeforeBlockBegins(block: 2)){
+        return "Next: \(classes[cycleDay]![1])"
+    } else if nowIsBeforeBlockBegins(block: 3){
+        return "Next: \(classes[cycleDay]![2])"
+    } else if nowIsBeforeBlockBegins(block: 4){
+        return "Next: Lunch"
+    } else if nowIsBeforeBlockBegins(block: 5){
+        return "Next: \(classes[cycleDay]![3])"
+    } else if nowIsBeforeBlockBegins(block: 6){
+        return "Next: \(classes[cycleDay]![4])"
+    } else if nowIsBeforeBlockBegins(block: 7){
+        return "Next: \(classes[cycleDay]![5])"
+    } else {
+        return "Next: Go home!"
+    }
+}
+
+func compShortNextClass() -> String {
+    if cycleDay == 0 {
+        return "None"
+    } else if nowIsBeforeBlockBegins(block: 0){
+        return "\(classes[cycleDay]![0])"
+    } else if nowIsBeforeBlockBegins(block: 1){
+        return "\(getMorningActivity())"
+    } else if (nowIsBeforeBlockBegins(block: 2)){
+        return "\(classes[cycleDay]![1])"
+    } else if nowIsBeforeBlockBegins(block: 3){
+        return "\(classes[cycleDay]![2])"
+    } else if nowIsBeforeBlockBegins(block: 4){
+        return "Lunch"
+    } else if nowIsBeforeBlockBegins(block: 5){
+        return "\(classes[cycleDay]![3])"
+    } else if nowIsBeforeBlockBegins(block: 6){
+        return "\(classes[cycleDay]![4])"
+    } else if nowIsBeforeBlockBegins(block: 7){
+        return "\(classes[cycleDay]![5])"
+    } else {
+        return "Go home!"
+    }
+}
+
 func compGetTime(dc: DateComponents) -> String {
-    var min = ((dc.hour!) + dc.minute!) //i don't think this works properly...
-    
     var hr = String(dc.hour!)
     if hr.count == 1 {
         hr = "0" + hr
     }
-    var mn = String(min)
+    var mn = String(dc.minute!)
     if mn.count == 1 {
         mn = "0" + mn
     }
-    var sc = String(dc.second!)
-    if sc.count == 1 {
-        sc = "0" + sc
-    }
-    
     
 //    return hr + ":" + mn + ":" + sc
-    return mn + ":" + sc
+    return hr + ":" + mn
 }
-//NOT DONE
-func comGetTime(str : String) -> String {
+
+func compGetTimeUntil() -> String {
     return compGetTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))
 }
