@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import WatchKit
 
 @main
 struct CalendarTestApp: App {
+    @WKExtensionDelegateAdaptor(ExtensionDelegate.self) var extensionDelegate
+
     @SceneBuilder var body: some Scene {
         WindowGroup {
             NavigationView {
