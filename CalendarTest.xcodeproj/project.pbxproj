@@ -82,7 +82,7 @@
 
 /* Begin PBXFileReference section */
 		15DA717327AD516F00B26BDF /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		5C91878327A35B990097DCB0 /* CalendarTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C91878327A35B990097DCB0 /* WatchYourCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchYourCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C91878727A35B990097DCB0 /* CalendarTest WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CalendarTest WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C91878C27A35B9C0097DCB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5C91878E27A35B9C0097DCB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 		5C91878427A35B990097DCB0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5C91878327A35B990097DCB0 /* CalendarTest.app */,
+				5C91878327A35B990097DCB0 /* WatchYourCalendar.app */,
 				5C91878727A35B990097DCB0 /* CalendarTest WatchKit App.app */,
 				5C91879327A35B9C0097DCB0 /* CalendarTest WatchKit Extension.appex */,
 				5C9187AD27A35B9D0097DCB0 /* CalendarTestTests.xctest */,
@@ -225,7 +225,7 @@
 			);
 			name = CalendarTest;
 			productName = CalendarTest;
-			productReference = 5C91878327A35B990097DCB0 /* CalendarTest.app */;
+			productReference = 5C91878327A35B990097DCB0 /* WatchYourCalendar.app */;
 			productType = "com.apple.product-type.application.watchapp2-container";
 		};
 		5C91878627A35B990097DCB0 /* CalendarTest WatchKit App */ = {
@@ -657,7 +657,7 @@
 				DEVELOPMENT_TEAM = 72S2H2ZD48;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.CalendarTest;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = WatchYourCalendar;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -670,7 +670,7 @@
 				DEVELOPMENT_TEAM = 72S2H2ZD48;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.CalendarTest;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = WatchYourCalendar;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
