@@ -414,7 +414,7 @@ func compGetDayGayge(dc: DateComponents, now: Date) -> Int{
     let comp = DateComponents(calendar: cal, hour: hr, minute: mn, second:sc)
     let time = cal.nextDate(after: date, matching: comp, matchingPolicy: .nextTime)!
     let diff = cal.dateComponents([.hour, .minute, .second], from: date, to: time)
-    let min = ((diff.hour)! * 60) + diff.minute
+    let min = ((diff.hour)! * 60) + diff.minute!
     if (390 - min) / 390 > 1 {
         return 1
     } else if (390 - min) / 390 < 1 {
