@@ -350,7 +350,7 @@ func compGetNowBlock(date: Date) -> Int{
         return 5
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
         return 6
-    } else if timeIsBeforeBlockBegins(date: date, block: 8){
+    } else if isAfter(hour1: Calendar.current.component(.hour, from: date), minute1: Calendar.current.component(.hour, from: date), hour2: 15, minute2: 15){
         return 7
     } else {
         return 0
@@ -450,29 +450,29 @@ func compShortNextClass(date: Date) -> String {
     }
 }
 
-//func compLongNowClass(date: Date) -> String {
-//    if cycleDay == 0 {
-//        return "None"
-//    } else if timeIsBeforeBlockBegins(date: date, block: 1){
-//        return "\(classes[cycleDay]![0])"
-//    } else if timeIsBeforeBlockBegins(date: date, block: 2){
-//        return "\(getMorningActivity())"
-//    } else if timeIsBeforeBlockBegins(date: date, block: 3){
-//        return "\(classes[cycleDay]![1])"
-//    } else if timeIsBeforeBlockBegins(date: date, block: 4){
-//        return "\(classes[cycleDay]![2])"
-//    } else if timeIsBeforeBlockBegins(date: date, block: 5){
-//        return "Next: Lunch"
-//    } else if timeIsBeforeBlockBegins(date: date, block: 6){
-//        return "\(classes[cycleDay]![3])"
-//    } else if timeIsBeforeBlockBegins(date: date, block: 7){
-//        return "\(classes[cycleDay]![4])"
-//    } else if timeIsBeforeBlockBegins(date: date, block: 9){
-//        return "\(classes[cycleDay]![5])"
-//    } else {
-//        return "Next: Go home!"
-//    }
-//}
+func compLongNowClass(date: Date) -> String {
+    if cycleDay == 0 {
+        return "None"
+    } else if timeIsBeforeBlockBegins(date: date, block: 1){
+        return "\(classes[cycleDay]![0])"
+    } else if timeIsBeforeBlockBegins(date: date, block: 2){
+        return "\(getMorningActivity())"
+    } else if timeIsBeforeBlockBegins(date: date, block: 3){
+        return "\(classes[cycleDay]![1])"
+    } else if timeIsBeforeBlockBegins(date: date, block: 4){
+        return "\(classes[cycleDay]![2])"
+    } else if timeIsBeforeBlockBegins(date: date, block: 5){
+        return "Next: Lunch"
+    } else if timeIsBeforeBlockBegins(date: date, block: 6){
+        return "\(classes[cycleDay]![3])"
+    } else if timeIsBeforeBlockBegins(date: date, block: 7){
+        return "\(classes[cycleDay]![4])"
+    } else if timeIsBeforeBlockBegins(date: date, block: 9){
+        return "\(classes[cycleDay]![5])"
+    } else {
+        return "Next: Go home!"
+    }
+}
 
 
 func compGetTime(dc: DateComponents) -> String {
@@ -490,26 +490,19 @@ func compGetTime(dc: DateComponents) -> String {
 }
 
 func compGetTimeUntil(date: Date) -> String {
-    return compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date))
+    return String(compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date)).suffix(2)) + "m"
 }
 
 func compGetDayGigue(now: Date) -> Float {
-    let date = now
-    let cal = Calendar.current
-    let hr = 15
-    let mn = 25
-    let sc = 00
-    let comp = DateComponents(calendar: cal, hour: hr, minute: mn, second:sc)
-    let time = cal.nextDate(after: date, matching: comp, matchingPolicy: .nextTime)!
-    let diff = cal.dateComponents([.hour, .minute, .second], from: date, to: time)
-    let min = ((diff.hour)! * 60) + diff.minute!
-    if (390 - min) / 390 > 1 {
-        return 1
-    } else if (390 - min) / 390 < 1 {
-        return 0
-    } else {
-        return Float((390 - min)) / 390.0
-    }
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy/MM/dd"
+    let yearStr = formatter.string(from: Date())
+    formatter.dateFormat = "yyyy/MM/dd HH:mm"
+    let dayStart = formatter.date(from: yearStr + " 08:40")!
+    let mins = Float(Int(now.timeIntervalSince(dayStart) / 60))
+    if mins < 0 { return 0.0 }
+    if mins > 390 { return 1.0 }
+    return Float(mins / 390.0)
 }
 
 //func compGetTimeUntilClassEnd(dc: DateComponents, now: Date = Date()) -> DateComponents {
