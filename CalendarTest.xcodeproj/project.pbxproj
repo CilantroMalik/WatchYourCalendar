@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15DA717427AD516F00B26BDF /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA717327AD516F00B26BDF /* ExtensionDelegate.swift */; };
 		5C91878827A35B990097DCB0 /* CalendarTest WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 5C91878727A35B990097DCB0 /* CalendarTest WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5C91878D27A35B9C0097DCB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C91878C27A35B9C0097DCB0 /* Assets.xcassets */; };
 		5C91879427A35B9C0097DCB0 /* CalendarTest WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5C91879327A35B9C0097DCB0 /* CalendarTest WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -80,6 +81,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		15DA717327AD516F00B26BDF /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		5C91878327A35B990097DCB0 /* CalendarTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C91878727A35B990097DCB0 /* CalendarTest WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CalendarTest WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C91878C27A35B9C0097DCB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				5C91879A27A35B9C0097DCB0 /* ContentView.swift */,
 				5C91885127A363000097DCB0 /* DayView.swift */,
 				5CDF9C8F27A7231F00B608C2 /* Utilities.swift */,
+				15DA717327AD516F00B26BDF /* ExtensionDelegate.swift */,
 				5C91879C27A35B9C0097DCB0 /* NotificationController.swift */,
 				5C91879E27A35B9C0097DCB0 /* NotificationView.swift */,
 				5C9187A027A35B9C0097DCB0 /* ComplicationController.swift */,
@@ -393,6 +396,7 @@
 			files = (
 				5C91879D27A35B9C0097DCB0 /* NotificationController.swift in Sources */,
 				5C91885227A363000097DCB0 /* DayView.swift in Sources */,
+				15DA717427AD516F00B26BDF /* ExtensionDelegate.swift in Sources */,
 				5C91879B27A35B9C0097DCB0 /* ContentView.swift in Sources */,
 				5C9187A127A35B9C0097DCB0 /* ComplicationController.swift in Sources */,
 				5C91879927A35B9C0097DCB0 /* CalendarTestApp.swift in Sources */,
