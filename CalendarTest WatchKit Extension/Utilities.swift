@@ -318,13 +318,13 @@ func compGetNextBlock(date: Date) -> String{
     } else if timeIsBeforeBlockBegins(date: date, block: 0){
         return (blocks[cycleDay]![0])
     } else if timeIsBeforeBlockBegins(date: date, block: 1){
-        return "ACT" //activities?? or change to something nicer
+        return "M" //activities?? or change to something nicer
     } else if timeIsBeforeBlockBegins(date: date, block: 2){
         return (blocks[cycleDay]![1])
     } else if timeIsBeforeBlockBegins(date: date, block: 3){
         return (blocks[cycleDay]![2])
     } else if timeIsBeforeBlockBegins(date: date, block: 4){
-        return "LCH" //lunch- how many letters could we have-- given that the others are only one letter each
+        return "L" //lunch- how many letters could we have-- given that the others are only one letter each
     } else if timeIsBeforeBlockBegins(date: date, block: 5){
         return (blocks[cycleDay]![3])
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
@@ -332,7 +332,7 @@ func compGetNextBlock(date: Date) -> String{
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
         return (blocks[cycleDay]![5])
     } else {
-        return ("END")
+        return ("X")
     }
 }
 func compGetOrder() -> String{
@@ -405,7 +405,7 @@ func compGetTimeUntil(date: Date) -> String {
     return compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date))
 }
 
-func compGetDayGayge(dc: DateComponents, now: Date) -> Int{
+func compGetDayGayge(now: Date) -> Float {
     let date = now
     let cal = Calendar.current
     let hr = 15
@@ -414,12 +414,12 @@ func compGetDayGayge(dc: DateComponents, now: Date) -> Int{
     let comp = DateComponents(calendar: cal, hour: hr, minute: mn, second:sc)
     let time = cal.nextDate(after: date, matching: comp, matchingPolicy: .nextTime)!
     let diff = cal.dateComponents([.hour, .minute, .second], from: date, to: time)
-    let min = ((diff.hour)! * 60) + diff.minute
+    let min = ((diff.hour)! * 60) + diff.minute!
     if (390 - min) / 390 > 1 {
         return 1
     } else if (390 - min) / 390 < 1 {
         return 0
     } else {
-    return (390 - min) / 390
+        return Float((390 - min)) / 390.0
     }
 }
