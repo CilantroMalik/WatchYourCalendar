@@ -6,6 +6,22 @@
 //
 
 import Foundation
+import WatchKit
+import ClockKit
+
+func scheduleRefresh() {
+    let refreshTime = Date().advanced(by: 900)
+    WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: refreshTime, userInfo: nil, scheduledCompletion: {_ in print("Scheduled task") })
+}
+
+func reloadActiveComplications() {
+    let server = CLKComplicationServer.sharedInstance()
+
+    for complication in server.activeComplications ?? [] {
+        server.reloadTimeline(for: complication)
+    }
+}
+
 public var nextClass = 0
 var dateToCycleDay: [[Int: Int]] = [
     // January
@@ -206,6 +222,7 @@ func nowIsBeforeBlockBegins(block: Int) -> Bool{
     }
     return false
 }
+
 func getMorningActivity() -> String {
     var date = Date()
     let cal = Calendar.current
@@ -240,24 +257,48 @@ func getMorningActivity() -> String {
 
 //COMPLICATIONS (functions start with "comp" in order to avoid confusion with other methods
 
-func compGetNextBlock() -> String{
+func timeIsBeforeBlockBegins(date: Date, block: Int) -> Bool{
+    let hr = Calendar.current.component(.hour, from: date)
+    let min = Calendar.current.component(.minute, from: date)
+    if block == 7 { //
+        return isAfter(hour1: hr,minute1: min,hour2: 15,minute2: 15)
+    } else if block == 6 { //
+        return isAfter(hour1: hr,minute1: min,hour2: 14,minute2: 30)
+    } else if block == 5 { //before
+        return isAfter(hour1: hr,minute1: min,hour2: 13,minute2: 20)
+    } else if block == 4 {//before lunch
+        return isAfter(hour1: hr,minute1: min,hour2: 12,minute2: 30)
+    } else if block == 3 {//
+        return isAfter(hour1: hr,minute1: min,hour2: 11,minute2: 25)
+    } else if block == 2 { //
+        return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 35)
+    }else if block == 1 { //
+            return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 00)
+    } else if block == 0 { //before first block
+        return isAfter(hour1: hr, minute1: min, hour2: 8, minute2: 55)
+    }
+    return false
+}
+
+func compGetNextBlock(date: Date) -> String{
+    print("Getting next block for time \(Calendar.current.component(.hour, from: date)):\(Calendar.current.component(.minute, from: date))")
     if cycleDay == 0{
         return ""
-    } else if nowIsBeforeBlockBegins(block: 0){
+    } else if timeIsBeforeBlockBegins(date: date, block: 0){
         return (blocks[cycleDay]![0])
-    } else if nowIsBeforeBlockBegins(block: 1){
+    } else if timeIsBeforeBlockBegins(date: date, block: 1){
         return "ACT" //activities?? or change to something nicer
-    } else if (nowIsBeforeBlockBegins(block: 2)){
+    } else if timeIsBeforeBlockBegins(date: date, block: 2){
         return (blocks[cycleDay]![1])
-    } else if nowIsBeforeBlockBegins(block: 3){
+    } else if timeIsBeforeBlockBegins(date: date, block: 3){
         return (blocks[cycleDay]![2])
-    } else if nowIsBeforeBlockBegins(block: 4){
+    } else if timeIsBeforeBlockBegins(date: date, block: 4){
         return "LCH" //lunch- how many letters could we have-- given that the others are only one letter each
-    } else if nowIsBeforeBlockBegins(block: 5){
+    } else if timeIsBeforeBlockBegins(date: date, block: 5){
         return (blocks[cycleDay]![3])
-    } else if nowIsBeforeBlockBegins(block: 6){
+    } else if timeIsBeforeBlockBegins(date: date, block: 6){
         return (blocks[cycleDay]![4])
-    } else if nowIsBeforeBlockBegins(block: 7){
+    } else if timeIsBeforeBlockBegins(date: date, block: 7){
         return (blocks[cycleDay]![5])
     } else {
         return ("END")
