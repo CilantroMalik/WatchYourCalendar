@@ -309,20 +309,20 @@ struct ContentView: View {
                     }
                 } else if globalOffset > 0{
                     if globalOffset == 1 {
-                        Text("Tomorrow")
+                        Text("Tomorrow").fontWeight(.italic.heavy).foregroundColor(.purple)
                     } else if (globalOffset % 7 == 0){
-                        Text("In " + String(globalOffset / 7) + " week" + (globalOffset >= 14 ? "s" : ""))
+                        Text("In " + String(globalOffset / 7) + " week" + (globalOffset >= 14 ? "s" : "")).fontWeight(.italic).foregroundColor(.purple)
                     } else {
-                        Text("In " + String(globalOffset) + " days")
+                        Text("In " + String(globalOffset) + " days").fontWeight(.italic).foregroundColor(.purple)
                     }
                 } else if globalOffset < 0{
                     if globalOffset == -1 {
-                        Text("Yesterday")
+                        Text("Yesterday").fontWeight(.italic.heavy).foregroundColor(.purple)
                     } else {
-                        Text(String(globalOffset - globalOffset - globalOffset) + " days ago")
+                        Text(String(globalOffset - globalOffset - globalOffset) + " days ago").fontWeight(.italic).foregroundColor(.purple)
                     }
                 } else if ((globalOffset - globalOffset - globalOffset) % 7 == 0){
-                    Text(String(globalOffset / 7) + " week" + ((globalOffset - globalOffset - globalOffset) >= 14 ? "s" : "" + " ago"))
+                    Text(String(globalOffset / 7) + " week" + ((globalOffset - globalOffset - globalOffset) >= 14 ? "s" : "" + " ago")).fontWeight(.italic).foregroundColor(.purple)
                 }
                 
                 Text("\(getDate())")
