@@ -553,25 +553,44 @@ func compGetDayGigue(now: Date) -> Float {
 //      }
 //  }
 
-//func compGetTimeUntilClassEnds(date: Date) -> String{
-//    return compGetTimeUntilClassEn(dc: compGetTimeUntilClassEnd(dc: compBeginningTimeOfBlock(now: date), now: date))
-//}
+func compMinsSinceClassStart(now: Date) -> Int {
+    let nowBlock = compGetNowBlock(date: now)
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy/MM/dd"
+    let yearStr = formatter.string(from: Date())
+    formatter.dateFormat = "yyyy/MM/dd HH:mm"
+    var classStart = formatter.date(from: yearStr + " 08:40")!
+    switch nowBlock {
+    case 0:
+        classStart = formatter.date(from: yearStr + " 08:55")!
+    case 1:
+        classStart = formatter.date(from: yearStr + " 10:00")!
+    case 2:
+        classStart = formatter.date(from: yearStr + " 10:35")!
+    case 3:
+        classStart = formatter.date(from: yearStr + " 11:25")!
+    case 4:
+        classStart = formatter.date(from: yearStr + " 12:30")!
+    case 5:
+        classStart = formatter.date(from: yearStr + " 13:20")!
+    case 6:
+        classStart = formatter.date(from: yearStr + " 14:30")!
+    case 7:
+        classStart = formatter.date(from: yearStr + " 15:15")!
+    default:
+        classStart = formatter.date(from: yearStr + " 08:40")!
+    }
+    return Int(now.timeIntervalSince(classStart) / 60)
+}
+
+func compGetTimeUntilClassEnds(length: Int, now: Date) -> String{
+    let minsPassed = compMinsSinceClassStart(now: now)
+    return "\(length - minsPassed)m"
+}
 
 func compGetClassGigue(length: Int, now: Date) -> Float {
-    let date = now
-    let cal = Calendar.current
-    let hr = cal.component(.hour, from: now)
-    let mn = cal.component(.minute, from: now)
-    let sc = cal.component(.second, from: now)
-    let comp = DateComponents(calendar: cal, hour: hr, minute: mn, second:sc)
-    let time = cal.nextDate(after: date, matching: comp, matchingPolicy: .nextTime)!
-    let diff = cal.dateComponents([.hour, .minute, .second], from: date, to: time)
-    let min = ((diff.hour)! * 60) + diff.minute!
-    if (length - min) / length > 1 {
-        return 1
-    } else if (length - min) / length < 1 {
-        return 0
-    } else {
-        return Float((length - min) / length)
-    }
+    let mins = Float(compMinsSinceClassStart(now: now))
+    if mins < 0 { return 0.0 }
+    if mins > Float(length) { return 1.0 }
+    return Float(mins / Float(length))
 }
