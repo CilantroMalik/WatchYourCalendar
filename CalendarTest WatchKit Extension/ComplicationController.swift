@@ -44,6 +44,14 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
             let template = CLKComplicationTemplateUtilitarianLargeFlat(textProvider: CLKSimpleTextProvider(text: "\(compLongNextClass(date: date)) in \(compGetTimeUntil(date: date))"))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
+    } else if complication.identifier == "DayProgress" {
+        if complication.family == CLKComplicationFamily.graphicCircular {
+            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: .orange, fillFraction: compGetDayGayge(now: date)), centerTextProvider: CLKSimpleTextProvider(text: compGetNextBlock(date: date)))
+            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+        } else if complication.family == CLKComplicationFamily.circularSmall {
+            let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: compGetNextBlock(date: date)), fillFraction: compGetDayGayge(now: date), ringStyle: .closed)
+            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+        }
     }
     return nil
 }
@@ -57,7 +65,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             CLKComplicationDescriptor(identifier: "DayAndBlocks", displayName: "Day & Blocks", supportedFamilies: [CLKComplicationFamily.modularSmall, CLKComplicationFamily.graphicCircular]),
             CLKComplicationDescriptor(identifier: "DayAndNextClass", displayName: "Day & Next Class", supportedFamilies: [CLKComplicationFamily.utilitarianSmallFlat, CLKComplicationFamily.circularSmall]),
             CLKComplicationDescriptor(identifier: "DayBlocksClass", displayName: "Day, Blocks, & Next Class", supportedFamilies: [CLKComplicationFamily.modularLarge, CLKComplicationFamily.graphicRectangular]),
-            CLKComplicationDescriptor(identifier: "NextClassIn", displayName: "Next class time", supportedFamilies: [CLKComplicationFamily.graphicBezel, CLKComplicationFamily.graphicCorner, CLKComplicationFamily.utilitarianLarge])
+            CLKComplicationDescriptor(identifier: "NextClassIn", displayName: "Next Class Time", supportedFamilies: [CLKComplicationFamily.graphicBezel, CLKComplicationFamily.graphicCorner, CLKComplicationFamily.utilitarianLarge]),
+            CLKComplicationDescriptor(identifier: "DayProgress", displayName: "Day rogress", supportedFamilies: [CLKComplicationFamily.graphicCircular, CLKComplicationFamily.circularSmall])
             // Multiple complication support can be added here with more descriptors
         ]
         
