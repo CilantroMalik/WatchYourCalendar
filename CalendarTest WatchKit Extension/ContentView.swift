@@ -154,6 +154,21 @@ func cycleDayDay() -> Text {
     
 }
 
+func getTimeUntilNextClass(dc: DateComponents) -> DateComponents {
+    var date = Date()
+    let cal = Calendar.current
+    if globalOffset != 0 {
+        date = cal.date(byAdding: .day, value: globalOffset, to: date)!
+    }
+    let hr = dc.hour
+    let mn = dc.minute
+    let sc = dc.second
+    let comp = DateComponents(calendar: cal, hour: hr, minute: mn, second:sc)
+    let time = cal.nextDate(after: date, matching: comp, matchingPolicy: .nextTime)!
+    let diff = cal.dateComponents([.hour, .minute, .second], from: date, to: time)
+    return diff
+}
+
 var globalOffset = 0
 
 struct ContentView: View {
@@ -164,20 +179,6 @@ struct ContentView: View {
     @State var offset = 0
     @State var minOffset = 0.0
     
-    func getTimeUntilNextClass(dc: DateComponents) -> DateComponents {
-        var date = Date()
-        let cal = Calendar.current
-        if offset != 0 {
-            date = cal.date(byAdding: .day, value: offset, to: date)!
-        }
-        let hr = dc.hour
-        let mn = dc.minute
-        let sc = dc.second
-        let comp = DateComponents(calendar: cal, hour: hr, minute: mn, second:sc)
-        let time = cal.nextDate(after: date, matching: comp, matchingPolicy: .nextTime)!
-        let diff = cal.dateComponents([.hour, .minute, .second], from: date, to: time)
-        return diff
-    }
     func getDate() -> String {
         var date = Date()
         let cal = Calendar.current
@@ -309,20 +310,20 @@ struct ContentView: View {
                     }
                 } else if globalOffset > 0{
                     if globalOffset == 1 {
-                        Text("Tomorrow").fontWeight(.italic.heavy).foregroundColor(.purple)
+                        Text("Tomorrow").fontWeight(.heavy).foregroundColor(.purple)
                     } else if (globalOffset % 7 == 0){
-                        Text("In " + String(globalOffset / 7) + " week" + (globalOffset >= 14 ? "s" : "")).fontWeight(.italic).foregroundColor(.purple)
+                        Text("In " + String(globalOffset / 7) + " week" + (globalOffset >= 14 ? "s" : "")).foregroundColor(.purple)
                     } else {
-                        Text("In " + String(globalOffset) + " days").fontWeight(.italic).foregroundColor(.purple)
+                        Text("In " + String(globalOffset) + " days").foregroundColor(.purple)
                     }
                 } else if globalOffset < 0{
                     if globalOffset == -1 {
-                        Text("Yesterday").fontWeight(.italic.heavy).foregroundColor(.purple)
+                        Text("Yesterday").fontWeight(.heavy).foregroundColor(.purple)
                     } else {
-                        Text(String(globalOffset - globalOffset - globalOffset) + " days ago").fontWeight(.italic).foregroundColor(.purple)
+                        Text(String(globalOffset - globalOffset - globalOffset) + " days ago").foregroundColor(.purple)
                     }
                 } else if ((globalOffset - globalOffset - globalOffset) % 7 == 0){
-                    Text(String(globalOffset / 7) + " week" + ((globalOffset - globalOffset - globalOffset) >= 14 ? "s" : "" + " ago")).fontWeight(.italic).foregroundColor(.purple)
+                    Text(String(globalOffset / 7) + " week" + ((globalOffset - globalOffset - globalOffset) >= 14 ? "s" : "" + " ago")).foregroundColor(.purple)
                 }
                 
                 Text("\(getDate())")
