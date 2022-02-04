@@ -404,3 +404,22 @@ func compGetTime(dc: DateComponents) -> String {
 func compGetTimeUntil(date: Date) -> String {
     return compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date))
 }
+
+func compGetDayGayge(dc: DateComponents, now: Date) -> Int{
+    let date = now
+    let cal = Calendar.current
+    let hr = 15
+    let mn = 25
+    let sc = 00
+    let comp = DateComponents(calendar: cal, hour: hr, minute: mn, second:sc)
+    let time = cal.nextDate(after: date, matching: comp, matchingPolicy: .nextTime)!
+    let diff = cal.dateComponents([.hour, .minute, .second], from: date, to: time)
+    let min = ((diff.hour)! * 60) + diff.minute
+    if (390 - min) / 390 > 1 {
+        return 1
+    } else if (390 - min) / 390 < 1 {
+        return 0
+    } else {
+    return (390 - min) / 390
+    }
+}
