@@ -6,6 +6,7 @@
 //
  
 import SwiftUI
+import UserNotifications
 func beginningTimeOfBlock() -> DateComponents {
     let cal = Calendar.current
     if nowIsBeforeBlockBegins(block: 0){
