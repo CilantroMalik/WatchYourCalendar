@@ -154,8 +154,9 @@ func cycleDayDay() -> Text {
     
 }
 
-func getTimeUntilNextClass(dc: DateComponents) -> DateComponents {
-    var date = Date()
+func getTimeUntilNextClass(dc: DateComponents, now: Date = Date()) -> DateComponents {
+    var date = now
+    print("Now: \(Calendar.current.component(.hour, from: date)):\(Calendar.current.component(.minute, from: date))")
     let cal = Calendar.current
     if globalOffset != 0 {
         date = cal.date(byAdding: .day, value: globalOffset, to: date)!
@@ -165,7 +166,9 @@ func getTimeUntilNextClass(dc: DateComponents) -> DateComponents {
     let sc = dc.second
     let comp = DateComponents(calendar: cal, hour: hr, minute: mn, second:sc)
     let time = cal.nextDate(after: date, matching: comp, matchingPolicy: .nextTime)!
+    print("Time: \(Calendar.current.component(.hour, from: time)):\(Calendar.current.component(.minute, from: time))")
     let diff = cal.dateComponents([.hour, .minute, .second], from: date, to: time)
+    print("Diff: \(diff)")
     return diff
 }
 
@@ -358,6 +361,7 @@ struct ContentView: View {
             .opacity(opacity).animation(.easeInOut, value: opacity)
             .gesture(TapGesture(count: 2).onEnded({ returnToCurrent() }))
             .focusable().digitalCrownRotation($minOffset)
+            .onChange(of: scenePhase, perform: { phase in if phase == .background { globalOffset = 0; offset = 0; minOffset = 0 } })
     }
  
 struct ContentView_Previews: PreviewProvider {
