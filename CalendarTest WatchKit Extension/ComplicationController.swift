@@ -46,13 +46,33 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
         }
     } else if complication.identifier == "DayProgress" {
         if complication.family == CLKComplicationFamily.graphicCircular {
-            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: .orange, fillFraction: compGetDayGayge(now: date)), centerTextProvider: CLKSimpleTextProvider(text: compGetNextBlock(date: date)))
+            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: .orange, fillFraction: compGetDayGigue(now: date)), centerTextProvider: CLKSimpleTextProvider(text: compGetNextBlock(date: date)))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.circularSmall {
-            let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: compGetNextBlock(date: date)), fillFraction: compGetDayGayge(now: date), ringStyle: .closed)
+            let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: compGetNextBlock(date: date)), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
-    }
+//    } else if complication.identifier == "TimeUntilClassEnds" {
+//        if complication.family == CLKComplicationFamily.graphicBezel {
+//            let preTemplate = CLKComplicationTemplateGraphicCircularStackText(line1TextProvider: CLKSimpleTextProvider(text: "DAY \(cycleDay)"), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
+//            let template = CLKComplicationTemplateGraphicBezelCircularText(circularTemplate: preTemplate, textProvider: CLKSimpleTextProvider(text: "\(compLongNowClass(date: date)) ends in \(compGetTimeUntilClassEnds(date: date))"))
+//            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+//        } else if complication.family == CLKComplicationFamily.graphicCorner {
+//            let template = CLKComplicationTemplateGraphicCornerStackText(innerTextProvider: CLKSimpleTextProvider(text: "\(compGetNowBlock(date: date)) in \(compGetTimeUntilClassEnds(date: date))"), outerTextProvider: CLKSimpleTextProvider(text: "DAY \(cycleDay)"))
+//            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+//        } else if complication.family == CLKComplicationFamily.utilitarianLarge {
+//            let template = CLKComplicationTemplateUtilitarianLargeFlat(textProvider: CLKSimpleTextProvider(text: "\(compLongNowClass(date: date)) in \(compGetTimeUntilClassEnds(date: date))"))
+//            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+//        }
+    } else if complication.identifier == "ClassProgress" {
+        if complication.family == CLKComplicationFamily.graphicCircular {
+            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: .orange, fillFraction: compGetClassGigue(length: compGetClassLength(block: compGetNowBlock(date: date)),now: date)), centerTextProvider: CLKSimpleTextProvider(text: compGetNowBlockLetter(date: date)))
+            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+        } else if complication.family == CLKComplicationFamily.circularSmall {
+            let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: compGetNowBlockLetter(date: date)), fillFraction: compGetClassGigue(length: compGetClassLength(block: compGetNowBlock(date: date)),now: date), ringStyle: .closed)
+            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+        }
+}
     return nil
 }
 
@@ -66,7 +86,9 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             CLKComplicationDescriptor(identifier: "DayAndNextClass", displayName: "Day & Next Class", supportedFamilies: [CLKComplicationFamily.utilitarianSmallFlat, CLKComplicationFamily.circularSmall]),
             CLKComplicationDescriptor(identifier: "DayBlocksClass", displayName: "Day, Blocks, & Next Class", supportedFamilies: [CLKComplicationFamily.modularLarge, CLKComplicationFamily.graphicRectangular]),
             CLKComplicationDescriptor(identifier: "NextClassIn", displayName: "Next Class Time", supportedFamilies: [CLKComplicationFamily.graphicBezel, CLKComplicationFamily.graphicCorner, CLKComplicationFamily.utilitarianLarge]),
-            CLKComplicationDescriptor(identifier: "DayProgress", displayName: "Day Progress", supportedFamilies: [CLKComplicationFamily.graphicCircular, CLKComplicationFamily.circularSmall])
+            CLKComplicationDescriptor(identifier: "DayProgress", displayName: "Day Progress", supportedFamilies: [CLKComplicationFamily.graphicCircular, CLKComplicationFamily.circularSmall]),
+            CLKComplicationDescriptor(identifier: "ClassProgress", displayName: "Class Progress", supportedFamilies: [CLKComplicationFamily.graphicCircular, CLKComplicationFamily.circularSmall]),
+            CLKComplicationDescriptor(identifier: "TimeUntilClassEnds", displayName: "Time Until Class Ends", supportedFamilies: [CLKComplicationFamily.graphicBezel, CLKComplicationFamily.graphicCorner, CLKComplicationFamily.utilitarianLarge])
             // Multiple complication support can be added here with more descriptors
         ]
         
