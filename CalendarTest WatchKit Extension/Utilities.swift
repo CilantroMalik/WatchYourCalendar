@@ -594,3 +594,40 @@ func compGetClassGigue(length: Int, now: Date) -> Float {
     if mins > Float(length) { return 1.0 }
     return Float(mins / Float(length))
 }
+func schoolDone() -> Bool{
+    let date = Date()
+    let cal = Calendar.current
+    if (isSports()){
+        return (cal.component(.hour, from: date) > 4 && cal.component(.minute, from: date) > 10) || (cal.component(.hour, from: date) < 8)
+    } else {
+        return (cal.component(.hour, from: date) > 3 && cal.component(.minute, from: date) > 20) || (cal.component(.hour, from: date) < 8)
+    }
+}
+
+//INDIVIDUAL COMPLICATION METHODS - i can make them fancy nested ? : statements later; just trying to organize my thoughts
+func NextClassInGraphicCorner() -> String{
+    let date = Date()
+    if !schoolDone(){
+    return "\(compGetNextBlock(date: date)) in \(compGetTimeUntil(date: date))"
+    } else {
+        return "noSchool" //fix
+    }
+}
+func NextClassInGraphicBezel() -> String{
+    let date = Date()
+    if !schoolDone(){
+        return "\(compLongNextClass(date: date)) in \(compGetTimeUntil(date: date))"
+    } else {
+        return "schooln't" //fix
+    }
+}
+func NextClassInUtilitarianLarge() -> String{
+    let date = Date()
+    if !schoolDone(){
+        return "\(compLongNextClass(date: date)) in \(compGetTimeUntil(date: date))"
+    }else{
+        return "!school" //fix
+    }
+}
+
+
