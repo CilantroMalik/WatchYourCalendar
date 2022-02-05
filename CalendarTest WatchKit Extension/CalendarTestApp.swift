@@ -21,5 +21,6 @@ struct CalendarTestApp: App {
 
         WKNotificationScene(controller: NotificationController.self, category: "sports")
         WKNotificationScene(controller: LunchNotificationController.self, category: "lunch")
+        WKNotificationScene(controller: ScheduleNotificationController.self, category: "event")
     }
 }

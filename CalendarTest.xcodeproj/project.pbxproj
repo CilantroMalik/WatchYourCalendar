@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1501FD0027AF24FF0084CB40 /* ScheduleNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1501FCFF27AF24FF0084CB40 /* ScheduleNotificationController.swift */; };
 		15DA717427AD516F00B26BDF /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA717327AD516F00B26BDF /* ExtensionDelegate.swift */; };
 		15DA717627AECA6E00B26BDF /* LunchNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA717527AECA6E00B26BDF /* LunchNotificationController.swift */; };
 		15DA717827AECA8A00B26BDF /* LunchNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA717727AECA8A00B26BDF /* LunchNotificationView.swift */; };
@@ -85,6 +86,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1501FCFF27AF24FF0084CB40 /* ScheduleNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNotificationController.swift; sourceTree = "<group>"; };
 		15DA717327AD516F00B26BDF /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		15DA717527AECA6E00B26BDF /* LunchNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchNotificationController.swift; sourceTree = "<group>"; };
 		15DA717727AECA8A00B26BDF /* LunchNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchNotificationView.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				15DA717727AECA8A00B26BDF /* LunchNotificationView.swift */,
 				5C3210A427AEF9CD00AD582F /* SchedulingView.swift */,
 				5C3210A627AF07FB00AD582F /* ScheduleNotificationView.swift */,
+				1501FCFF27AF24FF0084CB40 /* ScheduleNotificationController.swift */,
 				5C9187A227A35B9D0097DCB0 /* Assets.xcassets */,
 				5C9187A727A35B9D0097DCB0 /* Info.plist */,
 				5C9187A827A35B9D0097DCB0 /* PushNotificationPayload.apns */,
@@ -407,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C3210A527AEF9CD00AD582F /* SchedulingView.swift in Sources */,
+				1501FD0027AF24FF0084CB40 /* ScheduleNotificationController.swift in Sources */,
 				5C91879D27A35B9C0097DCB0 /* NotificationController.swift in Sources */,
 				5C91885227A363000097DCB0 /* DayView.swift in Sources */,
 				15DA717427AD516F00B26BDF /* ExtensionDelegate.swift in Sources */,

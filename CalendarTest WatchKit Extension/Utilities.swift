@@ -151,6 +151,15 @@ func getMinute() -> Int{
     return minute
 }
 
+func getOffsetDate() -> String {
+    var date = Date()
+    let cal = Calendar.current
+    if globalOffset != 0 {
+        date = cal.date(byAdding: .day, value: globalOffset, to: date)!
+    }
+    return "\(cal.shortWeekdaySymbols[cal.component(.weekday, from: date)-1]), \(cal.shortMonthSymbols[cal.component(.month, from: date)-1]) \(cal.component(.day, from: date)), \(cal.component(.year, from: date))"
+}
+
 func isSports() -> Bool{
     if cycleDay == 3 || cycleDay == 6 || cycleDay == 8{
         return true
