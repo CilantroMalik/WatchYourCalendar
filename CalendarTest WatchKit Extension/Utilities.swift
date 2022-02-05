@@ -53,9 +53,41 @@ func scheduleSportsNotification() {
     let request = UNNotificationRequest(identifier: "dailyNotif", content: content, trigger: trigger)
 
     // add our notification request
-    UNUserNotificationCenter.current().add(request) { (error) in if let error = error { print("Notification Scheduling Error: \(error)") } else { print("scheduled notification successfully") } }
-    print("requested notification")
-    print("notification scheduler complete")
+    UNUserNotificationCenter.current().add(request)
+}
+
+func scheduleLunchNotification() {
+    var alreadyScheduled = false
+    UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+        for request in requests {
+            if request.identifier.starts(with: "lunchNotif") {
+                alreadyScheduled = true
+            }
+        }
+    }
+    if alreadyScheduled { return }
+    
+    let content = UNMutableNotificationContent()
+    content.title = "e"
+    content.subtitle = "e"
+    content.sound = UNNotificationSound.default
+    content.body = "e"
+    content.categoryIdentifier = "lunch"
+
+    let category = UNNotificationCategory(identifier: "lunch", actions: [], intentIdentifiers: [], options: [])
+    UNUserNotificationCenter.current().setNotificationCategories([category])
+    
+    // enable the line below for testing notifications: shows five seconds after app launch
+    //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 20, repeats: false)
+    for i in 2...6 {
+        let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 13, minute: 12, weekday: i), repeats: true)
+
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: "lunchNotif\(i)", content: content, trigger: trigger)
+
+        // add our notification request
+        UNUserNotificationCenter.current().add(request)
+    }
 }
 
 public var nextClass = 0
