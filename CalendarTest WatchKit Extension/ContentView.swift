@@ -299,7 +299,7 @@ struct ContentView: View {
                     getNextClass().fontWeight(.heavy)
                 }
                 if globalOffset == 0{
-                    if isSchool() {
+                    if isSchool() || !schoolDone(){
                         Text(timeUntil).fontWeight(.light).foregroundColor(offset == 0 ? .white : .black).onReceive(timer, perform: {_ in timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))}).onChange(of: scenePhase, perform: { phase in
                             if phase == .active {
                                 timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))
@@ -317,14 +317,14 @@ struct ContentView: View {
                     } else {
                         Text("In " + String(globalOffset) + " days").foregroundColor(.purple)
                     }
-                } else if globalOffset < 0{
-                    if globalOffset == -1 {
-                        Text("Yesterday").fontWeight(.heavy).foregroundColor(.purple)
-                    } else {
-                        Text(String(globalOffset - globalOffset - globalOffset) + " days ago").foregroundColor(.purple)
-                    }
-                } else if ((globalOffset - globalOffset - globalOffset) % 7 == 0){
-                    Text(String(globalOffset / 7) + " week" + ((globalOffset - globalOffset - globalOffset) >= 14 ? "s" : "" + " ago")).foregroundColor(.purple)
+                   } else if globalOffset < 0{
+                       if globalOffset == -1 {
+                           Text("Yesterday").fontWeight(.heavy).foregroundColor(.purple)
+                       } else if ((globalOffset - globalOffset - globalOffset) % 7 == 0){
+                           Text(String((globalOffset - globalOffset - globalOffset) / 7) + " week" + ((globalOffset - globalOffset - globalOffset) >= 14 ? "s" : "" + " ago")).foregroundColor(.purple) } else {
+                           Text(String(globalOffset - globalOffset - globalOffset) + " days ago").foregroundColor(.purple)
+                       }
+                
                 }
                 
                 Text("\(getDate())")

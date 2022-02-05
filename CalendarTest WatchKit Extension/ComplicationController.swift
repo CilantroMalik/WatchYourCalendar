@@ -10,10 +10,10 @@ import ClockKit
 func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKComplicationTimelineEntry? {
     if complication.identifier == "DayAndBlocks" {
         if complication.family == CLKComplicationFamily.modularSmall {
-            let template = CLKComplicationTemplateModularSmallStackText(line1TextProvider: CLKSimpleTextProvider(text: "DAY \(cycleDay)"), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
+            let template = CLKComplicationTemplateModularSmallStackText(line1TextProvider: CLKSimpleTextProvider(text: getCycleDayDay()), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.graphicCircular {
-            let template = CLKComplicationTemplateGraphicCircularStackText(line1TextProvider: CLKSimpleTextProvider(text: "DAY \(cycleDay)"), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
+            let template = CLKComplicationTemplateGraphicCircularStackText(line1TextProvider: CLKSimpleTextProvider(text: getCycleDayDay()), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
     } else if complication.identifier == "DayAndNextClass" {
@@ -21,27 +21,27 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
             let template = CLKComplicationTemplateUtilitarianSmallFlat(textProvider: CLKSimpleTextProvider(text: "Next: \(compGetNextBlock(date: date))"))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.circularSmall {
-            let template = CLKComplicationTemplateCircularSmallStackText(line1TextProvider: CLKSimpleTextProvider(text: "DAY \(cycleDay)"), line2TextProvider: CLKSimpleTextProvider(text: compGetNextBlock(date: date)))
+            let template = CLKComplicationTemplateCircularSmallStackText(line1TextProvider: CLKSimpleTextProvider(text: getCycleDayDay()), line2TextProvider: CLKSimpleTextProvider(text: compGetNextBlock(date: date)))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
     } else if complication.identifier == "DayBlocksClass" {
         if complication.family == CLKComplicationFamily.modularLarge {
-            let template = CLKComplicationTemplateModularLargeStandardBody(headerTextProvider: CLKSimpleTextProvider(text: "DAY \(cycleDay)"), body1TextProvider: CLKSimpleTextProvider(text: "Blocks: \(order[cycleDay]!.joined(separator: "-"))"), body2TextProvider: CLKSimpleTextProvider(text: compLongNextClass(date: date)))
+            let template = CLKComplicationTemplateModularLargeStandardBody(headerTextProvider: CLKSimpleTextProvider(text: getCycleDayDay()), body1TextProvider: CLKSimpleTextProvider(text: "Blocks: \(order[cycleDay]!.joined(separator: "OFF"))"), body2TextProvider: CLKSimpleTextProvider(text: compLongNextClass(date: date)))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.graphicRectangular {
-            let template = CLKComplicationTemplateGraphicRectangularStandardBody(headerTextProvider: CLKSimpleTextProvider(text: "DAY \(cycleDay)"), body1TextProvider: CLKSimpleTextProvider(text: "Blocks: \(order[cycleDay]!.joined(separator: "-"))"), body2TextProvider: CLKSimpleTextProvider(text: compLongNextClass(date: date)))
+            let template = CLKComplicationTemplateGraphicRectangularStandardBody(headerTextProvider: CLKSimpleTextProvider(text: getCycleDayDay()), body1TextProvider: CLKSimpleTextProvider(text: "Blocks: \(order[cycleDay]!.joined(separator: "OFF"))"), body2TextProvider: CLKSimpleTextProvider(text: compLongNextClass(date: date)))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
     } else if complication.identifier == "NextClassIn" {
         if complication.family == CLKComplicationFamily.graphicBezel {
-            let preTemplate = CLKComplicationTemplateGraphicCircularStackText(line1TextProvider: CLKSimpleTextProvider(text: "DAY \(cycleDay)"), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
-            let template = CLKComplicationTemplateGraphicBezelCircularText(circularTemplate: preTemplate, textProvider: CLKSimpleTextProvider(text: NextClassInGraphicBezel()))
+            let preTemplate = CLKComplicationTemplateGraphicCircularStackText(line1TextProvider: CLKSimpleTextProvider(text: getCycleDayDay()), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
+            let template = CLKComplicationTemplateGraphicBezelCircularText(circularTemplate: preTemplate, textProvider: CLKSimpleTextProvider(text: !schoolDone() ? "\(compLongNextClass(date: date)) in \(compGetTimeUntil(date: date))" : "No School!"))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.graphicCorner {
-            let template = CLKComplicationTemplateGraphicCornerStackText(innerTextProvider: CLKSimpleTextProvider(text: NextClassInGraphicCorner()), outerTextProvider: CLKSimpleTextProvider(text: "DAY \(cycleDay)"))
+            let template = CLKComplicationTemplateGraphicCornerStackText(innerTextProvider: CLKSimpleTextProvider(text: !schoolDone() ? "\(compGetNextBlock(date: date)) in \(compGetTimeUntil(date: date))" : "No School!"), outerTextProvider: CLKSimpleTextProvider(text: getCycleDayDay()))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.utilitarianLarge {
-            let template = CLKComplicationTemplateUtilitarianLargeFlat(textProvider: CLKSimpleTextProvider(text: NextClassInUtilitarianLarge()))
+            let template = CLKComplicationTemplateUtilitarianLargeFlat(textProvider: CLKSimpleTextProvider(text: !schoolDone() ? "\(compLongNextClass(date: date)) in \(compGetTimeUntil(date: date))" : "OFF"))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
     } else if complication.identifier == "DayProgress" {
@@ -54,27 +54,27 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
         if isSports(){
             dayEnd = formatter.date(from: yearStr + " 16:10")!}
         if complication.family == CLKComplicationFamily.graphicCircular {
-            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKTimeIntervalGaugeProvider(style: .fill, gaugeColors: [.orange], gaugeColorLocations: nil, start: dayStart, end: dayEnd), centerTextProvider: CLKSimpleTextProvider(text: !schoolDone() ? String(cycleDay)+compGetNextBlock(date: date) : "X"))
+            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKTimeIntervalGaugeProvider(style: .fill, gaugeColors: [.orange], gaugeColorLocations: nil, start: dayStart, end: dayEnd), centerTextProvider: CLKSimpleTextProvider(text: !schoolDone() ? String(cycleDay)+compGetNextBlock(date: date) : "--"))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.circularSmall {
-            let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: (!schoolDone() ? String(compGetNextBlock(date: date)) : "X")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
+            let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: (!schoolDone() ? String(compGetNextBlock(date: date)) : "--")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
     } else if complication.identifier == "TimeUntilClassEnds" {
         if complication.family == CLKComplicationFamily.graphicBezel {
-            let preTemplate = CLKComplicationTemplateGraphicCircularStackText(line1TextProvider: CLKSimpleTextProvider(text: "DAY \(cycleDay)"), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
-            let template = CLKComplicationTemplateGraphicBezelCircularText(circularTemplate: preTemplate, textProvider: CLKSimpleTextProvider(text: "\(compLongNowClass(date: date)) ends in \(compGetTimeUntilClassEnds(length: compGetClassLength(block: compGetNowBlock(date: date)),now: date))"))
+            let preTemplate = CLKComplicationTemplateGraphicCircularStackText(line1TextProvider: CLKSimpleTextProvider(text: getCycleDayDay()), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
+            let template = CLKComplicationTemplateGraphicBezelCircularText(circularTemplate: preTemplate, textProvider: CLKSimpleTextProvider(text: !schoolDone() ? "\(compLongNowClass(date: date)) ends in \(compGetTimeUntilClassEnds(length: compGetClassLength(block: compGetNowBlock(date: date)),now: date))" : "OFF"))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.graphicCorner {
-            let template = CLKComplicationTemplateGraphicCornerStackText(innerTextProvider: CLKSimpleTextProvider(text:(!schoolDone() ? "\(compGetNowBlockLetter(date: date)) end \(compGetTimeUntilClassEnds(length: compGetClassLength(block: compGetNowBlock(date: date)),now: date))" : "")), outerTextProvider: CLKSimpleTextProvider(text: "DAY \(cycleDay)"))
+            let template = CLKComplicationTemplateGraphicCornerStackText(innerTextProvider: CLKSimpleTextProvider(text:(!schoolDone() ? "\(compGetNowBlockLetter(date: date)) end \(compGetTimeUntilClassEnds(length: compGetClassLength(block: compGetNowBlock(date: date)),now: date))" : "No School!")), outerTextProvider: CLKSimpleTextProvider(text: getCycleDayDay()))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.utilitarianLarge {
-            let template = CLKComplicationTemplateUtilitarianLargeFlat(textProvider: CLKSimpleTextProvider(text:(!schoolDone() ? "\(compLongNowClass(date: date)) end \(compGetTimeUntilClassEnds(length: compGetClassLength(block: compGetNowBlock(date: date)),now: date))" : "")))
+            let template = CLKComplicationTemplateUtilitarianLargeFlat(textProvider: CLKSimpleTextProvider(text:(!schoolDone() ? "\(compLongNowClass(date: date)) end \(compGetTimeUntilClassEnds(length: compGetClassLength(block: compGetNowBlock(date: date)),now: date))" : "No School!")))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
     } else if complication.identifier == "ClassProgress" {
         if complication.family == CLKComplicationFamily.graphicCircular {
-            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: .orange, fillFraction: compGetClassGigue(length: compGetClassLength(block: compGetNowBlock(date: date)),now: date)), centerTextProvider: CLKSimpleTextProvider(text: compGetNowBlockLetter(date: date)))
+            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: .orange, fillFraction: compGetClassGigue(length: compGetClassLength(block: compGetNowBlock(date: date)),now: date)), centerTextProvider: CLKSimpleTextProvider(text: !schoolDone() ? compGetNowBlockLetter(date: date) : "--"))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.circularSmall {
             let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: compGetNowBlockLetter(date: date)), fillFraction: compGetClassGigue(length: compGetClassLength(block: compGetNowBlock(date: date)),now: date), ringStyle: .closed)

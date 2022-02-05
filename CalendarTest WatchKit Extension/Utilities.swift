@@ -80,7 +80,7 @@ func scheduleLunchNotification() {
     // enable the line below for testing notifications: shows five seconds after app launch
     //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 20, repeats: false)
     for i in 2...6 {
-        let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 13, minute: 12, weekday: i), repeats: true)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 13, minute: 10, weekday: i), repeats: true)
 
         // choose a random identifier
         let request = UNNotificationRequest(identifier: "lunchNotif\(i)", content: content, trigger: trigger)
@@ -124,7 +124,13 @@ var cycleDay : Int {
         } else { return 0 }
     }
 }
-
+func getCycleDayDay() -> String{
+    if cycleDay != 0{
+        return "Day " + String(cycleDay)
+    } else {
+        return "OFF"
+    }
+}
 func getHour() -> Int{
     var date = Date()
     let cal = Calendar.current
@@ -167,7 +173,7 @@ var blocks: [Int: [String]] = [
     0: ["","","","",""], 1: ["C","E","D","A","B"], 2: ["F","G","H","A","B"], 3:["C","D","F","E","G"], 4:["H","A","B","C","D"], 5:["G","A","H","E","F"], 6:["B","C","D","E","F"], 7:["A","H","G","B","C"], 8:["D","E","F","G","H"]
 ]
 var blockOrder: [Int: [String]] = [
-    0: ["OFF"], 1: ["CEDAB"], 2: ["FGHAB"], 3:["CDFEG"], 4:["HABCD"], 5:["GAHEF"], 6:["BCDEF"], 7:["AHGBC"], 8:["DEFGH"]
+    0: ["-"], 1: ["CEDAB"], 2: ["FGHAB"], 3:["CDFEG"], 4:["HABCD"], 5:["GAHEF"], 6:["BCDEF"], 7:["AHGBC"], 8:["DEFGH"]
 ]
 func isAfter(hour1:Int,minute1: Int,hour2:Int ,minute2:Int) -> Bool{ //is time2 after time1
     if hour2>hour1{
@@ -398,7 +404,7 @@ func compGetNextBlock(date: Date) -> String{
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
         return (blocks[cycleDay]![4])
     } else {
-        return ("X")
+        return ("--")
     }
 }
 func compGetNowBlock(date: Date) -> Int{
@@ -442,7 +448,7 @@ func compGetNowBlockLetter(date: Date) -> String{
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
         return (blocks[cycleDay]![4])
     } else{
-        return "X"
+        return "--"
     }
 }
 func compGetClassLength(block: Int) -> Int{
@@ -657,44 +663,23 @@ func compGetTimeUntilClassEnds(length: Int, now: Date) -> String{
 }
 
 func compGetClassGigue(length: Int, now: Date) -> Float {
+    if schoolDone(){return 1}else{
     let mins = Float(compMinsSinceClassStart(now: now))
     if mins < 0 { return 0.0 }
     if mins > Float(length) { return 1.0 }
     return Float(mins / Float(length))
+    }
 }
 func schoolDone() -> Bool{
     let date = Date()
     let cal = Calendar.current
+    if cycleDay == 0 {
+        return true
+    }
     if (isSports()){
         return (cal.component(.hour, from: date) > 4 && cal.component(.minute, from: date) > 10) || (cal.component(.hour, from: date) < 8)
     } else {
         return (cal.component(.hour, from: date) > 3 && cal.component(.minute, from: date) > 20) || (cal.component(.hour, from: date) < 8)
-    }
-}
-
-//INDIVIDUAL COMPLICATION METHODS - i can make them fancy nested ? : statements later; just trying to organize my thoughts
-func NextClassInGraphicCorner() -> String{
-    let date = Date()
-    if !schoolDone(){
-    return "\(compGetNextBlock(date: date)) in \(compGetTimeUntil(date: date))"
-    } else {
-        return "noSchool" //fix
-    }
-}
-func NextClassInGraphicBezel() -> String{
-    let date = Date()
-    if !schoolDone(){
-        return "\(compLongNextClass(date: date)) in \(compGetTimeUntil(date: date))"
-    } else {
-        return "schooln't" //fix
-    }
-}
-func NextClassInUtilitarianLarge() -> String{
-    let date = Date()
-    if !schoolDone(){
-        return "\(compLongNextClass(date: date)) in \(compGetTimeUntil(date: date))"
-    }else{
-        return "!school" //fix
     }
 }
 
