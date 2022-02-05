@@ -24,10 +24,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
     func applicationDidFinishLaunching() {
         scheduleRefresh()
-        scheduleSportsNotification()
         UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert]) { success, error in
             if success { print("Authorized") } else if let error = error { print(error.localizedDescription) }
         }
+        scheduleSportsNotification()
+        scheduleLunchNotification()
     }
     
 }
