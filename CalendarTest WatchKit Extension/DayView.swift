@@ -15,7 +15,7 @@ struct DayView: View {
                          
                          if globalOffset == 0 {
                          if isNextBlock(bl: 0){
-                             Text("08:55 - 09:55:").fontWeight(.bold).foregroundColor(.mint)
+                             Text("08:55 - 09:55:").fontWeight(.bold).foregroundColor(.red)
                              Text(classes[cycleDay]![0]).foregroundColor(.green).fontWeight(.medium)
                          } else if nowIsBeforeBlockBegins(block: 0){
                              Text("08:55 - 09:55:").fontWeight(.bold)
@@ -30,7 +30,7 @@ struct DayView: View {
                      Spacer()
                      if globalOffset == 0 {
                      if isNextBlock(bl: 1){
-                         Text("10:00 - 10:30:").fontWeight(.bold).foregroundColor(.mint)
+                         Text("10:00 - 10:30:").fontWeight(.bold).foregroundColor(.red)
                          Text(getMorningActivity()).foregroundColor(.green).fontWeight(.medium)
                      } else if nowIsBeforeBlockBegins(block: 1) {
                          Text("10:00 - 10:30:").fontWeight(.bold)
@@ -46,7 +46,7 @@ struct DayView: View {
                    
                          if globalOffset == 0 {
                          if isNextBlock(bl: 2){
-                             Text("10:35 - 11:20:").fontWeight(.bold).foregroundColor(.mint)
+                             Text("10:35 - 11:20:").fontWeight(.bold).foregroundColor(.red)
                              Text(classes[cycleDay]![1]).foregroundColor(.green).fontWeight(.medium)
                          } else if nowIsBeforeBlockBegins(block: 2){
                              Text("10:35 - 11:20:").fontWeight(.bold)
@@ -60,7 +60,7 @@ struct DayView: View {
                      Spacer()
                              if globalOffset == 0 {
                          if isNextBlock(bl: 3){
-                             Text("11:25 - 12:25:").fontWeight(.bold).foregroundColor(.mint)
+                             Text("11:25 - 12:25:").fontWeight(.bold).foregroundColor(.red)
                              Text(classes[cycleDay]![2]).foregroundColor(.green).fontWeight(.medium)
                          } else if nowIsBeforeBlockBegins(block: 3){
                              Text("11:25 - 12:25:").fontWeight(.bold)
@@ -78,7 +78,7 @@ struct DayView: View {
                      
                          if globalOffset == 0 {
                          if isNextBlock(bl: 4){
-                             Text("12:25 - 13:15:").fontWeight(.bold).foregroundColor(.mint)
+                             Text("12:25 - 13:15:").fontWeight(.bold).foregroundColor(.red)
                              Text("Lunch").foregroundColor(.green).fontWeight(.medium)
                          } else if nowIsBeforeBlockBegins(block: 4){
                              Text("12:25 - 13:15:").fontWeight(.bold)
@@ -96,7 +96,7 @@ struct DayView: View {
                      
                          if globalOffset == 0 {
                          if isNextBlock(bl: 5){
-                             Text("13:20 - 14:20:").fontWeight(.bold).foregroundColor(.mint)
+                             Text("13:20 - 14:20:").fontWeight(.bold).foregroundColor(.red)
                              Text(classes[cycleDay]![3]).foregroundColor(.green).fontWeight(.medium)
                          } else if nowIsBeforeBlockBegins(block: 5){
                              Text("13:20 - 14:20:").fontWeight(.bold)
@@ -111,7 +111,7 @@ struct DayView: View {
                      
                              if globalOffset == 0 {
                          if isNextBlock(bl: 6){
-                             Text("14:30 - 15:15:").fontWeight(.bold).foregroundColor(.mint)
+                             Text("14:30 - 15:15:").fontWeight(.bold).foregroundColor(.red)
                              Text(classes[cycleDay]![4]).foregroundColor(.green).fontWeight(.medium)
                          } else if nowIsBeforeBlockBegins(block: 6){
                              Text("14:30 - 15:15:").fontWeight(.bold)
@@ -125,7 +125,7 @@ struct DayView: View {
                          if (isSports()){
                              if globalOffset == 0 {
                              if isNextBlock(bl: 7){
-                                 Text("15:20 - 16:10:").fontWeight(.bold).foregroundColor(.mint)
+                                 Text("15:20 - 16:10:").fontWeight(.bold).foregroundColor(.red)
                                  Text("Fitness Center").foregroundColor(.green).fontWeight(.medium)
                              } else if nowIsBeforeBlockBegins(block: 7){
                                  Text("15:20 - 16:10:").fontWeight(.bold)
