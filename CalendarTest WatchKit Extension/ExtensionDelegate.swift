@@ -7,6 +7,7 @@
 
 import Foundation
 import WatchKit
+import UserNotifications
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
@@ -23,6 +24,10 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
     func applicationDidFinishLaunching() {
         scheduleRefresh()
+        scheduleSportsNotification()
+        UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert]) { success, error in
+            if success { print("Authorized") } else if let error = error { print(error.localizedDescription) }
+        }
     }
     
 }

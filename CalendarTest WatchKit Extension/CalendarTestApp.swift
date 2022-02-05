@@ -19,6 +19,6 @@ struct CalendarTestApp: App {
             }
         }
 
-        WKNotificationScene(controller: NotificationController.self, category: "myCategory")
+        WKNotificationScene(controller: NotificationController.self, category: "sports")
     }
 }
