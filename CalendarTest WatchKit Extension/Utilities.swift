@@ -44,8 +44,8 @@ func scheduleSportsNotification() {
     let category = UNNotificationCategory(identifier: "sports", actions: [], intentIdentifiers: [], options: [])
     UNUserNotificationCenter.current().setNotificationCategories([category])
     
-    // enable the line below for testing notifications: shows five seconds after app launch
-    //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 20, repeats: false)
+    // enable the line below for testing notifications: shows ten seconds after app launch
+    //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
     
     let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), repeats: true)
 
