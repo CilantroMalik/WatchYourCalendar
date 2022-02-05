@@ -8,6 +8,7 @@
 import Foundation
 import WatchKit
 import ClockKit
+import UserNotifications
 
 func scheduleRefresh() {
     let refreshTime = Date().advanced(by: 900)
@@ -20,6 +21,41 @@ func reloadActiveComplications() {
     for complication in server.activeComplications ?? [] {
         server.reloadTimeline(for: complication)
     }
+}
+
+func scheduleSportsNotification() {
+    var alreadyScheduled = false
+    UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+        for request in requests {
+            if request.identifier == "dailyNotif" {
+                alreadyScheduled = true
+            }
+        }
+    }
+    if alreadyScheduled { return }
+    
+    let content = UNMutableNotificationContent()
+    content.title = "e"
+    content.subtitle = "e"
+    content.sound = UNNotificationSound.default
+    content.body = "e"
+    content.categoryIdentifier = "sports"
+
+    let category = UNNotificationCategory(identifier: "sports", actions: [], intentIdentifiers: [], options: [])
+    UNUserNotificationCenter.current().setNotificationCategories([category])
+    
+    // enable the line below for testing notifications: shows five seconds after app launch
+    //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 20, repeats: false)
+    
+    let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), repeats: true)
+
+    // choose a random identifier
+    let request = UNNotificationRequest(identifier: "dailyNotif", content: content, trigger: trigger)
+
+    // add our notification request
+    UNUserNotificationCenter.current().add(request) { (error) in if let error = error { print("Notification Scheduling Error: \(error)") } else { print("scheduled notification successfully") } }
+    print("requested notification")
+    print("notification scheduler complete")
 }
 
 public var nextClass = 0
