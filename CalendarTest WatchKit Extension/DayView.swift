@@ -1,149 +1,69 @@
 //  DayView.swift
- //  CalendarTest WatchKit Extension
- //
- //  Created by Jack de Haan on 1/27/22.
- //
-  
- import SwiftUI
- 
+//  CalendarTest WatchKit Extension
+//
+//  Created by Jack de Haan on 1/27/22.
+//
+
+import SwiftUI
+
 struct DayView: View {
-    var body: some View {
-             ScrollView{
-                 VStack{
-                     Group{
-                         Text(getCycleDayDay()).font(.title2).fontWeight(.bold).multilineTextAlignment(.center)
-                         
-                         if globalOffset == 0 {
-                         if isNextBlock(bl: 0){
-                             Text("08:55 - 09:55:").fontWeight(.bold).foregroundColor(.red)
-                             Text(classes[cycleDay]![0]).foregroundColor(.green).fontWeight(.medium)
-                         } else if nowIsBeforeBlockBegins(block: 0){
-                             Text("08:55 - 09:55:").fontWeight(.bold)
-                             Text(classes[cycleDay]![0]).foregroundColor(.red).fontWeight(.medium)}
-                         else {
-                             Text("08:55 - 09:55:").fontWeight(.medium).foregroundColor(.gray)
-                             Text(classes[cycleDay]![0]).foregroundColor(.blue).fontWeight(.light)}
-                         } else {
-                             Text("08:55 - 09:55:").fontWeight(.bold)
-                             Text(classes[cycleDay]![0]).foregroundColor(.blue).fontWeight(.light)}
-                         }
-                     Spacer()
-                     if globalOffset == 0 {
-                     if isNextBlock(bl: 1){
-                         Text("10:00 - 10:30:").fontWeight(.bold).foregroundColor(.red)
-                         Text(getMorningActivity()).foregroundColor(.green).fontWeight(.medium)
-                     } else if nowIsBeforeBlockBegins(block: 1) {
-                         Text("10:00 - 10:30:").fontWeight(.bold)
-                         Text(getMorningActivity()).foregroundColor(.red).fontWeight(.medium)}
-                     else {
-                         Text("10:00 - 10:30:").fontWeight(.medium).foregroundColor(.gray)
-                         Text(getMorningActivity()).foregroundColor(.blue).fontWeight(.light)}
-                     } else {
-                         Text("10:00 - 10:30:").fontWeight(.bold)
-                         Text(getMorningActivity()).foregroundColor(.blue).fontWeight(.light)}
-                     Spacer()
-                     Group{
-                   
-                         if globalOffset == 0 {
-                         if isNextBlock(bl: 2){
-                             Text("10:35 - 11:20:").fontWeight(.bold).foregroundColor(.red)
-                             Text(classes[cycleDay]![1]).foregroundColor(.green).fontWeight(.medium)
-                         } else if nowIsBeforeBlockBegins(block: 2){
-                             Text("10:35 - 11:20:").fontWeight(.bold)
-                             Text(classes[cycleDay]![1]).foregroundColor(.red).fontWeight(.medium)}
-                         else {
-                             Text("10:35 - 11:20:").fontWeight(.medium).foregroundColor(.gray)
-                             Text(classes[cycleDay]![1]).foregroundColor(.blue).fontWeight(.light)}
-                         } else {
-                             Text("10:35 - 11:20:").fontWeight(.bold)
-                             Text(classes[cycleDay]![1]).foregroundColor(.blue).fontWeight(.light)}
-                     Spacer()
-                             if globalOffset == 0 {
-                         if isNextBlock(bl: 3){
-                             Text("11:25 - 12:25:").fontWeight(.bold).foregroundColor(.red)
-                             Text(classes[cycleDay]![2]).foregroundColor(.green).fontWeight(.medium)
-                         } else if nowIsBeforeBlockBegins(block: 3){
-                             Text("11:25 - 12:25:").fontWeight(.bold)
-                             Text(classes[cycleDay]![2]).foregroundColor(.red).fontWeight(.medium)}
-                         else {
-                             Text("11:25 - 12:25:").fontWeight(.medium).foregroundColor(.gray)
-                             Text(classes[cycleDay]![2]).foregroundColor(.blue).fontWeight(.light)}
-                             } else {
-                            Text("11:25 - 12:25:").fontWeight(.bold)
-                            Text(classes[cycleDay]![2]).foregroundColor(.blue).fontWeight(.light)}
-                     Spacer()
-                     Spacer()
-                     }
-                     Group{
-                     
-                         if globalOffset == 0 {
-                         if isNextBlock(bl: 4){
-                             Text("12:25 - 13:15:").fontWeight(.bold).foregroundColor(.red)
-                             Text("Lunch").foregroundColor(.green).fontWeight(.medium)
-                         } else if nowIsBeforeBlockBegins(block: 4){
-                             Text("12:25 - 13:15:").fontWeight(.bold)
-                             Text("Lunch").foregroundColor(.red).fontWeight(.medium)}
-                         else {
-                             Text("12:25 - 13:15:").fontWeight(.medium).foregroundColor(.gray)
-                             Text("Lunch").foregroundColor(.blue).fontWeight(.light)}
-                         } else {
-                             Text("12:25 - 13:15:").fontWeight(.bold)
-                             Text("Lunch").foregroundColor(.blue).fontWeight(.light)}
-                     Spacer()
-                     Spacer()
-                     }
-                     Group{
-                     
-                         if globalOffset == 0 {
-                         if isNextBlock(bl: 5){
-                             Text("13:20 - 14:20:").fontWeight(.bold).foregroundColor(.red)
-                             Text(classes[cycleDay]![3]).foregroundColor(.green).fontWeight(.medium)
-                         } else if nowIsBeforeBlockBegins(block: 5){
-                             Text("13:20 - 14:20:").fontWeight(.bold)
-                             Text(classes[cycleDay]![3]).foregroundColor(.red).fontWeight(.medium)}
-                         else {
-                             Text("13:20 - 14:20:").fontWeight(.medium).foregroundColor(.gray)
-                             Text(classes[cycleDay]![3]).foregroundColor(.blue).fontWeight(.light)}
-                         }else {
-                             Text("13:20 - 14:20:").fontWeight(.bold)
-                             Text(classes[cycleDay]![3]).foregroundColor(.blue).fontWeight(.light)}
-                     Spacer()
-                     
-                             if globalOffset == 0 {
-                         if isNextBlock(bl: 6){
-                             Text("14:30 - 15:15:").fontWeight(.bold).foregroundColor(.red)
-                             Text(classes[cycleDay]![4]).foregroundColor(.green).fontWeight(.medium)
-                         } else if nowIsBeforeBlockBegins(block: 6){
-                             Text("14:30 - 15:15:").fontWeight(.bold)
-                             Text(classes[cycleDay]![4]).foregroundColor(.red).fontWeight(.medium)}
-                         else {
-                             Text("14:30 - 15:15:").fontWeight(.medium).foregroundColor(.gray)
-                             Text(classes[cycleDay]![4]).foregroundColor(.blue).fontWeight(.light)}
-                             }else {
-                                 Text("14:30 - 15:15:").fontWeight(.bold)
-                                 Text(classes[cycleDay]![4]).foregroundColor(.blue).fontWeight(.light)}
-                         if (isSports()){
-                             if globalOffset == 0 {
-                             if isNextBlock(bl: 7){
-                                 Text("15:20 - 16:10:").fontWeight(.bold).foregroundColor(.red)
-                                 Text("Fitness Center").foregroundColor(.green).fontWeight(.medium)
-                             } else if nowIsBeforeBlockBegins(block: 7){
-                                 Text("15:20 - 16:10:").fontWeight(.bold)
-                                 Text("Fitness Center").foregroundColor(.red).fontWeight(.medium)}
-                             else {
-                                 Text("15:20 - 16:10:").fontWeight(.medium).foregroundColor(.gray)
-                                 Text("Fitness Center").foregroundColor(.blue).fontWeight(.light)}
-                             }else {
-                                 Text("15:20 - 16:10:").fontWeight(.bold)
-                                 Text("Fitness Center").foregroundColor(.blue).fontWeight(.light)}
-                         }
-                     }
-                 }
-                 }
-    }
-    }
-        struct DayView_Previews: PreviewProvider {
-            static var previews: some View {
-                 DayView()
+    
+    func scheduleRow(time: String, block: Int, content: String) -> some View {
+        return Group {
+            if globalOffset == 0 {
+                if isNextBlock(bl: block){
+                    NavigationLink(destination: {SchedulingView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold).foregroundColor(.red)}).buttonStyle(PlainButtonStyle())
+                    Text(content).foregroundColor(.green).fontWeight(.medium)
+                } else if nowIsBeforeBlockBegins(block: block){
+                    NavigationLink(destination: {SchedulingView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+                    Text(content).foregroundColor(.red).fontWeight(.medium)
+                } else {
+                    NavigationLink(destination: {SchedulingView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.medium).foregroundColor(.gray)}).buttonStyle(PlainButtonStyle())
+                    Text(content).foregroundColor(.blue).fontWeight(.light)
+                }
+            } else {
+                NavigationLink(destination: {SchedulingView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+                Text(content).foregroundColor(.blue).fontWeight(.light)
             }
         }
+    }
+    
+    var body: some View {
+        ScrollView{
+            VStack{
+                Group{
+                    Text(getCycleDayDay()).font(.title2).fontWeight(.bold).multilineTextAlignment(.center)
+                    scheduleRow(time: "08:55 - 09:55:", block: 0, content: classes[cycleDay]![0])
+                }
+                Spacer()
+                scheduleRow(time: "10:00 - 10:30:", block: 1, content: getMorningActivity())
+                Spacer()
+                Group{
+                    scheduleRow(time: "10:35 - 11:25:", block: 2, content: classes[cycleDay]![1])
+                    Spacer()
+                    scheduleRow(time: "11:25 - 12:25:", block: 3, content: classes[cycleDay]![2])
+                    Spacer()
+                    Spacer()
+                }
+                Group{
+                    scheduleRow(time: "12:25 - 13:15:", block: 4, content: "Lunch")
+                    Spacer()
+                    Spacer()
+                }
+                Group{
+                    scheduleRow(time: "13:20 - 14:20:", block: 5, content: classes[cycleDay]![3])
+                    Spacer()
+                    scheduleRow(time: "14:30 - 15:15:", block: 6, content: classes[cycleDay]![4])
+                    if isSports() {
+                        scheduleRow(time: "15:20 - 16:10:", block: 7, content: "Fitness Center")
+                    }
+                }
+            }
+        }
+    }
+}
+struct DayView_Previews: PreviewProvider {
+    static var previews: some View {
+        DayView()
+    }
+}
