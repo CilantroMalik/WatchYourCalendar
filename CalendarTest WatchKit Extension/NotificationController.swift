@@ -11,8 +11,10 @@ import UserNotifications
 
 class NotificationController: WKUserNotificationHostingController<NotificationView> {
 
+    var content = UNNotificationContent()
+    
     override var body: NotificationView {
-        return NotificationView()
+        return NotificationView(content: content)
     }
 
     override func willActivate() {
@@ -29,5 +31,6 @@ class NotificationController: WKUserNotificationHostingController<NotificationVi
         // This method is called when a notification needs to be presented.
         // Implement it if you use a dynamic notification interface.
         // Populate your dynamic notification interface as quickly as possible.
+        content = notification.request.content
     }
 }
