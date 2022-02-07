@@ -26,6 +26,7 @@
 		5C9187B227A35B9D0097DCB0 /* CalendarTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9187B127A35B9D0097DCB0 /* CalendarTestTests.swift */; };
 		5C9187BD27A35B9D0097DCB0 /* CalendarTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9187BC27A35B9D0097DCB0 /* CalendarTestUITests.swift */; };
 		5C91885227A363000097DCB0 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C91885127A363000097DCB0 /* DayView.swift */; };
+		5CA8D39C27B09EE900D66A14 /* MidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA8D39B27B09EE900D66A14 /* MidView.swift */; };
 		5CDF9C9027A7231F00B608C2 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDF9C8F27A7231F00B608C2 /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +114,7 @@
 		5C9187BC27A35B9D0097DCB0 /* CalendarTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTestUITests.swift; sourceTree = "<group>"; };
 		5C9187BE27A35B9D0097DCB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C91885127A363000097DCB0 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		5CA8D39B27B09EE900D66A14 /* MidView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MidView.swift; sourceTree = "<group>"; };
 		5CDF9C8F27A7231F00B608C2 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,6 +181,7 @@
 				5C91879827A35B9C0097DCB0 /* CalendarTestApp.swift */,
 				5C91879A27A35B9C0097DCB0 /* ContentView.swift */,
 				5C91885127A363000097DCB0 /* DayView.swift */,
+				5CA8D39B27B09EE900D66A14 /* MidView.swift */,
 				5CDF9C8F27A7231F00B608C2 /* Utilities.swift */,
 				5C9187A027A35B9C0097DCB0 /* ComplicationController.swift */,
 				15DA717327AD516F00B26BDF /* ExtensionDelegate.swift */,
@@ -410,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C3210A527AEF9CD00AD582F /* SchedulingView.swift in Sources */,
+				5CA8D39C27B09EE900D66A14 /* MidView.swift in Sources */,
 				1501FD0027AF24FF0084CB40 /* ScheduleNotificationController.swift in Sources */,
 				5C91879D27A35B9C0097DCB0 /* NotificationController.swift in Sources */,
 				5C91885227A363000097DCB0 /* DayView.swift in Sources */,

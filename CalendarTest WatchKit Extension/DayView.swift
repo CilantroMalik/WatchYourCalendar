@@ -12,17 +12,20 @@ struct DayView: View {
         return Group {
             if globalOffset == 0 {
                 if isNextBlock(bl: block){
-                    NavigationLink(destination: {SchedulingView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold).foregroundColor(.red)}).buttonStyle(PlainButtonStyle())
+                    NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold).foregroundColor(.red)}).buttonStyle(PlainButtonStyle())
                     Text(content).foregroundColor(.green).fontWeight(.medium)
                 } else if nowIsBeforeBlockBegins(block: block){
-                    NavigationLink(destination: {SchedulingView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+                    NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
                     Text(content).foregroundColor(.red).fontWeight(.medium)
                 } else {
-                    NavigationLink(destination: {SchedulingView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.medium).foregroundColor(.gray)}).buttonStyle(PlainButtonStyle())
+                    NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.medium).foregroundColor(.gray)}).buttonStyle(PlainButtonStyle())
                     Text(content).foregroundColor(.blue).fontWeight(.light)
                 }
+            } else if globalOffset > 0 {
+                NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+                Text(content).foregroundColor(.red).fontWeight(.medium)
             } else {
-                NavigationLink(destination: {SchedulingView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+                NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
                 Text(content).foregroundColor(.blue).fontWeight(.light)
             }
         }

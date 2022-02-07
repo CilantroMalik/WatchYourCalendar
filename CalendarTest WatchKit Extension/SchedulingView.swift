@@ -28,6 +28,17 @@ var hasAs: [Int: [Bool]] = [
     7: [false, false, false, false, false, false, false],
     8: [false, false, false, false, false, false, false]
 ]
+var numEvents: [Int: [Int]] = [ //cycle day, block #
+    0: [0, 0, 0, 0, 0, 0, 0],
+    1: [0, 0, 0, 0, 0, 0, 0],
+    2: [0, 0, 0, 0, 0, 0, 0],
+    3: [0, 0, 0, 0, 0, 0, 0],
+    4: [0, 0, 0, 0, 0, 0, 0],
+    5: [0, 0, 0, 0, 0, 0, 0],
+    6: [0, 0, 0, 0, 0, 0, 0],
+    7: [0, 0, 0, 0, 0, 0, 0],
+    8: [0, 0, 0, 0, 0, 0, 0]
+]
 
 struct SchedulingView: View {
     var day: Int
@@ -40,21 +51,24 @@ struct SchedulingView: View {
     }
     
     func meetingOrAssessment() -> String{
+        let date = Date()
+        let cal = Calendar.current
+        let weekday = cal.component(.weekday, from: date)
         switch block {
         case 0:
-            return classes[day]![0].starts(with: "Free ") ? "Meeting" : "Assessment"
+            return classes[day]![0].starts(with: "Free") ? "Meeting" : "Assessment"
         case 1:
-            return "Meeting"
+            return weekday == 3 || weekday == 5 ? "Meeting" : "Event"
         case 2:
-            return classes[day]![1].starts(with: "Free ") ? "Meeting" : "Assessment"
+            return classes[day]![1].starts(with: "Free") ? "Meeting" : "Assessment"
         case 3:
-            return classes[day]![2].starts(with: "Free ") ? "Meeting" : "Assessment"
+            return classes[day]![2].starts(with: "Free") ? "Meeting" : "Assessment"
         case 4:
             return "Meeting"
         case 5:
-            return classes[day]![3].starts(with: "Free ") ? "Meeting" : "Assessment"
+            return classes[day]![3].starts(with: "Free") ? "Meeting" : "Assessment"
         case 6:
-            return classes[day]![4].starts(with: "Free ") ? "Meeting" : "Assessment"
+            return classes[day]![4].starts(with: "Free") ? "Meeting" : "Assessment"
         default:
             return "e"
         }
@@ -93,12 +107,12 @@ struct SchedulingView: View {
                     // *** Schedule Meeting Notification ***
                     let content = UNMutableNotificationContent()
                     // TODO: pass in values here; see ScheduleNotificationView for where the values will be displayed
-                    content.title = "e"
-                    content.subtitle = "e"
+                    content.title = "Reminder: Meeting"
+                    content.subtitle = ("Day " + String(day) + ", " + getPeriod(blockNum: block))
                     content.sound = UNNotificationSound.default
-                    content.body = "e"
+                    content.body = "Reminder: You have a meeting this block."
                     content.categoryIdentifier = "event"
-
+                    numEvents[day]![block] += 1
                     let category = UNNotificationCategory(identifier: "event", actions: [], intentIdentifiers: [], options: [])
                     UNUserNotificationCenter.current().setNotificationCategories([category])
                     
@@ -111,17 +125,43 @@ struct SchedulingView: View {
                     // add our notification request
                     UNUserNotificationCenter.current().add(request)
                 }, label: { Text("Schedule Meeting").fontWeight(.medium) })
+            } else if meetingOrAssessment() == "Assessment"{
+                Button(action: {
+                    isEvent = true
+                    // *** Schedule Assessment Notification ***
+                    let content = UNMutableNotificationContent()
+                    // TODO: pass in values here; see ScheduleNotificationView for where the values will be displayed
+                    content.title = "Reminder: Assessment"
+                    content.subtitle = ("Day " + String(day) + ", " + getPeriod(blockNum: block))
+                    content.sound = UNNotificationSound.default
+                    content.body = "Reminder: You have an assessment this block. Good luck!"
+                    content.categoryIdentifier = "event"
+                    numEvents[day]![block] += 1
+
+                    let category = UNNotificationCategory(identifier: "event", actions: [], intentIdentifiers: [], options: [])
+                    UNUserNotificationCenter.current().setNotificationCategories([category])
+                    
+                    // TODO: use the cycle day and block instance variables, as well as any methods we have, to calculate the components for the date that we need to trigger the notification
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(), repeats: false)
+
+                    // TODO: somehow construct a unique identifier string from the date and class or block information; do it in such a way as to ensure that any other assessment we schedule into some other block cannot possibly have the same string
+                    let request = UNNotificationRequest(identifier: "[insert id here]", content: content, trigger: trigger)
+
+                    // add our notification request
+                    UNUserNotificationCenter.current().add(request)
+                }, label: { Text("Input Assessment").fontWeight(.medium) })
             } else {
                 Button(action: {
                     isEvent = true
                     // *** Schedule Assessment Notification ***
                     let content = UNMutableNotificationContent()
                     // TODO: pass in values here; see ScheduleNotificationView for where the values will be displayed
-                    content.title = "e"
-                    content.subtitle = "e"
+                    content.title = "Reminder: Event"
+                    content.subtitle = ("Day " + String(day) + ", " + getPeriod(blockNum: block))
                     content.sound = UNNotificationSound.default
-                    content.body = "e"
+                    content.body = "Reminder: You have an event this block."
                     content.categoryIdentifier = "event"
+                    numEvents[day]![block] += 1
 
                     let category = UNNotificationCategory(identifier: "event", actions: [], intentIdentifiers: [], options: [])
                     UNUserNotificationCenter.current().setNotificationCategories([category])

@@ -317,13 +317,9 @@ func getMorningActivity() -> String {
     case 1:
         return "None"
     case 2:
-        return "Clubs"
-    case 3:
         return "Community Meeting"
-//    case 2:
-//        return "Community Meeting"
-//    case 3:
-//        return "Clubs"
+    case 3:
+        return "Clubs"
     case 4:
         return "Advisory"
     case 5:
@@ -672,7 +668,7 @@ func compGetTimeUntilClassEnds(length: Int, now: Date) -> String{
 }
 
 func compGetClassGigue(length: Int, now: Date) -> Float {
-    if schoolDone(){return 1}else{
+    if schoolDone(){return 1}else if !isSchool(){return 1} else {
     let mins = Float(compMinsSinceClassStart(now: now))
     if mins < 0 { return 0.0 }
     if mins > Float(length) { return 1.0 }
