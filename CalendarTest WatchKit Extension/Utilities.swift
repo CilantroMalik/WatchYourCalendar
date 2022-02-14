@@ -95,7 +95,7 @@ var dateToCycleDay: [[Int: Int]] = [
     // January
     [1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0, 14:0, 15:0, 16:0, 17:0, 18:0, 19:0, 20:0, 21:0, 22:0, 23:0, 24:7, 25:8, 26:1, 27:2, 28:3, 29:0, 30:0, 31:4],
     // February
-    [1:5, 2:6, 3:7, 4:8, 5:0, 6:0, 7:1, 8:2, 9:3, 10:4, 11:5, 12:0, 13:0, 14:7, 15:7, 16:8, 17:1, 18:0, 19:0, 20:0, 21:0, 22:2, 23:3, 24:4, 25:5, 26:0, 27:0, 28:6],
+    [1:5, 2:6, 3:7, 4:8, 5:0, 6:0, 7:1, 8:2, 9:3, 10:4, 11:5, 12:0, 13:0, 14:6, 15:7, 16:8, 17:1, 18:0, 19:0, 20:0, 21:0, 22:2, 23:3, 24:4, 25:5, 26:0, 27:0, 28:6],
     // March
     [1:7, 2:8, 3:1, 4:2, 5:0, 6:0, 7:3, 8:4, 9:5, 10:6, 11:7, 12:0, 13:0, 14:0, 15:0, 16:0, 17:0, 18:0, 19:0, 20:0, 21:0, 22:0, 23:0, 24:0, 25:0, 26:0, 27:0, 28:8, 29:1, 30:2, 31:3],
     // April
@@ -555,21 +555,11 @@ func compLongNowClass(date: Date) -> String {
 
 
 func compGetTime(dc: DateComponents) -> String {
-    var hr = String(dc.hour!)
-    if hr.count == 1 {
-        hr = "0" + hr
-    }
-    var mn = String(dc.minute!)
-    if mn.count == 1 {
-        mn = "0" + mn
-    }
-    
-//    return hr + ":" + mn + ":" + sc
-    return hr + ":" + mn
+    return String((dc.hour! * 60) + dc.minute!)
 }
 
 func compGetTimeUntil(date: Date) -> String {
-    return String(compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date)).suffix(2)) + "m"
+    return String(compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date))) + "m"
 }
 
 func compGetDayGigue(now: Date) -> Float {
@@ -584,53 +574,6 @@ func compGetDayGigue(now: Date) -> Float {
     return Float(mins / 390.0)
 }
 
-//func compGetTimeUntilClassEnd(dc: DateComponents, now: Date = Date()) -> DateComponents {
-//    let date = now
-//    let cal = Calendar.current
-//    let hr = dc.hour
-//    let mn = dc.minute
-//    let sc = dc.second
-//    let comp = DateComponents(calendar: cal, hour: hr, minute: mn, second:sc)
-//    let time = cal.nextDate(after: date, matching: comp, matchingPolicy: .nextTime)!
-//    let diff = cal.dateComponents([.hour, .minute, .second], from: date, to: time)
-//    return diff
-//}
-//
-//func compGetTimeUntilClassEn(dc: DateComponents) -> String {
-//    return ((String(dc.hour!)) + ":" + String(dc.minute!))
-//}
-
-//func compBeginningTimeOfBlock() -> DateComponents {
-//      let cal = Calendar.current
-//      if nowIsBeforeBlockBegins(block: 0){
-//          let comp = DateComponents(calendar: cal, hour: 8, minute: 55, second:00)
-//          return comp
-//      } else if nowIsBeforeBlockBegins(block: 1){
-//          let comp = DateComponents(calendar: cal, hour: 9, minute: 55, second:00)
-//          return comp
-//      } else if (nowIsBeforeBlockBegins(block: 2)){
-//          let comp = DateComponents(calendar: cal, hour: 10, minute: 30, second:00)
-//          return comp
-//      } else if nowIsBeforeBlockBegins(block: 3){
-//          let comp = DateComponents(calendar: cal, hour: 11, minute: 20, second:00)
-//          return comp
-//      } else if nowIsBeforeBlockBegins(block: 4){
-//          let comp = DateComponents(calendar: cal, hour: 12, minute: 25, second:00)
-//          return comp
-//      } else if nowIsBeforeBlockBegins(block: 5){
-//          let comp = DateComponents(calendar: cal, hour: 13, minute: 15, second:00)
-//          return comp
-//      } else if nowIsBeforeBlockBegins(block: 6){
-//          let comp = DateComponents(calendar: cal, hour: 14, minute: 20, second:00)
-//          return comp
-//      } else if nowIsBeforeBlockBegins(block: 7){
-//          let comp = DateComponents(calendar: cal, hour: 15, minute: 15, second:00)
-//          return comp
-//      } else {
-//          let comp = DateComponents(calendar: cal, hour: 8, minute: 55, second:00)
-//          return comp
-//      }
-//  }
 
 func compMinsSinceClassStart(now: Date) -> Int {
     let nowBlock = compGetNowBlock(date: now)
@@ -682,9 +625,9 @@ func schoolDone() -> Bool{
         return true
     }
     if (isSports()){
-        return (cal.component(.hour, from: date) > 4 && cal.component(.minute, from: date) > 10) || (cal.component(.hour, from: date) < 8)
+        return (cal.component(.hour, from: date) > 16 && cal.component(.minute, from: date) > 10) || (cal.component(.hour, from: date) < 8)
     } else {
-        return (cal.component(.hour, from: date) > 3 && cal.component(.minute, from: date) > 20) || (cal.component(.hour, from: date) < 8)
+        return (cal.component(.hour, from: date) > 15 && cal.component(.minute, from: date) > 20) || (cal.component(.hour, from: date) < 8)
     }
 }
 

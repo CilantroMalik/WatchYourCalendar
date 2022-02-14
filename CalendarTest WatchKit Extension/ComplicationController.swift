@@ -38,7 +38,7 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
             let template = CLKComplicationTemplateGraphicBezelCircularText(circularTemplate: preTemplate, textProvider: CLKSimpleTextProvider(text: !schoolDone() ? "\(compLongNextClass(date: date)) in \(compGetTimeUntil(date: date))" : "No School!"))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.graphicCorner {
-            let template = CLKComplicationTemplateGraphicCornerStackText(innerTextProvider: CLKSimpleTextProvider(text: !schoolDone() ? "\(compGetNextBlock(date: date)) in \(compGetTimeUntil(date: date))" : "No School!"), outerTextProvider: CLKSimpleTextProvider(text: getCycleDayDay()))
+            let template = CLKComplicationTemplateGraphicCornerStackText(innerTextProvider: CLKSimpleTextProvider(text: schoolDone() ? "No School!" : "\(compGetNextBlock(date: date)) in \(compGetTimeUntil(date: date))"), outerTextProvider: CLKSimpleTextProvider(text: getCycleDayDay()))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.utilitarianLarge {
             let template = CLKComplicationTemplateUtilitarianLargeFlat(textProvider: CLKSimpleTextProvider(text: !schoolDone() ? "\(compLongNextClass(date: date)) in \(compGetTimeUntil(date: date))" : "OFF"))

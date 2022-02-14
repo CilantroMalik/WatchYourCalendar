@@ -78,20 +78,22 @@ struct MidView: View {
                 Text("Event 3" + meetingOrAssessment())}
             
             Divider().padding(.vertical, 5)
-            if !maxEvents(){
-            NavigationLink(destination: SchedulingView(day: cycleDay, block: block)){
-                Text("Add Event").fontWeight(.heavy)
-            }
+            if maxEvents(){
+                Text("Max Events been reached for this block.").fontWeight(.heavy).multilineTextAlignment(.center) //is this too wordy?
+            } else if globalOffset < 0{
+                Text("You cannot schedule events in the past.").fontWeight(.heavy).multilineTextAlignment(.center)
             } else {
-                Text("Max Events been reached for this block.").fontWeight(.heavy) //is this too wordy?
+                NavigationLink(destination: SchedulingView(day: cycleDay, block: block)){
+                    Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)
             }
         }
     }
-    }
 }
+    }
 
 struct MidView_Previews: PreviewProvider {
     static var previews: some View {
         MidView(day: 4, block: 1)
     }
+}
 }
