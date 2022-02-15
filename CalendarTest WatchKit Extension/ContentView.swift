@@ -295,20 +295,19 @@ struct ContentView: View {
                 .font(.title)
                 .fontWeight(.heavy)
                 .multilineTextAlignment(.center)
+                if school(){
+                    if globalOffset == 0{
+                        getNextClass().fontWeight(.heavy)
+                    }}
                 if globalOffset == 0{
-                    getNextClass().fontWeight(.heavy)
-                }
-                if globalOffset == 0{
-                    if isSchool() || !schoolDone(){
+                    if school(){
                         Text(timeUntil).fontWeight(.light).foregroundColor(offset == 0 ? .white : .black).onReceive(timer, perform: {_ in timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))}).onChange(of: scenePhase, perform: { phase in
                             if phase == .active {
                                 timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))
                                 timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
                             } else {
                                 timer.upstream.connect().cancel()
-                            }
-                        })
-                    }
+                            }})}
                 } else if globalOffset > 0{
                     if globalOffset == 1 {
                         Text("Tomorrow").fontWeight(.heavy).foregroundColor(.purple)
@@ -329,13 +328,13 @@ struct ContentView: View {
                 
                 Text("\(getDate())")
                 
-                if isSchool() {
+                if isSchoolDay() {
                 getOrder()
                 }
                 if globalOffset == 0{
                 Spacer()
                 }
-                if isSchool() {
+                if isSchoolDay() {
                     NavigationLink(destination: DayView()){
                         Text(offset == 0 ? "Today" : "View Day").fontWeight(.heavy)
                     }

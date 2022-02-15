@@ -182,7 +182,7 @@ var blocks: [Int: [String]] = [
     0: ["","","","",""], 1: ["C","E","D","A","B"], 2: ["F","G","H","A","B"], 3:["C","D","F","E","G"], 4:["H","A","B","C","D"], 5:["G","A","H","E","F"], 6:["B","C","D","E","F"], 7:["A","H","G","B","C"], 8:["D","E","F","G","H"]
 ]
 var blockOrder: [Int: [String]] = [
-    0: ["-"], 1: ["CEDAB"], 2: ["FGHAB"], 3:["CDFEG"], 4:["HABCD"], 5:["GAHEF"], 6:["BCDEF"], 7:["AHGBC"], 8:["DEFGH"]
+    0: ["—"], 1: ["CEDAB"], 2: ["FGHAB"], 3:["CDFEG"], 4:["HABCD"], 5:["GAHEF"], 6:["BCDEF"], 7:["AHGBC"], 8:["DEFGH"]
 ]
 func isAfter(hour1:Int,minute1: Int,hour2:Int ,minute2:Int) -> Bool{ //is time2 after time1
     if hour2>hour1{
@@ -253,7 +253,7 @@ func isNextBlock(bl: Int) -> Bool {
         return false
     }
 }
-func isSchool() -> Bool{
+func isSchoolDay() -> Bool{
     var date = Date()
     let cal = Calendar.current
     if globalOffset != 0 {
@@ -409,7 +409,7 @@ func compGetNextBlock(date: Date) -> String{
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
         return (blocks[cycleDay]![4])
     } else {
-        return ("--")
+        return ("")
     }
 }
 func compGetNowBlock(date: Date) -> Int{
@@ -453,7 +453,7 @@ func compGetNowBlockLetter(date: Date) -> String{
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
         return (blocks[cycleDay]![4])
     } else{
-        return "--"
+        return "——"
     }
 }
 func compGetClassLength(block: Int) -> Int{
@@ -611,7 +611,7 @@ func compGetTimeUntilClassEnds(length: Int, now: Date) -> String{
 }
 
 func compGetClassGigue(length: Int, now: Date) -> Float {
-    if schoolDone(){return 1}else if !isSchool(){return 1} else {
+    if !school(){return 1} else {
     let mins = Float(compMinsSinceClassStart(now: now))
     if mins < 0 { return 0.0 }
     if mins > Float(length) { return 1.0 }
@@ -632,3 +632,7 @@ func schoolDone() -> Bool{
 }
 
 
+func school() -> Bool{
+//    return isSchoolDay() && !schoolDone()
+    return false
+}
