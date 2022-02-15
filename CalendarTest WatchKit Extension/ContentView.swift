@@ -334,7 +334,12 @@ struct ContentView: View {
                 Spacer()
                 }
                 if isSchoolDay() {
-                    NavigationLink(destination: DayView()){
+                    var date = Date()
+                    let cal = Calendar.current
+                    if globalOffset != 0 {
+                        date = cal.date(byAdding: .day, value: globalOffset, to: date)!
+                    }
+                    NavigationLink(destination: DayView(dtcp: date)){
                         Text(offset == 0 ? "Today" : "View Day").fontWeight(.heavy)
                     }
                 } else {

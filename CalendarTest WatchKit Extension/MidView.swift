@@ -11,12 +11,10 @@ import SwiftUI
 struct MidView: View {
     var day : Int
     var block : Int
-    func isBusy(bl: Int) -> Bool{
-//        return numEvents[day]![block] > 0 ? true : false
-        return false
-    }
+    var datecomp : DateComponents
+    
     func maxEvents() -> Bool{ //has reached max events (3)
-        return numEvents[day]![block] > 2 ? true : false
+        return numEvents[Int(String(datecomp.month) + String(datecomp.date))][block]! > 2 ? true : false
     }
     func getPeriod(blockNum: Int) -> String {
         switch blockNum {
@@ -69,13 +67,13 @@ struct MidView: View {
             Text("Day \(day), \(getPeriod(blockNum: block))")
             
             Divider().padding(.vertical, 5)
-            if numEvents[day]![block] == 0 {
+            if numEvents[Int(String(datecomp.month) + String(datecomp.date))][block]! == 0 {
                 Text("No Events").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
-            } else if numEvents[day]![block] > 0 {
+            } else if numEvents[Int(String(datecomp.month) + String(datecomp.date))][block]! > 0 {
                 NavigationLink(destination: {EventView(day: cycleDay, block: block, num: 1)}, label: {Text("Event 1: " + meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())}
-            if numEvents[day]![block] > 1 {
+            if numEvents[Int(String(datecomp.month) + String(datecomp.date))][block]! > 1 {
                 NavigationLink(destination: {EventView(day: cycleDay, block: block, num: 2)}, label: {Text("Event 2: " + meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())}
-            if numEvents[day]![block] > 2 {
+            if numEvents[Int(String(datecomp.month) + String(datecomp.date))][block]! > 2 {
                 NavigationLink(destination: {EventView(day: cycleDay, block: block, num: 3)}, label: {Text("Event 3: " + meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())}
             
             Divider().padding(.vertical, 5)

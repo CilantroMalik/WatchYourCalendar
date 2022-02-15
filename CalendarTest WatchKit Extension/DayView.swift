@@ -7,31 +7,32 @@
 import SwiftUI
 
 struct DayView: View {
+    var dtcp: DateComponents
     
     func scheduleRow(time: String, block: Int, content: String) -> some View {
         return Group {
             if globalOffset == 0 {
                 if isNextBlock(bl: block){//next block
-                    NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold).foregroundColor(.red)}).buttonStyle(PlainButtonStyle())
+                    NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp)}, label: {Text(time).fontWeight(.bold).foregroundColor(.red)}).buttonStyle(PlainButtonStyle())
                     Text(content).foregroundColor(.green).fontWeight(.medium)
                 } else if isNextBlock(bl: (block + 1)){ //now block
-                    NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).foregroundColor(.white).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+                    NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp)}, label: {Text(time).foregroundColor(.white).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
                     Text(content).foregroundColor(.purple).fontWeight(.medium)
                 } else if nowIsBeforeBlockBegins(block: block){//future block
-                    NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+                    NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
                     Text(content).foregroundColor(.red).fontWeight(.medium)}
 //                else if nowIsBeforeBlockBegins(block: block) && isBusy(bl: block){//future busy block
-//                    NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+//                    NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
 //                    Text(content).foregroundColor(.orange).fontWeight(.medium)}
                 else {//past block
-                    NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.medium).foregroundColor(Color(UIColor.lightGray))}).buttonStyle(PlainButtonStyle())
+                    NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp)}, label: {Text(time).fontWeight(.medium).foregroundColor(Color(UIColor.lightGray))}).buttonStyle(PlainButtonStyle())
                     Text(content).foregroundColor(.blue).fontWeight(.light)
                 }
             } else if globalOffset > 0 {
-                NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+                NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
                 Text(content).foregroundColor(.red).fontWeight(.medium)
             } else {
-                NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).foregroundColor(Color(UIColor.lightGray)).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+                NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp)}, label: {Text(time).foregroundColor(Color(UIColor.lightGray)).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
                 Text(content).foregroundColor(.blue).fontWeight(.light)
             }
         }
@@ -85,6 +86,6 @@ struct DayView: View {
 }
 struct DayView_Previews: PreviewProvider {
     static var previews: some View {
-        DayView()
+        DayView(dtcp: Date())
     }
 }
