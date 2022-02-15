@@ -11,21 +11,27 @@ struct DayView: View {
     func scheduleRow(time: String, block: Int, content: String) -> some View {
         return Group {
             if globalOffset == 0 {
-                if isNextBlock(bl: block){
+                if isNextBlock(bl: block){//next block
                     NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold).foregroundColor(.red)}).buttonStyle(PlainButtonStyle())
                     Text(content).foregroundColor(.green).fontWeight(.medium)
-                } else if nowIsBeforeBlockBegins(block: block){
+                } else if isNextBlock(bl: (block + 1)){ //now block
+                    NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).foregroundColor(.white).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+                    Text(content).foregroundColor(.purple).fontWeight(.medium)
+                } else if nowIsBeforeBlockBegins(block: block){//future block
                     NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
-                    Text(content).foregroundColor(.red).fontWeight(.medium)
-                } else {
-                    NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.medium).foregroundColor(.gray)}).buttonStyle(PlainButtonStyle())
+                    Text(content).foregroundColor(.red).fontWeight(.medium)}
+//                else if nowIsBeforeBlockBegins(block: block) && isBusy(bl: block){//future busy block
+//                    NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+//                    Text(content).foregroundColor(.orange).fontWeight(.medium)}
+                else {//past block
+                    NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.medium).foregroundColor(Color(UIColor.lightGray))}).buttonStyle(PlainButtonStyle())
                     Text(content).foregroundColor(.blue).fontWeight(.light)
                 }
             } else if globalOffset > 0 {
                 NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
                 Text(content).foregroundColor(.red).fontWeight(.medium)
             } else {
-                NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+                NavigationLink(destination: {MidView(day: cycleDay, block: block)}, label: {Text(time).foregroundColor(Color(UIColor.lightGray)).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
                 Text(content).foregroundColor(.blue).fontWeight(.light)
             }
         }
@@ -57,9 +63,21 @@ struct DayView: View {
                     scheduleRow(time: "13:20 - 14:20:", block: 5, content: classes[cycleDay]![3])
                     Spacer()
                     scheduleRow(time: "14:30 - 15:15:", block: 6, content: classes[cycleDay]![4])
-                    if isSports() {
-                        scheduleRow(time: "15:20 - 16:10:", block: 7, content: "Fitness Center")
-                    }
+                    if (isSports()){
+                         if globalOffset == 0 {
+                         if isNextBlock(bl: 7){
+                             Text("15:20 - 16:10:").fontWeight(.bold).foregroundColor(.red)
+                             Text("Fitness Center").foregroundColor(.green).fontWeight(.medium)
+                         } else if nowIsBeforeBlockBegins(block: 7){
+                             Text("15:20 - 16:10:").fontWeight(.bold)
+                             Text("Fitness Center").foregroundColor(.red).fontWeight(.medium)}
+                         else {
+                             Text("15:20 - 16:10:").fontWeight(.medium).foregroundColor(Color(UIColor.lightGray))
+                             Text("Fitness Center").foregroundColor(.blue).fontWeight(.light)}
+                         }else {
+                             Text("15:20 - 16:10:").fontWeight(.bold)
+                             Text("Fitness Center").foregroundColor(.blue).fontWeight(.light)}
+                     }
                 }
             }
         }

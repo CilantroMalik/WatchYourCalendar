@@ -409,7 +409,7 @@ func compGetNextBlock(date: Date) -> String{
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
         return (blocks[cycleDay]![4])
     } else {
-        return ("")
+        return ("——")
     }
 }
 func compGetNowBlock(date: Date) -> Int{
@@ -501,7 +501,7 @@ func compLongNextClass(date: Date) -> String {
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
         return "Next: \(classes[cycleDay]![5])"
     } else {
-        return "Next: Go home!"
+        return "School Ends"
     }
 }
 
@@ -549,7 +549,7 @@ func compLongNowClass(date: Date) -> String {
     } else if timeIsBeforeBlockBegins(date: date, block: 9){
         return "\(classes[cycleDay]![5])"
     } else {
-        return "Next: Go home!"
+        return "School Ends"
     }
 }
 
@@ -625,14 +625,13 @@ func schoolDone() -> Bool{
         return true
     }
     if (isSports()){
-        return (cal.component(.hour, from: date) > 16 && cal.component(.minute, from: date) > 10) || (cal.component(.hour, from: date) < 8)
+        return (cal.component(.hour, from: date) > 16 && cal.component(.minute, from: date) > 10) || (cal.component(.hour, from: date) < 7)
     } else {
-        return (cal.component(.hour, from: date) > 15 && cal.component(.minute, from: date) > 20) || (cal.component(.hour, from: date) < 8)
+        return (cal.component(.hour, from: date) > 15 && cal.component(.minute, from: date) > 20) || (cal.component(.hour, from: date) < 7)
     }
 }
 
 
 func school() -> Bool{
-//    return isSchoolDay() && !schoolDone()
-    return false
+    return isSchoolDay() && !schoolDone()
 }

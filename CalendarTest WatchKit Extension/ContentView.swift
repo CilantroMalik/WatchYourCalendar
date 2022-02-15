@@ -295,19 +295,18 @@ struct ContentView: View {
                 .font(.title)
                 .fontWeight(.heavy)
                 .multilineTextAlignment(.center)
-                if school(){
+                if !schoolDone(){
                     if globalOffset == 0{
                         getNextClass().fontWeight(.heavy)
                     }}
-                if globalOffset == 0{
-                    if school(){
+                if globalOffset == 0 && !schoolDone(){
                         Text(timeUntil).fontWeight(.light).foregroundColor(offset == 0 ? .white : .black).onReceive(timer, perform: {_ in timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))}).onChange(of: scenePhase, perform: { phase in
                             if phase == .active {
                                 timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))
                                 timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
                             } else {
                                 timer.upstream.connect().cancel()
-                            }})}
+                            }})
                 } else if globalOffset > 0{
                     if globalOffset == 1 {
                         Text("Tomorrow").fontWeight(.heavy).foregroundColor(.purple)

@@ -13,6 +13,7 @@
 		15DA717827AECA8A00B26BDF /* LunchNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA717727AECA8A00B26BDF /* LunchNotificationView.swift */; };
 		5C3210A527AEF9CD00AD582F /* SchedulingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3210A427AEF9CD00AD582F /* SchedulingView.swift */; };
 		5C3210A727AF07FB00AD582F /* ScheduleNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3210A627AF07FB00AD582F /* ScheduleNotificationView.swift */; };
+		5C6B675F27BC2F6900DAADE8 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6B675E27BC2F6900DAADE8 /* EventView.swift */; };
 		5C91878827A35B990097DCB0 /* CalendarTest WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 5C91878727A35B990097DCB0 /* CalendarTest WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5C91878D27A35B9C0097DCB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C91878C27A35B9C0097DCB0 /* Assets.xcassets */; };
 		5C91879427A35B9C0097DCB0 /* CalendarTest WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5C91879327A35B9C0097DCB0 /* CalendarTest WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -93,6 +94,7 @@
 		15DA717727AECA8A00B26BDF /* LunchNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchNotificationView.swift; sourceTree = "<group>"; };
 		5C3210A427AEF9CD00AD582F /* SchedulingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingView.swift; sourceTree = "<group>"; };
 		5C3210A627AF07FB00AD582F /* ScheduleNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNotificationView.swift; sourceTree = "<group>"; };
+		5C6B675E27BC2F6900DAADE8 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		5C91878327A35B990097DCB0 /* WatchYourCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchYourCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C91878727A35B990097DCB0 /* CalendarTest WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CalendarTest WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C91878C27A35B9C0097DCB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				5CA8D39B27B09EE900D66A14 /* MidView.swift */,
 				5CDF9C8F27A7231F00B608C2 /* Utilities.swift */,
 				5C9187A027A35B9C0097DCB0 /* ComplicationController.swift */,
+				5C6B675E27BC2F6900DAADE8 /* EventView.swift */,
 				15DA717327AD516F00B26BDF /* ExtensionDelegate.swift */,
 				5C91879C27A35B9C0097DCB0 /* NotificationController.swift */,
 				5C91879E27A35B9C0097DCB0 /* NotificationView.swift */,
@@ -421,6 +424,7 @@
 				5C3210A727AF07FB00AD582F /* ScheduleNotificationView.swift in Sources */,
 				5C91879B27A35B9C0097DCB0 /* ContentView.swift in Sources */,
 				5C9187A127A35B9C0097DCB0 /* ComplicationController.swift in Sources */,
+				5C6B675F27BC2F6900DAADE8 /* EventView.swift in Sources */,
 				5C91879927A35B9C0097DCB0 /* CalendarTestApp.swift in Sources */,
 				15DA717827AECA8A00B26BDF /* LunchNotificationView.swift in Sources */,
 				5CDF9C9027A7231F00B608C2 /* Utilities.swift in Sources */,
