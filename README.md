@@ -20,10 +20,12 @@ A minimal watch app that makes the flow of the school day conveniently available
 
 ## What’s next?
 
+-bug FIXINGGGG   we do love it !
+
 -meetings/tests
 
 -(settings)
 
--removing classes from "up next" after done?
+-removing classes from "up next" after done? (settings)
 
 -iOS pairing? 😳
