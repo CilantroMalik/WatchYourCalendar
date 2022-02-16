@@ -625,9 +625,9 @@ func schoolDone() -> Bool{
         return true
     }
     if (isSports()){
-        return (cal.component(.hour, from: date) > 16 && cal.component(.minute, from: date) > 10) || (cal.component(.hour, from: date) < 7)
+        return ((cal.component(.hour, from: date) > 16) || ((cal.component(.hour, from: date) > 15 && cal.component(.minute, from: date) > 10)) || (cal.component(.hour, from: date) < 7))
     } else {
-        return (cal.component(.hour, from: date) > 15 && cal.component(.minute, from: date) > 20) || (cal.component(.hour, from: date) < 7)
+            return ((cal.component(.hour, from: date) > 15) || ((cal.component(.hour, from: date) > 14 && cal.component(.minute, from: date) > 15)) || (cal.component(.hour, from: date) < 7))
     }
 }
 
