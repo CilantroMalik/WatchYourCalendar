@@ -364,7 +364,7 @@ struct ContentView: View {
             .focusable().digitalCrownRotation($minOffset)
             .onChange(of: scenePhase, perform: { phase in if phase == .background { globalOffset = 0; offset = 0; minOffset = 0 } })
     }
- 
+}
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
@@ -372,4 +372,4 @@ struct ContentView_Previews: PreviewProvider {
 }
  
 
-}
+

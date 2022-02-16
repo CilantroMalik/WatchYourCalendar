@@ -86,6 +86,6 @@ struct DayView: View {
 }
 struct DayView_Previews: PreviewProvider {
     static var previews: some View {
-        DayView(dtcp: Date())
+        DayView(dtcp: DateComponents(calendar: Calendar.current))
     }
 }

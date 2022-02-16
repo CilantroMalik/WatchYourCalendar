@@ -14,7 +14,7 @@ struct MidView: View {
     var datecomp : DateComponents
     
     func maxEvents() -> Bool{ //has reached max events (3)
-        return numEvents[Int(String(datecomp.month) + String(datecomp.date))][block]! > 2 ? true : false
+        return numEvents[block][datecomp]! > 2 ? true : false
     }
     func getPeriod(blockNum: Int) -> String {
         switch blockNum {
@@ -67,14 +67,14 @@ struct MidView: View {
             Text("Day \(day), \(getPeriod(blockNum: block))")
             
             Divider().padding(.vertical, 5)
-            if numEvents[Int(String(datecomp.month) + String(datecomp.date))][block]! == 0 {
+            if numEvents[block][datecomp] == 0 {
                 Text("No Events").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
-            } else if numEvents[Int(String(datecomp.month) + String(datecomp.date))][block]! > 0 {
-                NavigationLink(destination: {EventView(day: cycleDay, block: block, num: 1)}, label: {Text("Event 1: " + meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())}
-            if numEvents[Int(String(datecomp.month) + String(datecomp.date))][block]! > 1 {
-                NavigationLink(destination: {EventView(day: cycleDay, block: block, num: 2)}, label: {Text("Event 2: " + meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())}
-            if numEvents[Int(String(datecomp.month) + String(datecomp.date))][block]! > 2 {
-                NavigationLink(destination: {EventView(day: cycleDay, block: block, num: 3)}, label: {Text("Event 3: " + meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())}
+            } else if numEvents[block][datecomp]! > 0 {
+                NavigationLink(destination: {EventView(dc: datecomp, day: cycleDay, block: block, ev: 1)}, label: {Text("Event 1: " + meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())}
+            if numEvents[block][datecomp]! > 1 {
+                NavigationLink(destination: {EventView(dc: datecomp, day: cycleDay, block: block, ev: 2)}, label: {Text("Event 2: " + meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())}
+            if numEvents[block][datecomp]! > 2 {
+                NavigationLink(destination: {EventView(dc: datecomp, day: cycleDay, block: block, ev: 3)}, label: {Text("Event 3: " + meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())}
             
             Divider().padding(.vertical, 5)
             if maxEvents(){
@@ -82,8 +82,9 @@ struct MidView: View {
             } else if globalOffset < 0 || (globalOffset == 0 && nowIsAfterBlockEnds(block: (block))){
                 Text("You cannot schedule events in the past.").fontWeight(.medium).multilineTextAlignment(.center)
             } else {
-                NavigationLink(destination: SchedulingView(day: cycleDay, block: block)){
-                    Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)
+                    Button(action: {
+                        numEvents[block][datecomp]! += 1
+                    }, label: {Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)})
             }
         }
     }
@@ -92,7 +93,7 @@ struct MidView: View {
 
 struct MidView_Previews: PreviewProvider {
     static var previews: some View {
-        MidView(day: 4, block: 1)
+        MidView(day: 4, block: 1, datecomp: DateComponents(calendar: Calendar.current))
     }
 }
-}
+
