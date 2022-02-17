@@ -20,7 +20,9 @@ A minimal watch app that makes the flow of the school day conveniently available
 
 ## What’s next?
 
--bug FIXINGGGG   we do love it !
+-bug FIXINGGGG   we do love it ! 
+
+uhhhhh NO WE DONT
 
 -meetings/tests
 
