@@ -12,10 +12,11 @@ struct MidView: View {
     var day : Int
     var block : Int
     var datecomp : DateComponents
+    var even : blockEvent
     
-    func maxEvents() -> Bool{ //has reached max events (3)
-        return numEvents[block][datecomp]! > 2 ? true : false
-    }
+//    func maxEvents() -> Bool{ //has reached max events (3)
+//        return numEvents[block][datecomp]! > 2 ? true : false
+//    }
     func getPeriod(blockNum: Int) -> String {
         switch blockNum {
         case 0:
@@ -60,6 +61,7 @@ struct MidView: View {
         }
     }
     var body: some View {
+        var eventt = blockEvent(block: block, time: datecomp, id: "00000", hasNotification: false)
         ScrollView{
         VStack {
 //            Text("Events").font(.title2).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
@@ -67,23 +69,25 @@ struct MidView: View {
             Text("Day \(day), \(getPeriod(blockNum: block))")
             
             Divider().padding(.vertical, 5)
-            if numEvents[block][datecomp] == 0 {
+            if (eventsList[datecomp.month! - 1][datecomp.day!])?.count == 0 {
                 Text("No Events").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
-            } else if numEvents[block][datecomp]! > 0 {
-                NavigationLink(destination: {EventView(dc: datecomp, day: cycleDay, block: block, ev: 1)}, label: {Text("Event 1: " + meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())}
-            if numEvents[block][datecomp]! > 1 {
-                NavigationLink(destination: {EventView(dc: datecomp, day: cycleDay, block: block, ev: 2)}, label: {Text("Event 2: " + meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())}
-            if numEvents[block][datecomp]! > 2 {
-                NavigationLink(destination: {EventView(dc: datecomp, day: cycleDay, block: block, ev: 3)}, label: {Text("Event 3: " + meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())}
-            
+            }else {
+//                for i in eventsList[datecomp.month - 1][datecomp.day]{
+//                    NavigationLink(destination: {EventView(ev: i)}, label: {Text(i.hasLabel ? i.label : i.label + i.meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+//                }
+                //FOR TESTING
+                    NavigationLink(destination: {EventView(ev: (eventsList[datecomp.month - 1][datecomp.day])[0])}, label: {Text((eventsList[datecomp.month - 1][datecomp.day])[0].hasLabel ? (eventsList[datecomp.month - 1][datecomp.day])[0].label : (eventsList[datecomp.month - 1][datecomp.day])[0].label + (eventsList[datecomp.month - 1][datecomp.day])[0].meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+            }
             Divider().padding(.vertical, 5)
-            if maxEvents(){
-                Text("Max Events been reached for this block.").fontWeight(.heavy).multilineTextAlignment(.center) //is this too wordy?
-            } else if globalOffset < 0 || (globalOffset == 0 && nowIsAfterBlockEnds(block: (block))){
+//            if maxEvents(){
+//                Text("Max Events been reached for this block.").fontWeight(.heavy).multilineTextAlignment(.center) //is this too wordy?
+//            } else
+            if globalOffset < 0 || (globalOffset == 0 && nowIsAfterBlockEnds(block: (block))){
                 Text("You cannot schedule events in the past.").fontWeight(.medium).multilineTextAlignment(.center)
             } else {
                     Button(action: {
-                        numEvents[block][datecomp]! += 1
+                        var temp = blockEvent(block: block, time: datecomp, id: "000000", label: "null", hasLabel: true, hasNotification: false)
+                        (eventsList[datecomp.month! - 1][datecomp.day!])?.append(temp: blockEvent)
                     }, label: {Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)})
             }
         }
@@ -93,7 +97,7 @@ struct MidView: View {
 
 struct MidView_Previews: PreviewProvider {
     static var previews: some View {
-        MidView(day: 4, block: 1, datecomp: DateComponents(calendar: Calendar.current))
+        MidView(day: 4, block: 1, datecomp: DateComponents(calendar: Calendar.current), even: blockEvent(block: 0, time: DateComponents(calendar: Calendar.current), id: "000000", label: "Nall", hasLabel: true, hasNotification: false))
     }
 }
 

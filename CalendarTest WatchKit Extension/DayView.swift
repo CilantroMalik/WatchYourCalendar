@@ -8,6 +8,7 @@ import SwiftUI
 
 struct DayView: View {
     var dtcp: DateComponents
+    var events = [blockEvent]()
     
     func scheduleRow(time: String, block: Int, content: String) -> some View {
         return Group {

@@ -9,70 +9,73 @@ import SwiftUI
 import UserNotifications
 
 struct EventView: View {
-    var dc: DateComponents
-    func meetingOrAssessment() -> String{
-        let date = Date()
-        let cal = Calendar.current
-        let weekday = cal.component(.weekday, from: date)
-        switch block {
-        case 0:
-            return classes[day]![0].starts(with: "Free") ? "Meeting" : "Assessment"
-        case 1:
-            return weekday == 3 || weekday == 5 ? "Meeting" : "Event"
-        case 2:
-            return classes[day]![1].starts(with: "Free") ? "Meeting" : "Assessment"
-        case 3:
-            return classes[day]![2].starts(with: "Free") ? "Meeting" : "Assessment"
-        case 4:
-            return "Meeting"
-        case 5:
-            return classes[day]![3].starts(with: "Free") ? "Meeting" : "Assessment"
-        case 6:
-            return classes[day]![4].starts(with: "Free") ? "Meeting" : "Assessment"
-        default:
-            return "e"
-        }
-    }
-    func getPeriod(blockNum: Int) -> String {
-        switch blockNum {
-        case 0:
-            return blocks[day]![0] + " Block"
-        case 1:
-            return "Break/Clubs"
-        case 2:
-            return blocks[day]![1] + " Block"
-        case 3:
-            return blocks[day]![2] + " Block"
-        case 4:
-            return "Lunch"
-        case 5:
-            return blocks[day]![3] + " Block"
-        case 6:
-            return blocks[day]![4] + " Block"
-        default:
-            return "e"
-        }
-    }
-    var day : Int
-    var block : Int
-    var ev : Int
+//    func meetingOrAssessment() -> String{
+//        let date = Date()
+//        let cal = Calendar.current
+//        let weekday = cal.component(.weekday, from: date)
+//        switch block {
+//        case 0:
+//            return classes[day]![0].starts(with: "Free") ? "Meeting" : "Assessment"
+//        case 1:
+//            return weekday == 3 || weekday == 5 ? "Meeting" : "Event"
+//        case 2:
+//            return classes[day]![1].starts(with: "Free") ? "Meeting" : "Assessment"
+//        case 3:
+//            return classes[day]![2].starts(with: "Free") ? "Meeting" : "Assessment"
+//        case 4:
+//            return "Meeting"
+//        case 5:
+//            return classes[day]![3].starts(with: "Free") ? "Meeting" : "Assessment"
+//        case 6:
+//            return classes[day]![4].starts(with: "Free") ? "Meeting" : "Assessment"
+//        default:
+//            return "e"
+//        }
+//    }
+//    func getPeriod(blockNum: Int) -> String {
+//        switch blockNum {
+//        case 0:
+//            return blocks[day]![0] + " Block"
+//        case 1:
+//            return "Break/Clubs"
+//        case 2:
+//            return blocks[day]![1] + " Block"
+//        case 3:
+//            return blocks[day]![2] + " Block"
+//        case 4:
+//            return "Lunch"
+//        case 5:
+//            return blocks[day]![3] + " Block"
+//        case 6:
+//            return blocks[day]![4] + " Block"
+//        default:
+//            return "e"
+//        }
+//    }
+    var ev : blockEvent
     var body: some View {
         Text("Edit Event").font(.title2).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
         Text(getOffsetDate())
-        Text("Day \(day), \(getPeriod(blockNum: block))")
+        Text("Day \(ev.getDay()), \(ev.getPeriod())")
         Divider().padding(.vertical, 5)
             
-        Button(action: {
-            numEvents[block][dc]! -= 1
-        }, label: {Text("Delete Event").fontWeight(.heavy).multilineTextAlignment(.center)})
+//        Button(action: {
+////            let delarray =  (eventsList[(ev.time).month! - 1][(ev.time).day!])!.filter {$0 != ev}
+////            (eventsList[(ev.time).month! - 1][(ev.time).day!]) = delarray
+////            (eventsList[(ev.time).month! - 1][(ev.time).day!])?.remove(at: (eventsList[(ev.time).month! - 1][(ev.time).day]).index(of: ev))
+//            while let remm = (eventsList[(ev.time).month! - 1][(ev.time).day!]).index(of:ev) {
+//                (eventsList[(ev.time).month! - 1][(ev.time).day!])!.remove(at: remm)
+//            }
+//        }, label: {Text("Delete Event").fontWeight(.heavy).multilineTextAlignment(.center)})
         
-        if meetingOrAssessment() == "Meeting" {
+        if ev.meetingOrAssessment() == "Meeting" {
             Button(action: {
+                ev.hasNotification = true
                 // *** Schedule Meeting Notification ***
                 let content = UNMutableNotificationContent()
                 // TODO: pass in values here; see ScheduleNotificationView for where the values will be displayed
                 content.title = "Reminder: Meeting"
-                content.subtitle = ("Day " + String(day) + ", " + getPeriod(blockNum: block))
+                content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod())
                 content.sound = UNNotificationSound.default
                 content.body = "Reminder: You have a meeting this block."
                 content.categoryIdentifier = "event"
@@ -88,13 +91,14 @@ struct EventView: View {
                 // add our notification request
                 UNUserNotificationCenter.current().add(request)
             }, label: { Text("Be notified!").fontWeight(.medium) })
-        } else if meetingOrAssessment() == "Assessment"{
+        } else if ev.meetingOrAssessment() == "Assessment"{
             Button(action: {
+                ev.hasNotification = true
                 // *** Schedule Assessment Notification ***
                 let content = UNMutableNotificationContent()
                 // TODO: pass in values here; see ScheduleNotificationView for where the values will be displayed
                 content.title = "Reminder: Assessment"
-                content.subtitle = ("Day " + String(day) + ", " + getPeriod(blockNum: block))
+                content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod())
                 content.sound = UNNotificationSound.default
                 content.body = "Reminder: You have an assessment this block. Good luck!"
                 content.categoryIdentifier = "event"
@@ -113,11 +117,12 @@ struct EventView: View {
             }, label: { Text("Be notified!").fontWeight(.medium) })
         } else {
             Button(action: {
+                ev.hasNotification = true
                 // *** Schedule Assessment Notification ***
                 let content = UNMutableNotificationContent()
                 // TODO: pass in values here; see ScheduleNotificationView for where the values will be displayed
                 content.title = "Reminder: Event"
-                content.subtitle = ("Day " + String(day) + ", " + getPeriod(blockNum: block))
+                content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod())
                 content.sound = UNNotificationSound.default
                 content.body = "Reminder: You have an event this block."
                 content.categoryIdentifier = "event"
@@ -140,6 +145,6 @@ struct EventView: View {
 
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
-        EventView(dc:DateComponents(calendar: Calendar.current), day: 4, block: 1,ev: 2)
+        EventView(ev: blockEvent(block: 0, time: DateComponents(calendar:Calendar.current), id: "000000", label: "Null", hasLabel: true, hasNotification: false))
     }
 }
