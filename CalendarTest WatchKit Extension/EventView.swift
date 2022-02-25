@@ -58,7 +58,8 @@ struct EventView: View {
         Text(getOffsetDate())
         Text("Day \(ev.getDay()), \(ev.getPeriod())")
         Divider().padding(.vertical, 5)
-            
+        
+         //Delete the event at its index
 //        Button(action: {
 ////            let delarray =  (eventsList[(ev.time).month! - 1][(ev.time).day!])!.filter {$0 != ev}
 ////            (eventsList[(ev.time).month! - 1][(ev.time).day!]) = delarray
@@ -145,6 +146,7 @@ struct EventView: View {
 
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
-        EventView(ev: blockEvent(block: 0, time: DateComponents(calendar:Calendar.current), id: "000000", label: "Null", hasLabel: true, hasNotification: false))
+        Text("e")
+        //EventView(ev: blockEvent(0, DateComponents(calendar: Calendar.current), "000000", "Nall", true, false))
     }
 }
