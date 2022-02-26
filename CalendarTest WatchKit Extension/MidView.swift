@@ -12,7 +12,7 @@ struct MidView: View {
     var day : Int
     var block : Int
     var datecomp : DateComponents
-    var even : blockEvent
+//    var even : blockEvent
     
 //    func maxEvents() -> Bool{ //has reached max events (3)
 //        return numEvents[block][datecomp]! > 2 ? true : false
@@ -99,7 +99,8 @@ struct MidView: View {
 
 struct MidView_Previews: PreviewProvider {
     static var previews: some View {
-        MidView(day: 4, block: 1, datecomp: DateComponents(calendar: Calendar.current), even: blockEvent(0, DateComponents(calendar: Calendar.current), "000000", "Nall", true, false))
+        //MidView(day: 4, block: 1, datecomp: DateComponents(calendar: Calendar.current), even: blockEvent(0, DateComponents(calendar: Calendar.current), "000000", "Nall", true, false))
+        Text("e")
     }
 }
 

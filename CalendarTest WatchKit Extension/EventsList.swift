@@ -36,9 +36,26 @@ class blockEvent {
         self.hasNotification = hasNotif
     }
     
+    init(_ str: String) {
+        let elements = str.split(separator: "|")
+        self.block = Int(elements[0])!
+        self.time = DateComponents(calendar: Calendar.current, month: Int(elements[1])!, day: Int(elements[2])!)
+        self.id = String(elements[3])
+        self.label = String(elements[4])
+        self.hasLabel = Bool(String(elements[5]))!
+        self.hasNotification = Bool(String(elements[6]))!
+    }
+    
+    func toString() -> String {
+        //   0     1    2  3    4      5            6
+        // block|month|day|id|label|hasLabel|hasNotification
+        return "\(block)|\(time.month!)|\(time.day!)|\(id)|\(label)|\(hasLabel)|\(hasNotification)"
+    }
+    
     func getDay() -> Int{
         return dateToCycleDay[time.month!-1][time.day!]!
     }
+    
     func meetingOrAssessment() -> String{
         let cal = Calendar.current
         let date = cal.date(from: time)!
@@ -62,6 +79,7 @@ class blockEvent {
             return "e"
         }
     }
+    
     func getPeriod() -> String {
         switch block {
         case 0:
@@ -92,7 +110,7 @@ var eventsList: [[Int: [blockEvent]]] = [
     // March
     [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
     // April
-    [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 2:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[]],
+    [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[]],
     // May
     [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
     // June
