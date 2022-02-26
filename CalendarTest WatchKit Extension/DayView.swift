@@ -10,23 +10,82 @@ struct DayView: View {
     var dtcp: DateComponents
     var events = [blockEvent]()
     
+    func getTimeWeight(_ block: Int) -> Font.Weight {
+        if globalOffset == 0 {
+            if isNextBlock(bl: block) {  // next block
+                return .bold
+            } else if isNextBlock(bl: block + 1) {  // now block
+                return .bold
+            } else if nowIsBeforeBlockBegins(block: block) {  // future block
+                return .bold
+            } else {  // past block
+                return .medium
+            }
+        } else if globalOffset > 0 {
+            return .bold
+        } else {
+            return .bold
+        }
+    }
+    
+    func getContentWeight(_ block: Int) -> Font.Weight {
+        if globalOffset == 0 {
+            if isNextBlock(bl: block) {  // next block
+                return .medium
+            } else if isNextBlock(bl: block + 1) {  // now block
+                return .medium
+            } else if nowIsBeforeBlockBegins(block: block) {  // future block
+                return .medium
+            } else {  // past block
+                return .light
+            }
+        } else if globalOffset > 0 {
+            return .medium
+        } else {
+            return .light
+        }
+    }
+    
+    func getTimeColor(_ block: Int) -> Color {
+        if globalOffset == 0 {
+            if isNextBlock(bl: block) {  // next block
+                return .red
+            } else if isNextBlock(bl: block + 1) {  // now block
+                return .white
+            } else if nowIsBeforeBlockBegins(block: block) {  // future block
+                return .white // ?
+            } else {  // past block
+                return Color(UIColor.lightGray)
+            }
+        } else if globalOffset > 0 {
+            return .white // ?
+        } else {
+            return Color(UIColor.lightGray)
+        }
+    }
+    
+    func getContentColor(_ block: Int) -> Color {
+        if globalOffset == 0 {
+            if isNextBlock(bl: block) {  // next block
+                return .green
+            } else if isNextBlock(bl: block + 1) {  // now block
+                return .purple
+            } else if nowIsBeforeBlockBegins(block: block) {  // future block
+                return .red
+            } else {  // past block
+                return .blue
+            }
+        } else if globalOffset > 0 {
+            return .red
+        } else {
+            return .blue
+        }
+    }
+    
     func scheduleRow(time: String, block: Int, content: String) -> some View {
         return Group {
-            if globalOffset == 0 {
-                if isNextBlock(bl: block){//next block
-                    NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp)}, label: {Text(time).fontWeight(.bold).foregroundColor(.red)}).buttonStyle(PlainButtonStyle())
-                    Text(content).foregroundColor(.green).fontWeight(.medium)
-                } else if nowIsBeforeBlockBegins(block: block){//future block
-                    NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp)}, label: {Text(time).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
-                    Text(content).foregroundColor(.red).fontWeight(.medium)
-                } else {//past block
-                    NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp)}, label: {Text(time).fontWeight(.medium).foregroundColor(Color(UIColor.lightGray))}).buttonStyle(PlainButtonStyle())
-                    Text(content).foregroundColor(.blue).fontWeight(.light)
-                }
-            } else {
-                NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp)}, label: {Text(time).foregroundColor(Color(UIColor.lightGray)).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
-                Text(content).foregroundColor(.blue).fontWeight(.light)
-            }
+            NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp)}, label: {Text(time).fontWeight(getTimeWeight(block)).foregroundColor(getTimeColor(block))}).buttonStyle(PlainButtonStyle())
+            Text(content).foregroundColor(getContentColor(block)).fontWeight(getContentWeight(block))
         }
     }
     
