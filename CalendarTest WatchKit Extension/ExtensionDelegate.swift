@@ -29,6 +29,35 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         }
         scheduleSportsNotification()
         scheduleLunchNotification()
+        let ud = UserDefaults.standard
+        guard let temp = ud.stringArray(forKey: "eventsList") else { return }
+        print("-- Before --")
+        print(eventsList)
+        print("-- Temp -- ")
+        print(temp)
+        for str in temp {
+            let comps = str.split(separator: "-")
+            print("- Comps -")
+            print(comps)
+            print("- Block Event -")
+            print(blockEvent(String(comps[2])).toString())
+            eventsList[Int(String(comps[0]))!][Int(String(comps[1]))!]?.append(blockEvent(String(comps[2])))
+        }
+        print("-- After --")
+        print(eventsList)
     }
     
+    func applicationWillResignActive() {
+        let ud = UserDefaults.standard
+        var allEvents: [String] = []
+        for (i, month) in eventsList.enumerated() {
+            for key in month.keys {
+                for event in month[key]! {
+                    allEvents.append("\(i)-\(key)-\(event.toString())")
+                }
+            }
+        }
+        print(allEvents)
+        ud.set(allEvents, forKey: "eventsList")
+    }
 }
