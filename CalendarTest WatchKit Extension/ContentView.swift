@@ -274,79 +274,77 @@ struct ContentView: View {
         }
     }
     
+    // --- COMPONENTS ---
+    
+    func timeTravelComponent() -> some View {
+        return Group {
+            Spacer()
+            cycleDayDay().font(.title).fontWeight(.heavy).multilineTextAlignment(.center)
+            timeTravelNextClass().fontWeight(.heavy)
+            Text("Time: " + getTimeTravelTime()).fontWeight(.semibold)
+            Text(getDate())
+            Text("e").foregroundColor(.black)
+            Spacer()
+            Button(action: { opacity = 0; delayWithSeconds(0.3) { opacity = 1 }; delayWithSeconds(0.2) { minOffset = 0 } }) {
+                Text("Return to Present").fontWeight(.heavy)
+            }
+        }
+    }
+    
+    func classTimeComponents() -> some View {
+        return Group {
+            getNextClass().fontWeight(.heavy)
+            Text(timeUntil).fontWeight(.light).foregroundColor(offset == 0 ? .white : .black).onReceive(timer, perform: {_ in timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))}).onChange(of: scenePhase, perform: { phase in
+                if phase == .active {
+                    timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))
+                    timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
+                } else { timer.upstream.connect().cancel() }})
+        }
+    }
+    
+    func getRelativeDayText() -> String {
+        if globalOffset > 0 {
+            if globalOffset == 1 { return "Tomorrow" }
+            else if globalOffset % 7 == 0 { return "In " + String(globalOffset / 7) + " week" + (globalOffset >= 14 ? "s" : "") }
+            else { return "In " + String(globalOffset) + " days" }
+        } else if globalOffset < 0 {
+            if globalOffset == -1 { return "Tomorrow" }
+            else if -globalOffset % 7 == 0 { return String(-globalOffset / 7) + " week" + (-globalOffset >= 14 ? "s" : "") + " ago" }
+            else { return String(-globalOffset) + " days ago" }
+        } else {
+            return ""
+        }
+    }
+    
+    func getNavDate() -> DateComponents {
+        var date = Date()
+        let cal = Calendar.current
+        if globalOffset != 0 {
+            date = cal.date(byAdding: .day, value: globalOffset, to: date)!
+        }
+        return DateComponents(calendar: Calendar.current, month: cal.component(.month, from: date), day: cal.component(.day, from: date))
+    }
+    
     var body: some View {
         VStack{
             if globalOffset == 0 && minOffset != 0 {
                 // *** TIME TRAVEL VIEW ***
-                Spacer()
-                cycleDayDay().font(.title).fontWeight(.heavy).multilineTextAlignment(.center)
-                timeTravelNextClass().fontWeight(.heavy)
-                Text("Time: " + getTimeTravelTime()).fontWeight(.semibold)
-                Text(getDate())
-                Text("e").foregroundColor(.black)
-                Spacer()
-                Button(action: { opacity = 0; delayWithSeconds(0.3) { opacity = 1 }; delayWithSeconds(0.2) { minOffset = 0 } }) {
-                    Text("Return to Present").fontWeight(.heavy)
-                }
+                timeTravelComponent()
                 // *** END TIME TRAVEL VIEW ***
             } else {
                 Spacer()
-                cycleDayDay()
-                .font(.title)
-                .fontWeight(.heavy)
-                .multilineTextAlignment(.center)
-                if !schoolDone(){
-                    if globalOffset == 0{
-                        getNextClass().fontWeight(.heavy)
-                    }}
-                if globalOffset == 0 && !schoolDone(){
-                        Text(timeUntil).fontWeight(.light).foregroundColor(offset == 0 ? .white : .black).onReceive(timer, perform: {_ in timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))}).onChange(of: scenePhase, perform: { phase in
-                            if phase == .active {
-                                timeUntil = getTime(dc: getTimeUntilNextClass(dc: beginningTimeOfBlock()))
-                                timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
-                            } else {
-                                timer.upstream.connect().cancel()
-                            }})
-                } else if globalOffset > 0{
-                    if globalOffset == 1 {
-                        Text("Tomorrow").fontWeight(.heavy).foregroundColor(.purple)
-                    } else if (globalOffset % 7 == 0){
-                        Text("In " + String(globalOffset / 7) + " week" + (globalOffset >= 14 ? "s" : "")).foregroundColor(.purple)
-                    } else {
-                        Text("In " + String(globalOffset) + " days").foregroundColor(.purple)
-                    }
-                   } else if globalOffset < 0{
-                       if globalOffset == -1 {
-                           Text("Yesterday").fontWeight(.heavy).foregroundColor(.purple)
-                       } else if ((globalOffset - globalOffset - globalOffset) % 7 == 0){
-                           Text(String((globalOffset - globalOffset - globalOffset) / 7) + " week" + ((globalOffset - globalOffset - globalOffset) >= 14 ? "s" : "" + " ago")).foregroundColor(.purple) } else {
-                           Text(String(globalOffset - globalOffset - globalOffset) + " days ago").foregroundColor(.purple)
-                       }
-                
+                cycleDayDay().font(.title).fontWeight(.heavy).multilineTextAlignment(.center)
+                if globalOffset == 0 && !schoolDone() {
+                    classTimeComponents()
+                } else {
+                    Text(getRelativeDayText()).foregroundColor(.purple).fontWeight(abs(globalOffset) == 1 ? .heavy : .regular)
                 }
                 
                 Text("\(getDate())")
-                
-                if isSchoolDay() {
-                getOrder()
-                }
-                if globalOffset == 0{
-                Spacer()
-                }
-                if isSchoolDay() {
-                    var date = Date()
-                    let cal = Calendar.current
-                    if globalOffset != 0 {
-                        date = cal.date(byAdding: .day, value: globalOffset, to: date)!
-                    }
-                    NavigationLink(destination: DayView(dtcp: date)){
-                        Text(offset == 0 ? "Today" : "View Day").fontWeight(.heavy)
-                    }
-                } else {
-                    Spacer()
-                    
-
-                }
+                if isSchoolDay() { getOrder() }
+                if globalOffset == 0 { Spacer() }
+                if isSchoolDay() { NavigationLink(destination: DayView(dtcp: getNavDate())){ Text(offset == 0 ? "Today" : "View Day").fontWeight(.heavy) } }
+                else { Spacer() }
             }
         }.animation(nil, value: opacity).gesture(DragGesture(minimumDistance: 50, coordinateSpace: .global).onEnded({ value in
             let horiz = value.translation.width as CGFloat
