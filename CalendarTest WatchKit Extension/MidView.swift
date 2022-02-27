@@ -88,7 +88,7 @@ struct MidView: View {
                 Text("You cannot schedule events in the past.").fontWeight(.medium).multilineTextAlignment(.center)
             } else {
                     Button(action: {
-                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: eventsList[datecomp.month! - 1][datecomp.day!]!.count + 1), "null", true, false)
+                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: eventsList[datecomp.month! - 1][datecomp.day!]!.count + 1), "New Event", true, false)
                         (eventsList[datecomp.month! - 1][datecomp.day!])!.append(temp)
                     }, label: {Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)})
             }

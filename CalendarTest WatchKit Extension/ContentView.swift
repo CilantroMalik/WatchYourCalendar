@@ -327,7 +327,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
-            if globalOffset == 0 && minOffset != 0 {
+            if globalOffset == 0 && minOffset != 0 && cycleDay != 0{
                 // *** TIME TRAVEL VIEW ***
                 timeTravelComponent()
                 // *** END TIME TRAVEL VIEW ***

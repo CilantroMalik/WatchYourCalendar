@@ -126,9 +126,13 @@ struct DayView: View {
                          else {
                              Text("15:20 - 16:10:").fontWeight(.medium).foregroundColor(Color(UIColor.lightGray))
                              Text("Fitness Center").foregroundColor(.blue).fontWeight(.light)}
-                         }else {
+                         } else if globalOffset < 0 {
                              Text("15:20 - 16:10:").fontWeight(.bold)
                              Text("Fitness Center").foregroundColor(.blue).fontWeight(.light)}
+                        else {
+                            Text("15:20 - 16:10:").fontWeight(.bold)
+                            Text("Fitness Center").foregroundColor(.red).fontWeight(.medium)
+                        }
                      }
                 }
             }

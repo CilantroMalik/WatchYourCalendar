@@ -60,14 +60,15 @@ struct EventView: View {
         Divider().padding(.vertical, 5)
         
          //Delete the event at its index
-//        Button(action: {
+        Button(action: {
 ////            let delarray =  (eventsList[(ev.time).month! - 1][(ev.time).day!])!.filter {$0 != ev}
 ////            (eventsList[(ev.time).month! - 1][(ev.time).day!]) = delarray
 ////            (eventsList[(ev.time).month! - 1][(ev.time).day!])?.remove(at: (eventsList[(ev.time).month! - 1][(ev.time).day]).index(of: ev))
 //            while let remm = (eventsList[(ev.time).month! - 1][(ev.time).day!]).index(of:ev) {
 //                (eventsList[(ev.time).month! - 1][(ev.time).day!])!.remove(at: remm)
 //            }
-//        }, label: {Text("Delete Event").fontWeight(.heavy).multilineTextAlignment(.center)})
+            //delete event from list? pls help :(
+        }, label: {Text("Delete Event").fontWeight(.heavy).multilineTextAlignment(.center)})
         
         if ev.meetingOrAssessment() == "Meeting" {
             Button(action: {
