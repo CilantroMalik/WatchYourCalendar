@@ -161,22 +161,33 @@ func getOffsetDate() -> String {
 }
 
 func isSports() -> Bool{
-    if cycleDay == 3 || cycleDay == 6 || cycleDay == 8{
-        return true
-    } else {
-        return false
-    }
+//    if cycleDay == 3 || cycleDay == 6 || cycleDay == 8{
+//        return true
+//    } else {
+//        return false
+//    }
+    return false
 }
 var classes: [Int: [String]] = [
+//    0: ["","","","","",""],
+//    1: ["Comp Sci (C)", "English (E)", "Physics (D)", "Free/OPI (A)", "Publ. Sp. (B)","Go Home!"],
+//    2: ["Latin (F)", "Spanish (G)", "Precalc (H)", "Math Team (A)", "Publ. Sp. (B)","Go Home!"],
+//    3: ["Comp Sci (C)", "Physics (D)", "Latin (F)", "English (E)", "Spanish (G)", "Fitness Center"],
+//    4: ["Precalc (H)", "Free (A)", "Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)","Go Home!"],
+//    5: ["Spanish (G)", "Math Team (A)", "Precalc (H)", "English (E)", "Latin (F)","Go Home!"],
+//    6: ["Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)", "English (E)", "Latin (F)","Fitness Center"],
+//    7: ["Free (A)", "Precalc (H)", "Spanish (G)", "Publ. Sp. (B)", "Comp Sci (C)","Go Home!"],
+//    8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Fitness Center"]
+    //it is now the post-fitness-centre era
     0: ["","","","","",""],
     1: ["Comp Sci (C)", "English (E)", "Physics (D)", "Free/OPI (A)", "Publ. Sp. (B)","Go Home!"],
     2: ["Latin (F)", "Spanish (G)", "Precalc (H)", "Math Team (A)", "Publ. Sp. (B)","Go Home!"],
-    3: ["Comp Sci (C)", "Physics (D)", "Latin (F)", "English (E)", "Spanish (G)", "Fitness Center"],
+    3: ["Comp Sci (C)", "Physics (D)", "Latin (F)", "English (E)", "Spanish (G)", "Go Home!"],
     4: ["Precalc (H)", "Free (A)", "Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)","Go Home!"],
     5: ["Spanish (G)", "Math Team (A)", "Precalc (H)", "English (E)", "Latin (F)","Go Home!"],
-    6: ["Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)", "English (E)", "Latin (F)","Fitness Center"],
+    6: ["Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)", "English (E)", "Latin (F)","Go Home!"],
     7: ["Free (A)", "Precalc (H)", "Spanish (G)", "Publ. Sp. (B)", "Comp Sci (C)","Go Home!"],
-    8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Fitness Center"]
+    8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Go Home!"]
 ]
 var blocks: [Int: [String]] = [
     0: ["","","","",""], 1: ["C","E","D","A","B"], 2: ["F","G","H","A","B"], 3:["C","D","F","E","G"], 4:["H","A","B","C","D"], 5:["G","A","H","E","F"], 6:["B","C","D","E","F"], 7:["A","H","G","B","C"], 8:["D","E","F","G","H"]
@@ -329,7 +340,7 @@ func getMorningActivity() -> String {
     case 7:
         return "None"
     default:
-        return "error..."
+        return "error... lol"
     }
 }
 

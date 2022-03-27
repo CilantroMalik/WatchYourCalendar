@@ -67,80 +67,82 @@ struct EventView: View {
 //            while let remm = (eventsList[(ev.time).month! - 1][(ev.time).day!]).index(of:ev) {
 //                (eventsList[(ev.time).month! - 1][(ev.time).day!])!.remove(at: remm)
 //            }
-            //delete event from list? pls help :(
+            //FIXME: delete event from list
         }, label: {Text("Delete Event").fontWeight(.heavy).multilineTextAlignment(.center)})
-        
-        if ev.meetingOrAssessment() == "Meeting" {
-            Button(action: {
-                ev.hasNotification = true
-                // *** Schedule Meeting Notification ***
-                let content = UNMutableNotificationContent()
-                // TODO: pass in values here; see ScheduleNotificationView for where the values will be displayed
-                content.title = "Reminder: Meeting"
-                content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod())
-                content.sound = UNNotificationSound.default
-                content.body = "Reminder: You have a meeting this block."
-                content.categoryIdentifier = "event"
-                let category = UNNotificationCategory(identifier: "event", actions: [], intentIdentifiers: [], options: [])
-                UNUserNotificationCenter.current().setNotificationCategories([category])
-                
-                // TODO: use the cycle day and block instance variables, as well as any methods we have, to calculate the components for the date that we need to trigger the notification
-                let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(), repeats: false)
+        //TODO: edit events' labels (for appearance in MidView and for notifications)
+        if !ev.hasNotification { //so the button disappears after scheduling notifications
+            if ev.meetingOrAssessment() == "Meeting" {
+                Button(action: {
+                    ev.hasNotification = true
+                    // *** Schedule Meeting Notification *** TODO: like, actually do notifications
+                    let content = UNMutableNotificationContent()
+                    // TOD: pass in values here; see ScheduleNotificationView for where the values will be displayed
+                    content.title = "Reminder: Meeting"
+                    content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod())
+                    content.sound = UNNotificationSound.default
+                    content.body = "Reminder: You have a meeting this block."
+                    content.categoryIdentifier = "event"
+                    let category = UNNotificationCategory(identifier: "event", actions: [], intentIdentifiers: [], options: [])
+                    UNUserNotificationCenter.current().setNotificationCategories([category])
+                    
+                    // TOD: use the cycle day and block instance variables, as well as any methods we have, to calculate the components for the date that we need to trigger the notification
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(), repeats: false)
 
-                // TODO: somehow construct a unique identifier string from the date and class or block information; do it in such a way as to ensure that any other meeting we schedule into some other block cannot possibly have the same string
-                let request = UNNotificationRequest(identifier: "[insert id here]", content: content, trigger: trigger)
+                    // TOD: somehow construct a unique identifier string from the date and class or block information; do it in such a way as to ensure that any other meeting we schedule into some other block cannot possibly have the same string
+                    let request = UNNotificationRequest(identifier: "[insert id here]", content: content, trigger: trigger)
 
-                // add our notification request
-                UNUserNotificationCenter.current().add(request)
-            }, label: { Text("Be notified!").fontWeight(.medium) })
-        } else if ev.meetingOrAssessment() == "Assessment"{
-            Button(action: {
-                ev.hasNotification = true
-                // *** Schedule Assessment Notification ***
-                let content = UNMutableNotificationContent()
-                // TODO: pass in values here; see ScheduleNotificationView for where the values will be displayed
-                content.title = "Reminder: Assessment"
-                content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod())
-                content.sound = UNNotificationSound.default
-                content.body = "Reminder: You have an assessment this block. Good luck!"
-                content.categoryIdentifier = "event"
+                    // add our notification request
+                    UNUserNotificationCenter.current().add(request)
+                }, label: { Text("Be notified!").fontWeight(.medium) })
+            } else if ev.meetingOrAssessment() == "Assessment"{
+                Button(action: {
+                    ev.hasNotification = true
+                    // *** Schedule Assessment Notification ***
+                    let content = UNMutableNotificationContent()
+                    // TOD: pass in values here; see ScheduleNotificationView for where the values will be displayed
+                    content.title = "Reminder: Assessment"
+                    content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod())
+                    content.sound = UNNotificationSound.default
+                    content.body = "Reminder: You have an assessment this block. Good luck!"
+                    content.categoryIdentifier = "event"
 
-                let category = UNNotificationCategory(identifier: "event", actions: [], intentIdentifiers: [], options: [])
-                UNUserNotificationCenter.current().setNotificationCategories([category])
-                
-                // TODO: use the cycle day and block instance variables, as well as any methods we have, to calculate the components for the date that we need to trigger the notification
-                let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(), repeats: false)
+                    let category = UNNotificationCategory(identifier: "event", actions: [], intentIdentifiers: [], options: [])
+                    UNUserNotificationCenter.current().setNotificationCategories([category])
+                    
+                    // TOO: use the cycle day and block instance variables, as well as any methods we have, to calculate the components for the date that we need to trigger the notification
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(), repeats: false)
 
-                // TODO: somehow construct a unique identifier string from the date and class or block information; do it in such a way as to ensure that any other assessment we schedule into some other block cannot possibly have the same string
-                let request = UNNotificationRequest(identifier: "[insert id here]", content: content, trigger: trigger)
+                    // ODO: somehow construct a unique identifier string from the date and class or block information; do it in such a way as to ensure that any other assessment we schedule into some other block cannot possibly have the same string
+                    let request = UNNotificationRequest(identifier: "[insert id here]", content: content, trigger: trigger)
 
-                // add our notification request
-                UNUserNotificationCenter.current().add(request)
-            }, label: { Text("Be notified!").fontWeight(.medium) })
-        } else {
-            Button(action: {
-                ev.hasNotification = true
-                // *** Schedule Assessment Notification ***
-                let content = UNMutableNotificationContent()
-                // TODO: pass in values here; see ScheduleNotificationView for where the values will be displayed
-                content.title = "Reminder: Event"
-                content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod())
-                content.sound = UNNotificationSound.default
-                content.body = "Reminder: You have an event this block."
-                content.categoryIdentifier = "event"
+                    // add our notification request
+                    UNUserNotificationCenter.current().add(request)
+                }, label: { Text("Be notified!").fontWeight(.medium) })
+            } else {
+                Button(action: {
+                    ev.hasNotification = true
+                    // *** Schedule Assessment Notification ***
+                    let content = UNMutableNotificationContent()
+                    // TODO: pass in values here; see ScheduleNotificationView for where the values will be displayed
+                    content.title = "Reminder: Event"
+                    content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod())
+                    content.sound = UNNotificationSound.default
+                    content.body = "Reminder: You have an event this block."
+                    content.categoryIdentifier = "event"
 
-                let category = UNNotificationCategory(identifier: "event", actions: [], intentIdentifiers: [], options: [])
-                UNUserNotificationCenter.current().setNotificationCategories([category])
-                
-                // TODO: use the cycle day and block instance variables, as well as any methods we have, to calculate the components for the date that we need to trigger the notification
-                let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(), repeats: false)
+                    let category = UNNotificationCategory(identifier: "event", actions: [], intentIdentifiers: [], options: [])
+                    UNUserNotificationCenter.current().setNotificationCategories([category])
+                    
+                    // ODO: use the cycle day and block instance variables, as well as any methods we have, to calculate the components for the date that we need to trigger the notification
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(), repeats: false)
 
-                // TODO: somehow construct a unique identifier string from the date and class or block information; do it in such a way as to ensure that any other assessment we schedule into some other block cannot possibly have the same string
-                let request = UNNotificationRequest(identifier: "[insert id here]", content: content, trigger: trigger)
+                    // OO: somehow construct a unique identifier string from the date and class or block information; do it in such a way as to ensure that any other assessment we schedule into some other block cannot possibly have the same string
+                    let request = UNNotificationRequest(identifier: "[insert id here]", content: content, trigger: trigger)
 
-                // add our notification request
-                UNUserNotificationCenter.current().add(request)
-            }, label: { Text("Be notified!").fontWeight(.medium) })
+                    // add our notification request
+                    UNUserNotificationCenter.current().add(request)
+                }, label: { Text("Be notified!").fontWeight(.medium) })
+            }
         }
     }
 }
