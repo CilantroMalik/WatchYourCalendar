@@ -41,9 +41,6 @@ func scheduleSportsNotification() {
     content.body = "e"
     content.categoryIdentifier = "sports"
 
-    let category = UNNotificationCategory(identifier: "sports", actions: [], intentIdentifiers: [], options: [])
-    UNUserNotificationCenter.current().setNotificationCategories([category])
-    
     // enable the line below for testing notifications: shows ten seconds after app launch
     //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
     
@@ -74,9 +71,6 @@ func scheduleLunchNotification() {
     content.body = "e"
     content.categoryIdentifier = "lunch"
 
-    let category = UNNotificationCategory(identifier: "lunch", actions: [], intentIdentifiers: [], options: [])
-    UNUserNotificationCenter.current().setNotificationCategories([category])
-    
     // enable the line below for testing notifications: shows five seconds after app launch
     //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 20, repeats: false)
     for i in 2...6 {

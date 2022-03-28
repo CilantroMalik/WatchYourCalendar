@@ -27,6 +27,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert]) { success, error in
             if success { print("Authorized") } else if let error = error { print(error.localizedDescription) }
         }
+        let category1 = UNNotificationCategory(identifier: "sports", actions: [], intentIdentifiers: [], options: [])
+        let category2 = UNNotificationCategory(identifier: "lunch", actions: [], intentIdentifiers: [], options: [])
+        let category3 = UNNotificationCategory(identifier: "event", actions: [], intentIdentifiers: [], options: [])
+        UNUserNotificationCenter.current().setNotificationCategories([category1, category2, category3])
+        
         scheduleSportsNotification()
         scheduleLunchNotification()
         let ud = UserDefaults.standard
