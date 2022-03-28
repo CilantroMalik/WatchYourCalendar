@@ -37,7 +37,7 @@ struct MidView: View {
             return "e"
         }
     }
-    func meetingOrAssessment() -> String{
+    func meetingOrAssessment() -> String {
         let date = Date()
         let cal = Calendar.current
         let weekday = cal.component(.weekday, from: date)
@@ -60,6 +60,16 @@ struct MidView: View {
             return "e"
         }
     }
+    
+    func eventsThisBlock() -> [blockEvent] {
+        let dayEvents = eventsList[datecomp.month! - 1][datecomp.day!]!
+        var blockEvents: [blockEvent] = []
+        for event in dayEvents {
+            if event.block == block { blockEvents.append(event) }
+        }
+        return blockEvents
+    }
+    
     var body: some View {
         ScrollView{
         VStack {
@@ -71,7 +81,7 @@ struct MidView: View {
             if (eventsList[datecomp.month! - 1][datecomp.day!])?.count == 0 {
                 Text("No Events").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
             }else {
-                ForEach(eventsList[datecomp.month! - 1][datecomp.day!]!, id: \.id) { item in //FIXME: so yeah in each individual element of the array of arrays, not the whole day's events
+                ForEach(eventsThisBlock(), id: \.id) { item in //FIXME: so yeah in each individual element of the array of arrays, not the whole day's events >(rohan) should work correctly with this implementation?
                     NavigationLink(destination: {EventView(ev: item)}, label: {Text(item.hasLabel ? item.label : item.label + item.meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
                 }
             }
@@ -83,7 +93,8 @@ struct MidView: View {
                 Text("You cannot schedule events in the past.").fontWeight(.medium).multilineTextAlignment(.center)
             } else {
                     Button(action: {
-                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: eventsList[datecomp.month! - 1][datecomp.day!]!.count + 1), "New Event", true, false)
+                        let n = eventsList[datecomp.month! - 1][datecomp.day!]!.count + 1
+                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: n), "Event \(n)", true, false)
                         (eventsList[datecomp.month! - 1][datecomp.day!])!.append(temp)
                     }, label: {Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)})
             }
