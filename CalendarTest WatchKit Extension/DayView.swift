@@ -66,7 +66,7 @@ struct DayView: View {
     
     func getContentColor(_ block: Int) -> Color {
         if globalOffset == 0 {
-            if !(eventsList[dtcp.month! - 1][dtcp.day]!.isEmpty) { //FIXME: doth this worketh?
+            if !(eventsList[dtcp.month! - 1][dtcp.day!]!.isEmpty) { //FIXME: doth this worketh?
                 return .orange
             } else if isNextBlock(bl: block) {  // next block
                 return .green
