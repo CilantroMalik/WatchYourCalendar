@@ -518,6 +518,8 @@ func compGetClassLength(block: Int) -> Int{
         return 45
     } else if block == 7 {
         return 50
+    } else if block == 9 {
+        return 10
     } else {
         return 99
     }

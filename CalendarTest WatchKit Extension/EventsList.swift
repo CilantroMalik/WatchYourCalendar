@@ -99,7 +99,7 @@ class blockEvent {
         case 6:
             return blocks[getDay()]![4] + " Block"
         case 9:
-            return "Office Hours / Break"
+            return "Office Hours"
         default:
             return "e"
         }

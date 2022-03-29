@@ -82,10 +82,11 @@ struct MidView: View {
             Text("Day \(day), \(getPeriod(blockNum: block))")
             
             Divider().padding(.vertical, 5)
-            if (eventsList[datecomp.month! - 1][datecomp.day!])?.count == 0 {
+//            if (eventsList[datecomp.month! - 1][datecomp.day!])?.count == 0 {
+            if (eventsThisBlock()).count == 0 {
                 Text("No Events").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
-            }else {
-                ForEach(eventsThisBlock(), id: \.id) { item in //FIXME: so yeah in each individual element of the array of arrays, not the whole day's events >(cilantro) should work correctly with this implementation? >(jack) sure i'll check it out when i upload tomorrow
+            } else {
+                ForEach(eventsThisBlock(), id: \.id) { item in
                     NavigationLink(destination: {EventView(ev: item)}, label: {Text(item.hasLabel ? item.label : item.label + item.meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
                 }
             }

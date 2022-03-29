@@ -49,7 +49,7 @@ struct DayView: View {
     func getTimeColor(_ block: Int) -> Color {
         if globalOffset == 0 {
             if isNextBlock(bl: block) {  // next block
-                return .red
+                return .purple
             } else if isNextBlock(bl: block + 1) {  // now block
                 return .white
             } else if nowIsBeforeBlockBegins(block: block) {  // future block
@@ -66,7 +66,9 @@ struct DayView: View {
     
     func getContentColor(_ block: Int) -> Color {
         if globalOffset == 0 {
-            if isNextBlock(bl: block) {  // next block
+            if !(eventsList[1][1]!.isEmpty) { //FIXME: add proper location for the block
+                return .orange
+            } else if isNextBlock(bl: block) {  // next block
                 return .green
             } else if isNextBlock(bl: block + 1) {  // now block
                 return .purple
