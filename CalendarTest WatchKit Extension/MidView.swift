@@ -12,11 +12,11 @@ struct MidView: View {
     var day : Int
     var block : Int
     var datecomp : DateComponents
-//    var even : blockEvent
+    //    var even : blockEvent
     
-//    func maxEvents() -> Bool{ //has reached max events (3)
-//        return numEvents[block][datecomp]! > 2 ? true : false
-//    }
+    //    func maxEvents() -> Bool{ //has reached max events (3)
+    //        return numEvents[block][datecomp]! > 2 ? true : false
+    //    }
     func getPeriod(blockNum: Int) -> String {
         switch blockNum {
         case 0:
@@ -76,34 +76,34 @@ struct MidView: View {
     
     var body: some View {
         ScrollView{
-        VStack {
-//            Text("Events").font(.title2).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
-            Text(getOffsetDate())
-            Text("Day \(day), \(getPeriod(blockNum: block))")
-            
-            Divider().padding(.vertical, 5)
-//            if (eventsList[datecomp.month! - 1][datecomp.day!])?.count == 0 {
-            if (eventsThisBlock()).count == 0 {
-                Text("No Events").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
-            } else {
-                ForEach(eventsThisBlock(), id: \.id) { item in
-                    NavigationLink(destination: {EventView(ev: item)}, label: {Text(item.hasLabel ? item.label : item.label + item.meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+            VStack {
+                //            Text("Events").font(.title2).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
+                Text(getOffsetDate())
+                Text("Day \(day), \(getPeriod(blockNum: block))")
+                
+                Divider().padding(.vertical, 5)
+                //            if (eventsList[datecomp.month! - 1][datecomp.day!])?.count == 0 {
+                if (eventsThisBlock()).count == 0 {
+                    Text("No Events").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
+                } else {
+                    ForEach(eventsThisBlock(), id: \.id) { item in
+                        NavigationLink(destination: {EventView(ev: item)}, label: {Text(item.hasLabel ? item.label : item.label + item.meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+                    }
                 }
-            }
-            Divider().padding(.vertical, 5)
-            if globalOffset < 0 || (globalOffset == 0 && nowIsAfterBlockEnds(block: (block))){
-                Text("You cannot schedule events in the past.").fontWeight(.medium).multilineTextAlignment(.center)
-            } else {
+                Divider().padding(.vertical, 5)
+                if globalOffset < 0 || (globalOffset == 0 && nowIsAfterBlockEnds(block: (block))){
+                    Text("You cannot schedule events in the past.").fontWeight(.medium).multilineTextAlignment(.center)
+                } else {
                     Button(action: {
                         let n = eventsList[datecomp.month! - 1][datecomp.day!]!.count + 1
                         let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: n), "Event \(n)", true, false)
                         (eventsList[datecomp.month! - 1][datecomp.day!])!.append(temp)
                     }, label: {Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)})
+                }
             }
         }
     }
 }
-    }
 
 struct MidView_Previews: PreviewProvider {
     static var previews: some View {

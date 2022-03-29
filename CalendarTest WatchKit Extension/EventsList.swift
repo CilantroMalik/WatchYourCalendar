@@ -18,7 +18,7 @@ func makeId(block: Int, time: DateComponents, num: Int) -> String{
 //    ev.id = idd
 //}
 class blockEvent {
-//    var num = 0 //event 1, 2, 3?
+    //    var num = 0 //event 1, 2, 3?
     var block = 0 //
     var time = DateComponents(calendar: Calendar.current, month: 1, day: 1)
     var id = "000000" //MM DD B

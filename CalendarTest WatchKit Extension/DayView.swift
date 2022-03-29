@@ -66,7 +66,7 @@ struct DayView: View {
     
     func getContentColor(_ block: Int) -> Color {
         if globalOffset == 0 {
-            if !(eventsList[1][1]!.isEmpty) { //FIXME: add proper location for the block
+            if !(eventsList[dtcp.month! - 1][dtcp.day]!.isEmpty) { //FIXME: doth this worketh?
                 return .orange
             } else if isNextBlock(bl: block) {  // next block
                 return .green
@@ -120,24 +120,24 @@ struct DayView: View {
                     Spacer()
                     scheduleRow(time: "14:30 - 15:15:", block: 6, content: classes[cycleDay]![4])
                     if (isSports()){
-                         if globalOffset == 0 {
-                         if isNextBlock(bl: 7){
-                             Text("15:20 - 16:10:").fontWeight(.bold).foregroundColor(.red)
-                             Text("Fitness Center").foregroundColor(.green).fontWeight(.medium)
-                         } else if nowIsBeforeBlockBegins(block: 7){
-                             Text("15:20 - 16:10:").fontWeight(.bold)
-                             Text("Fitness Center").foregroundColor(.red).fontWeight(.medium)}
-                         else {
-                             Text("15:20 - 16:10:").fontWeight(.medium).foregroundColor(Color(UIColor.lightGray))
-                             Text("Fitness Center").foregroundColor(.blue).fontWeight(.light)}
-                         } else if globalOffset < 0 {
-                             Text("15:20 - 16:10:").fontWeight(.bold)
-                             Text("Fitness Center").foregroundColor(.blue).fontWeight(.light)}
+                        if globalOffset == 0 {
+                            if isNextBlock(bl: 7){
+                                Text("15:20 - 16:10:").fontWeight(.bold).foregroundColor(.red)
+                                Text("Fitness Center").foregroundColor(.green).fontWeight(.medium)
+                            } else if nowIsBeforeBlockBegins(block: 7){
+                                Text("15:20 - 16:10:").fontWeight(.bold)
+                                Text("Fitness Center").foregroundColor(.red).fontWeight(.medium)}
+                            else {
+                                Text("15:20 - 16:10:").fontWeight(.medium).foregroundColor(Color(UIColor.lightGray))
+                                Text("Fitness Center").foregroundColor(.blue).fontWeight(.light)}
+                        } else if globalOffset < 0 {
+                            Text("15:20 - 16:10:").fontWeight(.bold)
+                            Text("Fitness Center").foregroundColor(.blue).fontWeight(.light)}
                         else {
                             Text("15:20 - 16:10:").fontWeight(.bold)
                             Text("Fitness Center").foregroundColor(.red).fontWeight(.medium)
                         }
-                     }
+                    }
                 }
             }
         }

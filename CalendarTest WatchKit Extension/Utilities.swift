@@ -17,7 +17,7 @@ func scheduleRefresh() {
 
 func reloadActiveComplications() {
     let server = CLKComplicationServer.sharedInstance()
-
+    
     for complication in server.activeComplications ?? [] {
         server.reloadTimeline(for: complication)
     }
@@ -40,15 +40,15 @@ func scheduleSportsNotification() {
     content.sound = UNNotificationSound.default
     content.body = "e"
     content.categoryIdentifier = "sports"
-
+    
     // enable the line below for testing notifications: shows ten seconds after app launch
     //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
     
     let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), repeats: true)
-
+    
     // choose a random identifier
     let request = UNNotificationRequest(identifier: "dailyNotif", content: content, trigger: trigger)
-
+    
     // add our notification request
     UNUserNotificationCenter.current().add(request)
 }
@@ -70,15 +70,15 @@ func scheduleLunchNotification() {
     content.sound = UNNotificationSound.default
     content.body = "e"
     content.categoryIdentifier = "lunch"
-
+    
     // enable the line below for testing notifications: shows five seconds after app launch
     //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 20, repeats: false)
     for i in 2...6 {
         let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 13, minute: 10, weekday: i), repeats: true)
-
+        
         // choose a random identifier
         let request = UNNotificationRequest(identifier: "lunchNotif\(i)", content: content, trigger: trigger)
-
+        
         // add our notification request
         UNUserNotificationCenter.current().add(request)
     }
@@ -155,23 +155,23 @@ func getOffsetDate() -> String {
 }
 
 func isSports() -> Bool{
-//    if cycleDay == 3 || cycleDay == 6 || cycleDay == 8{
-//        return true
-//    } else {
-//        return false
-//    }
+    //    if cycleDay == 3 || cycleDay == 6 || cycleDay == 8{
+    //        return true
+    //    } else {
+    //        return false
+    //    }
     return false
 }
 var classes: [Int: [String]] = [
-//    0: ["","","","","",""],
-//    1: ["Comp Sci (C)", "English (E)", "Physics (D)", "Free/OPI (A)", "Publ. Sp. (B)","Go Home!"],
-//    2: ["Latin (F)", "Spanish (G)", "Precalc (H)", "Math Team (A)", "Publ. Sp. (B)","Go Home!"],
-//    3: ["Comp Sci (C)", "Physics (D)", "Latin (F)", "English (E)", "Spanish (G)", "Fitness Center"],
-//    4: ["Precalc (H)", "Free (A)", "Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)","Go Home!"],
-//    5: ["Spanish (G)", "Math Team (A)", "Precalc (H)", "English (E)", "Latin (F)","Go Home!"],
-//    6: ["Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)", "English (E)", "Latin (F)","Fitness Center"],
-//    7: ["Free (A)", "Precalc (H)", "Spanish (G)", "Publ. Sp. (B)", "Comp Sci (C)","Go Home!"],
-//    8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Fitness Center"]
+    //    0: ["","","","","",""],
+    //    1: ["Comp Sci (C)", "English (E)", "Physics (D)", "Free/OPI (A)", "Publ. Sp. (B)","Go Home!"],
+    //    2: ["Latin (F)", "Spanish (G)", "Precalc (H)", "Math Team (A)", "Publ. Sp. (B)","Go Home!"],
+    //    3: ["Comp Sci (C)", "Physics (D)", "Latin (F)", "English (E)", "Spanish (G)", "Fitness Center"],
+    //    4: ["Precalc (H)", "Free (A)", "Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)","Go Home!"],
+    //    5: ["Spanish (G)", "Math Team (A)", "Precalc (H)", "English (E)", "Latin (F)","Go Home!"],
+    //    6: ["Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)", "English (E)", "Latin (F)","Fitness Center"],
+    //    7: ["Free (A)", "Precalc (H)", "Spanish (G)", "Publ. Sp. (B)", "Comp Sci (C)","Go Home!"],
+    //    8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Fitness Center"]
     //it is now the post-fitness-centre era
     0: ["","","","","",""],
     1: ["Comp Sci (C)", "English (E)", "Physics (D)", "Free/OPI (A)", "Publ. Sp. (B)","Go Home!"],
@@ -292,7 +292,7 @@ func nowIsAfterBlockEnds(block:Int) -> Bool{
     } else if block == 2 { //next: block 3
         return isAfter(hour1: 10,minute1: 35,hour2: getHour(),minute2: getMinute())
     }else if block == 1 { //next: block 2
-            return isAfter(hour1: 10,minute1: 00,hour2: getHour(),minute2: getMinute())
+        return isAfter(hour1: 10,minute1: 00,hour2: getHour(),minute2: getMinute())
     } else if block == 0 { //next: morning Activity
         return isAfter(hour1: 9, minute1: 55, hour2: getHour(), minute2: getMinute())
     }
@@ -314,7 +314,7 @@ func nowIsBeforeBlockBegins(block: Int) -> Bool{
     } else if block == 2 { //
         return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 35)
     }else if block == 1 { //
-            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 00)
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 00)
     } else if block == 0 { //before first block
         return isAfter(hour1: getHour(), minute1: getMinute(), hour2: 8, minute2: 55)
     }
@@ -356,7 +356,7 @@ func schoolDone() -> Bool{
     if (isSports()){
         return ((cal.component(.hour, from: date) > 16) || ((cal.component(.hour, from: date) > 15 && cal.component(.minute, from: date) > 10)) || (cal.component(.hour, from: date) < 7))
     } else {
-            return ((cal.component(.hour, from: date) > 15) || ((cal.component(.hour, from: date) > 14 && cal.component(.minute, from: date) > 15)) || (cal.component(.hour, from: date) < 7))
+        return ((cal.component(.hour, from: date) > 15) || ((cal.component(.hour, from: date) > 14 && cal.component(.minute, from: date) > 15)) || (cal.component(.hour, from: date) < 7))
     }
 }
 
@@ -388,7 +388,7 @@ func timeIsBeforeBlockBegins(date: Date, block: Int) -> Bool{
     } else if block == 2 { //
         return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 35)
     }else if block == 1 { //
-            return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 00)
+        return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 00)
     } else if block == 0 { //before first block
         return isAfter(hour1: hr, minute1: min, hour2: 8, minute2: 55)
     }
@@ -615,7 +615,7 @@ func compGetTimeUntil(date: Date) -> String {
     if nowIsAfterBlockEnds(block: 6){
         return ""
     } else {
-    return " in " + String(compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date))) + "m"
+        return " in " + String(compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date))) + "m"
     }
 }
 
@@ -669,9 +669,9 @@ func compGetTimeUntilClassEnds(length: Int, now: Date) -> String{
 
 func compGetClassGigue(length: Int, now: Date) -> Float {
     if !school(){return 1} else {
-    let mins = Float(compMinsSinceClassStart(now: now))
-    if mins < 0 { return 0.0 }
-    if mins > Float(length) { return 1.0 }
-    return Float(mins / Float(length))
+        let mins = Float(compMinsSinceClassStart(now: now))
+        if mins < 0 { return 0.0 }
+        if mins > Float(length) { return 1.0 }
+        return Float(mins / Float(length))
     }
 }

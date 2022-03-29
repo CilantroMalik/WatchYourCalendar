@@ -4,7 +4,7 @@
 //
 //  Created by Jack de Haan on 1/27/22.
 //
- 
+
 import SwiftUI
 import UserNotifications
 func beginningTimeOfBlock() -> DateComponents {
@@ -59,7 +59,7 @@ func getTime(dc: DateComponents) -> String {
     
     return hr + ":" + mn + ":" + sc
 }
- 
+
 func getOrder() -> Text {
     return getColor(Blk: 0) + Text("-") + getColor(Blk: 2) + Text("-") + getColor(Blk: 3) + Text("-") + getColor(Blk: 5) + Text("-") + getColor(Blk: 6)
 }
@@ -188,7 +188,7 @@ struct ContentView: View {
         } else if block == 2 {
             return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 35)
         }else if block == 1 {
-                return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 00)
+            return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 00)
         } else if block == 0 { //before first block
             return isAfter(hour1: hr, minute1: min, hour2: 8, minute2: 55)
         }
@@ -334,10 +334,10 @@ struct ContentView: View {
             }
             delayWithSeconds(0.35) { opacity = 1 }
         }).onChanged({value in opacity = max(0, 1.0 - abs(value.translation.width/125))}))
-            .opacity(opacity).animation(.easeInOut, value: opacity)
-            .gesture(TapGesture(count: 2).onEnded({ returnToCurrent() }))
-            .focusable().digitalCrownRotation($minOffset)
-            .onChange(of: scenePhase, perform: { phase in if phase == .background { globalOffset = 0; offset = 0; minOffset = 0 } })
+        .opacity(opacity).animation(.easeInOut, value: opacity)
+        .gesture(TapGesture(count: 2).onEnded({ returnToCurrent() }))
+        .focusable().digitalCrownRotation($minOffset)
+        .onChange(of: scenePhase, perform: { phase in if phase == .background { globalOffset = 0; offset = 0; minOffset = 0 } })
     }
 }
 struct ContentView_Previews: PreviewProvider {
@@ -345,6 +345,6 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
- 
+
 
 
