@@ -15,19 +15,11 @@ A minimal watch app that makes the flow of the school day conveniently available
 
 -Allow notifications to tell you in the morning if you have sports that day or an assessment— or to tell you when lunch is ending— or to remind you that your next class starts in 5 minutes!
 
--e
+-e!
 
 
 ## What’s next?
 
--bug FIXINGGGG   we do love it ! 
+-releasing a standalone watch app
 
-uhhhhh NO WE DONT
-
--meetings/tests
-
--(settings)
-
--removing classes from "up next" after done? (settings)
-
--iOS pairing? 😳
+-iOS app
