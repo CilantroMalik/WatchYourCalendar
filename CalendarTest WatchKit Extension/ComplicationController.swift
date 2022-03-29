@@ -35,13 +35,13 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
     } else if complication.identifier == "NextClassIn" {
         if complication.family == CLKComplicationFamily.graphicBezel {
             let preTemplate = CLKComplicationTemplateGraphicCircularStackText(line1TextProvider: CLKSimpleTextProvider(text: getCycleDayDay()), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
-            let template = CLKComplicationTemplateGraphicBezelCircularText(circularTemplate: preTemplate, textProvider: CLKSimpleTextProvider(text: school() ? "\(compLongNextClass(date: date)) in \(compGetTimeUntil(date: date))" : "—"))
+            let template = CLKComplicationTemplateGraphicBezelCircularText(circularTemplate: preTemplate, textProvider: CLKSimpleTextProvider(text: school() ? "\(compLongNextClass(date: date))\(compGetTimeUntil(date: date))" : "—"))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.graphicCorner {
-            let template = CLKComplicationTemplateGraphicCornerStackText(innerTextProvider: CLKSimpleTextProvider(text: school() ? "\(compGetNextBlock(date: date)) in \(compGetTimeUntil(date: date))" : "—"), outerTextProvider: CLKSimpleTextProvider(text: getCycleDayDay()))
+            let template = CLKComplicationTemplateGraphicCornerStackText(innerTextProvider: CLKSimpleTextProvider(text: school() ? "\(compGetNextBlock(date: date))  \(compGetTimeUntil(date: date))" : "—"), outerTextProvider: CLKSimpleTextProvider(text: getCycleDayDay()))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.utilitarianLarge {
-            let template = CLKComplicationTemplateUtilitarianLargeFlat(textProvider: CLKSimpleTextProvider(text: school() ? "\(compLongNextClass(date: date)) in \(compGetTimeUntil(date: date))" : "OFF"))
+            let template = CLKComplicationTemplateUtilitarianLargeFlat(textProvider: CLKSimpleTextProvider(text: school() ? "\(compLongNextClass(date: date))  \(compGetTimeUntil(date: date))" : "OFF"))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
     } else if complication.identifier == "DayProgress" {

@@ -550,7 +550,7 @@ func compLongNextClass(date: Date) -> String {
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
         return "Next: \(classes[cycleDay]![5])"
     } else {
-        return "School Ends"
+        return "Next: Go home!"
     }
 }
 
@@ -612,7 +612,11 @@ func compGetTime(dc: DateComponents) -> String {
 }
 
 func compGetTimeUntil(date: Date) -> String {
-    return String(compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date))) + "m"
+    if nowIsAfterBlockEnds(block: 6){
+        return ""
+    } else {
+    return " in " + String(compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date))) + "m"
+    }
 }
 
 func compGetDayGigue(now: Date) -> Float {
