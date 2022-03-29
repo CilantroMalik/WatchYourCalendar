@@ -285,7 +285,7 @@ struct ContentView: View {
             else if globalOffset % 7 == 0 { return "In " + String(globalOffset / 7) + " week" + (globalOffset >= 14 ? "s" : "") }
             else { return "In " + String(globalOffset) + " days" }
         } else if globalOffset < 0 {
-            if globalOffset == -1 { return "Tomorrow" }
+            if globalOffset == -1 { return "Yesterday" }
             else if -globalOffset % 7 == 0 { return String(-globalOffset / 7) + " week" + (-globalOffset >= 14 ? "s" : "") + " ago" }
             else { return String(-globalOffset) + " days ago" }
         } else {

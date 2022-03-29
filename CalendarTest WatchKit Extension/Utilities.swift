@@ -254,6 +254,12 @@ func isNextBlock(bl: Int) -> Bool {
         } else {
             return false
         }
+    } else if nowIsBeforeBlockBegins(block: 9){
+        if (bl == 9){
+            return true
+        } else {
+            return false
+        }
     } else {
         return false
     }
@@ -275,7 +281,9 @@ func nowIsAfterBlockEnds(block:Int) -> Bool{
         return isAfter(hour1: 15,minute1: 20,hour2: getHour(),minute2: getMinute())
     } else if block == 6 { //sports or go home
         return isAfter(hour1: 14,minute1: 30,hour2: getHour(),minute2: getMinute())
-    } else if block == 5 { //next: last block
+    } else if block == 9 { //next: last block
+        return isAfter(hour1: 14,minute1: 20,hour2: getHour(),minute2: getMinute())
+    } else if block == 5 { //next: break
         return isAfter(hour1: 13,minute1: 20,hour2: getHour(),minute2: getMinute())
     } else if block == 4 {// next: afterlunch block
         return isAfter(hour1: 12,minute1: 30,hour2: getHour(),minute2: getMinute())
@@ -295,6 +303,8 @@ func nowIsBeforeBlockBegins(block: Int) -> Bool{
         return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 15,minute2: 15)
     } else if block == 6 { //
         return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 30)
+    } else if block == 9 { //before break
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 20)
     } else if block == 5 { //before
         return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 20)
     } else if block == 4 {//before lunch
