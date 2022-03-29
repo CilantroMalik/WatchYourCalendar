@@ -334,10 +334,29 @@ func getMorningActivity() -> String {
     case 7:
         return "None"
     default:
-        return "error... lol"
+        return "error... lul"
+    }
+}
+func schoolDone() -> Bool{
+    let date = Date()
+    let cal = Calendar.current
+    if cycleDay == 0 {
+        return true
+    }
+    if (isSports()){
+        return ((cal.component(.hour, from: date) > 16) || ((cal.component(.hour, from: date) > 15 && cal.component(.minute, from: date) > 10)) || (cal.component(.hour, from: date) < 7))
+    } else {
+            return ((cal.component(.hour, from: date) > 15) || ((cal.component(.hour, from: date) > 14 && cal.component(.minute, from: date) > 15)) || (cal.component(.hour, from: date) < 7))
     }
 }
 
+
+func school() -> Bool{
+    return isSchoolDay() && !schoolDone()
+}
+var lunchBlockFirst: [Int: [Bool]] = [
+    0: [false], 1: [false], 2: [false], 3: [false], 4:[false], 5: [false], 6: [false], 7: [false], 8: [false] //teehee imagine having first lunch
+]
 
 //COMPLICATIONS (functions start with "comp" in order to avoid confusion with other methods
 
@@ -622,21 +641,4 @@ func compGetClassGigue(length: Int, now: Date) -> Float {
     if mins > Float(length) { return 1.0 }
     return Float(mins / Float(length))
     }
-}
-func schoolDone() -> Bool{
-    let date = Date()
-    let cal = Calendar.current
-    if cycleDay == 0 {
-        return true
-    }
-    if (isSports()){
-        return ((cal.component(.hour, from: date) > 16) || ((cal.component(.hour, from: date) > 15 && cal.component(.minute, from: date) > 10)) || (cal.component(.hour, from: date) < 7))
-    } else {
-            return ((cal.component(.hour, from: date) > 15) || ((cal.component(.hour, from: date) > 14 && cal.component(.minute, from: date) > 15)) || (cal.component(.hour, from: date) < 7))
-    }
-}
-
-
-func school() -> Bool{
-    return isSchoolDay() && !schoolDone()
 }

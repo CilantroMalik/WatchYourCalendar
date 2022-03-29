@@ -91,7 +91,7 @@ struct DayView: View {
     
     var body: some View {
         ScrollView{
-            VStack{
+            VStack{//TODO: fix spacing
                 Group{
                     Text(getCycleDayDay()).font(.title2).fontWeight(.bold).multilineTextAlignment(.center)
                     scheduleRow(time: "08:55 - 09:55:", block: 0, content: classes[cycleDay]![0])
@@ -102,17 +102,19 @@ struct DayView: View {
                 Group{
                     scheduleRow(time: "10:35 - 11:25:", block: 2, content: classes[cycleDay]![1])
                     Spacer()
-                    scheduleRow(time: "11:25 - 12:25:", block: 3, content: classes[cycleDay]![2])
+                    (lunchBlockFirst[cycleDay]! == [true]) ? scheduleRow(time: "11:25 - 12:25:", block: 4, content: "Lunch") : scheduleRow(time: "11:25 - 12:25:", block: 3, content: classes[cycleDay]![2])
                     Spacer()
                     Spacer()
                 }
                 Group{
-                    scheduleRow(time: "12:25 - 13:15:", block: 4, content: "Lunch")
+                    (lunchBlockFirst[cycleDay]! == [true]) ? (scheduleRow(time: "12:25 - 13:15:", block: 4, content: classes[cycleDay]![3])) : (scheduleRow(time: "12:25 - 13:15:", block: 4, content: "Lunch"))
                     Spacer()
                     Spacer()
                 }
                 Group{
                     scheduleRow(time: "13:20 - 14:20:", block: 5, content: classes[cycleDay]![3])
+                    Spacer()
+                    scheduleRow(time: "14:20 - 14:30:", block: 9, content: "Office Hours / Break") //BLOCK 9 IS THE 10 MINUTE BREAK
                     Spacer()
                     scheduleRow(time: "14:30 - 15:15:", block: 6, content: classes[cycleDay]![4])
                     if (isSports()){

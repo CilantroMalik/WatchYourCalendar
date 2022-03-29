@@ -33,6 +33,8 @@ struct MidView: View {
             return blocks[day]![3] + " Block"
         case 6:
             return blocks[day]![4] + " Block"
+        case 9:
+            return "Office Hours / Break"
         default:
             return "e"
         }
@@ -56,6 +58,8 @@ struct MidView: View {
             return classes[day]![3].starts(with: "Free") ? "Meeting" : "Assessment"
         case 6:
             return classes[day]![4].starts(with: "Free") ? "Meeting" : "Assessment"
+        case 9:
+            return "Meeting"
         default:
             return "e"
         }
@@ -81,14 +85,11 @@ struct MidView: View {
             if (eventsList[datecomp.month! - 1][datecomp.day!])?.count == 0 {
                 Text("No Events").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
             }else {
-                ForEach(eventsThisBlock(), id: \.id) { item in //FIXME: so yeah in each individual element of the array of arrays, not the whole day's events >(rohan) should work correctly with this implementation?
+                ForEach(eventsThisBlock(), id: \.id) { item in //FIXME: so yeah in each individual element of the array of arrays, not the whole day's events >(cilantro) should work correctly with this implementation? >(jack) sure i'll check it out when i upload tomorrow
                     NavigationLink(destination: {EventView(ev: item)}, label: {Text(item.hasLabel ? item.label : item.label + item.meetingOrAssessment()).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
                 }
             }
             Divider().padding(.vertical, 5)
-//            if maxEvents(){
-//                Text("Max Events been reached for this block.").fontWeight(.heavy).multilineTextAlignment(.center) //is this too wordy?
-//            } else
             if globalOffset < 0 || (globalOffset == 0 && nowIsAfterBlockEnds(block: (block))){
                 Text("You cannot schedule events in the past.").fontWeight(.medium).multilineTextAlignment(.center)
             } else {

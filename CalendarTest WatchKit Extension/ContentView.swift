@@ -38,19 +38,7 @@ func beginningTimeOfBlock() -> DateComponents {
         return comp
     }
 }
-//func getTimeUntilNextClass(dc: DateComponents) -> DateComponents {
-//    let date = Date()
-//    let cal = Calendar.current
-//    let hr = dc.hour
-//    let mn = dc.minute
-//    let sc = dc.second
-//    let comp = DateComponents(calendar: cal, hour: hr, minute: mn, second:sc)
-//    let time = cal.nextDate(after: date, matching: comp, matchingPolicy: .nextTime)!
-//    let diff = cal.dateComponents([.hour, .minute, .second], from: date, to: time)
-//    return diff
-//}
 func getTime(dc: DateComponents) -> String {
-//    var min = ((dc.hour!) + dc.minute!)
     
     var hr = String(dc.hour!)
     if hr.count == 1 {
@@ -70,18 +58,7 @@ func getTime(dc: DateComponents) -> String {
     }
     
     return hr + ":" + mn + ":" + sc
-//    return mn + ":" + sc
 }
-
-//func getDate() -> String {
-//    let date = Date()
-//    let cal = Calendar.current
-//    let month = cal.component(.month, from: date)
-//    let day = cal.component(.day, from: date)
-//    let year = cal.component(.year, from: date)
-//    let weekday = cal.component(.weekday, from: date)
-//    return "\(cal.shortWeekdaySymbols[weekday-1]), \(cal.shortMonthSymbols[month-1]) \(day), \(year)"
-//}
  
 func getOrder() -> Text {
     return getColor(Blk: 0) + Text("-") + getColor(Blk: 2) + Text("-") + getColor(Blk: 3) + Text("-") + getColor(Blk: 5) + Text("-") + getColor(Blk: 6)
@@ -198,19 +175,19 @@ struct ContentView: View {
         let date = cal.date(byAdding: .minute, value: Int(floor(minOffset)), to: Date())!
         let hr = cal.component(.hour, from: date)
         let min = cal.component(.minute, from: date)
-        if block == 7 { //
+        if block == 7 {
             return isAfter(hour1: hr,minute1: min,hour2: 15,minute2: 15)
-        } else if block == 6 { //
+        } else if block == 6 {
             return isAfter(hour1: hr,minute1: min,hour2: 14,minute2: 30)
         } else if block == 5 { //before
             return isAfter(hour1: hr,minute1: min,hour2: 13,minute2: 20)
         } else if block == 4 {//before lunch
             return isAfter(hour1: hr,minute1: min,hour2: 12,minute2: 30)
-        } else if block == 3 {//
+        } else if block == 3 {
             return isAfter(hour1: hr,minute1: min,hour2: 11,minute2: 25)
-        } else if block == 2 { //
+        } else if block == 2 {
             return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 35)
-        }else if block == 1 { //
+        }else if block == 1 {
                 return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 00)
         } else if block == 0 { //before first block
             return isAfter(hour1: hr, minute1: min, hour2: 8, minute2: 55)
