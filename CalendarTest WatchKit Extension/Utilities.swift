@@ -377,6 +377,8 @@ func timeIsBeforeBlockBegins(date: Date, block: Int) -> Bool{
         return isAfter(hour1: hr,minute1: min,hour2: 15,minute2: 15)
     } else if block == 6 { //
         return isAfter(hour1: hr,minute1: min,hour2: 14,minute2: 30)
+    } else if block == 9 { //before break
+        return isAfter(hour1: hr,minute1: min,hour2: 14,minute2: 20)
     } else if block == 5 { //before
         return isAfter(hour1: hr,minute1: min,hour2: 13,minute2: 20)
     } else if block == 4 {//before lunch
@@ -413,6 +415,9 @@ func compBeginningTimeOfBlock(now: Date = Date()) -> DateComponents {
     } else if timeIsBeforeBlockBegins(date: now, block: 5){
         let comp = DateComponents(calendar: cal, hour: 13, minute: 20, second:00)
         return comp
+    } else if timeIsBeforeBlockBegins(date: now, block: 9){
+        let comp = DateComponents(calendar: cal, hour: 14, minute: 20, second:00)
+        return comp
     } else if timeIsBeforeBlockBegins(date: now, block: 6){
         let comp = DateComponents(calendar: cal, hour: 14, minute: 30, second:00)
         return comp
@@ -437,9 +442,11 @@ func compGetNextBlock(date: Date) -> String{
     } else if timeIsBeforeBlockBegins(date: date, block: 3){
         return (blocks[cycleDay]![2])
     } else if timeIsBeforeBlockBegins(date: date, block: 4){
-        return "L" //lunch- how many letters could we have-- given that the others are only one letter each
+        return "L"
     } else if timeIsBeforeBlockBegins(date: date, block: 5){
         return (blocks[cycleDay]![3])
+    } else if timeIsBeforeBlockBegins(date: date, block: 9){
+        return "OH" //for office hours break
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
         return (blocks[cycleDay]![4])
     } else {
@@ -459,8 +466,10 @@ func compGetNowBlock(date: Date) -> Int{
         return 3
     } else if timeIsBeforeBlockBegins(date: date, block: 5){
         return 4
-    } else if timeIsBeforeBlockBegins(date: date, block: 6){
+    } else if timeIsBeforeBlockBegins(date: date, block: 9){
         return 5
+    } else if timeIsBeforeBlockBegins(date: date, block: 6){
+        return 9
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
         return 6
     } else if isAfter(hour1: Calendar.current.component(.hour, from: date), minute1: Calendar.current.component(.hour, from: date), hour2: 15, minute2: 15){
@@ -484,6 +493,8 @@ func compGetNowBlockLetter(date: Date) -> String{
         return "L"
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
         return (blocks[cycleDay]![3])
+    } else if timeIsBeforeBlockBegins(date: date, block: 9){
+        return "OH"
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
         return (blocks[cycleDay]![4])
     } else{
@@ -530,6 +541,8 @@ func compLongNextClass(date: Date) -> String {
         return "Next: Lunch"
     } else if timeIsBeforeBlockBegins(date: date, block: 5){
         return "Next: \(classes[cycleDay]![3])"
+    } else if timeIsBeforeBlockBegins(date: date, block: 9){
+        return "Next: Office Hours"
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
         return "Next: \(classes[cycleDay]![4])"
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
@@ -554,6 +567,8 @@ func compShortNextClass(date: Date) -> String {
         return "Lunch"
     } else if timeIsBeforeBlockBegins(date: date, block: 5){
         return "\(classes[cycleDay]![3])"
+    } else if timeIsBeforeBlockBegins(date: date, block: 9){
+        return "Office Hours"
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
         return "\(classes[cycleDay]![4])"
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
@@ -578,6 +593,8 @@ func compLongNowClass(date: Date) -> String {
         return "Next: Lunch"
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
         return "\(classes[cycleDay]![3])"
+    } else if timeIsBeforeBlockBegins(date: date, block: 9){
+        return "Next: Office Hours"
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
         return "\(classes[cycleDay]![4])"
     } else if timeIsBeforeBlockBegins(date: date, block: 9){
