@@ -75,6 +75,8 @@ class blockEvent {
             return classes[weekday]![3].starts(with: "Free") ? "Meeting" : "Assessment"
         case 6:
             return classes[weekday]![4].starts(with: "Free") ? "Meeting" : "Assessment"
+        case 9:
+            return "Meeting"
         default:
             return "e"
         }
@@ -96,6 +98,8 @@ class blockEvent {
             return blocks[getDay()]![3] + " Block"
         case 6:
             return blocks[getDay()]![4] + " Block"
+        case 9:
+            return "Office Hours / Break"
         default:
             return "e"
         }
