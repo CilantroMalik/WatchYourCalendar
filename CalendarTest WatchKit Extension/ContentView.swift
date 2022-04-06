@@ -313,7 +313,7 @@ struct ContentView: View {
                 cycleDayDay().font(.title).fontWeight(.heavy).multilineTextAlignment(.center)
                 if globalOffset == 0 && !schoolDone() {
                     classTimeComponents()
-                } else {
+                } else if globalOffset != 0 {
                     Text(getRelativeDayText()).foregroundColor(.purple).fontWeight(abs(globalOffset) == 1 ? .heavy : .regular)
                 }
                 

@@ -34,17 +34,17 @@ struct NotificationView: View {
 //        if cycleDay == 0 { return "No events!" }
 //        return "Events today:\n" + (getEvArr()[0...(getEvArr().count)]).joined(separator: "\n")//FIXME: i am trying to add events to the daily summary
 //    }
-    func hasSports() -> Bool {
-        return cycleDay == 3 || cycleDay == 6 || cycleDay == 8
-    }
+//    func hasSports() -> Bool {
+////        return cycleDay == 3 || cycleDay == 6 || cycleDay == 8
+//    }
     
     var body: some View {
         Text("Day \(cycleDay): \(compGetOrder())").font(.system(size: 20)).fontWeight(.black)
-        if hasSports() {
-            Text("Sports today!").font(.title3).fontWeight(.semibold).foregroundColor(.orange)
-        } else {
-            Text("No sports today.").font(.title3).fontWeight(.light)
-        }
+//        if hasSports() {
+//            Text("Sports today!").font(.title3).fontWeight(.semibold).foregroundColor(.orange)
+//        } else {
+//            Text("No sports today.").font(.title3).fontWeight(.light)
+//        }
         Divider()
         Text(classesToday()).multilineTextAlignment(.center).font(.system(size: 12)).frame(width: nil, height: cycleDay == 0 ? 20 : 100, alignment: .center)
 //        Divider()

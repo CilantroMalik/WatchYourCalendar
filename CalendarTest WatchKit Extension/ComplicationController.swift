@@ -54,10 +54,10 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
         if isSports(){
             dayEnd = formatter.date(from: yearStr + " 16:10")!}
         if complication.family == CLKComplicationFamily.graphicCircular {
-            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKTimeIntervalGaugeProvider(style: .fill, gaugeColors: [.orange], gaugeColorLocations: nil, start: dayStart, end: dayEnd), centerTextProvider: CLKSimpleTextProvider(text: school() ? String(cycleDay) : "——"))
+            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKTimeIntervalGaugeProvider(style: .fill, gaugeColors: [.orange], gaugeColorLocations: nil, start: dayStart, end: dayEnd), centerTextProvider: CLKSimpleTextProvider(text: school() ? String(cycleDay) : "—"))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.circularSmall {
-            let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: (school() ? String(cycleDay) : "——")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
+            let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: (school() ? String(cycleDay) : "—")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
     } else if complication.identifier == "DayProgressWBlock" {
@@ -70,10 +70,10 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
         if isSports(){
             dayEnd = formatter.date(from: yearStr + " 16:10")!}
         if complication.family == CLKComplicationFamily.graphicCircular {
-            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKTimeIntervalGaugeProvider(style: .fill, gaugeColors: [.orange], gaugeColorLocations: nil, start: dayStart, end: dayEnd), centerTextProvider: CLKSimpleTextProvider(text: school() ? compGetNextBlock(date: date) : "——"))
+            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKTimeIntervalGaugeProvider(style: .fill, gaugeColors: [.orange], gaugeColorLocations: nil, start: dayStart, end: dayEnd), centerTextProvider: CLKSimpleTextProvider(text: school() ? compGetNextBlock(date: date) : "—"))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.circularSmall {
-            let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: (school() ? String(compGetNextBlock(date: date)) : "——")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
+            let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: (school() ? String(compGetNextBlock(date: date)) : "—")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
     } else if complication.identifier == "TimeUntilClassEnds" {
@@ -90,7 +90,7 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
         }
     } else if complication.identifier == "ClassProgress" {
         if complication.family == CLKComplicationFamily.graphicCircular {
-            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: .orange, fillFraction: compGetClassGigue(length: compGetClassLength(block: compGetNowBlock(date: date)),now: date)), centerTextProvider: CLKSimpleTextProvider(text: school() ? compGetNowBlockLetter(date: date) : "——"))
+            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKSimpleGaugeProvider(style: .fill, gaugeColor: .orange, fillFraction: compGetClassGigue(length: compGetClassLength(block: compGetNowBlock(date: date)),now: date)), centerTextProvider: CLKSimpleTextProvider(text: school() ? compGetNowBlockLetter(date: date) : "—"))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.circularSmall {
             let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: compGetNowBlockLetter(date: date)), fillFraction: compGetClassGigue(length: compGetClassLength(block: compGetNowBlock(date: date)),now: date), ringStyle: .closed)

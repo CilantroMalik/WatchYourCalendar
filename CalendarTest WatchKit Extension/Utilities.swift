@@ -450,7 +450,7 @@ func compGetNextBlock(date: Date) -> String{
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
         return (blocks[cycleDay]![4])
     } else {
-        return ("——")
+        return ("—")
     }
 }
 func compGetNowBlock(date: Date) -> Int{
@@ -498,7 +498,7 @@ func compGetNowBlockLetter(date: Date) -> String{
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
         return (blocks[cycleDay]![4])
     } else{
-        return "——"
+        return "—"
     }
 }
 func compGetClassLength(block: Int) -> Int{
@@ -550,7 +550,7 @@ func compLongNextClass(date: Date) -> String {
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
         return "Next: \(classes[cycleDay]![5])"
     } else {
-        return "Next: Go home!"
+        return "—"
     }
 }
 
@@ -576,7 +576,7 @@ func compShortNextClass(date: Date) -> String {
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
         return "\(classes[cycleDay]![5])"
     } else {
-        return "Go home!"
+        return "—"
     }
 }
 
@@ -602,7 +602,7 @@ func compLongNowClass(date: Date) -> String {
     } else if timeIsBeforeBlockBegins(date: date, block: 9){
         return "\(classes[cycleDay]![5])"
     } else {
-        return "School Ends"
+        return "—"
     }
 }
 
@@ -612,10 +612,14 @@ func compGetTime(dc: DateComponents) -> String {
 }
 
 func compGetTimeUntil(date: Date) -> String {
+    if !schoolDone(){
     if nowIsAfterBlockEnds(block: 6){
         return ""
     } else {
         return " in " + String(compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date))) + "m"
+    }
+    } else {
+        return "—"
     }
 }
 
@@ -663,8 +667,12 @@ func compMinsSinceClassStart(now: Date) -> Int {
 }
 
 func compGetTimeUntilClassEnds(length: Int, now: Date) -> String{
+    if !schoolDone(){
     let minsPassed = compMinsSinceClassStart(now: now)
     return "\(length - minsPassed)m"
+    } else {
+        return "—"
+    }
 }
 
 func compGetClassGigue(length: Int, now: Date) -> Float {
