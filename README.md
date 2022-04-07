@@ -31,34 +31,34 @@ If your complication isn't showing the correct information, try switching watch 
 
 ## Complications List
 
-### Day and Blocks `Day & Blocks`
+### Day and Blocks #("`Day & Blocks`")
 - Shows the Cycle Day and the block order
 - (Supports `Modular Small`, `Graphic Circular`)
 
-### Day and Next Class `Day & Next Class`
+### Day and Next Class #("`Day & Next Class`")
 - Shows the Cycle Day and the next block
 - (Supports `Utilitarian Small Flat`, `Circular Small`)
 
-### Day, Blocks, and Class `Day, Blocks, & Next Class`
+### Day, Blocks, and Class #("`Day, Blocks, & Next Class`")
 - Shows the Cycle Day, the block order, and the next class
 - (Supports `Modular Large`, `Graphic Rectangular`)
 
-### Next Class In `Next Class Time`
+### Next Class In #("`Next Class Time`")
 - Shows the next class's block and how long until that class
 - (Supports `Graphic Bezel`, `Graphic Corner`, `Utilitarian Large`)
 
-### Day Progress `Day Progress`
+### Day Progress #("`Day Progress`")
 - Shows the day's progress as a gauge (Text is the Cycle Day)
 - (Supports `Graphic Circular`, `Circular Small`, `Extra Large`)
 
-### Day Progress with Block `Day Progress (Next Block)`
+### Day Progress with Block #("`Day Progress (Next Block)`")
 - Shows the day's progress as a gauge (Text is the Cycle Day and the next block)
 - (Supports `Graphic Circular`, `Circular Small`, `Extra Large`)
 
-### Time Until Class Ends `Time Until ClassEnds`
+### Time Until Class Ends #("`Time Until ClassEnds`")
 - Shows the current class's block and how long until it ends
 - (Supports `Graphic Bezel`, `Graphic Corner`, `Utilitarian Large`)
 
-### Class Progress `Class Progress`
+### Class Progress #("`Class Progress`")
 - Shows the current class's progress as a gauge (Text is the block)
 - (Supports `Graphic Circular`, `Circular Small`)
