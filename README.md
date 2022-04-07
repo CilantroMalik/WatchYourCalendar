@@ -23,3 +23,42 @@ A minimal watch app that makes the flow of the school day conveniently available
 -releasing a standalone watch app
 
 -iOS app
+
+
+## Troubleshooting (Complications)
+
+If your complication isn't showing the correct information, try switching watch faces and then switiching back. If that still doesn't work, restarting your watch won't hurt.
+
+## Complications List
+
+# Day and Blocks `Day & Blocks`
+- Shows the Cycle Day and the block order
+- (Supports `Modular Small`, `Graphic Circular`)
+
+# Day and Next Class `Day & Next Class`
+- Shows the Cycle Day and the next block
+- (Supports `Utilitarian Small Flat`, `Circular Small`)
+
+# Day, Blocks, and Class `Day, Blocks, & Next Class`
+- Shows the Cycle Day, the block order, and the next class
+- (Supports `Modular Large`, `Graphic Rectangular`)
+
+# Next Class In `Next Class Time`
+- Shows the next class's block and how long until that class
+- (Supports `Graphic Bezel`, `Graphic Corner`, `Utilitarian Large`)
+
+# Day Progress `Day Progress`
+- Shows the day's progress as a gauge (Text is the Cycle Day)
+- (Supports `Graphic Circular`, `Circular Small`, `Extra Large`)
+
+# Day Progress with Block `Day Progress (Next Block)`
+- Shows the day's progress as a gauge (Text is the Cycle Day and the next block)
+- (Supports `Graphic Circular`, `Circular Small`, `Extra Large`)
+
+# Time Until Class Ends `Time Until ClassEnds`
+- Shows the current class's block and how long until it ends
+- (Supports `Graphic Bezel`, `Graphic Corner`, `Utilitarian Large`)
+
+# Class Progress `Class Progress`
+- Shows the current class's progress as a gauge (Text is the block)
+- (Supports `Graphic Circular`, `Circular Small`)
