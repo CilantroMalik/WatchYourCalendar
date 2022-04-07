@@ -79,7 +79,7 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
             let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: (school() ? String(compGetNextBlock(date: date)) : "—")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.extraLarge {
-            let template = CLKComplicationTemplateExtraLargeRingText(textProvider: CLKSimpleTextProvider(text: (school() ? String(cycleDay) : "—")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
+            let template = CLKComplicationTemplateExtraLargeRingText(textProvider: CLKSimpleTextProvider(text: (school() ? String(compGetNextBlock(date: date)) : "—")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
     } else if complication.identifier == "TimeUntilClassEnds" {
