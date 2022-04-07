@@ -59,6 +59,9 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
         } else if complication.family == CLKComplicationFamily.circularSmall {
             let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: (school() ? String(cycleDay) : "—")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+        } else if complication.family == CLKComplicationFamily.extraLarge {
+            let template = CLKComplicationTemplateExtraLargeRingText(textProvider: CLKSimpleTextProvider(text: (school() ? String(cycleDay) : "—")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
+            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
     } else if complication.identifier == "DayProgressWBlock" {
         let formatter = DateFormatter()
@@ -74,6 +77,9 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.circularSmall {
             let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: (school() ? String(compGetNextBlock(date: date)) : "—")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
+            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+        } else if complication.family == CLKComplicationFamily.extraLarge {
+            let template = CLKComplicationTemplateExtraLargeRingText(textProvider: CLKSimpleTextProvider(text: (school() ? String(cycleDay) : "—")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
     } else if complication.identifier == "TimeUntilClassEnds" {
@@ -110,8 +116,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             CLKComplicationDescriptor(identifier: "DayAndNextClass", displayName: "Day & Next Class", supportedFamilies: [CLKComplicationFamily.utilitarianSmallFlat, CLKComplicationFamily.circularSmall]),
             CLKComplicationDescriptor(identifier: "DayBlocksClass", displayName: "Day, Blocks, & Next Class", supportedFamilies: [CLKComplicationFamily.modularLarge, CLKComplicationFamily.graphicRectangular]),
             CLKComplicationDescriptor(identifier: "NextClassIn", displayName: "Next Class Time", supportedFamilies: [CLKComplicationFamily.graphicBezel, CLKComplicationFamily.graphicCorner, CLKComplicationFamily.utilitarianLarge]),
-            CLKComplicationDescriptor(identifier: "DayProgress", displayName: "Day Progress", supportedFamilies: [CLKComplicationFamily.graphicCircular, CLKComplicationFamily.circularSmall]),
-            CLKComplicationDescriptor(identifier: "DayProgressWBlock", displayName: "Day Progress (Next Block)", supportedFamilies: [CLKComplicationFamily.graphicCircular, CLKComplicationFamily.circularSmall]),
+            CLKComplicationDescriptor(identifier: "DayProgress", displayName: "Day Progress", supportedFamilies: [CLKComplicationFamily.graphicCircular, CLKComplicationFamily.circularSmall, CLKComplicationFamily.extraLarge]),
+            CLKComplicationDescriptor(identifier: "DayProgressWBlock", displayName: "Day Progress (Next Block)", supportedFamilies: [CLKComplicationFamily.graphicCircular, CLKComplicationFamily.circularSmall, CLKComplicationFamily.extraLarge]),
             CLKComplicationDescriptor(identifier: "ClassProgress", displayName: "Class Progress", supportedFamilies: [CLKComplicationFamily.graphicCircular, CLKComplicationFamily.circularSmall]),
             CLKComplicationDescriptor(identifier: "TimeUntilClassEnds", displayName: "Time Until Class Ends", supportedFamilies: [CLKComplicationFamily.graphicBezel, CLKComplicationFamily.graphicCorner, CLKComplicationFamily.utilitarianLarge])
             // Multiple complication support can be added here with more descriptors
