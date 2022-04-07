@@ -183,6 +183,17 @@ var classes: [Int: [String]] = [
     7: ["Free (A)", "Precalc (H)", "Spanish (G)", "Publ. Sp. (B)", "Comp Sci (C)","Go Home!"],
     8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Go Home!"]
 ]
+var rooms: [Int: [String]] = [
+    0: ["","","","",""],
+    1: ["US Room 312", "US Room 211", "US Room 334", "US Room 102", "US Room 104"],
+    2: ["US Room 306", "US Room 104", "US Room 308", "ACOB1", "US Room 104"],
+    3: ["US Room 312", "US Room 334", "US Room 306", "US Room 211", "US Room 104"],
+    4: ["US Room 308", "Free", "US Room 104", "US Room 312", "US Room 334"],
+    5: ["US Room 104", "ACOB1", "US Room 308", "US Room 211", "US Room 306"],
+    6: ["US Room 104", "US Room 312", "US Room 334", "US Room 211", "US Room 306"],
+    7: ["Free", "US Room 308", "US Room 104", "US Room 104", "US Room 312"],
+    8: ["US Room 334", "US Room 211", "US Room 306", "US Room 104", "US Room 308"]
+    ]
 var blocks: [Int: [String]] = [
     0: ["","","","",""], 1: ["C","E","D","A","B"], 2: ["F","G","H","A","B"], 3:["C","D","F","E","G"], 4:["H","A","B","C","D"], 5:["G","A","H","E","F"], 6:["B","C","D","E","F"], 7:["A","H","G","B","C"], 8:["D","E","F","G","H"]
 ]
@@ -353,11 +364,11 @@ func schoolDone() -> Bool{
     if cycleDay == 0 {
         return true
     }
-    if (isSports()){
-        return ((cal.component(.hour, from: date) > 16) || ((cal.component(.hour, from: date) > 15 && cal.component(.minute, from: date) > 10)) || (cal.component(.hour, from: date) < 7))
-    } else {
+//    if (isSports()){
+//        return ((cal.component(.hour, from: date) > 16) || ((cal.component(.hour, from: date) > 15 && cal.component(.minute, from: date) > 10)) || (cal.component(.hour, from: date) < 7))
+//    } else {
         return ((cal.component(.hour, from: date) > 15) || ((cal.component(.hour, from: date) > 14 && cal.component(.minute, from: date) > 15)) || (cal.component(.hour, from: date) < 7))
-    }
+//    }
 }
 
 

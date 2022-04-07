@@ -56,6 +56,14 @@ class blockEvent {
         return dateToCycleDay[time.month!-1][time.day!]!
     }
     
+    func getRoom() -> String{
+        if meetingOrAssessment() == "Assessment"{
+        return rooms[getDay()]![block]
+        } else {
+            return ""
+        }
+    }
+    
     func meetingOrAssessment() -> String{
         let cal = Calendar.current
         let date = cal.date(from: time)!
