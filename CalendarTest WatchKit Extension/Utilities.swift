@@ -694,3 +694,15 @@ func compGetClassGigue(length: Int, now: Date) -> Float {
         return Float(mins / Float(length))
     }
 }
+
+func getBlockAlmostStartTimes(_ block: Int) -> DateComponents {
+    if block == 0 { return DateComponents(calendar: Calendar.current, hour: 8, minute: 52) }
+    else if block == 1 { return DateComponents(calendar: Calendar.current, hour: 9, minute: 57) }
+    else if block == 2 { return DateComponents(calendar: Calendar.current, hour: 10, minute: 32) }
+    else if block == 3 { return DateComponents(calendar: Calendar.current, hour: 11, minute: 22) }
+    else if block == 4 { return DateComponents(calendar: Calendar.current, hour: 12, minute: 27) }
+    else if block == 5 { return DateComponents(calendar: Calendar.current, hour: 1, minute: 17) }
+    else if block == 6 { return DateComponents(calendar: Calendar.current, hour: 2, minute: 27) }
+    else if block == 7 { return DateComponents(calendar: Calendar.current, hour: 3, minute: 12) }
+    else { return DateComponents(calendar: Calendar.current, hour: 2, minute: 17) }  // block = 9
+}
