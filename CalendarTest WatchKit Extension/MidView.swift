@@ -12,6 +12,8 @@ struct MidView: View {
     var day : Int
     var block : Int
     var datecomp : DateComponents
+    
+    @State var eventPick: String = ""
     //    var even : blockEvent
     
     //    func maxEvents() -> Bool{ //has reached max events (3)
@@ -95,10 +97,18 @@ struct MidView: View {
                     Text("You cannot schedule events in the past.").fontWeight(.medium).multilineTextAlignment(.center)
                 } else {
                     Button(action: {
-                        let n = eventsList[datecomp.month! - 1][datecomp.day!]!.count + 1
-                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: n), "Event \(n)", true, false)
+                        let n = eventsList[datecomp.month! - 1][datecomp.day!]!.filter({$0.label.contains(eventPick)}).count + 1
+                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: n), "\(eventPick) of block - \(n)", true, false)
                         (eventsList[datecomp.month! - 1][datecomp.day!])!.append(temp)
-                    }, label: {Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)})
+                    }, label: {
+                        Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)
+                    })
+                    Picker("Select Part of Block", selection: $eventPick, content: {
+                        Text("first half").tag("first half")
+                        Text("second half").tag("second half")
+                        Text("entirety").tag("entirety")
+                        Text("middle").tag("middle")
+                    }).pickerStyle(.wheel).frame(width: WKInterfaceDevice.current().screenBounds.width, height: 50, alignment: .center)
                 }
             }
         }
