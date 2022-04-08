@@ -38,13 +38,13 @@ struct EventView: View {
                         content.title = "Reminder: Meeting"
                         content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod())
                         content.sound = UNNotificationSound.default //FIXME: can we make custom sounds? can i record you saying, "you have a precalc test next block. good luck! you'll need it to get into bc"
-                        content.body = "Reminder: You have a meeting this block."
+                        var detail = ev.label.split(separator: " ")
+                        detail.removeLast()
+                        content.body = "Reminder: You have a meeting during the \(detail.joined(separator: " ")) of the block."
                         content.categoryIdentifier = "event"
                         
                         // TOD: use the cycle day and block instance variables, as well as any methods we have, to calculate the components for the date that we need to trigger the notification
-                        // TODO: HELP HOW DO I DO THIS
-                        // (then replicate in the other two fields, below
-                        let trigger = UNCalendarNotificationTrigger(dateMatching: ev.time, repeats: false)
+                        let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, month: ev.time.month, day: ev.time.day, hour: getBlockAlmostStartTimes(ev.block).hour, minute: getBlockAlmostStartTimes(ev.block).minute), repeats: false)
                         
                         // TOD: somehow construct a unique identifier string from the date and class or block information; do it in such a way as to ensure that any other meeting we schedule into some other block cannot possibly have the same string
                         let request = UNNotificationRequest(identifier: "\(ev.toString())-\(nEv()+1)", content: content, trigger: trigger)
@@ -65,7 +65,7 @@ struct EventView: View {
                         content.categoryIdentifier = "event"
                         
                         // TOO: use the cycle day and block instance variables, as well as any methods we have, to calculate the components for the date that we need to trigger the notification
-                        let trigger = UNCalendarNotificationTrigger(dateMatching: ev.time, repeats: false)
+                        let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, month: ev.time.month, day: ev.time.day, hour: getBlockAlmostStartTimes(ev.block).hour, minute: getBlockAlmostStartTimes(ev.block).minute), repeats: false)
                         
                         // ODO: somehow construct a unique identifier string from the date and class or block information; do it in such a way as to ensure that any other assessment we schedule into some other block cannot possibly have the same string
                         let request = UNNotificationRequest(identifier: "\(ev.toString())-\(nEv()+1)", content: content, trigger: trigger)
@@ -82,11 +82,13 @@ struct EventView: View {
                         content.title = "Reminder: Event"
                         content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod())
                         content.sound = UNNotificationSound.default
-                        content.body = "Reminder: You have an event this block."
+                        var detail = ev.label.split(separator: " ")
+                        detail.removeLast()
+                        content.body = "Reminder: You have an event during the \(detail.joined(separator: " ")) of the block."
                         content.categoryIdentifier = "event"
                         
                         // ODO: use the cycle day and block instance variables, as well as any methods we have, to calculate the components for the date that we need to trigger the notification
-                        let trigger = UNCalendarNotificationTrigger(dateMatching: ev.time, repeats: false)
+                        let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, month: ev.time.month, day: ev.time.day, hour: getBlockAlmostStartTimes(ev.block).hour, minute: getBlockAlmostStartTimes(ev.block).minute), repeats: false)
                         
                         // OO: somehow construct a unique identifier string from the date and class or block information; do it in such a way as to ensure that any other assessment we schedule into some other block cannot possibly have the same string
                         let request = UNNotificationRequest(identifier: "\(ev.toString())-\(nEv()+1)", content: content, trigger: trigger)
