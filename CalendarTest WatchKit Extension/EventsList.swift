@@ -61,11 +61,12 @@ class blockEvent: Equatable {
     }
     
     func getRoom() -> String{
-        if meetingOrAssessment() == "Assessment"{
-        return rooms[getDay()]![block]
-        } else {
-            return ""
-        }
+//        if meetingOrAssessment() == "Assessment"{
+//        return rooms[getDay()]![block]
+//        } else {
+//            return ""
+//        }
+        return "room ###"
     }
     
     func meetingOrAssessment() -> String{
@@ -138,23 +139,21 @@ var eventsList: [[Int: [blockEvent]]] = [
 
 
 class EventsListObs: ObservableObject {
-    @Published var eventsList: [[Int: [blockEvent]]]
+    @Published var evList: [[Int: [blockEvent]]]
     
     init() {
-        eventsList = [
-            // January
-            [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
-            // February
-            [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[]],
-            // March
-            [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
-            // April
-            [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[]],
-            // May
-            [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
-            // June
-            [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[]]
-        ]
+        evList = eventsList
+    }
+    
+    func addEvent(ev: blockEvent, month: Int, day: Int) {
+        eventsList[month][day]!.append(ev)
+        evList = eventsList
+    }
+    
+    func delEvent(ev: blockEvent) {
+        eventsList[ev.time.month!-1][ev.time.day!] = eventsList[ev.time.month!-1][ev.time.day!]!.filter { !($0.isEqual(ev)) }
+        print("deleted")
+        evList = eventsList
     }
     
 }

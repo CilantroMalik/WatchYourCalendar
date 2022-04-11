@@ -13,6 +13,9 @@ struct MidView: View {
     var block : Int
     var datecomp : DateComponents
     
+    @State var editingEvent: Bool = false
+    @State var eventEditing: blockEvent = blockEvent(0, DateComponents(calendar: Calendar.current, month: 1, day: 1), "000000", "e", false, false)
+    
     @State var eventPick: String = "entirety"
     
     @StateObject var eventsListObs = EventsListObs()
@@ -70,7 +73,7 @@ struct MidView: View {
     }
     
     func eventsThisBlock() -> [blockEvent] {
-        let dayEvents = eventsListObs.eventsList[datecomp.month! - 1][datecomp.day!]!
+        let dayEvents = eventsListObs.evList[datecomp.month! - 1][datecomp.day!]!
         var blockEvents: [blockEvent] = []
         for event in dayEvents {
             if event.block == block { blockEvents.append(event) }
@@ -91,7 +94,8 @@ struct MidView: View {
                     Text("No Events").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
                 } else {
                     ForEach(eventsThisBlock(), id: \.id) { item in
-                        NavigationLink(destination: {EventView(ev: item)}, label: {Text(item.label).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+                        //NavigationLink(destination: {EventView(ev: item)}, label: {Text(item.label).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
+                        Button(action: { editingEvent.toggle(); eventEditing = item }, label: {Text(item.label)})
                     }
                 }
                 Divider().padding(.vertical, 5)
@@ -99,21 +103,24 @@ struct MidView: View {
                     Text("You cannot schedule events in the past.").fontWeight(.medium).multilineTextAlignment(.center)
                 } else {
                     Button(action: {
-                        let n = eventsListObs.eventsList[datecomp.month! - 1][datecomp.day!]!.filter({$0.label.contains(eventPick)}).count + 1
-                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: eventsListObs.eventsList[datecomp.month! - 1][datecomp.day!]!.count+1), "\(eventPick) of block - \(n)", true, false)
-                        (eventsListObs.eventsList[datecomp.month! - 1][datecomp.day!])!.append(temp)
+                        let n = eventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.filter({$0.label.contains(eventPick)}).count + 1
+                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: eventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.count+1), "\(eventPick) of block - \(n)", true, false)
+                        eventsListObs.addEvent(ev: temp, month: datecomp.month!-1, day: datecomp.day!)
                         eventPick = "entirety"
                     }, label: {
                         Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)
                     })
                     Picker("Select Part of Block", selection: $eventPick, content: {
-                        Text("entirety").tag("entirety")
-                        Text("1st half").tag("1st half")
-                        Text("2nd half").tag("2nd half")
-                        Text("middle").tag("middle")
+                        Text("all").tag("entirety")
+                        Text("1st third").tag("1st half")
+                        Text("2nd third").tag("2nd half")
+                        Text("3rd third").tag("3rd third")
                     }).pickerStyle(.wheel).frame(width: WKInterfaceDevice.current().screenBounds.width, height: 50, alignment: .center)
                 }
             }
+        }
+        .sheet(isPresented: $editingEvent) {
+            EventView(ev: eventEditing)
         }
     }
 }

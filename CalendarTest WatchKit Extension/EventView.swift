@@ -10,9 +10,12 @@ import UserNotifications
 
 struct EventView: View {
     var ev : blockEvent
+    @Environment(\.presentationMode) private var presentationMode
+    
+    @StateObject var eventsListObs = EventsListObs()
     
     func nEv() -> Int {
-        return eventsList[ev.time.month!-1][ev.time.day!]!.count
+        return eventsListObs.evList[ev.time.month!-1][ev.time.day!]!.count
     }
     
     var body: some View {
@@ -24,8 +27,8 @@ struct EventView: View {
             Divider().padding(.vertical, 5)
             Text("Options:").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
             Button(action: {
-                //FIXMEM: delete event from list >(glasses) should work now? this is kind of hacky but try >(contacts) i'll take a lookie at my bookie
-                eventsList[ev.time.month!-1][ev.time.day!] = eventsList[ev.time.month!-1][ev.time.day!]!.filter { !($0.isEqual(ev)) }
+                eventsListObs.delEvent(ev: ev)
+                presentationMode.wrappedValue.dismiss()
             }, label: {Text("Delete Event").fontWeight(.heavy).multilineTextAlignment(.center)})
             //TODO: edit events' labels (for appearance in MidView and for notifications)
             if !ev.hasNotification { //so the button disappears after scheduling notifications
