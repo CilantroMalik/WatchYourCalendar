@@ -19,7 +19,7 @@ struct LunchNotificationView: View {
         // populate with some text
         Text("10 minutes until lunch ends!")
         Text("Your next class is\n")
-        Text(postLunchClass()).multilineTextAlignment(.center).font(.system(size: 12)).frame(width: nil, height: cycleDay == 0 ? 20 : 100, alignment: .center)
+        Text(postLunchClass()).multilineTextAlignment(.center).font(.system(size: 24)).frame(width: nil, height: cycleDay == 0 ? 20 : 100, alignment: .center)
     }
 }
 

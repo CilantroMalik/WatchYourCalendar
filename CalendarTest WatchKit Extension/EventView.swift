@@ -23,7 +23,8 @@ struct EventView: View {
             Text("Event Details").font(.title2).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
             Text(getOffsetDate())
             Text("Day \(ev.getDay()), \(ev.getPeriod())")
-            Text(ev.getRoom())
+            if ev.getRoom() != "e" {Text(ev.getRoom())}
+            if ev.hasLabel {Text(ev.label)}
             Divider().padding(.vertical, 5)
             Text("Options:").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
             Button(action: {
@@ -31,6 +32,14 @@ struct EventView: View {
                 presentationMode.wrappedValue.dismiss()
             }, label: {Text("Delete Event").fontWeight(.heavy).multilineTextAlignment(.center)})
             //TODO: edit events' labels (for appearance in MidView and for notifications)
+            /*if ev.meetingOrAssessment() == "Meeting" {
+                Picker("Select Teacher", selection: $eventPick, content: {
+                    Text("all").tag("entirety")
+                    Text("1st third").tag("1st half")
+                    Text("2nd third").tag("2nd half")
+                    Text("3rd third").tag("3rd third")
+                }).pickerStyle(.wheel).frame(width: WKInterfaceDevice.current().screenBounds.width, height: 50, alignment: .center)
+            }*/
             if !ev.hasNotification { //so the button disappears after scheduling notifications
                 if ev.meetingOrAssessment() == "Meeting" {
                     Button(action: {
@@ -39,7 +48,7 @@ struct EventView: View {
                         let content = UNMutableNotificationContent()
                         // TOD: pass in values here; see ScheduleNotificationView for where the values will be displayed
                         content.title = "Reminder: Meeting"
-                        content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod())
+                        content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.label)
                         content.sound = UNNotificationSound.default //FIXME: can we make custom sounds? can i record you saying, "you have a precalc test next block. good luck! you'll need it to get into bc"
                         var detail = ev.label.split(separator: " ")
                         detail.removeLast()
@@ -62,7 +71,7 @@ struct EventView: View {
                         let content = UNMutableNotificationContent()
                         // TOD: pass in values here; see ScheduleNotificationView for where the values will be displayed
                         content.title = "Reminder: Assessment"
-                        content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod())
+                        content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.label)
                         content.sound = UNNotificationSound.default
                         content.body = "Reminder: You have an assessment this block. Good luck!"
                         content.categoryIdentifier = "event"
@@ -83,7 +92,7 @@ struct EventView: View {
                         let content = UNMutableNotificationContent()
                         // TODODODOD: pass in values here; see ScheduleNotificationView for where the values will be displayed
                         content.title = "Reminder: Event"
-                        content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod())
+                        content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.label)
                         content.sound = UNNotificationSound.default
                         var detail = ev.label.split(separator: " ")
                         detail.removeLast()

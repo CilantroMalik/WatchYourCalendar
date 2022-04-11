@@ -22,7 +22,6 @@ class blockEvent: Equatable {
         return lhs.toString() == rhs.toString()
     }
     
-    //    var num = 0 //event 1, 2, 3?
     var block = 0 //
     var time = DateComponents(calendar: Calendar.current, month: 1, day: 1)
     var id = "000000" //MM DD B
@@ -61,12 +60,31 @@ class blockEvent: Equatable {
     }
     
     func getRoom() -> String{
-//        if meetingOrAssessment() == "Assessment"{
-//        return rooms[getDay()]![block]
-//        } else {
-//            return ""
-//        }
-        return "room ###"
+        if meetingOrAssessment() == "Assessment"{
+            switch block {
+            case 0:
+                return rooms[getDay()]![0]
+            case 1:
+                return "e"
+            case 2:
+                return rooms[getDay()]![1]
+            case 3:
+                return rooms[getDay()]![2]
+            case 4:
+                return "e"
+            case 5:
+                return rooms[getDay()]![3]
+            case 6:
+                return rooms[getDay()]![4]
+            case 9:
+                return "e"
+            default:
+                return "e"
+            }
+        } else {
+            return "e"
+        }
+        
     }
     
     func meetingOrAssessment() -> String{

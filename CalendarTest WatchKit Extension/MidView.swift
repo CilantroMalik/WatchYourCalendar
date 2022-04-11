@@ -106,12 +106,12 @@ struct MidView: View {
                         let n = eventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.filter({$0.label.contains(eventPick)}).count + 1
                         let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: eventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.count+1), "\(eventPick) of block - \(n)", true, false)
                         eventsListObs.addEvent(ev: temp, month: datecomp.month!-1, day: datecomp.day!)
-                        eventPick = "entirety"
+                        eventPick = "All"
                     }, label: {
                         Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)
                     })
                     Picker("Select Part of Block", selection: $eventPick, content: {
-                        Text("all").tag("entirety")
+                        Text("all").tag("All")
                         Text("1st third").tag("1st half")
                         Text("2nd third").tag("2nd half")
                         Text("3rd third").tag("3rd third")
