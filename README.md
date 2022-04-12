@@ -51,8 +51,12 @@ If your complication isn't showing the correct information, try switching watch 
 - Shows the day's progress as a gauge (Text is the Cycle Day)
 - (Supports `Graphic Circular`, `Circular Small`, `Extra Large`)
 
-### Day Progress with Block
+### Day Progress (Next Block)
 - Shows the day's progress as a gauge (Text is the Cycle Day and the next block)
+- (Supports `Graphic Circular`, `Circular Small`, `Extra Large`)
+
+### Day Progress (Now Block)
+- Shows the day's progress as a gauge (Text is the Cycle Day and the current block)
 - (Supports `Graphic Circular`, `Circular Small`, `Extra Large`)
 
 ### Time Until Class Ends
