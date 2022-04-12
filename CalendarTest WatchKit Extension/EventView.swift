@@ -15,7 +15,7 @@ struct EventView: View {
     @StateObject var eventsListObs = EventsListObs()
     
     func nEv() -> Int {
-        return eventsListObs.evList[ev.time.month!-1][ev.time.day!]!.count
+        return EventsListObs.evList[ev.time.month!-1][ev.time.day!]!.count
     }
     
     var body: some View {

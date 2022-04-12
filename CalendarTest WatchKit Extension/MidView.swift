@@ -7,14 +7,17 @@
 
 import SwiftUI
 
+class EventEditorManager: ObservableObject {
+    @Published var isEditing: Bool = false
+    @Published var eventToEdit: blockEvent? = nil
+}
 
 struct MidView: View {
     var day : Int
     var block : Int
     var datecomp : DateComponents
     
-    @State var editingEvent: Bool = false
-    @State var eventEditing: blockEvent = blockEvent(0, DateComponents(calendar: Calendar.current, month: 1, day: 1), "000000", "e", false, false)
+    @StateObject var evEditManager = EventEditorManager()
     
     @State var eventPick: String = "entirety"
     
@@ -73,7 +76,7 @@ struct MidView: View {
     }
     
     func eventsThisBlock() -> [blockEvent] {
-        let dayEvents = eventsListObs.evList[datecomp.month! - 1][datecomp.day!]!
+        let dayEvents = EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!
         var blockEvents: [blockEvent] = []
         for event in dayEvents {
             if event.block == block { blockEvents.append(event) }
@@ -95,7 +98,7 @@ struct MidView: View {
                 } else {
                     ForEach(eventsThisBlock(), id: \.id) { item in
                         //NavigationLink(destination: {EventView(ev: item)}, label: {Text(item.label).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
-                        Button(action: { editingEvent.toggle(); eventEditing = item }, label: {Text(item.label)})
+                        Button(action: { evEditManager.eventToEdit = item; evEditManager.isEditing.toggle() }, label: { Text(item.label) })
                     }
                 }
                 Divider().padding(.vertical, 5)
@@ -103,8 +106,8 @@ struct MidView: View {
                     Text("You cannot schedule events in the past.").fontWeight(.medium).multilineTextAlignment(.center)
                 } else {
                     Button(action: {
-                        let n = eventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.filter({$0.label.contains(eventPick)}).count + 1
-                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: eventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.count+1), "\(eventPick) of block - \(n)", true, false)
+                        let n = EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.filter({$0.label.contains(eventPick)}).count + 1
+                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.count+1), "\(eventPick) of block - \(n)", true, false)
                         eventsListObs.addEvent(ev: temp, month: datecomp.month!-1, day: datecomp.day!)
                         eventPick = "All"
                     }, label: {
@@ -119,9 +122,8 @@ struct MidView: View {
                 }
             }
         }
-        .sheet(isPresented: $editingEvent) {
-            EventView(ev: eventEditing)
-        }
+        .sheet(isPresented: $evEditManager.isEditing, onDismiss: {eventsListObs.objectWillChange.send()}, content: { EventView(ev: evEditManager.eventToEdit!) })
+        
     }
 }
 
