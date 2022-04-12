@@ -18,8 +18,8 @@ struct LunchNotificationView: View {
     var body: some View {
         // populate with some text
         Text("10 minutes until lunch ends!")
-        Text("Your next class is\n")
-        Text(postLunchClass()).multilineTextAlignment(.center).font(.system(size: 24)).frame(width: nil, height: cycleDay == 0 ? 20 : 100, alignment: .center)
+        Text("Your next class is")
+        Text(postLunchClass()).foregroundColor(.green).multilineTextAlignment(.center).font(.system(size: 24)).frame(width: nil, height: cycleDay == 0 ? 20 : 100, alignment: .center)
     }
 }
 

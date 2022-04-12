@@ -130,7 +130,7 @@ class blockEvent: Equatable {
         case 6:
             return blocks[getDay()]![4] + " Block"
         case 9:
-            return "Office Hours"
+            return "Break"
         default:
             return "e"
         }

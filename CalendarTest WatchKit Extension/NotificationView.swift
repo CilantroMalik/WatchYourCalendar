@@ -46,7 +46,7 @@ struct NotificationView: View {
 //            Text("No sports today.").font(.title3).fontWeight(.light)
 //        }
         Divider()
-        Text(classesToday()).multilineTextAlignment(.center).font(.system(size: 12)).frame(width: nil, height: cycleDay == 0 ? 20 : 100, alignment: .center)
+        Text(classesToday()).multilineTextAlignment(.center).font(.system(size: 12)).frame(width: nil, height: cycleDay == 0 ? 20 : 50, alignment: .center)
 //        Divider()
 //        Text(eventsToday()).multilineTextAlignment(.center).font(.system(size: 12)).frame(width: nil, height: cycleDay == 0 ? 20 : 100, alignment: .center)
     }

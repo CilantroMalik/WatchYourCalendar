@@ -413,7 +413,7 @@ func nowIsBeforeThird(block: Int, third: Int) -> Bool {
             return isAfter(hour1: getHour(), minute1: getMinute(), hour2: 9, minute2: 55) && isAfter(hour1: 9, minute1: 35, hour2: getHour(), minute2: getMinute())
         }
         }
-    return false
+    return true
 }
 
 func getMorningActivity() -> String {
