@@ -148,7 +148,7 @@ func getTimeUntilNextClass(dc: DateComponents, now: Date = Date()) -> DateCompon
 }
 
 var globalOffset = 0
-var showTime = false
+var showTime = true
 struct ContentView: View {
     @State var timeUntil = "00:00:00"
     @Environment(\.scenePhase) private var scenePhase
@@ -311,10 +311,11 @@ struct ContentView: View {
             } else {
                 Spacer()
 //                Button(action: { showTime.toggle() }) {
-                (cycleDayDay().font(.title).fontWeight(.heavy).multilineTextAlignment(.center)).onTapGesture(count: 3){ showTime.toggle()
-                    print("workedyay")
-                }
+//                (cycleDayDay().font(.title).fontWeight(.heavy).multilineTextAlignment(.center)).onTapGesture(count: 3){ showTime.toggle()
+//                    print("workedyay")
+//                }
 //                }.buttonStyle(DefaultButtonStyle())
+                cycleDayDay().font(.title).fontWeight(.heavy).multilineTextAlignment(.center)
                 if globalOffset == 0 && !schoolDone() && showTime{
                     classTimeComponents()
                 } else if globalOffset != 0 {
