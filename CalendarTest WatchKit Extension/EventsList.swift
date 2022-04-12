@@ -25,7 +25,7 @@ class blockEvent: Equatable {
     var block = 0 //
     var time = DateComponents(calendar: Calendar.current, month: 1, day: 1)
     var id = "000000" //MM DD B
-    var label = "New "
+    var label = "entirety "
     var hasLabel = false
     var hasNotification = false
     let cal = Calendar.current

@@ -49,9 +49,9 @@ struct DayView: View {
     func getTimeColor(_ block: Int) -> Color {
         if globalOffset == 0 {
             if isNextBlock(bl: block) {  // next block
-                return .purple
+                return .green
             } else if isNextBlock(bl: block + 1) {  // now block
-                return .white
+                return Color(UIColor.lightGray)
             } else if nowIsBeforeBlockBegins(block: block) {  // future block
                 return .white // ?
             } else {  // past block

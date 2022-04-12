@@ -82,6 +82,25 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
             let template = CLKComplicationTemplateExtraLargeRingText(textProvider: CLKSimpleTextProvider(text: (school() ? String(compGetNextBlock(date: date)) : "—")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
+    } else if complication.identifier == "DayProgressWNBlock" {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        let yearStr = formatter.string(from: Date())
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let dayStart = formatter.date(from: yearStr + " 08:40")!
+        var dayEnd = formatter.date(from: yearStr + " 15:20")!
+        if isSports(){
+            dayEnd = formatter.date(from: yearStr + " 16:10")!}
+        if complication.family == CLKComplicationFamily.graphicCircular {
+            let template = CLKComplicationTemplateGraphicCircularClosedGaugeText(gaugeProvider: CLKTimeIntervalGaugeProvider(style: .fill, gaugeColors: [.orange], gaugeColorLocations: nil, start: dayStart, end: dayEnd), centerTextProvider: CLKSimpleTextProvider(text: school() ? compGetNowBlockLetter(date: date) : "—"))
+            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+        } else if complication.family == CLKComplicationFamily.circularSmall {
+            let template = CLKComplicationTemplateCircularSmallRingText(textProvider: CLKSimpleTextProvider(text: (school() ? String(compGetNowBlockLetter(date: date)) : "—")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
+            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+        } else if complication.family == CLKComplicationFamily.extraLarge {
+            let template = CLKComplicationTemplateExtraLargeRingText(textProvider: CLKSimpleTextProvider(text: (school() ? String(compGetNowBlockLetter(date: date)) : "—")), fillFraction: compGetDayGigue(now: date), ringStyle: .closed)
+            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+        }
     } else if complication.identifier == "TimeUntilClassEnds" {
         if complication.family == CLKComplicationFamily.graphicBezel {
             let preTemplate = CLKComplicationTemplateGraphicCircularStackText(line1TextProvider: CLKSimpleTextProvider(text: getCycleDayDay()), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
@@ -118,6 +137,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
             CLKComplicationDescriptor(identifier: "NextClassIn", displayName: "Next Class Time", supportedFamilies: [CLKComplicationFamily.graphicBezel, CLKComplicationFamily.graphicCorner, CLKComplicationFamily.utilitarianLarge]),
             CLKComplicationDescriptor(identifier: "DayProgress", displayName: "Day Progress", supportedFamilies: [CLKComplicationFamily.graphicCircular, CLKComplicationFamily.circularSmall, CLKComplicationFamily.extraLarge]),
             CLKComplicationDescriptor(identifier: "DayProgressWBlock", displayName: "Day Progress (Next Block)", supportedFamilies: [CLKComplicationFamily.graphicCircular, CLKComplicationFamily.circularSmall, CLKComplicationFamily.extraLarge]),
+            CLKComplicationDescriptor(identifier: "DayProgressWNBlock", displayName: "Day Progress (Now Block)", supportedFamilies: [CLKComplicationFamily.graphicCircular, CLKComplicationFamily.circularSmall, CLKComplicationFamily.extraLarge]),
             CLKComplicationDescriptor(identifier: "ClassProgress", displayName: "Class Progress", supportedFamilies: [CLKComplicationFamily.graphicCircular, CLKComplicationFamily.circularSmall]),
             CLKComplicationDescriptor(identifier: "TimeUntilClassEnds", displayName: "Time Until Class Ends", supportedFamilies: [CLKComplicationFamily.graphicBezel, CLKComplicationFamily.graphicCorner, CLKComplicationFamily.utilitarianLarge])
             // Multiple complication support can be added here with more descriptors
