@@ -102,7 +102,7 @@ struct MidView: View {
                     }
                 }
                 Divider().padding(.vertical, 5)
-                if globalOffset < 0 || (globalOffset == 0 && nowIsAfterBlockEnds(block: (block))){
+                if globalOffset < 0 || (globalOffset == 0 && nowIsAfterBlockEnds(block: (block))) || (nowIsBeforeThird(block: block, third: 4)){
                     Text("You cannot schedule events in the past.").fontWeight(.medium).multilineTextAlignment(.center)
                 } else {
                     Button(action: {
@@ -114,10 +114,10 @@ struct MidView: View {
                         Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)
                     })
                     Picker("Select Part of Block", selection: $eventPick, content: {
-                        Text("all").tag("entirety")
-                        Text("1st third").tag("1st third")
-                        Text("2nd third").tag("2nd third")
-                        Text("3rd third").tag("3rd third")
+                        if nowIsBeforeBlockBegins(block: (block)) {Text("all").tag("entirety")}
+                        if nowIsBeforeThird(block: block, third: 1) {Text("1st third").tag("1st third")}
+                        if nowIsBeforeThird(block: block, third: 2) {Text("2nd third").tag("2nd third")}
+                        if nowIsBeforeThird(block: block, third: 3) {Text("3rd third").tag("3rd third")}
                     }).pickerStyle(.wheel).frame(width: WKInterfaceDevice.current().screenBounds.width, height: 50, alignment: .center)
                 }
             }

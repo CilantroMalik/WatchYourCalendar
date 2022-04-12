@@ -331,6 +331,90 @@ func nowIsBeforeBlockBegins(block: Int) -> Bool{
     }
     return false
 }
+func nowIsBeforeThird(block: Int, third: Int) -> Bool {
+    if third == 1{
+        if block == 7 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 15,minute2: 15)
+        } else if block == 6 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 30)
+        } else if block == 9 { //before break
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 20)
+        } else if block == 5 { //before
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 20)
+        } else if block == 4 {//before lunch
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 12,minute2: 30)
+        } else if block == 3 {//
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 11,minute2: 25)
+        } else if block == 2 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 35)
+        }else if block == 1 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 00)
+        } else if block == 0 { //before first block
+            return isAfter(hour1: getHour(), minute1: getMinute(), hour2: 8, minute2: 55)
+        }
+    } else if third == 2{
+    if block == 7 { //
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 15,minute2: 15)//not necessary
+    } else if block == 6 { //
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 45)
+    } else if block == 9 { //before break
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 23)
+    } else if block == 5 { //before
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 40)
+    } else if block == 4 {//before lunch
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 12,minute2: 45)
+    } else if block == 3 {//
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 11,minute2: 45)
+    } else if block == 2 { //
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 50)
+    }else if block == 1 { //
+        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 10)
+    } else if block == 0 { //before first block
+        return isAfter(hour1: getHour(), minute1: getMinute(), hour2: 9, minute2: 15)
+    }
+    } else if third == 3{
+        if block == 7 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 15,minute2: 15)
+        } else if block == 6 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 15,minute2: 00)
+        } else if block == 9 { //before break
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 27)
+        } else if block == 5 { //before
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 00)
+        } else if block == 4 {//before lunch
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 00)
+        } else if block == 3 {//
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 12,minute2: 05)
+        } else if block == 2 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 11,minute2: 05)
+        }else if block == 1 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 20)
+        } else if block == 0 { //before first block
+            return isAfter(hour1: getHour(), minute1: getMinute(), hour2: 9, minute2: 35)
+        }
+    } else if third == 4{
+        if block == 7 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 15,minute2: 15) && isAfter(hour1: 15, minute1: 15, hour2: getHour(), minute2: getMinute())
+        } else if block == 6 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 15,minute2: 15) && isAfter(hour1: 15, minute1: 00, hour2: getHour(), minute2: getMinute())
+        } else if block == 9 { //before break
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 30) && isAfter(hour1: 14, minute1: 27, hour2: getHour(), minute2: getMinute())
+        } else if block == 5 { //before
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 20) && isAfter(hour1: 14, minute1: 00, hour2: getHour(), minute2: getMinute())
+        } else if block == 4 {//before lunch
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 15) && isAfter(hour1: 13, minute1: 00, hour2: getHour(), minute2: getMinute())
+        } else if block == 3 {//
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 12,minute2: 25) && isAfter(hour1: 12, minute1: 05, hour2: getHour(), minute2: getMinute())
+        } else if block == 2 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 11,minute2: 20) && isAfter(hour1: 11, minute1: 05, hour2: getHour(), minute2: getMinute())
+        }else if block == 1 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 30) && isAfter(hour1: 10, minute1: 20, hour2: getHour(), minute2: getMinute())
+        } else if block == 0 { //before first block
+            return isAfter(hour1: getHour(), minute1: getMinute(), hour2: 9, minute2: 55) && isAfter(hour1: 9, minute1: 35, hour2: getHour(), minute2: getMinute())
+        }
+        }
+    return false
+}
 
 func getMorningActivity() -> String {
     var date = Date()

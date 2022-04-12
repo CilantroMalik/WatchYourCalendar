@@ -51,6 +51,7 @@ struct EventView: View {
                     
                     // add our notification request
                     UNUserNotificationCenter.current().add(request)
+                    presentationMode.wrappedValue.dismiss()
                 }, label: { Text("Be notified!").fontWeight(.medium) })
             }
         }
