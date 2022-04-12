@@ -31,15 +31,6 @@ struct EventView: View {
                 eventsListObs.delEvent(ev: ev)
                 presentationMode.wrappedValue.dismiss()
             }, label: {Text("Delete Event").fontWeight(.heavy).multilineTextAlignment(.center)})
-            //TODO: edit events' labels (for appearance in MidView and for notifications)
-            /*if ev.meetingOrAssessment() == "Meeting" {
-                Picker("Select Teacher", selection: $eventPick, content: {
-                    Text("all").tag("entirety")
-                    Text("1st third").tag("1st half")
-                    Text("2nd third").tag("2nd half")
-                    Text("3rd third").tag("3rd third")
-                }).pickerStyle(.wheel).frame(width: WKInterfaceDevice.current().screenBounds.width, height: 50, alignment: .center)
-            }*/
             if !ev.hasNotification { //so the button disappears after scheduling notifications
                 if ev.meetingOrAssessment() == "Meeting" {
                     Button(action: {
@@ -49,16 +40,14 @@ struct EventView: View {
                         // TOD: pass in values here; see ScheduleNotificationView for where the values will be displayed
                         content.title = "Reminder: Meeting"
                         content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.label)
-                        content.sound = UNNotificationSound.default //FIXME: can we make custom sounds? can i record you saying, "you have a precalc test next block. good luck! you'll need it to get into bc"
+                        content.sound = UNNotificationSound.default
                         var detail = ev.label.split(separator: " ")
                         detail.removeLast()
                         content.body = "Reminder: You have a meeting during the \(detail.joined(separator: " ")) of the block."
                         content.categoryIdentifier = "event"
                         
-                        // TOD: use the cycle day and block instance variables, as well as any methods we have, to calculate the components for the date that we need to trigger the notification
                         let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, month: ev.time.month, day: ev.time.day, hour: getBlockAlmostStartTimes(ev.block).hour, minute: getBlockAlmostStartTimes(ev.block).minute), repeats: false)
                         
-                        // TOD: somehow construct a unique identifier string from the date and class or block information; do it in such a way as to ensure that any other meeting we schedule into some other block cannot possibly have the same string
                         let request = UNNotificationRequest(identifier: "\(ev.toString())-\(nEv()+1)", content: content, trigger: trigger)
                         
                         // add our notification request
@@ -72,7 +61,7 @@ struct EventView: View {
                         // TOD: pass in values here; see ScheduleNotificationView for where the values will be displayed
                         content.title = "Reminder: Assessment"
                         content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.label)
-                        content.sound = UNNotificationSound.default
+                        content.sound = UNNotificationSound.defaultCritical
                         content.body = "Reminder: You have an assessment this block. Good luck!"
                         content.categoryIdentifier = "event"
                         
