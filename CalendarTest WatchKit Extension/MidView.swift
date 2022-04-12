@@ -114,9 +114,9 @@ struct MidView: View {
                         Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)
                     })
                     Picker("Select Part of Block", selection: $eventPick, content: {
-                        Text("all").tag("All")
-                        Text("1st third").tag("1st half")
-                        Text("2nd third").tag("2nd half")
+                        Text("all").tag("entirety")
+                        Text("1st third").tag("1st third")
+                        Text("2nd third").tag("2nd third")
                         Text("3rd third").tag("3rd third")
                     }).pickerStyle(.wheel).frame(width: WKInterfaceDevice.current().screenBounds.width, height: 50, alignment: .center)
                 }
