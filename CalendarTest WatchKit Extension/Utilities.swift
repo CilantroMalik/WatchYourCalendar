@@ -174,14 +174,14 @@ var classes: [Int: [String]] = [
     //    8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Fitness Center"]
     //it is now the post-fitness-centre era
     0: ["","","","","",""],
-    1: ["Comp Sci (C)", "English (E)", "Physics (D)", "Free/OPI (A)", "Publ. Sp. (B)","Go Home!"],
-    2: ["Latin (F)", "Spanish (G)", "Precalc (H)", "Math Team (A)", "Publ. Sp. (B)","Go Home!"],
-    3: ["Comp Sci (C)", "Physics (D)", "Latin (F)", "English (E)", "Spanish (G)", "Go Home!"],
-    4: ["Precalc (H)", "Free (A)", "Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)","Go Home!"],
-    5: ["Spanish (G)", "Math Team (A)", "Precalc (H)", "English (E)", "Latin (F)","Go Home!"],
-    6: ["Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)", "English (E)", "Latin (F)","Go Home!"],
-    7: ["Free (A)", "Precalc (H)", "Spanish (G)", "Publ. Sp. (B)", "Comp Sci (C)","Go Home!"],
-    8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Go Home!"]
+    1: ["Comp Sci (C)", "English (E)", "Physics (D)", "Free/OPI (A)", "Publ. Sp. (B)","Tennis"],
+    2: ["Latin (F)", "Spanish (G)", "Precalc (H)", "Math Team (A)", "Publ. Sp. (B)","Tennis"],
+    3: ["Comp Sci (C)", "Physics (D)", "Latin (F)", "English (E)", "Spanish (G)", "Tennis"],
+    4: ["Precalc (H)", "Free (A)", "Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)","Tennis"],
+    5: ["Spanish (G)", "Math Team (A)", "Precalc (H)", "English (E)", "Latin (F)","Tennis"],
+    6: ["Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)", "English (E)", "Latin (F)","Tennis"],
+    7: ["Free (A)", "Precalc (H)", "Spanish (G)", "Publ. Sp. (B)", "Comp Sci (C)","Tennis"],
+    8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Tennis"]
 ]
 var rooms: [Int: [String]] = [
     0: ["","","","",""],
@@ -555,7 +555,7 @@ func compLongNextClass(date: Date) -> String {
     } else if timeIsBeforeBlockBegins(date: date, block: 5){
         return "Next: \(classes[cycleDay]![3])"
     } else if timeIsBeforeBlockBegins(date: date, block: 9){
-        return "Next: Office Hours"
+        return "Next: Break"
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
         return "Next: \(classes[cycleDay]![4])"
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
@@ -581,7 +581,7 @@ func compShortNextClass(date: Date) -> String {
     } else if timeIsBeforeBlockBegins(date: date, block: 5){
         return "\(classes[cycleDay]![3])"
     } else if timeIsBeforeBlockBegins(date: date, block: 9){
-        return "Office Hours"
+        return "Break"
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
         return "\(classes[cycleDay]![4])"
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
@@ -607,7 +607,7 @@ func compLongNowClass(date: Date) -> String {
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
         return "\(classes[cycleDay]![3])"
     } else if timeIsBeforeBlockBegins(date: date, block: 9){
-        return "Next: Office Hours"
+        return "Next: Break"
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
         return "\(classes[cycleDay]![4])"
     } else if timeIsBeforeBlockBegins(date: date, block: 9){

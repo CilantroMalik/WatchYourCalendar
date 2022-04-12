@@ -66,9 +66,10 @@ struct DayView: View {
     
     func getContentColor(_ block: Int) -> Color {
         if globalOffset == 0 {
-            if !(eventsList[dtcp.month! - 1][dtcp.day!]!.isEmpty) { //FIXME: doth this worketh?
-                return .orange
-            } else if isNextBlock(bl: block) {  // next block
+//            if !(eventsList[dtcp.month! - 1][dtcp.day!]!.isEmpty) { //FIXME: doth this worketh?
+//                return .orange
+//            } else
+            if isNextBlock(bl: block) {  // next block
                 return .green
             } else if isNextBlock(bl: block + 1) {  // now block
                 return .purple
@@ -116,7 +117,7 @@ struct DayView: View {
                 Group{
                     scheduleRow(time: "13:20 - 14:20:", block: 5, content: classes[cycleDay]![3])
                     Spacer()
-                    scheduleRow(time: "14:20 - 14:30:", block: 9, content: "Office Hours / Break") //BLOCK 9 IS THE 10 MINUTE BREAK
+                    scheduleRow(time: "14:20 - 14:30:", block: 9, content: "Break") //BLOCK 9 IS THE 10 MINUTE BREAK
                     Spacer()
                     scheduleRow(time: "14:30 - 15:15:", block: 6, content: classes[cycleDay]![4])
                     if (isSports()){
