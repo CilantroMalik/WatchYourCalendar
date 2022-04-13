@@ -790,3 +790,29 @@ func getBlockAlmostStartTimes(_ block: Int) -> DateComponents {
     else if block == 7 { return DateComponents(calendar: Calendar.current, hour: 3, minute: 12) }
     else { return DateComponents(calendar: Calendar.current, hour: 2, minute: 17) }  // block = 9
 }
+
+func isMeetingOrAssessment(_ block: Int, _ time: DateComponents) -> String {
+    let cal = Calendar.current
+    let date = cal.date(from: time)!
+    let weekday = cal.component(.weekday, from: date)
+    switch block {
+    case 0:
+        return classes[weekday]![0].starts(with: "Free") ? "Meeting" : "Assessment"
+    case 1:
+        return weekday == 3 || weekday == 5 ? "Meeting" : "Event"
+    case 2:
+        return classes[weekday]![1].starts(with: "Free") ? "Meeting" : "Assessment"
+    case 3:
+        return classes[weekday]![2].starts(with: "Free") ? "Meeting" : "Assessment"
+    case 4:
+        return "Meeting"
+    case 5:
+        return classes[weekday]![3].starts(with: "Free") ? "Meeting" : "Assessment"
+    case 6:
+        return classes[weekday]![4].starts(with: "Free") ? "Meeting" : "Assessment"
+    case 9:
+        return "Meeting"
+    default:
+        return "e"
+    }
+}
