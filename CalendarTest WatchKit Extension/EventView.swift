@@ -33,8 +33,8 @@ struct EventView: View {
             }, label: {Text("Delete Event").fontWeight(.heavy).multilineTextAlignment(.center)})
             if !ev.hasNotification { //so the button disappears after scheduling notifications
                 Button(action: {
-                    for i in 1...EventsListObs.evList[ev.time.month!-1][ev.time.day!]!.count {
-                        if EventsListObs.evList[ev.time.month!-1][ev.time.day!]![i].isEqual(ev) { EventsListObs.evList[ev.time.month!-1][ev.time.day!]![i].hasNotification = true }
+                    for i in 1...EventsListObs.evList[ev.time.month!-1][ev.time.day!]!.count { //TODO: check if this is right?
+                        if EventsListObs.evList[ev.time.month!-1][ev.time.day!]![i-1].isEqual(ev) { /*I changed i to i-1*/ EventsListObs.evList[ev.time.month!-1][ev.time.day!]![i-1].hasNotification = true }
                     }
                     // *** Schedule Meeting Notification ***
                     let content = UNMutableNotificationContent()
