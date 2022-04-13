@@ -107,17 +107,22 @@ struct MidView: View {
                 } else {
                     Button(action: {
                         let n = EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.filter({$0.label.contains(eventPick)}).count + 1
-                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.count+1), "\(eventPick) of block - \(n)", true, false)
+                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.count+1), isMeetingOrAssessment(block, datecomp) == "Meeting" ? "\(eventPick) of block - \(n)" : "\(eventPick) - \(n)", true, false)
                         eventsListObs.addEvent(ev: temp, month: datecomp.month!-1, day: datecomp.day!)
-                        eventPick = "entirety"
+                        eventPick = isMeetingOrAssessment(block, datecomp) == "Meeting" ? "entirety" : "Test"
                     }, label: {
                         Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)
                     })
-                    Picker("Select Part of Block", selection: $eventPick, content: {
-                        if nowIsBeforeBlockBegins(block: (block)) {Text("entirety").tag("entirety")}
-                        if nowIsBeforeThird(block: block, third: 1) {Text("1st third").tag("1st third")}
-                        if nowIsBeforeThird(block: block, third: 2) {Text("2nd third").tag("2nd third")}
-                        if nowIsBeforeThird(block: block, third: 3) {Text("3rd third").tag("3rd third")}
+                    Picker(isMeetingOrAssessment(block, datecomp) == "Meeting" ? "Select Part of Block" : "Select Assessment Type", selection: $eventPick, content: {
+                        if isMeetingOrAssessment(block, datecomp) == "Meeting" {
+                            if nowIsBeforeBlockBegins(block: (block)) {Text("entirety").tag("entirety")}
+                            if nowIsBeforeThird(block: block, third: 1) {Text("1st third").tag("1st third")}
+                            if nowIsBeforeThird(block: block, third: 2) {Text("2nd third").tag("2nd third")}
+                            if nowIsBeforeThird(block: block, third: 3) {Text("3rd third").tag("3rd third")}
+                        } else {
+                            Text("Test").tag("Test")
+                            Text("Quiz").tag("Quiz")
+                        }
                     }).pickerStyle(.wheel).frame(width: WKInterfaceDevice.current().screenBounds.width, height: 50, alignment: .center)
                 }
             }
