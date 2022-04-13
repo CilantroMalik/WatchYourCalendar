@@ -33,7 +33,9 @@ struct EventView: View {
             }, label: {Text("Delete Event").fontWeight(.heavy).multilineTextAlignment(.center)})
             if !ev.hasNotification { //so the button disappears after scheduling notifications
                 Button(action: {
-                    ev.hasNotification = true
+                    for i in 1...EventsListObs.evList[ev.time.month!-1][ev.time.day!]!.count {
+                        if EventsListObs.evList[ev.time.month!-1][ev.time.day!]![i].isEqual(ev) { EventsListObs.evList[ev.time.month!-1][ev.time.day!]![i].hasNotification = true }
+                    }
                     // *** Schedule Meeting Notification ***
                     let content = UNMutableNotificationContent()
                     // TOD: pass in values here; see ScheduleNotificationView for where the values will be displayed
@@ -42,7 +44,13 @@ struct EventView: View {
                     content.sound = UNNotificationSound.default
                     var detail = ev.label.split(separator: " ")
                     detail.removeLast()
-                    content.body = "Reminder: You have a " + (ev.meetingOrAssessment()).lowercased() + " during the \(detail.joined(separator: " ")) of the block."
+                    detail.removeLast()
+                    if ev.meetingOrAssessment() == "Meeting" {
+                        content.body = "Reminder: You have a meeting during the \(detail.joined(separator: " ")) of the block."
+                        if detail.joined(separator: " ") == "entirety" { content.body = "Reminder: You have a meeting for the whole block." }
+                    } else {
+                        content.body = "Reminder: You have an assessment (a \(detail.joined(separator: " ").lowercased()) this block."
+                    }
                     content.categoryIdentifier = "event"
                     
                     let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, month: ev.time.month, day: ev.time.day, hour: getBlockAlmostStartTimes(ev.block).hour, minute: getBlockAlmostStartTimes(ev.block).minute), repeats: false)
