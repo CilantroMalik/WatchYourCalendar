@@ -72,10 +72,11 @@ struct DayView: View {
             if isNextBlock(bl: block) {  // next block
                 return .green
             } else if isNextBlock(bl: block + 1) {  // now block
-                return .purple
+                return .blue
+                //return .purple
             } else if nowIsBeforeBlockBegins(block: block) {  // future block
                 return .red
-            } else {  // past block
+            } else {  // past block;
                 return .blue
             }
         } else if globalOffset > 0 {
@@ -97,9 +98,10 @@ struct DayView: View {
             VStack{//TODO: fix spacing
                 Group{
                     Text(getCycleDayDay()).font(.title2).fontWeight(.bold).multilineTextAlignment(.center)
-                    scheduleRow(time: "08:55 - 09:55:", block: 0, content: classes[cycleDay]![0])
+                    Text(getOffsetDate()).font(.title3).fontWeight(.bold).multilineTextAlignment(.center)
                 }
                 Spacer()
+                scheduleRow(time: "08:55 - 09:55:", block: 0, content: classes[cycleDay]![0])
                 scheduleRow(time: "10:00 - 10:30:", block: 1, content: getMorningActivity())
                 Spacer()
                 Group{

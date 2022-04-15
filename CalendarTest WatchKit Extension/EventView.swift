@@ -33,8 +33,8 @@ struct EventView: View {
             }, label: {Text("Delete Event").fontWeight(.heavy).multilineTextAlignment(.center)})
             if !ev.hasNotification { //so the button disappears after scheduling notifications
                 Button(action: {
-                    for i in 1...EventsListObs.evList[ev.time.month!-1][ev.time.day!]!.count { //TODO: check if this is right?
-                        if EventsListObs.evList[ev.time.month!-1][ev.time.day!]![i-1].isEqual(ev) { /*I changed i to i-1*/ EventsListObs.evList[ev.time.month!-1][ev.time.day!]![i-1].hasNotification = true }
+                    for i in 1...EventsListObs.evList[ev.time.month!-1][ev.time.day!]!.count {
+                        if EventsListObs.evList[ev.time.month!-1][ev.time.day!]![i-1].isEqual(ev) { EventsListObs.evList[ev.time.month!-1][ev.time.day!]![i-1].hasNotification = true }
                     }
                     // *** Schedule Meeting Notification ***
                     let content = UNMutableNotificationContent()
@@ -45,11 +45,11 @@ struct EventView: View {
                     var detail = ev.label.split(separator: " ")
                     detail.removeLast()
                     detail.removeLast()
-                    if ev.meetingOrAssessment() == "Meeting" {
-                        content.body = "Reminder: You have a meeting during the \(detail.joined(separator: " ")) of the block."
-                        if detail.joined(separator: " ") == "entirety" { content.body = "Reminder: You have a meeting for the whole block." }
+                    if ev.meetingOrAssessment() == "Assessment" {
+                        content.body = "Reminder: You have a \(detail.joined(separator: " ").lowercased()) this block."
                     } else {
-                        content.body = "Reminder: You have an assessment (a \(detail.joined(separator: " ").lowercased()) this block."
+                        content.body = "Reminder: You have a \(ev.meetingOrAssessment().lowercased()) during the \(detail.joined(separator: " "))."
+                        if detail.joined(separator: " ") == "entirety" { content.body = "Reminder: You have a meeting for the entire block." }
                     }
                     content.categoryIdentifier = "event"
                     
