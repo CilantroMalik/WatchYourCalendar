@@ -88,7 +88,8 @@ struct MidView: View {
         case 0:
             return classes[day]![0].starts(with: "Free") ? "Meeting" : "Assessment"
         case 1:
-            return weekday == 3 || weekday == 5 ? "Meeting" : "Event"
+//            return weekday == 3 || weekday == 5 ? "Meeting" : "Event"
+            return "Meeting"
         case 2:
             return classes[day]![1].starts(with: "Free") ? "Meeting" : "Assessment"
         case 3:
