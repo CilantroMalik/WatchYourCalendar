@@ -88,7 +88,7 @@ struct DayView: View {
     
     func scheduleRow(time: String, block: Int, content: String) -> some View {
         return Group {
-            NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp)}, label: {Text(time).fontWeight(getTimeWeight(block)).foregroundColor(getTimeColor(block))}).buttonStyle(PlainButtonStyle())
+            NavigationLink(destination: {MidView(cycleDay, block, dtcp)}, label: {Text(time).fontWeight(getTimeWeight(block)).foregroundColor(getTimeColor(block))}).buttonStyle(PlainButtonStyle())
             Text(content).foregroundColor(getContentColor(block)).fontWeight(getContentWeight(block))
         }
     }

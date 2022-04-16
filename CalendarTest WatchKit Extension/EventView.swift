@@ -29,6 +29,7 @@ struct EventView: View {
             Text("Options:").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
             Button(action: {
                 eventsListObs.delEvent(ev: ev)
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [ev.toString()])
                 presentationMode.wrappedValue.dismiss()
             }, label: {Text("Delete Event").fontWeight(.heavy).multilineTextAlignment(.center)})
             if !ev.hasNotification { //so the button disappears after scheduling notifications
@@ -53,9 +54,9 @@ struct EventView: View {
                     }
                     content.categoryIdentifier = "event"
                     
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, month: ev.time.month, day: ev.time.day, hour: getBlockAlmostStartTimes(ev.block).hour, minute: getBlockAlmostStartTimes(ev.block).minute), repeats: false)
-                    
-                    let request = UNNotificationRequest(identifier: "\(ev.toString())-\(nEv()+1)", content: content, trigger: trigger)
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, month: ev.time.month!, day: ev.time.day!, hour: getBlockAlmostStartTimes(ev.block).hour, minute: getBlockAlmostStartTimes(ev.block).minute), repeats: false)
+
+                    let request = UNNotificationRequest(identifier: ev.toString(), content: content, trigger: trigger)
                     
                     // add our notification request
                     UNUserNotificationCenter.current().add(request)

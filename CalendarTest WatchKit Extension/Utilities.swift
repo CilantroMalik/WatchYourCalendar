@@ -44,7 +44,6 @@ func scheduleSportsNotification() {
     //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
     for i in 2...6 {
         let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 8, minute: 0, weekday: i), repeats: true)
-        
         // choose a random identifier
         let request = UNNotificationRequest(identifier: "dailyNotif", content: content, trigger: trigger)
         
