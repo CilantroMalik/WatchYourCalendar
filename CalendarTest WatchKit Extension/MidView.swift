@@ -19,7 +19,7 @@ struct MidView: View {
     
     @StateObject var evEditManager = EventEditorManager()
     
-    @State var eventPick: String = "entirety"
+    @State var eventPick: String = ""
     
     @StateObject var eventsListObs = EventsListObs()
     //    var even : blockEvent
@@ -27,6 +27,14 @@ struct MidView: View {
     //    func maxEvents() -> Bool{ //has reached max events (3)
     //        return numEvents[block][datecomp]! > 2 ? true : false
     //    }
+    
+    init(_ day: Int, _ block: Int, _ datecomp: DateComponents) {
+        self.day = day
+        self.block = block
+        self.datecomp = datecomp
+        eventPick = isMeetingOrAssessment(block, datecomp) == "Meeting" ? "entirety" : "Test"
+    }
+    
     func getPeriod(blockNum: Int) -> String {
         switch blockNum {
         case 0:
