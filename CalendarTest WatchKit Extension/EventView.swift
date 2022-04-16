@@ -20,11 +20,13 @@ struct EventView: View {
     
     var body: some View {
         ScrollView{
-            Text("Event Details").font(.title2).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
+            Text("Event Details").font(.title2).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 3)
+            if ev.hasLabel {Text(ev.label).fontWeight(.heavy).foregroundColor(.orange)}
             Text(getOffsetDate())
             Text("Day \(ev.getDay()), \(ev.getPeriod())")
+            Text(ev.getTime())
             if ev.getRoom() != "e" {Text(ev.getRoom())}
-            if ev.hasLabel {Text(ev.label)}
+
             Divider().padding(.vertical, 5)
             Text("Options:").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
             Button(action: {
@@ -69,6 +71,6 @@ struct EventView: View {
 
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
-        Text("e")
+        Text("e").foregroundColor(.purple)
     }
 }

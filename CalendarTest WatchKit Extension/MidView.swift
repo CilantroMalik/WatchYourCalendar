@@ -36,11 +36,34 @@ struct MidView: View {
     }
     
     func getPeriod(blockNum: Int) -> String {
+        var date = Date()
+        let cal = Calendar.current
+        if globalOffset != 0 {
+            date = cal.date(byAdding: .day, value: globalOffset, to: date)!
+        }
+        let weekday = cal.component(.weekday, from: date)
         switch blockNum {
         case 0:
             return blocks[day]![0] + " Block"
         case 1:
-            return "Break/Clubs"
+            switch weekday {
+            case 1:
+                return "None"
+            case 2:
+                return "\n Community Meeting"
+            case 3:
+                return "Clubs"
+            case 4:
+                return "Advisory"
+            case 5:
+                return "Clubs"
+            case 6:
+                return "Class Meeting"
+            case 7:
+                return "None"
+            default:
+                return "error... lul"
+            }
         case 2:
             return blocks[day]![1] + " Block"
         case 3:
@@ -52,7 +75,7 @@ struct MidView: View {
         case 6:
             return blocks[day]![4] + " Block"
         case 9:
-            return "Office Hours / Break"
+            return "Break"
         default:
             return "e"
         }
@@ -82,6 +105,27 @@ struct MidView: View {
             return "e"
         }
     }
+    func getBlockTime(day: Int, block: String) -> String {
+        if ((day == 1 || day == 3) && block == "C") || (day == 2 && block == "F") || (day == 4 && block == "H") || (day == 5 && block == "G") || (day == 6 && block == "B") || (day == 7 && block == "A") || (day == 8 && block == "D"){
+        return "08:55 - 09:55"
+        } else if (block == "Clubs" || block == "Community Meeting" || block == "None" || block == "Advisory" || block == "Class Meeting") {
+        return "10:00 - 10:30"
+        } else if ((day == 1 || day == 8) && block == "E") || (day == 2 && block == "G") || (day == 3 && block == "D") || ((day == 4 || day == 5) && block == "A") || (day == 6 && block == "C") || (day == 7 && block == "H") {
+        return "10:35 - 11:25"
+        } else if (block == "Lunch" && (lunchBlockFirst[day]! == [true])) || (((day == 1 || day == 6) && block == "D") || ((day == 2 || day == 5) && block == "H") || ((day == 3 || day == 8) && block == "F") || (day == 4 && block == "B") || (day == 7 && block == "G")) {
+        return "11:25 - 12:25"
+        } else if (block == "Lunch" && (lunchBlockFirst[day]! == [false])) || (((day == 1 || day == 6) && block == "D") || ((day == 2 || day == 5) && block == "H") || ((day == 3 || day == 8) && block == "F") || (day == 4 && block == "B") || (day == 7 && block == "G")) {
+        return "12:25 - 13:15"
+        } else if ((day == 1 || day == 2) && block == "A") || ((day == 3 || day == 4 || day == 6) && block == "E") || (day == 4 && block == "C") || (day == 7 && block == "B") || (day == 8 && block == "G") {
+        return "13:20 - 14:20"
+        } else if ((day == 1 || day == 2) && block == "B") || (day == 3 && block == "G") || (day == 4 && block == "D") || ((day == 5 || day == 6) && block == "F") || (day == 7 && block == "C") || (day == 8 && block == "H") {
+        return "14:30 - 15:15"
+        } else if (block == "Break") {
+        return "14:20 - 14:30"
+        } else {
+            return "e"
+        }
+    }
     
     func eventsThisBlock() -> [blockEvent] {
         let dayEvents = EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!
@@ -98,6 +142,7 @@ struct MidView: View {
                 //            Text("Events").font(.title2).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
                 Text(getOffsetDate())
                 Text("Day \(day), \(getPeriod(blockNum: block))")
+                Text(getBlockTime(day: day, block: getPeriod(blockNum: block)))
                 
                 Divider().padding(.vertical, 5)
                 //            if (eventsList[datecomp.month! - 1][datecomp.day!])?.count == 0 {

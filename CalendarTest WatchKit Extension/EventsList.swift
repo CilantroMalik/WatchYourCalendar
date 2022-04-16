@@ -86,6 +86,28 @@ class blockEvent: Equatable {
         }
         
     }
+    func getTime() -> String{
+        switch block {
+        case 0:
+            return "08:55 - 09:55"
+        case 1:
+            return "10:00 - 10:30"
+        case 2:
+            return "10:35 - 11:25"
+        case 3:
+            return "11:25 - 12:25"
+        case 4:
+            return "12:25 - 13:15"
+        case 5:
+            return "13:20 - 14:20"
+        case 6:
+            return "14:30 - 15:15"
+        case 9:
+            return "14:20 - 14:30"
+        default:
+            return "e"
+        }
+    }
     
     func meetingOrAssessment() -> String{
         let cal = Calendar.current
@@ -95,7 +117,8 @@ class blockEvent: Equatable {
         case 0:
             return classes[weekday]![0].starts(with: "Free") ? "Meeting" : "Assessment"
         case 1:
-            return weekday == 3 || weekday == 5 ? "Meeting" : "Event"
+//            return weekday == 3 || weekday == 5 ? "Meeting" : "Event"
+            return "Meeting"
         case 2:
             return classes[weekday]![1].starts(with: "Free") ? "Meeting" : "Assessment"
         case 3:

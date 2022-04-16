@@ -17,23 +17,17 @@ struct NotificationView: View {
         let classes = classes[cycleDay]!
         return "Classes today:\n" + classes[0...4].joined(separator: "\n")
     }
-//    func getEvArr() -> [blockEvent] {
-//        var date = Date()
-//        let cal = Calendar.current
-//        if globalOffset != 0 {
-//            date = cal.date(byAdding: .day, value: globalOffset, to: date)!
-//        }
-//        let dtcp = DateComponents(calendar: Calendar.current, month: cal.component(.month, from: date), day: cal.component(.day, from: date))
-//        let events = eventsList[dtcp.month! - 1][dtcp.day!]!
-//        return events
-//    }
-//    func eventsToday() -> String {
-//        let date = Date()
-//        let cal = Calendar.current
-//        let datecomp = DateComponents(calendar: cal)
-//        if cycleDay == 0 { return "No events!" }
-//        return "Events today:\n" + (getEvArr()[0...(getEvArr().count)]).joined(separator: "\n")//FIXME: i am trying to add events to the daily summary
-//    }
+    func eventsToday() -> [blockEvent] {
+        let date = Date()
+        let cal = Calendar.current
+        let datecomp = DateComponents(calendar: Calendar.current, month: cal.component(.month, from: date), day: cal.component(.day, from: date))
+        let dayEvents = EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!
+        var blockEvents: [blockEvent] = []
+        for event in dayEvents {
+            blockEvents.append(event)
+        }
+        return blockEvents
+    }
 //    func hasSports() -> Bool {
 ////        return cycleDay == 3 || cycleDay == 6 || cycleDay == 8
 //    }
@@ -47,8 +41,10 @@ struct NotificationView: View {
 //        }
         Divider()
         Text(classesToday()).multilineTextAlignment(.center).font(.system(size: 12)).frame(width: nil, height: cycleDay == 0 ? 20 : 50, alignment: .center)
-//        Divider()
-//        Text(eventsToday()).multilineTextAlignment(.center).font(.system(size: 12)).frame(width: nil, height: cycleDay == 0 ? 20 : 100, alignment: .center)
+        Divider()
+        ForEach(eventsToday(), id: \.id) { item in
+            Text(item.label)
+        }
     }
 }
 

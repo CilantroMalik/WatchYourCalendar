@@ -279,20 +279,6 @@ struct ContentView: View {
         }
     }
     
-    func getRelativeDayText() -> String {
-        if globalOffset > 0 {
-            if globalOffset == 1 { return "Tomorrow" }
-            else if globalOffset % 7 == 0 { return "In " + String(globalOffset / 7) + " week" + (globalOffset >= 14 ? "s" : "") }
-            else { return "In " + String(globalOffset) + " days" }
-        } else if globalOffset < 0 {
-            if globalOffset == -1 { return "Yesterday" }
-            else if -globalOffset % 7 == 0 { return String(-globalOffset / 7) + " week" + (-globalOffset >= 14 ? "s" : "") + " ago" }
-            else { return String(-globalOffset) + " days ago" }
-        } else {
-            return ""
-        }
-    }
-    
     func getNavDate() -> DateComponents {
         var date = Date()
         let cal = Calendar.current
