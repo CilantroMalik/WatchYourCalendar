@@ -35,22 +35,22 @@ func scheduleSportsNotification() {
     if alreadyScheduled { return }
     
     let content = UNMutableNotificationContent()
-    content.title = "e"
-    content.subtitle = "e"
+    content.title = "Good morning!"
     content.sound = UNNotificationSound.default
-    content.body = "e"
+    content.body = "Here's your daily overview."
     content.categoryIdentifier = "sports"
     
     // enable the line below for testing notifications: shows ten seconds after app launch
     //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
-    
-    let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), repeats: true)
-    
-    // choose a random identifier
-    let request = UNNotificationRequest(identifier: "dailyNotif", content: content, trigger: trigger)
-    
-    // add our notification request
-    UNUserNotificationCenter.current().add(request)
+    for i in 2...6 {
+        let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 8, minute: 0, weekday: i), repeats: true)
+        
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: "dailyNotif", content: content, trigger: trigger)
+        
+        // add our notification request
+        UNUserNotificationCenter.current().add(request)
+    }
 }
 
 func scheduleLunchNotification() {
@@ -65,10 +65,10 @@ func scheduleLunchNotification() {
     if alreadyScheduled { return }
     
     let content = UNMutableNotificationContent()
-    content.title = "e"
-    content.subtitle = "e"
+    content.title = "Lunch is ending!"
+    content.subtitle = ""
     content.sound = UNNotificationSound.default
-    content.body = "e"
+    content.body = "10 minutes left until your next class."
     content.categoryIdentifier = "lunch"
     
     // enable the line below for testing notifications: shows five seconds after app launch
