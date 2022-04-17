@@ -48,9 +48,9 @@ struct EventView: View {
                         content.title = ("Reminder: " + ev.label[...(ev.label).firstIndex(of: " ")!])
                     } else {content.title = ("Reminder:\nMeeting")}
                     if ev.getRoom() != "e" {
-                        content.subtitle = ("Day " + ev.label + "\n" + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.getTime() + "\n" + ev.getRoom())
+                        content.subtitle = (ev.label + "\nDay" + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.getTime() + "\n" + ev.getRoom())
                     } else {
-                        content.subtitle = ("Day " + ev.label + "\n" + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.getTime())
+                        content.subtitle = (ev.label + "\nDay" + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.getTime())
                     }
                     content.sound = UNNotificationSound.default
                     if #available(watchOSApplicationExtension 8.0, *) {
