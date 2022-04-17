@@ -33,7 +33,6 @@ func scheduleSportsNotification() {
         }
     }
     if alreadyScheduled { return }
-    
     let content = UNMutableNotificationContent()
     content.title = "Good morning!"
     content.sound = UNNotificationSound.default
@@ -43,7 +42,8 @@ func scheduleSportsNotification() {
     // enable the line below for testing notifications: shows ten seconds after app launch
     //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
     for i in 2...6 {
-        let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 8, minute: 0, weekday: i), repeats: true)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 8, minute: 0, weekday: i), repeats: true)
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
         // choose a random identifier
         let request = UNNotificationRequest(identifier: "dailyNotif", content: content, trigger: trigger)
         
@@ -62,7 +62,10 @@ func scheduleLunchNotification() {
         }
     }
     if alreadyScheduled { return }
-    
+    let date = Date()
+    let cal = Calendar.current
+    let month = cal.component(.month, from: date)
+    let day = cal.component(.day, from: date)
     let content = UNMutableNotificationContent()
     content.title = "Lunch is ending!"
     content.subtitle = ""
@@ -73,7 +76,12 @@ func scheduleLunchNotification() {
     // enable the line below for testing notifications: shows five seconds after app launch
     //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 20, repeats: false)
     for i in 2...6 {
-        let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 13, minute: 10, weekday: i), repeats: true)
+//        if lunchBlockFirst[(dateToCycleDay[month-1][day - 2 + i]!)]! == [true]{
+        let trigger = (lunchBlockFirst[(dateToCycleDay[month-1][day - 2 + i]!)]! == [true]) ? UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 12, minute: 15, weekday: i), repeats: true) : UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 13, minute: 10, weekday: i), repeats: true)
+//        } else {
+//            let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 13, minute: 10, weekday: i), repeats: true)
+//        }
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
         
         // choose a random identifier
         let request = UNNotificationRequest(identifier: "lunchNotif\(i)", content: content, trigger: trigger)
@@ -92,7 +100,7 @@ var dateToCycleDay: [[Int: Int]] = [
     // March
     [1:7, 2:8, 3:1, 4:2, 5:0, 6:0, 7:3, 8:4, 9:5, 10:6, 11:7, 12:0, 13:0, 14:0, 15:0, 16:0, 17:0, 18:0, 19:0, 20:0, 21:0, 22:0, 23:0, 24:0, 25:0, 26:0, 27:0, 28:8, 29:1, 30:2, 31:3],
     // April
-    [1:4, 2:0, 3:0, 4:5, 5:6, 6:7, 7:8, 8:1, 9:0, 10:0, 11:2, 12:3, 13:4, 14:5, 15:0, 16:0, 17:0, 18:6, 19:7, 20:8, 21:1, 22:2, 23:0, 24:0, 25:3, 26:4, 27:5, 28:6, 29:7, 30:0],
+    [1:4, 2:0, 3:0, 4:5, 5:6, 6:7, 7:8, 8:1, 9:0, 10:0, 11:2, 12:3, 13:4, 14:5, 15:0, 16:0, 17:6, 18:6, 19:7, 20:8, 21:1, 22:2, 23:0, 24:0, 25:3, 26:4, 27:5, 28:6, 29:7, 30:0],
     // May
     [1:0, 2:8, 3:1, 4:2, 5:3, 6:4, 7:0, 8:0, 9:5, 10:6, 11:7, 12:8, 13:1, 14:0, 15:0, 16:2, 17:3, 18:4, 19:5, 20:6, 21:0, 22:0, 23:7, 24:8, 25:1, 26:2, 27:3, 28:0, 29:0, 30:0, 31:4],
     // June
@@ -210,7 +218,7 @@ var rooms: [Int: [String]] = [
     6: ["US Room 104", "US Room 312", "US Room 334", "US Room 211", "US Room 306"],
     7: ["Free", "US Room 308", "US Room 104", "US Room 104", "US Room 312"],
     8: ["US Room 334", "US Room 211", "US Room 306", "US Room 104", "US Room 308"]
-    ]
+]
 var blocks: [Int: [String]] = [
     0: ["","","","",""], 1: ["C","E","D","A","B"], 2: ["F","G","H","A","B"], 3:["C","D","F","E","G"], 4:["H","A","B","C","D"], 5:["G","A","H","E","F"], 6:["B","C","D","E","F"], 7:["A","H","G","B","C"], 8:["D","E","F","G","H"]
 ]
@@ -370,25 +378,25 @@ func nowIsBeforeThird(block: Int, third: Int) -> Bool {
             return isAfter(hour1: getHour(), minute1: getMinute(), hour2: 8, minute2: 55)
         }
     } else if third == 2{
-    if block == 7 { //
-        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 15,minute2: 15)//not necessary
-    } else if block == 6 { //
-        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 45)
-    } else if block == 9 { //before break
-        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 23)
-    } else if block == 5 { //before
-        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 40)
-    } else if block == 4 {//before lunch
-        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 12,minute2: 45)
-    } else if block == 3 {//
-        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 11,minute2: 45)
-    } else if block == 2 { //
-        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 50)
-    }else if block == 1 { //
-        return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 10)
-    } else if block == 0 { //before first block
-        return isAfter(hour1: getHour(), minute1: getMinute(), hour2: 9, minute2: 15)
-    }
+        if block == 7 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 15,minute2: 15)//not necessary
+        } else if block == 6 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 45)
+        } else if block == 9 { //before break
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 23)
+        } else if block == 5 { //before
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 40)
+        } else if block == 4 {//before lunch
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 12,minute2: 45)
+        } else if block == 3 {//
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 11,minute2: 45)
+        } else if block == 2 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 50)
+        }else if block == 1 { //
+            return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 10)
+        } else if block == 0 { //before first block
+            return isAfter(hour1: getHour(), minute1: getMinute(), hour2: 9, minute2: 15)
+        }
     } else if third == 3{
         if block == 7 { //
             return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 15,minute2: 15)
@@ -429,7 +437,7 @@ func nowIsBeforeThird(block: Int, third: Int) -> Bool {
         } else if block == 0 { //before first block
             return isAfter(hour1: getHour(), minute1: getMinute(), hour2: 9, minute2: 55) && isAfter(hour1: 9, minute1: 35, hour2: getHour(), minute2: getMinute())
         }
-        }
+    }
     return true
 }
 
@@ -465,11 +473,11 @@ func schoolDone() -> Bool{
     if cycleDay == 0 {
         return true
     }
-//    if (isSports()){
-//        return ((cal.component(.hour, from: date) > 16) || ((cal.component(.hour, from: date) > 15 && cal.component(.minute, from: date) > 10)) || (cal.component(.hour, from: date) < 7))
-//    } else {
-        return ((cal.component(.hour, from: date) > 15) || ((cal.component(.hour, from: date) > 14 && cal.component(.minute, from: date) > 15)) || (cal.component(.hour, from: date) < 7))
-//    }
+    //    if (isSports()){
+    //        return ((cal.component(.hour, from: date) > 16) || ((cal.component(.hour, from: date) > 15 && cal.component(.minute, from: date) > 10)) || (cal.component(.hour, from: date) < 7))
+    //    } else {
+    return ((cal.component(.hour, from: date) > 15) || ((cal.component(.hour, from: date) > 14 && cal.component(.minute, from: date) > 15)) || (cal.component(.hour, from: date) < 7))
+    //    }
 }
 
 
@@ -725,17 +733,18 @@ func compGetTime(dc: DateComponents) -> String {
 
 func compGetTimeUntil(date: Date) -> String {
     if !schoolDone(){
-    if nowIsAfterBlockEnds(block: 6){
-        return ""
-    } else {
-        return " in " + String(compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date))) + "m"
-    }
+        if nowIsAfterBlockEnds(block: 6){
+            return ""
+        } else {
+            return " in " + String(compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date))) + "m"
+        }
     } else {
         return "—"
     }
 }
 
 func compGetDayGigue(now: Date) -> Float {
+    if cycleDay == 0 {return 1.0}
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy/MM/dd"
     let yearStr = formatter.string(from: Date())
@@ -780,8 +789,8 @@ func compMinsSinceClassStart(now: Date) -> Int {
 
 func compGetTimeUntilClassEnds(length: Int, now: Date) -> String{
     if !schoolDone(){
-    let minsPassed = compMinsSinceClassStart(now: now)
-    return "\(length - minsPassed)m"
+        let minsPassed = compMinsSinceClassStart(now: now)
+        return "\(length - minsPassed)m"
     } else {
         return "—"
     }

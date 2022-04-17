@@ -20,13 +20,16 @@ struct EventView: View {
     
     var body: some View {
         ScrollView{
-            Text("Event Details").font(.title2).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 3)
-            if ev.hasLabel {Text(ev.label).fontWeight(.heavy).foregroundColor(.orange)}
-            Text(getOffsetDate())
-            Text("Day \(ev.getDay()), \(ev.getPeriod())")
-            Text(ev.getTime())
-            if ev.getRoom() != "e" {Text(ev.getRoom())}
-
+            Text("Event Details").font(.title2).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 2)
+            Group{
+                if ev.hasLabel {Text(ev.label).fontWeight(.heavy).foregroundColor(.orange)}
+                Text("Day \(ev.getDay()), \(ev.getPeriod())").multilineTextAlignment(.center)
+                Text(ev.getTime()).multilineTextAlignment(.center)
+                if ev.getRoom() != "e" {Text(ev.getRoom()).italic().multilineTextAlignment(.center)}
+                Text(getOffsetDate()).italic().multilineTextAlignment(.center)
+                if ev.getRoom() != "e" {Text(ev.getRoom()).italic().foregroundColor(Color(UIColor.lightGray))}
+                ev.hasNotification ?  Text("Notifications on").fontWeight(.heavy) : Text("Notifications off").italic().foregroundColor(Color(UIColor.lightGray))
+            }
             Divider().padding(.vertical, 5)
             Text("Options:").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
             Button(action: {
@@ -41,8 +44,14 @@ struct EventView: View {
                     }
                     // *** Schedule Meeting Notification ***
                     let content = UNMutableNotificationContent()
-                    content.title = "Reminder: " + ev.meetingOrAssessment()
-                    content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.label)
+                    if ev.meetingOrAssessment() == "Assessment"{
+                        content.title = ("Reminder: " + ev.label[...(ev.label).firstIndex(of: " ")!])
+                    } else {content.title = ("Reminder: Meeting")}
+                    if ev.getRoom() != "e" {
+                        content.subtitle = ("Day " + ev.label + "\n" + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.getTime() + "\n" + ev.getRoom())
+                    } else {
+                        content.subtitle = ("Day " + ev.label + "\n" + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.getTime())
+                    }
                     content.sound = UNNotificationSound.default
                     if #available(watchOSApplicationExtension 8.0, *) {
                         content.interruptionLevel = .timeSensitive
@@ -50,15 +59,16 @@ struct EventView: View {
                     var detail = ev.label.split(separator: " ")
                     detail.removeLast()
                     if ev.meetingOrAssessment() == "Assessment" {
-                        content.body = "Reminder: You have a \(detail.joined(separator: " ").lowercased()) this block."
+                        content.body = "Reminder: You have a \(detail.joined(separator: " ").lowercased()) this block. Good luck!"
                     } else {
                         content.body = "Reminder: You have a \(ev.meetingOrAssessment().lowercased()) during the \(detail.joined(separator: " "))."
                         if detail.joined(separator: " ") == "entirety" { content.body = "Reminder: You have a meeting for the entire block." }
                     }
                     content.categoryIdentifier = "event"
                     
-                    let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, month: ev.time.month!, day: ev.time.day!, hour: getBlockAlmostStartTimes(ev.block).hour, minute: getBlockAlmostStartTimes(ev.block).minute), repeats: false)
-
+                                        let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, month: ev.time.month!, day: ev.time.day!, hour: getBlockAlmostStartTimes(ev.block).hour, minute: getBlockAlmostStartTimes(ev.block).minute), repeats: false)
+//                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+                    
                     let request = UNNotificationRequest(identifier: ev.toString(), content: content, trigger: trigger)
                     
                     // add our notification request

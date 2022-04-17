@@ -133,11 +133,34 @@ class blockEvent: Equatable {
     }
     
     func getPeriod() -> String {
+        var date = Date()
+        let cal = Calendar.current
+        if globalOffset != 0 {
+            date = cal.date(byAdding: .day, value: globalOffset, to: date)!
+        }
+        let weekday = cal.component(.weekday, from: date)
         switch block {
         case 0:
             return blocks[getDay()]![0] + " Block"
         case 1:
-            return "Break/Clubs"
+            switch weekday {
+            case 1:
+                return "None"
+            case 2:
+                return "\nCommunity Meeting"
+            case 3:
+                return "Clubs"
+            case 4:
+                return "Advisory"
+            case 5:
+                return "Clubs"
+            case 6:
+                return "Class Meeting"
+            case 7:
+                return "None"
+            default:
+                return "error... lul"
+            }
         case 2:
             return blocks[getDay()]![1] + " Block"
         case 3:

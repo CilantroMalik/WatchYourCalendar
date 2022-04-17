@@ -44,7 +44,7 @@ struct MidView: View {
             case 1:
                 return "None"
             case 2:
-                return "\n aCommunity Meeting"
+                return "Community Meeting"
             case 3:
                 return "Clubs"
             case 4:
@@ -140,11 +140,10 @@ struct MidView: View {
     var body: some View {
         ScrollView{
             VStack {
-                //            Text("Events").font(.title2).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
-                Text(getOffsetDate())
-                Text("Day \(day), \(getPeriod(blockNum: block))")
+                Text("\(getPeriod(blockNum: block)), Day \(day)").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 0.5)
+//                Text("Day \(day), \(getPeriod(blockNum: block))")
                 Text(getBlockTime(block: block))
-                
+                Text(getOffsetDate())
                 Divider().padding(.vertical, 5)
                 if (eventsThisBlock()).count == 0 {
                     Text("No Events").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
@@ -154,7 +153,7 @@ struct MidView: View {
                         Button(action: { evEditManager.eventToEdit = item; evEditManager.isEditing.toggle() }, label: { Text(item.label) })
                     }
                 }
-                Divider().padding(.vertical, 5)
+                Divider().padding(.vertical, 3)
                 if globalOffset < 0 || (globalOffset == 0 && nowIsAfterBlockEnds(block: (block))) || (nowIsBeforeThird(block: block, third: 4)){
                     Text("You cannot schedule events in the past.").fontWeight(.medium).multilineTextAlignment(.center)
                 } else {
