@@ -149,6 +149,7 @@ func getTimeUntilNextClass(dc: DateComponents, now: Date = Date()) -> DateCompon
 
 var globalOffset = 0
 var showTime = true
+var TIME_TRAVEL_SLOWDOWN_FACTOR = 5.0
 struct ContentView: View {
     @State var timeUntil = "00:00:00"
     @Environment(\.scenePhase) private var scenePhase
@@ -172,7 +173,7 @@ struct ContentView: View {
     
     func timeTravelBlockBegin(block: Int) -> Bool{
         let cal = Calendar.current
-        let date = cal.date(byAdding: .minute, value: Int(floor(minOffset)), to: Date())!
+        let date = cal.date(byAdding: .minute, value: Int(floor(minOffset / TIME_TRAVEL_SLOWDOWN_FACTOR)), to: Date())!
         let hr = cal.component(.hour, from: date)
         let min = cal.component(.minute, from: date)
         if block == 7 {
@@ -221,7 +222,7 @@ struct ContentView: View {
     
     func getTimeTravelTime() -> String {
         let cal = Calendar.current
-        let date = cal.date(byAdding: .minute, value: Int(floor(minOffset)), to: Date())!
+        let date = cal.date(byAdding: .minute, value: Int(floor(minOffset / TIME_TRAVEL_SLOWDOWN_FACTOR)), to: Date())!
         let hr = cal.component(.hour, from: date)
         let min = cal.component(.minute, from: date)
         return "\(hr < 10 ? "0" : "")\(hr):\(min < 10 ? "0" : "")\(min)"
