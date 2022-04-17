@@ -804,24 +804,23 @@ func getBlockAlmostStartTimes(_ block: Int) -> DateComponents {
 }
 
 func isMeetingOrAssessment(_ block: Int, _ time: DateComponents) -> String {
-    let cal = Calendar.current
-    let date = cal.date(from: time)!
-    let weekday = cal.component(.weekday, from: date)
+    let month = time.month!
+    let day = time.day!
     switch block {
     case 0:
-        return classes[weekday]![0].starts(with: "Free") ? "Meeting" : "Assessment"
+        return classes[dateToCycleDay[month-1][day]!]![0].starts(with: "Free") ? "Meeting" : "Assessment"
     case 1:
-        return weekday == 3 || weekday == 5 ? "Meeting" : "Event"
+        return "Meeting"
     case 2:
-        return classes[weekday]![1].starts(with: "Free") ? "Meeting" : "Assessment"
+        return classes[dateToCycleDay[month-1][day]!]![1].starts(with: "Free") ? "Meeting" : "Assessment"
     case 3:
-        return classes[weekday]![2].starts(with: "Free") ? "Meeting" : "Assessment"
+        return classes[dateToCycleDay[month-1][day]!]![2].starts(with: "Free") ? "Meeting" : "Assessment"
     case 4:
         return "Meeting"
     case 5:
-        return classes[weekday]![3].starts(with: "Free") ? "Meeting" : "Assessment"
+        return classes[dateToCycleDay[month-1][day]!]![3].starts(with: "Free") ? "Meeting" : "Assessment"
     case 6:
-        return classes[weekday]![4].starts(with: "Free") ? "Meeting" : "Assessment"
+        return classes[dateToCycleDay[month-1][day]!]![4].starts(with: "Free") ? "Meeting" : "Assessment"
     case 9:
         return "Meeting"
     default:

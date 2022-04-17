@@ -19,7 +19,7 @@ struct MidView: View {
     
     @StateObject var evEditManager = EventEditorManager()
     
-    @State var eventPick: String = ""
+    @State var eventPick: String
     
     @StateObject var eventsListObs = EventsListObs()
     //    var even : blockEvent
@@ -28,14 +28,8 @@ struct MidView: View {
     //        return numEvents[block][datecomp]! > 2 ? true : false
     //    }
     
-    init(_ day: Int, _ block: Int, _ datecomp: DateComponents) {
-        self.day = day
-        self.block = block
-        self.datecomp = datecomp
-        eventPick = isMeetingOrAssessment(block, datecomp) == "Meeting" ? "entirety" : "Test"
-    }
-    
     func getPeriod(blockNum: Int) -> String {
+        
         var date = Date()
         let cal = Calendar.current
         if globalOffset != 0 {
@@ -81,9 +75,6 @@ struct MidView: View {
         }
     }
     func meetingOrAssessment() -> String {
-        let date = Date()
-        let cal = Calendar.current
-        let weekday = cal.component(.weekday, from: date)
         switch block {
         case 0:
             return classes[day]![0].starts(with: "Free") ? "Meeting" : "Assessment"
@@ -138,6 +129,14 @@ struct MidView: View {
         return blockEvents
     }
     
+    func isToday() -> Bool {
+        let now = Date.init(timeIntervalSinceNow: 0)
+        let month = Calendar.current.component(.month, from: now)
+        let day = Calendar.current.component(.day, from: now)
+        
+        return datecomp.month! == month && datecomp.day! == day
+    }
+    
     var body: some View {
         ScrollView{
             VStack {
@@ -170,10 +169,17 @@ struct MidView: View {
                     })
                     Picker(isMeetingOrAssessment(block, datecomp) == "Meeting" ? "Select Part of Block" : "Select Assessment Type", selection: $eventPick, content: {
                         if isMeetingOrAssessment(block, datecomp) == "Meeting" {
-                            if nowIsBeforeBlockBegins(block: (block)) {Text("entirety").tag("entirety")}
-                            if nowIsBeforeThird(block: block, third: 1) {Text("1st third").tag("1st third")}
-                            if nowIsBeforeThird(block: block, third: 2) {Text("2nd third").tag("2nd third")}
-                            if nowIsBeforeThird(block: block, third: 3) {Text("3rd third").tag("3rd third")}
+                            if isToday() {
+                                if nowIsBeforeBlockBegins(block: (block)) {Text("entirety").tag("entirety")}
+                                if nowIsBeforeThird(block: block, third: 1) {Text("1st third").tag("1st third")}
+                                if nowIsBeforeThird(block: block, third: 2) {Text("2nd third").tag("2nd third")}
+                                if nowIsBeforeThird(block: block, third: 3) {Text("3rd third").tag("3rd third")}
+                            } else {
+                                Text("entirety").tag("entirety")
+                                Text("1st third").tag("1st third")
+                                Text("2nd third").tag("2nd third")
+                                Text("3rd third").tag("3rd third")
+                            }
                         } else {
                             Text("Test").tag("Test")
                             Text("Quiz").tag("Quiz")
