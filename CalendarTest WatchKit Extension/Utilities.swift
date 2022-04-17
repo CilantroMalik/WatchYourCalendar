@@ -39,11 +39,11 @@ func scheduleSportsNotification() {
     content.body = "Here's your daily overview."
     content.categoryIdentifier = "sports"
     
-    // enable the line below for testing notifications: shows ten seconds after app launch
-    //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+    // enable the line below for testing notifications: shows one seconds after app launch
+    //        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
     for i in 2...6 {
                 let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 8, minute: 0, weekday: i), repeats: true)
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+
         // choose a random identifier
         let request = UNNotificationRequest(identifier: "dailyNotif", content: content, trigger: trigger)
         
@@ -219,6 +219,30 @@ var rooms: [Int: [String]] = [
     7: ["Free", "US Room 308", "US Room 104", "US Room 104", "US Room 312"],
     8: ["US Room 334", "US Room 211", "US Room 306", "US Room 104", "US Room 308"]
 ]
+func getClassess(day: Int,block: Int) -> String{
+    switch block {
+    case 0:
+        return classes[day]![0]
+    case 1:
+        return getMorningActivity()
+    case 2:
+        return classes[day]![1]
+    case 3:
+        return classes[day]![2]
+    case 4:
+        return "Lunch"
+    case 5:
+        return classes[day]![3]
+    case 6:
+        return classes[day]![4]
+    case 7:
+        return classes[day]![5]
+    case 9:
+        return "Break"
+    default:
+        return "eeee"
+    }
+}
 var blocks: [Int: [String]] = [
     0: ["","","","",""], 1: ["C","E","D","A","B"], 2: ["F","G","H","A","B"], 3:["C","D","F","E","G"], 4:["H","A","B","C","D"], 5:["G","A","H","E","F"], 6:["B","C","D","E","F"], 7:["A","H","G","B","C"], 8:["D","E","F","G","H"]
 ]

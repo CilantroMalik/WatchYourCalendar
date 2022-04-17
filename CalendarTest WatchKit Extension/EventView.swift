@@ -46,7 +46,7 @@ struct EventView: View {
                     let content = UNMutableNotificationContent()
                     if ev.meetingOrAssessment() == "Assessment"{
                         content.title = ("Reminder: " + ev.label[...(ev.label).firstIndex(of: " ")!])
-                    } else {content.title = ("Reminder: Meeting")}
+                    } else {content.title = ("Reminder:\nMeeting")}
                     if ev.getRoom() != "e" {
                         content.subtitle = ("Day " + ev.label + "\n" + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.getTime() + "\n" + ev.getRoom())
                     } else {

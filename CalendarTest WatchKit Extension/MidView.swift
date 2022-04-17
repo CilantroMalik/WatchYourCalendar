@@ -160,8 +160,10 @@ struct MidView: View {
                     Button(action: {
                         let n = EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.filter({$0.label.contains(eventPick)}).count + 1
                         let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.count+1), isMeetingOrAssessment(block, datecomp) == "Meeting" ? "\(eventPick) of block \(n)" : "\(eventPick) \(n)", true, false)
+                        
                         eventsListObs.addEvent(ev: temp, month: datecomp.month!-1, day: datecomp.day!)
                         eventPick = isMeetingOrAssessment(block, datecomp) == "Meeting" ? "entirety" : "Test"
+                        print (temp.block)
                     }, label: {
                         Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)
                     })

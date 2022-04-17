@@ -29,11 +29,24 @@ struct NotificationView: View {
         return blockEvents
     }
     func getEventsToday() -> String {
-        var s: String = ""
+        var evs: [String] = []
+        var c: Int = 0
+            for item in eventsToday() {
+                evs.append(item.label + ": " + getClassess(day: cycleDay, block: item.block))
+                c += 1
+            }
+        c -= 1
+        return "Events today:\n" + evs[0...c].joined(separator: "\n")
+    }
+    func getEventsLength() -> Int {
+        var i: Int = 20
         for item in eventsToday() {
-            s += (item.label + "\n")
+            if item == item{
+            i += 15
+            }
         }
-        return s
+        return i
+//        return 30
     }
 //    func hasSports() -> Bool {
 //        return cycleDay == 3 || cycleDay == 6 || cycleDay == 8
@@ -48,8 +61,9 @@ struct NotificationView: View {
 //        }
         Divider()
         Text(classesToday()).multilineTextAlignment(.center).font(.system(size: 12)).frame(width: nil, height: cycleDay == 0 ? 50 : 100, alignment: .center)
-        Divider()
-        Text(getEventsToday()).multilineTextAlignment(.center).font(.system(size: 12)).frame(width: nil, height: cycleDay == 0 ? 50 : 100, alignment: .center)
+        if !eventsToday().isEmpty {
+            Divider()
+            Text(getEventsToday()).multilineTextAlignment(.center).font(.system(size: 12)).frame(width: nil, height: cycleDay == 0 ? CGFloat(getEventsLength()) : CGFloat(getEventsLength()), alignment: .center)}
 }
 }
 struct NotificationView_Previews: PreviewProvider {
