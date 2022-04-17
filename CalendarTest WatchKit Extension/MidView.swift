@@ -146,7 +146,6 @@ struct MidView: View {
                 Text(getBlockTime(block: block))
                 
                 Divider().padding(.vertical, 5)
-                //            if (eventsList[datecomp.month! - 1][datecomp.day!])?.count == 0 {
                 if (eventsThisBlock()).count == 0 {
                     Text("No Events").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
                 } else {

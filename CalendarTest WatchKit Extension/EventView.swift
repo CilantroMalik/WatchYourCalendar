@@ -41,7 +41,6 @@ struct EventView: View {
                     }
                     // *** Schedule Meeting Notification ***
                     let content = UNMutableNotificationContent()
-                    // TOD: pass in values here; see ScheduleNotificationView for where the values will be displayed
                     content.title = "Reminder: " + ev.meetingOrAssessment()
                     content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.label)
                     content.sound = UNNotificationSound.default

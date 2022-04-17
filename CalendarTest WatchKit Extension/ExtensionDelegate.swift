@@ -37,7 +37,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         let ud = UserDefaults.standard
         guard let temp = ud.stringArray(forKey: "eventsList") else { return }
         print("-- Before --")
-        print(eventsList)
+        print(EventsListObs.evList)
         print("-- Temp -- ")
         print(temp)
         for str in temp {
@@ -46,7 +46,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             print(comps)
             print("- Block Event -")
             print(blockEvent(String(comps[2])).toString())
-            eventsList[Int(String(comps[0]))!][Int(String(comps[1]))!]?.append(blockEvent(String(comps[2])))
+            EventsListObs.evList[Int(String(comps[0]))!][Int(String(comps[1]))!]?.append(blockEvent(String(comps[2])))
         }
         print("-- After --")
         print(eventsList)
@@ -55,7 +55,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     func applicationWillResignActive() {
         let ud = UserDefaults.standard
         var allEvents: [String] = []
-        for (i, month) in eventsList.enumerated() {
+        for (i, month) in (EventsListObs.evList).enumerated() {
             for key in month.keys {
                 for event in month[key]! {
                     allEvents.append("\(i)-\(key)-\(event.toString())")

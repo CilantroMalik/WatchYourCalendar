@@ -14,9 +14,6 @@ import Foundation
 func makeId(block: Int, time: DateComponents, num: Int) -> String{
     return ((String(time.month!).count == 1 ? "0" + String(time.month!) : String(time.month!)) + (String(time.day!).count == 1 ? "0" + String(time.day!) : String(time.day!)) + String(block) + String(num))
 }
-//func setId(ev: blockEvent, idd: String) {
-//    ev.id = idd
-//}
 class blockEvent: Equatable {
     static func == (lhs: blockEvent, rhs: blockEvent) -> Bool {
         return lhs.toString() == rhs.toString()
