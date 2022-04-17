@@ -45,6 +45,9 @@ struct EventView: View {
                     content.title = "Reminder: " + ev.meetingOrAssessment()
                     content.subtitle = ("Day " + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.label)
                     content.sound = UNNotificationSound.default
+                    if #available(watchOSApplicationExtension 8.0, *) {
+                        content.interruptionLevel = .timeSensitive
+                    }
                     var detail = ev.label.split(separator: " ")
                     detail.removeLast()
                     detail.removeLast()
