@@ -49,7 +49,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             EventsListObs.evList[Int(String(comps[0]))!][Int(String(comps[1]))!]?.append(blockEvent(String(comps[2])))
         }
         print("-- After --")
-        print(eventsList)
+        print(EventsListObs.evList)
     }
     
     func applicationWillResignActive() {

@@ -49,7 +49,6 @@ struct EventView: View {
                     }
                     var detail = ev.label.split(separator: " ")
                     detail.removeLast()
-                    detail.removeLast()
                     if ev.meetingOrAssessment() == "Assessment" {
                         content.body = "Reminder: You have a \(detail.joined(separator: " ").lowercased()) this block."
                     } else {
