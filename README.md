@@ -56,6 +56,7 @@ A minimal watch app that makes the flow of the school day conveniently available
 
 ###### Time Travel (Vertical Scrolling)
 - Shows: Day, Relative Class, Time, Date, `Return to Present` Button (Brings you to Default Content View)
+- Note: You can't time travel while day travelling.
 
 ###### Day Travel (Horizontal Swiping)
 - Shows: Day, Relative Day, Date, Block Order, `View Day` Button (Brings you to Day View for that day)
