@@ -17,26 +17,26 @@ struct NotificationView: View {
         let classes = classes[cycleDay]!
         return "Classes today:\n" + classes[0...4].joined(separator: "\n")
     }
-//    func eventsToday() -> [blockEvent] {
-//        let date = Date()
-//        let cal = Calendar.current
-//        let datecomp = DateComponents(calendar: Calendar.current, month: cal.component(.month, from: date), day: cal.component(.day, from: date))
-//        let dayEvents = EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!
-//        var blockEvents: [blockEvent] = []
-//        for event in dayEvents {
-//            blockEvents.append(event)
-//        }
-//        return blockEvents
-//    }
-//    func getEventsToday() -> String {
-//        var s: String
-//        ForEach(eventsToday(), id: \.id) { item in
-//            s += (item.label + "\n")
-//    }
-//        return s
-//    }
+    func eventsToday() -> [blockEvent] {
+        let date = Date()
+        let cal = Calendar.current
+        let datecomp = DateComponents(calendar: Calendar.current, month: cal.component(.month, from: date), day: cal.component(.day, from: date))
+        let dayEvents = EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!
+        var blockEvents: [blockEvent] = []
+        for event in dayEvents {
+            blockEvents.append(event)
+        }
+        return blockEvents
+    }
+    func getEventsToday() -> String {
+        var s: String = ""
+        for item in eventsToday() {
+            s += (item.label + "\n")
+        }
+        return s
+    }
 //    func hasSports() -> Bool {
-////        return cycleDay == 3 || cycleDay == 6 || cycleDay == 8
+//        return cycleDay == 3 || cycleDay == 6 || cycleDay == 8
 //    }
     
     var body: some View {
@@ -48,8 +48,8 @@ struct NotificationView: View {
 //        }
         Divider()
         Text(classesToday()).multilineTextAlignment(.center).font(.system(size: 12)).frame(width: nil, height: cycleDay == 0 ? 50 : 100, alignment: .center)
-//        Divider()
-//        Text(getEventsToday).multilineTextAlignment(.center).font(.system(size: 12)).frame(width: nil, height: cycleDay == 0 ? 50 : 100, alignment: .center)
+        Divider()
+        Text(getEventsToday()).multilineTextAlignment(.center).font(.system(size: 12)).frame(width: nil, height: cycleDay == 0 ? 50 : 100, alignment: .center)
 }
 }
 struct NotificationView_Previews: PreviewProvider {
