@@ -11,7 +11,7 @@ A minimal watch app that makes the flow of the school day conveniently available
 
 -Use your scroll wheel to scroll throughout today to see which class you have at what time!
 
--Choose from numerous complications to see the cycle day, the day's order, your next class; the time until your next class, the time until your current class ends; the progress through the current class and the progress throughout the day! (See https://github.com/RohanMalikRCDS/WatchYourCalendar#complications-list for a full list and descriptions)
+-Choose from numerous complications to see the cycle day, the day's order, your next class; the time until your next class, the time until your current class ends; the progress through the current class and the progress throughout the day! (See #complications-list for a full list and descriptions)
 
 -Allow notifications to tell you in the morning if you have sports that day or an assessment— or to tell you when lunch is ending— or to remind you that your next class starts in 5 minutes!
 
@@ -19,14 +19,22 @@ A minimal watch app that makes the flow of the school day conveniently available
 
 
 ## What’s next?
+- beta testing!!
 
--iOS app
+- app icon
+
+- app name
+
+- iOS app
 
 
 ## Troubleshooting
 
--If your complication isn't showing the correct information, try switching watch faces and then switiching back. If that still doesn't work, restarting your watch won't hurt.
--If your notifications are not going off, make sure they aren't getting caught in your focuses/DND.
+- If your complication isn't showing the correct information, try switching watch faces and then switiching back. If that still doesn't work, restarting your watch won't hurt.
+
+- If your notifications are not going off, make sure they aren't getting caught in your focuses/DND.
+
+- If you find any bugs, be sure to email us at watchyourcalendar@gmail.com !
 
 ## More Details:
 
@@ -43,13 +51,13 @@ A minimal watch app that makes the flow of the school day conveniently available
 
 ## Views Features
 ### Content View:
-- Default:
+###### Default:
 - Shows: Day, Next Class, Time until that class, Date, Block Order, `Today` Button (Brings you to Day View)
 
-- Time Travel (Vertical Scrolling)
+###### Time Travel (Vertical Scrolling)
 - Shows: Day, Relative Class, Time, Date, `Return to Present` Button (Brings you to Default Content View)
 
-- Day Travel (Horizontal Swiping)
+###### Day Travel (Horizontal Swiping)
 - Shows: Day, Relative Day, Date, Block Order, `View Day` Button (Brings you to Day View for that day)
 
 ### Day View:
@@ -66,7 +74,7 @@ A minimal watch app that makes the flow of the school day conveniently available
 - Shows: Day, List of classes, List of events
 
 ### Post-Lunch Notification View:
-- Shows: 10 minutes until next class, which is [next class]
+- Shows: 10 minutes until next class and what it is
 
 ### Event Notification View
 - Shows: Type of event, event label, event day & block, event time, event room (if applicable), positive message (if applicable)
