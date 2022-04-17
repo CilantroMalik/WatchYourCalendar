@@ -117,6 +117,11 @@ var cycleDay : Int {
         } else { return 0 }
     }
 }
+func getDate() -> String {
+    let date = Date()
+    let cal = Calendar.current
+    return String(cal.component(.month, from: date)) + "/" + String(cal.component(.day, from: date)) + "/" + String(cal.component(.year, from: date))
+}
 func getCycleDayDay() -> String{
     if cycleDay != 0{
         return "Day " + String(cycleDay)
