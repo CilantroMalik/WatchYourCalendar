@@ -28,11 +28,48 @@ A minimal watch app that makes the flow of the school day conveniently available
 -If your complication isn't showing the correct information, try switching watch faces and then switiching back. If that still doesn't work, restarting your watch won't hurt.
 -If your notifications are not going off, make sure they aren't getting caught in your focuses/DND.
 
+## More Details:
 
 ### Color Guide:
 - Red: Future Block
 - Green: Next Block
 - Blue: Past Block
+
+### Notifications:
+- Morning Notification goes off at 8:00
+- Lunch Notification goes off at 12:15 or 13:10, depends on first/second lunch
+- Event Notifications go off three minutes before the block of that notification
+
+
+## Views Features
+### Content View:
+- Default:
+- Shows: Day, Next Class, Time until that class, Date, Block Order, `Today` Button (Brings you to Day View)
+
+- Time Travel (Vertical Scrolling)
+- Shows: Day, Relative Class, Time, Date, `Return to Present` Button (Brings you to Default Content View)
+
+- Day Travel (Horizontal Swiping)
+- Shows: Day, Relative Day, Date, Block Order, `View Day` Button (Brings you to Day View for that day)
+
+### Day View:
+- Shows: Day, Date, Relative Day (if Day Travelling), each class and their times (click to bring to Mid View)
+
+### Mid View:
+- Shows: Block, Day, Block time, Date, Events List (click each event to bring you to Event View), `Add Event` Button (Creates a New Event), Label Picker (`Test`, `Quiz` for classes; `entirety`, `1st third`, `2nd third`, `3rd third` for frees)
+
+### Event View:
+- Shows: Event Label, Day, Block, Time, Room, Date, Notifications status (on/off), Options: `Delete Event` (deletes event), `Be notified!` (sets notifications on)
+
+
+### Morning Notification View:
+- Shows: Day, List of classes, List of events
+
+### Post-Lunch Notification View:
+- Shows: 10 minutes until next class, which is [next class]
+
+### Event Notification View
+- Shows: Type of event, event label, event day & block, event time, event room (if applicable), positive message (if applicable)
 
 ## Complications List
 
