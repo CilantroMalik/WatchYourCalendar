@@ -9,9 +9,9 @@ A minimal watch app that makes the flow of the school day conveniently available
 
 -Swipe left/right to see tomorrow's day or yesterday's-- or any day's! (Double tap to return to today!)
 
--Scroll throughout today to see which class you have at what time!
+-Use your scroll wheel to scroll throughout today to see which class you have at what time!
 
--Choose from numerous complications to see the cycle day, the day's order, your next class; the time until your next class, the time until your current class ends; the progress through the current class and the progress throughout the day!
+-Choose from numerous complications to see the cycle day, the day's order, your next class; the time until your next class, the time until your current class ends; the progress through the current class and the progress throughout the day! (See https://github.com/RohanMalikRCDS/WatchYourCalendar#complications-list for a full list and descriptions)
 
 -Allow notifications to tell you in the morning if you have sports that day or an assessment— or to tell you when lunch is ending— or to remind you that your next class starts in 5 minutes!
 
@@ -20,14 +20,19 @@ A minimal watch app that makes the flow of the school day conveniently available
 
 ## What’s next?
 
--releasing a standalone watch app
-
 -iOS app
 
 
-## Troubleshooting (Complications)
+## Troubleshooting
 
-If your complication isn't showing the correct information, try switching watch faces and then switiching back. If that still doesn't work, restarting your watch won't hurt.
+-If your complication isn't showing the correct information, try switching watch faces and then switiching back. If that still doesn't work, restarting your watch won't hurt.
+-If your notifications are not going off, make sure they aren't getting caught in your focuses/DND.
+
+
+### Color Guide:
+- Red: Future Block
+- Green: Next Block
+- Blue: Past Block
 
 ## Complications List
 
