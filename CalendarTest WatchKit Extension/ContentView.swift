@@ -95,7 +95,7 @@ func getNextClass() -> Text {
     } else if nowIsBeforeBlockBegins(block: 0){
         return Text("First: ") + Text(classes[cycleDay]![0]).foregroundColor(.green)
     } else if nowIsBeforeBlockBegins(block: 1){
-        return Text("Next: ") + Text(getMorningActivity()).foregroundColor(.green)
+        return Text("Next: ") + Text(getShortMorningActivity()).foregroundColor(.green)
     } else if (nowIsBeforeBlockBegins(block: 2)){
         return Text("Next: ") + Text(classes[cycleDay]![1]).foregroundColor(.green)
     } else if nowIsBeforeBlockBegins(block: 3){
