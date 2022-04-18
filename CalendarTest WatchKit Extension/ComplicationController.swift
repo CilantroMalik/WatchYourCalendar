@@ -16,22 +16,22 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
             let template = CLKComplicationTemplateGraphicCircularStackText(line1TextProvider: CLKSimpleTextProvider(text: getCycleDayDay()), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
-    } else if complication.identifier == "DateDay" { //oyster perpetual daydate
-        if complication.family == CLKComplicationFamily.modularSmall {
-            let template = CLKComplicationTemplateModularSmallStackText(line1TextProvider: CLKSimpleTextProvider(text: getDate()), line2TextProvider: CLKSimpleTextProvider(text: getCycleDayDay()))
-            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
-        } else if complication.family == CLKComplicationFamily.graphicCircular {
-            let template = CLKComplicationTemplateGraphicCircularStackText(line1TextProvider: CLKSimpleTextProvider(text: getDate()), line2TextProvider: CLKSimpleTextProvider(text: getCycleDayDay()))
-            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
-        }
-    } else if complication.identifier == "DateBlocks" { //oyster perpetual daydate
-        if complication.family == CLKComplicationFamily.modularSmall {
-            let template = CLKComplicationTemplateModularSmallStackText(line1TextProvider: CLKSimpleTextProvider(text: getDate()), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
-            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
-        } else if complication.family == CLKComplicationFamily.graphicCircular {
-            let template = CLKComplicationTemplateGraphicCircularStackText(line1TextProvider: CLKSimpleTextProvider(text: getDate()), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
-            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
-        }
+//    } else if complication.identifier == "DateDay" { //oyster perpetual daydate
+//        if complication.family == CLKComplicationFamily.modularSmall {
+//            let template = CLKComplicationTemplateModularSmallStackText(line1TextProvider: CLKSimpleTextProvider(text: getDate()), line2TextProvider: CLKSimpleTextProvider(text: getCycleDayDay()))
+//            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+//        } else if complication.family == CLKComplicationFamily.graphicCircular {
+//            let template = CLKComplicationTemplateGraphicCircularStackText(line1TextProvider: CLKSimpleTextProvider(text: getDate()), line2TextProvider: CLKSimpleTextProvider(text: getCycleDayDay()))
+//            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+//        }
+//    } else if complication.identifier == "DateBlocks" {
+//        if complication.family == CLKComplicationFamily.modularSmall {
+//            let template = CLKComplicationTemplateModularSmallStackText(line1TextProvider: CLKSimpleTextProvider(text: getDate()), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
+//            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+//        } else if complication.family == CLKComplicationFamily.graphicCircular {
+//            let template = CLKComplicationTemplateGraphicCircularStackText(line1TextProvider: CLKSimpleTextProvider(text: getDate()), line2TextProvider: CLKSimpleTextProvider(text: compGetOrder()))
+//            return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
+//        }
     } else if complication.identifier == "DayAndNextClass" {
         if complication.family == CLKComplicationFamily.utilitarianSmallFlat {
             let template = CLKComplicationTemplateUtilitarianSmallFlat(textProvider: CLKSimpleTextProvider(text: "Next: \(compGetNextBlock(date: date))"))
@@ -148,8 +148,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     func getComplicationDescriptors(handler: @escaping ([CLKComplicationDescriptor]) -> Void) {
         let descriptors = [
             CLKComplicationDescriptor(identifier: "DayAndBlocks", displayName: "Day & Blocks", supportedFamilies: [CLKComplicationFamily.modularSmall, CLKComplicationFamily.graphicCircular]),
-            CLKComplicationDescriptor(identifier: "DateAndDay", displayName: "Date & Day", supportedFamilies: [CLKComplicationFamily.modularSmall, CLKComplicationFamily.graphicCircular]),
-            CLKComplicationDescriptor(identifier: "DateAndBlocks", displayName: "Date & Blocks", supportedFamilies: [CLKComplicationFamily.modularSmall, CLKComplicationFamily.graphicCircular]),
+//            CLKComplicationDescriptor(identifier: "DateAndDay", displayName: "Date & Day", supportedFamilies: [CLKComplicationFamily.modularSmall, CLKComplicationFamily.graphicCircular]),
+//            CLKComplicationDescriptor(identifier: "DateAndBlocks", displayName: "Date & Blocks", supportedFamilies: [CLKComplicationFamily.modularSmall, CLKComplicationFamily.graphicCircular]),
             CLKComplicationDescriptor(identifier: "DayAndNextClass", displayName: "Day & Next Class", supportedFamilies: [CLKComplicationFamily.utilitarianSmallFlat, CLKComplicationFamily.circularSmall]),
             CLKComplicationDescriptor(identifier: "DayBlocksClass", displayName: "Day, Blocks, & Next Class", supportedFamilies: [CLKComplicationFamily.modularLarge, CLKComplicationFamily.graphicRectangular]),
             CLKComplicationDescriptor(identifier: "NextClassIn", displayName: "Next Class Time", supportedFamilies: [CLKComplicationFamily.graphicBezel, CLKComplicationFamily.graphicCorner, CLKComplicationFamily.utilitarianLarge]),
