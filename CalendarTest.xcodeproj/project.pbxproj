@@ -11,7 +11,6 @@
 		15DA717427AD516F00B26BDF /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA717327AD516F00B26BDF /* ExtensionDelegate.swift */; };
 		15DA717627AECA6E00B26BDF /* LunchNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA717527AECA6E00B26BDF /* LunchNotificationController.swift */; };
 		15DA717827AECA8A00B26BDF /* LunchNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA717727AECA8A00B26BDF /* LunchNotificationView.swift */; };
-		5C3210A527AEF9CD00AD582F /* SchedulingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3210A427AEF9CD00AD582F /* SchedulingView.swift */; };
 		5C3210A727AF07FB00AD582F /* ScheduleNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3210A627AF07FB00AD582F /* ScheduleNotificationView.swift */; };
 		5C6B675F27BC2F6900DAADE8 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6B675E27BC2F6900DAADE8 /* EventView.swift */; };
 		5C6B676127BC64D400DAADE8 /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6B676027BC64D400DAADE8 /* EventsList.swift */; };
@@ -93,7 +92,6 @@
 		15DA717327AD516F00B26BDF /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		15DA717527AECA6E00B26BDF /* LunchNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchNotificationController.swift; sourceTree = "<group>"; };
 		15DA717727AECA8A00B26BDF /* LunchNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchNotificationView.swift; sourceTree = "<group>"; };
-		5C3210A427AEF9CD00AD582F /* SchedulingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingView.swift; sourceTree = "<group>"; };
 		5C3210A627AF07FB00AD582F /* ScheduleNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNotificationView.swift; sourceTree = "<group>"; };
 		5C6B675E27BC2F6900DAADE8 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		5C6B676027BC64D400DAADE8 /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
@@ -194,7 +192,6 @@
 				5C91879C27A35B9C0097DCB0 /* NotificationController.swift */,
 				15DA717527AECA6E00B26BDF /* LunchNotificationController.swift */,
 				15DA717727AECA8A00B26BDF /* LunchNotificationView.swift */,
-				5C3210A427AEF9CD00AD582F /* SchedulingView.swift */,
 				5C6B676027BC64D400DAADE8 /* EventsList.swift */,
 				5C3210A627AF07FB00AD582F /* ScheduleNotificationView.swift */,
 				1501FCFF27AF24FF0084CB40 /* ScheduleNotificationController.swift */,
@@ -418,7 +415,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C3210A527AEF9CD00AD582F /* SchedulingView.swift in Sources */,
 				5CA8D39C27B09EE900D66A14 /* MidView.swift in Sources */,
 				1501FD0027AF24FF0084CB40 /* ScheduleNotificationController.swift in Sources */,
 				5C91879D27A35B9C0097DCB0 /* NotificationController.swift in Sources */,
