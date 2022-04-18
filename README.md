@@ -87,6 +87,14 @@ A minimal watch app that makes the flow of the school day conveniently available
 - Shows the Cycle Day and the block order
 - (Supports `Modular Small`, `Graphic Circular`)
 
+<!-- ### Date and Day
+- Shows the date and the Cycle Day
+- (Supports `Modular Small`, `Graphic Circular`)
+
+### Date and Blocks
+- Shows the date and the block order
+- (Supports `Modular Small`, `Graphic Circular`) -->
+
 ### Day and Next Class
 - Shows the Cycle Day and the next block
 - (Supports `Utilitarian Small Flat`, `Circular Small`)
