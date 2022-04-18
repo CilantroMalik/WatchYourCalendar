@@ -27,7 +27,6 @@ struct EventView: View {
                 Text(ev.getTime()).multilineTextAlignment(.center)
                 if ev.getRoom() != "e" {Text(ev.getRoom()).italic().multilineTextAlignment(.center)}
                 Text(getOffsetDate()).italic().multilineTextAlignment(.center)
-                if ev.getRoom() != "e" {Text(ev.getRoom()).italic().foregroundColor(Color(UIColor.lightGray))}
                 ev.hasNotification ?  Text("Notifications on").fontWeight(.heavy) : Text("Notifications off").italic().foregroundColor(Color(UIColor.lightGray))
             }
             Divider().padding(.vertical, 5)
