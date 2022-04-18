@@ -45,12 +45,12 @@ A minimal watch app that makes the flow of the school day conveniently available
 
 ### Notifications:
 - Morning Notification goes off at 8:00
-- Lunch Notification goes off at 12:15 or 13:10, depends on first/second lunch
+- Lunch Notification goes off at 12:15 or 13:10, depending on first/second lunch
 - Event Notifications go off three minutes before the block of that notification
 
 
 ## Views Features
-### Content View:
+### Main View (Homepage):
 ###### Default:
 - Shows: Day, Next Class, Time until that class, Date, Block Order, `Today` Button (Brings you to Day View)
 
@@ -60,24 +60,25 @@ A minimal watch app that makes the flow of the school day conveniently available
 
 ###### Day Travel (Horizontal Swiping)
 - Shows: Day, Relative Day, Date, Block Order, `View Day` Button (Brings you to Day View for that day)
+- Double tap screen to return to today
 
-### Day View:
+### Today View:
 - Shows: Day, Date, Relative Day (if Day Travelling), each class and their times (click to bring to Mid View)
 
-### Mid View:
+### Block Overview:
 - Shows: Block, Day, Block time, Date, Events List (click each event to bring you to Event View), `Add Event` Button (Creates a New Event), Label Picker (`Test`, `Quiz` for classes; `entirety`, `1st third`, `2nd third`, `3rd third` for frees)
 
-### Event View:
+### Event Details:
 - Shows: Event Label, Day, Block, Time, Room, Date, Notifications status (on/off), Options: `Delete Event` (deletes event), `Be notified!` (sets notifications on)
 
 
-### Morning Notification View:
+### Morning Notification:
 - Shows: Day, List of classes, List of events
 
-### Post-Lunch Notification View:
+### Post-Lunch Notification:
 - Shows: 10 minutes until next class and what it is
 
-### Event Notification View
+### Event Notification:
 - Shows: Type of event, event label, event day & block, event time, event room (if applicable), positive message (if applicable)
 
 ## Complications List
