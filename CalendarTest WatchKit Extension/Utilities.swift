@@ -491,6 +491,32 @@ func getMorningActivity() -> String {
         return "error... lul"
     }
 }
+func getShortMorningActivity() -> String {
+    var date = Date()
+    let cal = Calendar.current
+    if globalOffset != 0 {
+        date = cal.date(byAdding: .day, value: globalOffset, to: date)!
+    }
+    let weekday = cal.component(.weekday, from: date)
+    switch weekday {
+    case 1:
+        return "None"
+    case 2:
+        return "Comm. Meet."
+    case 3:
+        return "Clubs"
+    case 4:
+        return "Advisory"
+    case 5:
+        return "Clubs"
+    case 6:
+        return "Class Mt."
+    case 7:
+        return "None"
+    default:
+        return "error... lul"
+    }
+}
 func schoolDone() -> Bool{
     let date = Date()
     let cal = Calendar.current
@@ -678,7 +704,7 @@ func compLongNextClass(date: Date) -> String {
     } else if timeIsBeforeBlockBegins(date: date, block: 0){
         return "First: \(classes[cycleDay]![0])"
     } else if timeIsBeforeBlockBegins(date: date, block: 1){
-        return "Next: \(getMorningActivity())"
+        return "Next: \(getShortMorningActivity())"
     } else if timeIsBeforeBlockBegins(date: date, block: 2){
         return "Next: \(classes[cycleDay]![1])"
     } else if timeIsBeforeBlockBegins(date: date, block: 3){
