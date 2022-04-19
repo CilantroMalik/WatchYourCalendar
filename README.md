@@ -17,6 +17,9 @@ A minimal watch app that makes the flow of the school day conveniently available
 
 -e!
 
+## Video!
+
+https://www.youtube.com/watch?v=NCk36hA_xaY
 
 ## What’s next?
 - beta testing!!
