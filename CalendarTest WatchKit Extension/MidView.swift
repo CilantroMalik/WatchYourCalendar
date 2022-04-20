@@ -149,7 +149,6 @@ struct MidView: View {
                     Text("No Events").font(.title3).fontWeight(.bold).multilineTextAlignment(.center).padding(.bottom, 5)
                 } else {
                     ForEach(eventsThisBlock(), id: \.id) { item in
-                        //NavigationLink(destination: {EventView(ev: item)}, label: {Text(item.label).fontWeight(.bold)}).buttonStyle(PlainButtonStyle())
                         Button(action: { evEditManager.eventToEdit = item; evEditManager.isEditing.toggle() }, label: { Text(item.label) })
                     }
                 }
