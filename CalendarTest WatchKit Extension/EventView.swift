@@ -36,7 +36,7 @@ struct EventView: View {
                 UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [ev.toString()])
                 presentationMode.wrappedValue.dismiss()
             }, label: {Text("Delete Event").fontWeight(.heavy).multilineTextAlignment(.center)})
-            if !ev.hasNotification { //so the button disappears after scheduling notifications
+            if !ev.hasNotification {
                 Button(action: {
                     for i in 1...EventsListObs.evList[ev.time.month!-1][ev.time.day!]!.count {
                         if EventsListObs.evList[ev.time.month!-1][ev.time.day!]![i-1].isEqual(ev) { EventsListObs.evList[ev.time.month!-1][ev.time.day!]![i-1].hasNotification = true }
