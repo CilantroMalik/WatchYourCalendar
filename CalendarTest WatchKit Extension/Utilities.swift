@@ -10,6 +10,43 @@ import WatchKit
 import ClockKit
 import UserNotifications
 
+
+//var userData: [String: Any] = Connectivity.shared.data {
+//    didSet {
+//        print("Received user data from WatchConnectivity")
+//        for i in 0...7 {
+//            lunchBlockFirst[i+1] = [userData["firstLunch"]![i]]
+//        }
+//        let (a, b, c, d, e, f, g, h] = userData["classes"]!
+//        classes[1] = [c, e, d, a, b, "Sports/Go Home"]
+//        classes[2] = [f, g, h, a, b, "Sports/Go Home"]
+//        classes[3] = [c, d, f, e, g, "Sports/Go Home"]
+//        classes[4] = [h, a, b, c, d, "Sports/Go Home"]
+//        classes[5] = [g, a, h, e, f, "Sports/Go Home"]
+//        classes[6] = [b, c, d, e, f, "Sports/Go Home"]
+//        classes[7] = [a, h, g, b, c, "Sports/Go Home"]
+//        classes[8] = [d, e, f, g, h, "Sports/Go Home"]
+//    }
+//}
+
+
+var cancellable = Connectivity.shared.$data.sink() {
+    print("Received user data update")
+    for i in 0...7 {
+        lunchBlockFirst[i+1] = [$0["firstLunch"]![i]]
+    }
+    let (a, b, c, d, e, f, g, h] = $0["classes"]!
+    classes[1] = [c, e, d, a, b, "Sports/Go Home"]
+    classes[2] = [f, g, h, a, b, "Sports/Go Home"]
+    classes[3] = [c, d, f, e, g, "Sports/Go Home"]
+    classes[4] = [h, a, b, c, d, "Sports/Go Home"]
+    classes[5] = [g, a, h, e, f, "Sports/Go Home"]
+    classes[6] = [b, c, d, e, f, "Sports/Go Home"]
+    classes[7] = [a, h, g, b, c, "Sports/Go Home"]
+    classes[8] = [d, e, f, g, h, "Sports/Go Home"]
+}
+
+
 func scheduleRefresh() {
     let refreshTime = Date().advanced(by: 900)
     WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: refreshTime, userInfo: nil, scheduledCompletion: {_ in print("Scheduled task") })
