@@ -244,8 +244,26 @@ var classes: [Int: [String]] = [
     6: ["Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)", "English (E)", "Latin (F)","Tennis"],
     7: ["Free (A)", "Precalc (H)", "Spanish (G)", "Publ. Sp. (B)", "Comp Sci (C)","Tennis"],
     8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Tennis"]
+//    0: ["","","","","",""],
+//        1: ["Comp Sci (C)", "Chinese (E)", "History (D)", "English (A)", "Algebra (B)","Golf"],
+//        2: ["Free (F)", "Life Skills (G)", "Biology (H)", "English (A)", "Algebra (B)","Golf"],
+//        3: ["Comp Sci (C)", "History (D)", "Free (F)", "Chinese (E)", "Study Hall (G)", "Golf"],
+//        4: ["Biology (H)", "English (A)", "Algebra (B)", "Comp Sci (C)", "History (D)","Golf"],
+//        5: ["Free (G)", "English (A)", "Biology (H)", "Chinese (E)", "Free (F)","Golf"],
+//        6: ["Algebra (B)", "Comp Sci (C)", "History (D)", "Chinese (E)", "Free (F)","Golf"],
+//        7: ["English (A)", "Biology (H)", "Free (G)", "Algebra (B)", "Comp Sci (C)","Golf"],
+//        8: ["History (D)", "Chinese (E)", "Free (F)", "Study Hall (G)", "Biology (H)","Golf"]
 ]
 var rooms: [Int: [String]] = [
+//    0: ["","","","",""],
+//    1: ["US Room 312", "US Lib 1", "US Room 206", "US Lib 4", "US Room 205"],
+//    2: ["e", "US Room 131", "US Room 307", "US Lib 4", "US Room 205"],
+//    3: ["US Room 312", "US Room 206", "e", "US Lib 1", "US Library"],
+//    4: ["US Room 307", "US Lib 4", "US Room 205", "US Room 312", "US Room 206"],
+//    5: ["e", "US Lib 4", "US Room 307", "US Lib 1", "US Room 206"],
+//    6: ["US Room 205", "US Room 312", "US Room 206", "US Lib 1", "e"],
+//    7: ["US Lib 4", "US Room 307", "e", "US Room 205", "US Room 312"],
+//    8: ["US Room 206", "US Lib 1", "e", "US Library", "US Room 307"]
     0: ["","","","",""],
     1: ["US Room 312", "US Room 211", "US Room 334", "US Room 102", "US Room 104"],
     2: ["US Room 306", "US Room 104", "US Room 308", "ACOB1", "US Room 104"],
