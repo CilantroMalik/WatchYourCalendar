@@ -31,11 +31,13 @@ import UserNotifications
 
 
 var cancellable = Connectivity.shared.$data.sink() {
-    print("Received user data update")
+    var lunches = $0["firstLunch"]! as! [Bool]
+    var classArr = $0["classes"]! as! [String]
+    print("Received user data update. THIS MEANS THE DATA REACHED THE WATCH")
     for i in 0...7 {
-        lunchBlockFirst[i+1] = [$0["firstLunch"]![i]]
+        lunchBlockFirst[i+1] = [lunches[i]]
     }
-    let (a, b, c, d, e, f, g, h] = $0["classes"]!
+    let (a, b, c, d, e, f, g, h) = classArr
     classes[1] = [c, e, d, a, b, "Sports/Go Home"]
     classes[2] = [f, g, h, a, b, "Sports/Go Home"]
     classes[3] = [c, d, f, e, g, "Sports/Go Home"]
