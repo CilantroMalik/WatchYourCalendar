@@ -33,7 +33,7 @@ import UserNotifications
 var cancellable = Connectivity.shared.$data.sink() {
     var lunches = $0["firstLunch"]! as! [Bool]
     var classArr = $0["classes"]! as! [String]
-    print("Received user data update. THIS MEANS THE DATA REACHED THE WATCH")
+    print("Received user data update. THIS MEANS THE DATA REACHED THE WATCH :)")
     for i in 0...7 {
         lunchBlockFirst[i+1] = [lunches[i]]
     }
@@ -46,6 +46,40 @@ var cancellable = Connectivity.shared.$data.sink() {
     classes[6] = [b, c, d, e, f, "Sports/Go Home"]
     classes[7] = [a, h, g, b, c, "Sports/Go Home"]
     classes[8] = [d, e, f, g, h, "Sports/Go Home"]
+    
+    UserDefaults.standard.set(lunches, "firstLunch")
+    UserDefaults.standard.set(classArr, "classes")
+    
+    var ud = UserData()
+    ud.updateClasses(classes)
+    ud.updateLunch(lunchBlockFirst)
+}
+
+
+class UserData: ObservableObject {
+    // TODO replace this with generic placeholder
+    static var classes: [Int: [String]] = [
+        0: ["","","","","",""],
+        1: ["Comp Sci (C)", "English (E)", "Physics (D)", "Free/OPI (A)", "Publ. Sp. (B)","Tennis"],
+        2: ["Latin (F)", "Spanish (G)", "Precalc (H)", "Math Team (A)", "Publ. Sp. (B)","Tennis"],
+        3: ["Comp Sci (C)", "Physics (D)", "Latin (F)", "English (E)", "Spanish (G)", "Tennis"],
+        4: ["Precalc (H)", "Free (A)", "Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)","Tennis"],
+        5: ["Spanish (G)", "Math Team (A)", "Precalc (H)", "English (E)", "Latin (F)","Tennis"],
+        6: ["Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)", "English (E)", "Latin (F)","Tennis"],
+        7: ["Free (A)", "Precalc (H)", "Spanish (G)", "Publ. Sp. (B)", "Comp Sci (C)","Tennis"],
+        8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Tennis"]
+    ]
+    static var lunchBlockFirst: [Int: [Bool]] = [0: [false], 1: [false], 2: [false], 3: [false], 4:[false], 5: [false], 6: [false], 7: [false], 8: [false]]
+    
+    func updateClasses(_ new: [Int: [String]]) {
+        UserData.classes = new
+        objectWillChange.send()
+    }
+    
+    func updateLunch(_ new: [Int: [Bool]]) {
+        UserData.lunchBlockFirst = new
+        objectWillChange.send()
+    }
 }
 
 
