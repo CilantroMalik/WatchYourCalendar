@@ -50,6 +50,26 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         }
         print("-- After --")
         print(EventsListObs.evList)
+        
+        guard let temp = ud.array(forKey: "firstLunch") else { return }
+        temp = temp as! [Bool]
+        for i in 0...7 {
+            lunchBlockFirst[i+1] = [temp[i]]
+        }
+        guard let temp = ud.stringArray(forKey: "classes") else { return }
+        let (a, b, c, d, e, f, g, h) = temp
+        classes[1] = [c, e, d, a, b, "Sports/Go Home"]
+        classes[2] = [f, g, h, a, b, "Sports/Go Home"]
+        classes[3] = [c, d, f, e, g, "Sports/Go Home"]
+        classes[4] = [h, a, b, c, d, "Sports/Go Home"]
+        classes[5] = [g, a, h, e, f, "Sports/Go Home"]
+        classes[6] = [b, c, d, e, f, "Sports/Go Home"]
+        classes[7] = [a, h, g, b, c, "Sports/Go Home"]
+        classes[8] = [d, e, f, g, h, "Sports/Go Home"]
+        
+        let userData = UserData()
+        userData.updateClasses(classes)
+        userData.updateLunch(lunchBlockFirst)
     }
     
     func applicationWillResignActive() {
