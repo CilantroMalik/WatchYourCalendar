@@ -37,7 +37,14 @@ var cancellable = Connectivity.shared.$data.sink() {
     for i in 0...7 {
         lunchBlockFirst[i+1] = [lunches[i]]
     }
-    let (a, b, c, d, e, f, g, h) = classArr
+    let a = classArr[0]
+    let b = classArr[1]
+    let c = classArr[2]
+    let d = classArr[3]
+    let e = classArr[4]
+    let f = classArr[5]
+    let g = classArr[6]
+    let h = classArr[7]
     classes[1] = [c, e, d, a, b, "Sports/Go Home"]
     classes[2] = [f, g, h, a, b, "Sports/Go Home"]
     classes[3] = [c, d, f, e, g, "Sports/Go Home"]
@@ -47,8 +54,8 @@ var cancellable = Connectivity.shared.$data.sink() {
     classes[7] = [a, h, g, b, c, "Sports/Go Home"]
     classes[8] = [d, e, f, g, h, "Sports/Go Home"]
     
-    UserDefaults.standard.set(lunches, "firstLunch")
-    UserDefaults.standard.set(classArr, "classes")
+    UserDefaults.standard.set(lunches, forKey: "firstLunch")
+    UserDefaults.standard.set(classArr, forKey: "classes")
     
     var ud = UserData()
     ud.updateClasses(classes)

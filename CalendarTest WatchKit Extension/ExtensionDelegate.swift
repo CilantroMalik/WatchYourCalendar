@@ -51,13 +51,20 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         print("-- After --")
         print(EventsListObs.evList)
         
-        guard let temp = ud.array(forKey: "firstLunch") else { return }
+        guard var temp = ud.array(forKey: "firstLunch") else { return }
         temp = temp as! [Bool]
         for i in 0...7 {
-            lunchBlockFirst[i+1] = [temp[i]]
+            lunchBlockFirst[i+1] = [temp[i] as! Bool]
         }
         guard let temp = ud.stringArray(forKey: "classes") else { return }
-        let (a, b, c, d, e, f, g, h) = temp
+        let a = temp[0]
+        let b = temp[1]
+        let c = temp[2]
+        let d = temp[3]
+        let e = temp[4]
+        let f = temp[5]
+        let g = temp[6]
+        let h = temp[7]
         classes[1] = [c, e, d, a, b, "Sports/Go Home"]
         classes[2] = [f, g, h, a, b, "Sports/Go Home"]
         classes[3] = [c, d, f, e, g, "Sports/Go Home"]
