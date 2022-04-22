@@ -17,6 +17,7 @@ final class Connectivity: NSObject, ObservableObject {
         guard WCSession.isSupported() else { return }
         WCSession.default.delegate = self
         WCSession.default.activate()
+        print("Activating Watch Connectivity session")
     }
     
     public func send(obj: [String: Any]) {
@@ -39,7 +40,7 @@ extension Connectivity: WCSessionDelegate {
     
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any] = [:]) {
         self.data = userInfo
-        print("Setting data from session")
+        print("Setting data from session: \(self.data)")
     }
 
     #if os(iOS)

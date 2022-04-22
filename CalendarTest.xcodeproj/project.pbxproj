@@ -12,6 +12,7 @@
 		15DA717427AD516F00B26BDF /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA717327AD516F00B26BDF /* ExtensionDelegate.swift */; };
 		15DA717627AECA6E00B26BDF /* LunchNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA717527AECA6E00B26BDF /* LunchNotificationController.swift */; };
 		15DA717827AECA8A00B26BDF /* LunchNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA717727AECA8A00B26BDF /* LunchNotificationView.swift */; };
+		15E497772812C7A70016D16C /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158165712810FB55000F135D /* Connectivity.swift */; };
 		5C3210A727AF07FB00AD582F /* ScheduleNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3210A627AF07FB00AD582F /* ScheduleNotificationView.swift */; };
 		5C6B675F27BC2F6900DAADE8 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6B675E27BC2F6900DAADE8 /* EventView.swift */; };
 		5C6B676127BC64D400DAADE8 /* EventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6B676027BC64D400DAADE8 /* EventsList.swift */; };
@@ -613,6 +614,7 @@
 			files = (
 				5C827AF92812439C004DD3D9 /* ContentView.swift in Sources */,
 				5C827AF72812439C004DD3D9 /* whateverApp.swift in Sources */,
+				15E497772812C7A70016D16C /* Connectivity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
