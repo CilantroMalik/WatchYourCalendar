@@ -67,14 +67,13 @@ class UserData: ObservableObject {
     // TODO replace this with generic placeholder
     static var classes: [Int: [String]] = [
         0: ["","","","","",""],
-        1: ["Comp Sci (C)", "English (E)", "Physics (D)", "Free/OPI (A)", "Publ. Sp. (B)","Tennis"],
-        2: ["Latin (F)", "Spanish (G)", "Precalc (H)", "Math Team (A)", "Publ. Sp. (B)","Tennis"],
-        3: ["Comp Sci (C)", "Physics (D)", "Latin (F)", "English (E)", "Spanish (G)", "Tennis"],
-        4: ["Precalc (H)", "Free (A)", "Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)","Tennis"],
-        5: ["Spanish (G)", "Math Team (A)", "Precalc (H)", "English (E)", "Latin (F)","Tennis"],
-        6: ["Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)", "English (E)", "Latin (F)","Tennis"],
-        7: ["Free (A)", "Precalc (H)", "Spanish (G)", "Publ. Sp. (B)", "Comp Sci (C)","Tennis"],
-        8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Tennis"]
+        1: [" (A)", " (B)", " (C)", " (Z1)", " (Z2)"," (D)"],
+        2: [" (E)", " (F)", " (G)", " (Z1)", " (Z2)"," (H)"],
+        3: [" (D)", " (A)", " (B)", " (Z1)", " (Z2)"," (C)"],
+        4: [" (H)", " (E)", " (F)", " (Z1)", " (Z2)"," (G)"],
+        5: [" (A)", " (B)", " (C)", " (Z1)", " (Z2)"," (D)"],
+        6: [" (A)", " (B)", " (C)", " (Z1)", " (Z2)"," (D)"],
+        
     ]
     static var lunchBlockFirst: [Int: [Bool]] = [0: [false], 1: [false], 2: [false], 3: [false], 4:[false], 5: [false], 6: [false], 7: [false], 8: [false]]
     
@@ -173,18 +172,30 @@ func scheduleLunchNotification() {
 
 public var nextClass = 0
 var dateToCycleDay: [[Int: Int]] = [
-    // January
-    [1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0, 14:0, 15:0, 16:0, 17:0, 18:0, 19:0, 20:0, 21:0, 22:0, 23:0, 24:7, 25:8, 26:1, 27:2, 28:3, 29:0, 30:0, 31:4],
-    // February
-    [1:5, 2:6, 3:7, 4:8, 5:0, 6:0, 7:1, 8:2, 9:3, 10:4, 11:5, 12:0, 13:0, 14:6, 15:7, 16:8, 17:1, 18:0, 19:0, 20:0, 21:0, 22:2, 23:3, 24:4, 25:5, 26:0, 27:0, 28:6],
-    // March
-    [1:7, 2:8, 3:1, 4:2, 5:0, 6:0, 7:3, 8:4, 9:5, 10:6, 11:7, 12:0, 13:0, 14:0, 15:0, 16:0, 17:0, 18:0, 19:0, 20:0, 21:0, 22:0, 23:0, 24:0, 25:0, 26:0, 27:0, 28:8, 29:1, 30:2, 31:3],
-    // April
-    [1:4, 2:0, 3:0, 4:5, 5:6, 6:7, 7:8, 8:1, 9:0, 10:0, 11:2, 12:3, 13:4, 14:5, 15:0, 16:0, 17:0, 18:6, 19:7, 20:8, 21:1, 22:2, 23:0, 24:0, 25:3, 26:4, 27:5, 28:6, 29:7, 30:0],
-    // May
-    [1:0, 2:8, 3:1, 4:2, 5:3, 6:4, 7:0, 8:0, 9:5, 10:6, 11:7, 12:8, 13:1, 14:0, 15:0, 16:2, 17:3, 18:4, 19:5, 20:6, 21:0, 22:0, 23:7, 24:8, 25:1, 26:2, 27:3, 28:0, 29:0, 30:0, 31:4],
-    // June
-    [1:5, 2:6, 3:7, 4:0, 5:0, 6:8, 7:1, 8:0]
+    // January 2023
+    [1:0, 2:0, 3:5, 4:6, 5:1, 6:2, 7:0, 8:0, 9:3, 10:4, 11:5, 12:6, 13:1, 14:0, 15:0, 16:0, 17:2, 18:3, 19:4, 20:5, 21:0, 22:0, 23:6, 24:1, 25:2, 26:3, 27:4, 28:0, 29:0, 30:5, 31:6],
+    //February 2023
+    [1:1, 2:2, 3:3, 4:0, 5:0, 6:4, 7:5, 8:6, 9:1, 10:2, 11:0, 12:0, 13:3, 14:4, 15:5, 16:6, 17:0, 18:0, 19:0, 20:0, 21:1, 22:2, 23:3, 24:4, 25:0, 26:0, 27:5, 28:6],
+    //March 2023
+    [1:1, 2:2, 3:3, 4:0, 5:0, 6:4, 7:5, 8:6, 9:1, 10:2, 11:0, 12:0, 13:0, 14:0, 15:0, 16:0, 17:0, 18:0, 19:0, 20:0, 21:0, 22:0, 23:0, 24:0, 25:0, 26:0, 27:3, 28:4, 29:5, 30:6, 31:1],
+    //April 2023
+    [1:0, 2:0, 3:2, 4:3, 5:4, 6:5, 7:0, 8:0, 9:0, 10:6, 11:1, 12:2, 13:3, 14:4, 15:0, 16:0, 17:5, 18:6, 19:1, 20:2, 21:3, 22:0, 23:0, 24:4, 25:5, 26:6, 27:1, 28:2, 29:0, 30:0],
+    //May 2023
+    [1:3, 2:4, 3:5, 4:6, 5:1, 6:0, 7:0, 8:2, 9:3, 10:4, 11:5, 12:6, 13:0, 14:0, 15:1, 16:2, 17:3, 18:4, 19:5, 20:0, 21:0, 22:6, 23:1, 24:2, 25:3, 26:4, 27:0, 28:0, 29:0, 30:5, 31:6],
+    // June 2023
+    [1:1, 2:2, 3:0, 4:0, 5:3, 6:4, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0, 14:0, 15:0, 16:0, 17:0, 18:0, 19:0, 20:0, 21:0, 22:0, 23:0, 24:0, 25:0, 26:0, 27:0, 28:0, 29:0, 30:0, 31:0],
+    //July
+    [1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0, 14:0, 15:0, 16:0, 17:0, 18:0, 19:0, 20:0, 21:0, 22:0, 23:0, 24:0, 25:0, 26:0, 27:0, 28:0, 29:0, 30:0, 31:0],
+    //August
+    [1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:0, 10:0, 11:0, 12:0, 13:0, 14:0, 15:0, 16:0, 17:0, 18:0, 19:0, 20:0, 21:0, 22:0, 23:0, 24:0, 25:0, 26:0, 27:0, 28:0, 29:0, 30:0, 31:0],
+    //September 2022
+    [1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 8:0, 9:1, 10:0, 11:0, 12:2, 13:3, 14:4, 15:5, 16:6, 17:0, 18:0, 19:1, 20:2, 21:3, 22:4, 23:5, 24:0, 25:0, 26:0, 27:6, 28:1, 29:2, 30:3],
+    //October 2022
+    [1:0, 2:0, 3:4, 4:5, 5:0, 6:6, 7:1, 8:0, 9:0, 10:0, 11:2, 12:3, 13:4, 14:5, 15:0, 16:0, 17:6, 18:1, 19:2, 20:3, 21:4, 22:0, 23:0, 24:5, 25:6, 26:1, 27:2, 28:3, 29:0, 30:0, 31:4],
+    //November 2022
+    [1:5, 2:6, 3:1, 4:2, 5:0, 6:0, 7:3, 8:4, 9:5, 10:6, 11:1, 12:0, 13:0, 14:2, 15:3, 16:4, 17:5, 18:6, 19:0, 20:0, 21:1, 22:2, 23:0, 24:0, 25:0, 26:0, 27:0, 28:0, 29:3, 30:4],
+    //December 2022
+    [1:5, 2:6, 3:0, 4:0, 5:1, 6:2, 7:3, 8:4, 9:5, 10:0, 11:0, 12:6, 13:1, 14:2, 15:3, 16:4, 17:0, 18:0, 19:0, 20:0, 21:0, 22:0, 23:0, 24:0, 25:0, 26:0, 27:0, 28:0, 29:0, 30:0, 31:0],
 ]
 var cycleDay : Int {
     get {
@@ -267,57 +278,17 @@ func getRelativeDayText() -> String {
         return ""
     }
 }
-var classes: [Int: [String]] = [
-    //    0: ["","","","","",""],
-    //    1: ["Comp Sci (C)", "English (E)", "Physics (D)", "Free/OPI (A)", "Publ. Sp. (B)","Go Home!"],
-    //    2: ["Latin (F)", "Spanish (G)", "Precalc (H)", "Math Team (A)", "Publ. Sp. (B)","Go Home!"],
-    //    3: ["Comp Sci (C)", "Physics (D)", "Latin (F)", "English (E)", "Spanish (G)", "Fitness Center"],
-    //    4: ["Precalc (H)", "Free (A)", "Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)","Go Home!"],
-    //    5: ["Spanish (G)", "Math Team (A)", "Precalc (H)", "English (E)", "Latin (F)","Go Home!"],
-    //    6: ["Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)", "English (E)", "Latin (F)","Fitness Center"],
-    //    7: ["Free (A)", "Precalc (H)", "Spanish (G)", "Publ. Sp. (B)", "Comp Sci (C)","Go Home!"],
-    //    8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Fitness Center"]
-    //it is now the post-fitness-centre era
-    0: ["","","","","",""],
-    1: ["Comp Sci (C)", "English (E)", "Physics (D)", "Free/OPI (A)", "Publ. Sp. (B)","Tennis"],
-    2: ["Latin (F)", "Spanish (G)", "Precalc (H)", "Math Team (A)", "Publ. Sp. (B)","Tennis"],
-    3: ["Comp Sci (C)", "Physics (D)", "Latin (F)", "English (E)", "Spanish (G)", "Tennis"],
-    4: ["Precalc (H)", "Free (A)", "Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)","Tennis"],
-    5: ["Spanish (G)", "Math Team (A)", "Precalc (H)", "English (E)", "Latin (F)","Tennis"],
-    6: ["Publ. Sp. (B)", "Comp Sci (C)", "Physics (D)", "English (E)", "Latin (F)","Tennis"],
-    7: ["Free (A)", "Precalc (H)", "Spanish (G)", "Publ. Sp. (B)", "Comp Sci (C)","Tennis"],
-    8: ["Physics (D)", "English (E)", "Latin (F)", "Spanish (G)", "Precalc (H)","Tennis"]
-//    0: ["","","","","",""],
-//        1: ["Comp Sci (C)", "Chinese (E)", "History (D)", "English (A)", "Algebra (B)","Golf"],
-//        2: ["Free (F)", "Life Skills (G)", "Biology (H)", "English (A)", "Algebra (B)","Golf"],
-//        3: ["Comp Sci (C)", "History (D)", "Free (F)", "Chinese (E)", "Study Hall (G)", "Golf"],
-//        4: ["Biology (H)", "English (A)", "Algebra (B)", "Comp Sci (C)", "History (D)","Golf"],
-//        5: ["Free (G)", "English (A)", "Biology (H)", "Chinese (E)", "Free (F)","Golf"],
-//        6: ["Algebra (B)", "Comp Sci (C)", "History (D)", "Chinese (E)", "Free (F)","Golf"],
-//        7: ["English (A)", "Biology (H)", "Free (G)", "Algebra (B)", "Comp Sci (C)","Golf"],
-//        8: ["History (D)", "Chinese (E)", "Free (F)", "Study Hall (G)", "Biology (H)","Golf"]
-]
+var classes: [Int: [String]] = [:]//TODO: input
 var rooms: [Int: [String]] = [
-//    0: ["","","","",""],
-//    1: ["US Room 312", "US Lib 1", "US Room 206", "US Lib 4", "US Room 205"],
-//    2: ["e", "US Room 131", "US Room 307", "US Lib 4", "US Room 205"],
-//    3: ["US Room 312", "US Room 206", "e", "US Lib 1", "US Library"],
-//    4: ["US Room 307", "US Lib 4", "US Room 205", "US Room 312", "US Room 206"],
-//    5: ["e", "US Lib 4", "US Room 307", "US Lib 1", "US Room 206"],
-//    6: ["US Room 205", "US Room 312", "US Room 206", "US Lib 1", "e"],
-//    7: ["US Lib 4", "US Room 307", "e", "US Room 205", "US Room 312"],
-//    8: ["US Room 206", "US Lib 1", "e", "US Library", "US Room 307"]
     0: ["","","","",""],
-    1: ["US Room 312", "US Room 211", "US Room 334", "US Room 102", "US Room 104"],
-    2: ["US Room 306", "US Room 104", "US Room 308", "ACOB1", "US Room 104"],
-    3: ["US Room 312", "US Room 334", "US Room 306", "US Room 211", "US Room 104"],
-    4: ["US Room 308", "Free", "US Room 104", "US Room 312", "US Room 334"],
-    5: ["US Room 104", "ACOB1", "US Room 308", "US Room 211", "US Room 306"],
-    6: ["US Room 104", "US Room 312", "US Room 334", "US Room 211", "US Room 306"],
-    7: ["Free", "US Room 308", "US Room 104", "US Room 104", "US Room 312"],
-    8: ["US Room 334", "US Room 211", "US Room 306", "US Room 104", "US Room 308"]
+    1: ["US Room 100", "US Room 100", "US Room 100", "US Room 100", "US Room 100"],
+    2: ["US Room 100", "US Room 100", "US Room 100", "US Room 100", "US Room 100"],
+    3: ["US Room 100", "US Room 100", "US Room 100", "US Room 100", "US Room 100"],
+    4: ["US Room 100", "US Room 100", "US Room 100", "US Room 100", "US Room 100"],
+    5: ["US Room 100", "US Room 100", "US Room 100", "US Room 100", "US Room 100"],
+    6: ["US Room 100", "US Room 100", "US Room 100", "US Room 100", "US Room 100"]
 ]
-func getClassess(day: Int,block: Int) -> String{
+func getClassess(day: Int,block: Int) -> String{//TODO: input
     switch block {
     case 0:
         return classes[day]![0]
@@ -342,10 +313,10 @@ func getClassess(day: Int,block: Int) -> String{
     }
 }
 var blocks: [Int: [String]] = [
-    0: ["","","","",""], 1: ["C","E","D","A","B"], 2: ["F","G","H","A","B"], 3:["C","D","F","E","G"], 4:["H","A","B","C","D"], 5:["G","A","H","E","F"], 6:["B","C","D","E","F"], 7:["A","H","G","B","C"], 8:["D","E","F","G","H"]
+    0: ["","","",""], 1: ["A","B","C","D"], 2: ["E","F","G","H"], 3: ["D","A","B","C"], 4: ["H","E","F","G"], 5: ["C","D","A","B"], 6: ["G","H","E","F"]
 ]
 var blockOrder: [Int: [String]] = [
-    0: ["—"], 1: ["CEDAB"], 2: ["FGHAB"], 3:["CDFEG"], 4:["HABCD"], 5:["GAHEF"], 6:["BCDEF"], 7:["AHGBC"], 8:["DEFGH"]
+    0: ["—"], 1: ["ABCD"], 2: ["EFGH"], 3:["DABC"], 4:["HEFG"], 5:["CDAB"], 6:["GHEF"]
 ]
 func isAfter(hour1:Int,minute1: Int,hour2:Int ,minute2:Int) -> Bool{ //is time2 after time1
     if hour2>hour1{
