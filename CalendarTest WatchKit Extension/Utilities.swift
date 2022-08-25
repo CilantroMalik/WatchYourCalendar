@@ -50,7 +50,7 @@ var cancellable = Connectivity.shared.$data.sink() {
     var sportsArr = $0["classes"]! as! [String]
     print("Received user data update. THIS MEANS THE DATA REACHED THE WATCH :)")
     for i in 0...5 {
-        ZLunch[i+1] = [lunches[i]]
+        ZLunch[i+1] = lunches[i]
         sports[i] = sportsArr[i]
     }
     let a = classArr[0]
@@ -84,23 +84,23 @@ var cancellable = Connectivity.shared.$data.sink() {
 class UserData: ObservableObject {
     // TODO replace this with generic placeholder
     static var classes: [Int: [String]] = [
-        0: ["","","","","",""],
-        1: ["(A Block)", "(B Block)", "(C Block)", "(Z1)", "(Z2)","(D Block)"],
-        2: ["(E Block)", "(F Block)", "(G Block)", "(Z1)", "(Z2)","(H Block)"],
-        3: ["(D Block)", "(A Block)", "(B Block)", "(Z1)", "(Z2)","(C Block)"],
-        4: ["(H Block)", "(E Block)", "(F Block)", "(Z1)", "(Z2)","(G Block)"],
-        5: ["(C Block)", "(D Block)", "(A Block)", "(Z1)", "(Z2)","(B Block)"],
-        6: ["(G Block)", "(H Block)", "(E Block)", "(Z1)", "(Z2)","(F Block)"]
+        0: ["","","","",""],
+        1: ["(A Block)", "(B Block)", "(C Block)", "(Z)","(D Block)"],
+        2: ["(E Block)", "(F Block)", "(G Block)", "(Z)","(H Block)"],
+        3: ["(D Block)", "(A Block)", "(B Block)", "(Z)","(C Block)"],
+        4: ["(H Block)", "(E Block)", "(F Block)", "(Z)","(G Block)"],
+        5: ["(C Block)", "(D Block)", "(A Block)", "(Z)","(B Block)"],
+        6: ["(G Block)", "(H Block)", "(E Block)", "(Z)","(F Block)"]
     ]
     
-    static var ZLunch: [Int: [Int]] = [0: [3], 1: [3], 2: [3], 3: [3], 4:[3], 5: [3], 6: [3]]//Day : 1 = Z1 lunch, 2 = Z2 lunch, 3 = Both lunch
+    static var ZLunch: [Int: Int] = [0: 3, 1: 3, 2: 3, 3: 3, 4:3, 5: 3, 6: 3]//Day : 1 = Z1 lunch, 2 = Z2 lunch, 3 = Both lunch
     static var sports: [String] = ["XC","XC","XC","XC","XC","XC"]
     
     func updateClasses(_ new: [Int: [String]]) {
         UserData.classes = new
         objectWillChange.send()
     }
-    func updateLunch(_ new: [Int: [Int]]) {
+    func updateLunch(_ new: [Int: Int]) {
         UserData.ZLunch = new
         objectWillChange.send()
     }
@@ -153,44 +153,44 @@ func scheduleSportsNotification() {
     }
 }
 
-func scheduleLunchNotification() { //TODO: fix notifications
-    var alreadyScheduled = false
-    UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
-        for request in requests {
-            if request.identifier.starts(with: "lunchNotif") {
-                alreadyScheduled = true
-            }
-        }
-    }
-    if alreadyScheduled { return }
-    let date = Date()
-    let cal = Calendar.current
-    let month = cal.component(.month, from: date)
-    let day = cal.component(.day, from: date)
-    let content = UNMutableNotificationContent()
-    content.title = "Lunch is ending!"
-    content.subtitle = ""
-    content.sound = UNNotificationSound.default
-    content.body = "10 minutes left until your next class."
-    content.categoryIdentifier = "lunch"
-    
-    // enable the line below for testing notifications: shows five seconds after app launch
-    //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 20, repeats: false)
-    for i in 2...6 {
-//        if lunchBlockFirst[(dateToCycleDay[month-1][day - 2 + i]!)]! == [true]{
-        let trigger = (ZLunch[(dateToCycleDay[month-1][day - 2 + i]!)]! == [3]) ? UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 12, minute: 15, weekday: i), repeats: true) : UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 13, minute: 10, weekday: i), repeats: true)
-//        } else {
-//            let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 13, minute: 10, weekday: i), repeats: true)
+//func scheduleLunchNotification() { //TODO: fix notifications
+//    var alreadyScheduled = false
+//    UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+//        for request in requests {
+//            if request.identifier.starts(with: "lunchNotif") {
+//                alreadyScheduled = true
+//            }
 //        }
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
-        
-        // choose a random identifier
-        let request = UNNotificationRequest(identifier: "lunchNotif\(i)", content: content, trigger: trigger)
-        
-        // add our notification request
-        UNUserNotificationCenter.current().add(request)
-    }
-}
+//    }
+//    if alreadyScheduled { return }
+//    let date = Date()
+//    let cal = Calendar.current
+//    let month = cal.component(.month, from: date)
+//    let day = cal.component(.day, from: date)
+//    let content = UNMutableNotificationContent()
+//    content.title = "Lunch is ending!"
+//    content.subtitle = ""
+//    content.sound = UNNotificationSound.default
+//    content.body = "10 minutes left until your next class."
+//    content.categoryIdentifier = "lunch"
+//
+//    // enable the line below for testing notifications: shows five seconds after app launch
+//    //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 20, repeats: false)
+//    for i in 2...6 {
+////        if lunchBlockFirst[(dateToCycleDay[month-1][day - 2 + i]!)]! == [true]{
+//        let trigger = (ZLunch[(dateToCycleDay[month-1][day - 2 + i]!)]! == [3]) ? UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 12, minute: 15, weekday: i), repeats: true) : UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 13, minute: 10, weekday: i), repeats: true)
+////        } else {
+////            let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(calendar: Calendar.current, hour: 13, minute: 10, weekday: i), repeats: true)
+////        }
+////        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+//
+//        // choose a random identifier
+//        let request = UNNotificationRequest(identifier: "lunchNotif\(i)", content: content, trigger: trigger)
+//
+//        // add our notification request
+//        UNUserNotificationCenter.current().add(request)
+//    }
+//}
 
 public var nextClass = 0
 var dateToCycleDay: [[Int: Int]] = [
@@ -298,12 +298,12 @@ func getRelativeDayText() -> String {
     }
 }
 var classes: [Int: [String]] = [
-    1: ["(A Block)", "(B Block)", "(C Block)", "(Z1)", "(Z2)","(D Block)"],
-    2: ["(E Block)", "(F Block)", "(G Block)", "(Z1)", "(Z2)","(H Block)"],
-    3: ["(D Block)", "(A Block)", "(B Block)", "(Z1)", "(Z2)","(C Block)"],
-    4: ["(H Block)", "(E Block)", "(F Block)", "(Z1)", "(Z2)","(G Block)"],
-    5: ["(C Block)", "(D Block)", "(A Block)", "(Z1)", "(Z2)","(B Block)"],
-    6: ["(G Block)", "(H Block)", "(E Block)", "(Z1)", "(Z2)","(F Block)"]
+    1: ["(A Block)", "(B Block)", "(C Block)", "(Z)","(D Block)"],
+    2: ["(E Block)", "(F Block)", "(G Block)", "(Z)","(H Block)"],
+    3: ["(D Block)", "(A Block)", "(B Block)", "(Z)","(C Block)"],
+    4: ["(H Block)", "(E Block)", "(F Block)", "(Z)","(G Block)"],
+    5: ["(C Block)", "(D Block)", "(A Block)", "(Z)","(B Block)"],
+    6: ["(G Block)", "(H Block)", "(E Block)", "(Z)","(F Block)"]
 ]
 var rooms: [Int: [String]] = [ //The reason why this array is shorter than the classes array is because the fourth room is going to be either z block, whichever one actually goes to a class, and we won't need a room for lunch
     0: ["","","","",""],
@@ -315,10 +315,15 @@ var rooms: [Int: [String]] = [ //The reason why this array is shorter than the c
     6: ["US Room 100", "US Room 100", "US Room 100", "US Room 100", "US Room 100"]
 ]
 
-var ZLunch: [Int: [Int]] = [0: [3], 1: [3], 2: [3], 3: [3], 4:[3], 5: [3], 6: [3]]//Day : 1 = Z1 lunch, 2 = Z2 lunch, 3 = Both lunch
-var sports = ["XC","XC","XC","XC","XC","XC"] //TODO: Make an option for weekday dependent sports
-//COMPLICATIONS (functions start with "comp" in order to avoid confusion with other methods
-
+var ZLunch: [Int: Int] = [0: 3, 1: 3, 2: 3, 3: 3, 4:3, 5: 3, 6: 3]//Day : 1 = Z1 lunch, 2 = Z2 lunch, 3 = Both lunch
+var sports = ["XC","XC","XC","XC","XC","XC"] //TODO: Make an option for weekday dependent sports //TODO: make individual short sports names, e.g. XC, FH, BVS, TN, FC
+func getLunch(day: Int, z: Int) -> String{ //Input day and z block (1 or 2), output lunch or class
+    if ZLunch[day] == 3 || (ZLunch[day] == z){
+        return "Lunch"
+    } else {
+        return classes[day]![3]
+    }
+}
 func getClassess(day: Int,block: Int) -> String{ //TODO: input
     switch block {
     case 0:
@@ -332,11 +337,19 @@ func getClassess(day: Int,block: Int) -> String{ //TODO: input
     case 4:
         return classes[day]![2]
     case 5:
-        return classes[day]![3]
+        if getLunch(day: cycleDay, z: 1) == "Lunch"{
+            return "Lunch"
+        } else {
+            return "\(classes[cycleDay]![3])"
+        }
     case 6:
-        return classes[day]![4]
+        if getLunch(day: cycleDay, z: 2) == "Lunch"{
+            return "Lunch"
+        } else {
+            return "\(classes[cycleDay]![3])"
+        }
     case 7:
-        return classes[day]![5]
+        return classes[day]![4]
     case 8:
         return "Office Hours"
     case 9:
@@ -346,12 +359,12 @@ func getClassess(day: Int,block: Int) -> String{ //TODO: input
     }
 }
 var blocks: [Int: [String]] = [
-    0: ["","","","","",""], 1: ["A","B","C","Z1","Z2","D"], 2: ["E","F","G","Z1","Z2","H"], 3: ["D","A","B","Z1","Z2","C"], 4: ["H","E","F","Z1","Z2","G"], 5: ["C","D","A","Z1","Z2","B"], 6: ["G","H","E","Z1","Z2","F"]
+    0: ["","","","","",""], 1: ["A","B","C","Z","D"], 2: ["E","F","G","Z","H"], 3: ["D","A","B","Z","C"], 4: ["H","E","F","Z","G"], 5: ["C","D","A","Z","B"], 6: ["G","H","E","Z","F"]
 ]
-var blockOrder: [Int: [String]] = [
-    0: ["—"], 1: ["ABCD"], 2: ["EFGH"], 3:["DABC"], 4:["HEFG"], 5:["CDAB"], 6:["GHEF"]
+var blockOrder: [Int: String] = [
+    0: "—", 1: "ABCD", 2: "EFGH", 3:"DABC", 4:"HEFG", 5:"CDAB", 6:"GHEF"
 ]
-func isAfter(hour1:Int,minute1: Int,hour2:Int ,minute2:Int) -> Bool{ //is time2 after time1
+func isAfter(hour1:Int,minute1: Int,hour2:Int ,minute2:Int) -> Bool{ //is time2 after time1; is time1 before time2
     if hour2>hour1{
         return true
     } else if hour1>hour2{
@@ -578,6 +591,7 @@ func timeIsBeforeBlockBegins(date: Date, block: Int) -> Bool{
     
 }
 
+//COMPLICATIONS (functions start with "comp" in order to avoid confusion with other methods
 func compBeginningTimeOfBlock(now: Date = Date()) -> DateComponents {
     let cal = Calendar.current
     if timeIsBeforeBlockBegins(date: now, block: 0){
@@ -615,26 +629,38 @@ func compBeginningTimeOfBlock(now: Date = Date()) -> DateComponents {
         return comp
     }
 }
-//FIXME: below this
+
 func compGetNextBlock(date: Date) -> String{
     if cycleDay == 0{
         return ""
     } else if timeIsBeforeBlockBegins(date: date, block: 0){
-        return (blocks[cycleDay]![0])
+        return "H" //HOUSE
     } else if timeIsBeforeBlockBegins(date: date, block: 1){
-        return (blocks[cycleDay]![1])
+        return (blocks[cycleDay]![0])
     } else if timeIsBeforeBlockBegins(date: date, block: 2){
-        return "M"
+        return (blocks[cycleDay]![1])
     } else if timeIsBeforeBlockBegins(date: date, block: 3){
-        return (blocks[cycleDay]![2])
+        return "M"
     } else if timeIsBeforeBlockBegins(date: date, block: 4){
-        return (blocks[cycleDay]![3])
+        return (blocks[cycleDay]![2])
     } else if timeIsBeforeBlockBegins(date: date, block: 5){
-        return (blocks[cycleDay]![4])
+        if getLunch(day: cycleDay, z: 1) == "Lunch"{
+            return "L"
+        } else {
+            return "Z1"
+        }
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
-        return (blocks[cycleDay]![5])
+        if getLunch(day: cycleDay, z: 2) == "Lunch"{
+            return "L"
+        } else {
+            return "Z2"
+        }
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
+        return (blocks[cycleDay]![4])
+    } else if timeIsBeforeBlockBegins(date: date, block: 8){
         return "OH"
+    } else if timeIsBeforeBlockBegins(date: date, block: 9){
+        return sports[cycleDay]
     } else {
         return ("—")
     }
@@ -652,13 +678,13 @@ func compGetNowBlock(date: Date) -> Int{
         return 3
     } else if timeIsBeforeBlockBegins(date: date, block: 5){
         return 4
-    } else if timeIsBeforeBlockBegins(date: date, block: 9){
-        return 5
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
-        return 6
+        return 5
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
+        return 6
+    } else if timeIsBeforeBlockBegins(date: date, block: 8){
         return 7
-    } else if isAfter(hour1: Calendar.current.component(.hour, from: date), minute1: Calendar.current.component(.hour, from: date), hour2: 17, minute2: 00){
+    } else if timeIsBeforeBlockBegins(date: date, block: 9){
         return 8
     } else {
         return 0
@@ -668,127 +694,171 @@ func compGetNowBlockLetter(date: Date) -> String{
     if cycleDay == 0{
         return ""
     } else if timeIsBeforeBlockBegins(date: date, block: 1){
-        return (blocks[cycleDay]![0])
+        return "H" //HOUSE
     } else if timeIsBeforeBlockBegins(date: date, block: 2){
-        return (blocks[cycleDay]![1])
+        return (blocks[cycleDay]![0])
     } else if timeIsBeforeBlockBegins(date: date, block: 3){
-        return "M"
+        return (blocks[cycleDay]![1])
     } else if timeIsBeforeBlockBegins(date: date, block: 4){
-        return (blocks[cycleDay]![2])
+        return "M"
     } else if timeIsBeforeBlockBegins(date: date, block: 5){
-        return (blocks[cycleDay]![3])
+        return (blocks[cycleDay]![2])
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
-        return (blocks[cycleDay]![4])
+        if getLunch(day: cycleDay, z: 1) == "Lunch"{
+            return "L"
+        } else {
+            return "Z1"
+        }
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
-        return (blocks[cycleDay]![5])
+        if getLunch(day: cycleDay, z: 2) == "Lunch"{
+            return "L"
+        } else {
+            return "Z2"
+        }
     } else if timeIsBeforeBlockBegins(date: date, block: 8){
+        return (blocks[cycleDay]![4])
+    } else if timeIsBeforeBlockBegins(date: date, block: 9){
         return "OH"
-    } else{
-        return "—"
+    } else if isAfter(hour1: Calendar.current.component(.hour, from: date), minute1: Calendar.current.component(.hour, from: date), hour2: 17, minute2: 00){
+        return sports[cycleDay]
+    } else {
+        return ("—")
     }
 }
 func compGetClassLength(block: Int) -> Int{
     if block == 0{
-        return 60
+        return 5
     } else if block == 1 {
-        return 30
+        return 60
     } else if block == 2 {
-        return 45
+        return 60
     } else if block == 3 {
-        return 60
+        return 35
     } else if block == 4 {
-        return 45
-    } else if block == 5 {
         return 60
+    } else if block == 5 {
+        return 40
     } else if block == 6 {
-        return 45
+        return 40
     } else if block == 7 {
-        return 50
+        return 60
+    } else if block == 8 {
+        return 20
     } else if block == 9 {
-        return 10
+        return 120
     } else {
         return 99
     }
 }
 func compGetOrder() -> String{
-    return (blockOrder[cycleDay]![0])
+    return (blockOrder[cycleDay]!)
 }
 
 func compLongNextClass(date: Date) -> String {
-    if cycleDay == 0 {
+    if cycleDay == 0{
         return "None"
     } else if timeIsBeforeBlockBegins(date: date, block: 0){
-        return "First: \(classes[cycleDay]![0])"
+        return "First: House" //HOUSE
     } else if timeIsBeforeBlockBegins(date: date, block: 1){
-        return "Next: \(getShortMorningActivity())"
+        return "Next: \(classes[cycleDay]![0])"
     } else if timeIsBeforeBlockBegins(date: date, block: 2){
         return "Next: \(classes[cycleDay]![1])"
     } else if timeIsBeforeBlockBegins(date: date, block: 3){
-        return "Next: \(classes[cycleDay]![2])"
+        return "Next: \(getShortMorningActivity())"
     } else if timeIsBeforeBlockBegins(date: date, block: 4){
-        return "Next: Lunch"
+        return "Next: \(classes[cycleDay]![2])"
     } else if timeIsBeforeBlockBegins(date: date, block: 5){
-        return "Next: \(classes[cycleDay]![3])"
-    } else if timeIsBeforeBlockBegins(date: date, block: 9){
-        return "Next: Break"
+        if getLunch(day: cycleDay, z: 1) == "Lunch"{
+            return "Next: Lunch"
+        } else {
+            return "Next: \(classes[cycleDay]![3])"
+        }
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
-        return "Next: \(classes[cycleDay]![4])"
+        if getLunch(day: cycleDay, z: 2) == "Lunch"{
+            return "Next: Lunch"
+        } else {
+            return "Next: \(classes[cycleDay]![3])"
+        }
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
-        return "Next: \(classes[cycleDay]![5])"
+        return "Next: \(classes[cycleDay]![4])"
+    } else if timeIsBeforeBlockBegins(date: date, block: 8){
+        return "Next: Office Hours"
+    } else if timeIsBeforeBlockBegins(date: date, block: 9){
+        return "Next: " + sports[cycleDay]
     } else {
-        return "—"
+        return ("—")
     }
 }
 
 func compShortNextClass(date: Date) -> String {
-    if cycleDay == 0 {
+    if cycleDay == 0{
         return "None"
     } else if timeIsBeforeBlockBegins(date: date, block: 0){
-        return "\(classes[cycleDay]![0])"
+        return "House" //HOUSE
     } else if timeIsBeforeBlockBegins(date: date, block: 1){
-        return "\(getMorningActivity())"
+        return "\(classes[cycleDay]![0])"
     } else if timeIsBeforeBlockBegins(date: date, block: 2){
         return "\(classes[cycleDay]![1])"
     } else if timeIsBeforeBlockBegins(date: date, block: 3){
-        return "\(classes[cycleDay]![2])"
+        return "\(getShortMorningActivity())"
     } else if timeIsBeforeBlockBegins(date: date, block: 4){
-        return "Lunch"
+        return "\(classes[cycleDay]![2])"
     } else if timeIsBeforeBlockBegins(date: date, block: 5){
-        return "\(classes[cycleDay]![3])"
-    } else if timeIsBeforeBlockBegins(date: date, block: 9){
-        return "Break"
+        if getLunch(day: cycleDay, z: 1) == "Lunch"{
+            return "Lunch"
+        } else {
+            return "\(classes[cycleDay]![3])"
+        }
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
-        return "\(classes[cycleDay]![4])"
+        if getLunch(day: cycleDay, z: 2) == "Lunch"{
+            return "Lunch"
+        } else {
+            return "\(classes[cycleDay]![3])"
+        }
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
-        return "\(classes[cycleDay]![5])"
+        return "\(classes[cycleDay]![4])"
+    } else if timeIsBeforeBlockBegins(date: date, block: 8){
+        return "Office Hours"
+    } else if timeIsBeforeBlockBegins(date: date, block: 9){
+        return sports[cycleDay]
     } else {
-        return "—"
+        return ("—")
     }
 }
 
 func compLongNowClass(date: Date) -> String {
-    if cycleDay == 0 {
+    if cycleDay == 0{
         return "None"
     } else if timeIsBeforeBlockBegins(date: date, block: 1){
-        return "\(classes[cycleDay]![0])"
+        return "House" //HOUSE
     } else if timeIsBeforeBlockBegins(date: date, block: 2){
-        return "\(getMorningActivity())"
+        return "\(classes[cycleDay]![0])"
     } else if timeIsBeforeBlockBegins(date: date, block: 3){
         return "\(classes[cycleDay]![1])"
     } else if timeIsBeforeBlockBegins(date: date, block: 4){
-        return "\(classes[cycleDay]![2])"
+        return "\(getShortMorningActivity())"
     } else if timeIsBeforeBlockBegins(date: date, block: 5){
-        return "Next: Lunch"
+        return "\(classes[cycleDay]![2])"
     } else if timeIsBeforeBlockBegins(date: date, block: 6){
-        return "\(classes[cycleDay]![3])"
-    } else if timeIsBeforeBlockBegins(date: date, block: 9){
-        return "Next: Break"
+        if getLunch(day: cycleDay, z: 1) == "Lunch"{
+            return "Lunch"
+        } else {
+            return "\(classes[cycleDay]![3])"
+        }
     } else if timeIsBeforeBlockBegins(date: date, block: 7){
+        if getLunch(day: cycleDay, z: 2) == "Lunch"{
+            return "Lunch"
+        } else {
+            return "\(classes[cycleDay]![3])"
+        }
+    } else if timeIsBeforeBlockBegins(date: date, block: 8){
         return "\(classes[cycleDay]![4])"
     } else if timeIsBeforeBlockBegins(date: date, block: 9){
-        return "\(classes[cycleDay]![5])"
+        return "Office Hours"
+    } else if isAfter(hour1: Calendar.current.component(.hour, from: date), minute1: Calendar.current.component(.hour, from: date), hour2: 17, minute2: 00){
+        return sports[cycleDay]
     } else {
-        return "—"
+        return ("—")
     }
 }
 
@@ -799,8 +869,8 @@ func compGetTime(dc: DateComponents) -> String {
 
 func compGetTimeUntil(date: Date) -> String {
     if !schoolDone(){
-        if nowIsAfterBlockEnds(block: 6){
-            return ""
+        if nowIsAfterBlockEnds(block: 9){
+            return "—"
         } else {
             return " in " + String(compGetTime(dc: getTimeUntilNextClass(dc: compBeginningTimeOfBlock(now: date), now: date))) + "m"
         }
@@ -829,26 +899,28 @@ func compMinsSinceClassStart(now: Date) -> Int {
     formatter.dateFormat = "yyyy/MM/dd"
     let yearStr = formatter.string(from: Date())
     formatter.dateFormat = "yyyy/MM/dd HH:mm"
-    var classStart = formatter.date(from: yearStr + " 08:40")!
+    var classStart = formatter.date(from: yearStr + " 08:30")!
     switch nowBlock {
     case 0:
-        classStart = formatter.date(from: yearStr + " 08:55")!
-    case 1:
-        classStart = formatter.date(from: yearStr + " 10:00")!
-    case 2:
-        classStart = formatter.date(from: yearStr + " 10:35")!
-    case 3:
-        classStart = formatter.date(from: yearStr + " 11:25")!
-    case 4:
-        classStart = formatter.date(from: yearStr + " 12:30")!
-    case 5:
-        classStart = formatter.date(from: yearStr + " 13:20")!
-    case 6:
-        classStart = formatter.date(from: yearStr + " 14:30")!
-    case 7:
-        classStart = formatter.date(from: yearStr + " 15:15")!
-    default:
         classStart = formatter.date(from: yearStr + " 08:40")!
+    case 1:
+        classStart = formatter.date(from: yearStr + " 09:45")!
+    case 2:
+        classStart = formatter.date(from: yearStr + " 10:20")!
+    case 3:
+        classStart = formatter.date(from: yearStr + " 11:20")!
+    case 4:
+        classStart = formatter.date(from: yearStr + " 12:25")!
+    case 5:
+        classStart = formatter.date(from: yearStr + " 12:50")!
+    case 6:
+        classStart = formatter.date(from: yearStr + " 13:35")!
+    case 7:
+        classStart = formatter.date(from: yearStr + " 14:40")!
+    case 8:
+        classStart = formatter.date(from: yearStr + " 15:00")!
+    default:
+        classStart = formatter.date(from: yearStr + " 08:30")!
     }
     return Int(now.timeIntervalSince(classStart) / 60)
 }
@@ -872,38 +944,58 @@ func compGetClassGigue(length: Int, now: Date) -> Float {
 }
 
 func getBlockAlmostStartTimes(_ block: Int) -> DateComponents {
-    if block == 0 { return DateComponents(calendar: Calendar.current, hour: 8, minute: 52) }
-    else if block == 1 { return DateComponents(calendar: Calendar.current, hour: 9, minute: 57) }
-    else if block == 2 { return DateComponents(calendar: Calendar.current, hour: 10, minute: 32) }
-    else if block == 3 { return DateComponents(calendar: Calendar.current, hour: 11, minute: 22) }
-    else if block == 4 { return DateComponents(calendar: Calendar.current, hour: 12, minute: 27) }
-    else if block == 5 { return DateComponents(calendar: Calendar.current, hour: 1, minute: 17) }
-    else if block == 6 { return DateComponents(calendar: Calendar.current, hour: 2, minute: 27) }
-    else if block == 7 { return DateComponents(calendar: Calendar.current, hour: 3, minute: 12) }
-    else { return DateComponents(calendar: Calendar.current, hour: 2, minute: 17) }  // block = 9
+    if block == 0 { return DateComponents(calendar: Calendar.current, hour: 8, minute: 28) }
+    else if block == 1 { return DateComponents(calendar: Calendar.current, hour: 8, minute: 38) }
+    else if block == 2 { return DateComponents(calendar: Calendar.current, hour: 9, minute: 43) }
+    else if block == 3 { return DateComponents(calendar: Calendar.current, hour: 10, minute: 18) }
+    else if block == 4 { return DateComponents(calendar: Calendar.current, hour: 11, minute: 18) }
+    else if block == 5 { return DateComponents(calendar: Calendar.current, hour: 12, minute: 23) }
+    else if block == 6 { return DateComponents(calendar: Calendar.current, hour: 12, minute: 48) }
+    else if block == 7 { return DateComponents(calendar: Calendar.current, hour: 13, minute: 33) }
+    else if block == 8 { return DateComponents(calendar: Calendar.current, hour: 14, minute: 38) }
+    else if block == 9 { return DateComponents(calendar: Calendar.current, hour: 15, minute: 18) }
+    else { return DateComponents(calendar: Calendar.current, hour: 12, minute: 00) }  // block = 9
 }
 
 func isMeetingOrAssessment(_ block: Int, _ time: DateComponents) -> String {
     let month = time.month!
     let day = time.day!
+    let begin: [Int: Bool] = [
+        0: classes[dateToCycleDay[month-1][day]!]![0].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![0].starts(with: "Study Hall"),
+        1: classes[dateToCycleDay[month-1][day]!]![1].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![1].starts(with: "Study Hall"),
+        2: classes[dateToCycleDay[month-1][day]!]![2].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![2].starts(with: "Study Hall"),
+        4: classes[dateToCycleDay[month-1][day]!]![4].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![4].starts(with: "Study Hall"),
+        7: classes[dateToCycleDay[month-1][day]!]![7].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![7].starts(with: "Study Hall")
+        
+    ]
     switch block {
     case 0:
-        return classes[dateToCycleDay[month-1][day]!]![0].starts(with: "Free") ? "Meeting" : "Assessment"
+        return "Meeting"
     case 1:
-        return "Meeting"
+        return begin[1]! ? "Meeting" : "Assessment"
     case 2:
-        return classes[dateToCycleDay[month-1][day]!]![1].starts(with: "Free") ? "Meeting" : "Assessment"
+        return begin[2]! ? "Meeting" : "Assessment"
     case 3:
-        return classes[dateToCycleDay[month-1][day]!]![2].starts(with: "Free") ? "Meeting" : "Assessment"
-    case 4:
         return "Meeting"
+    case 4:
+        return begin[4]! ? "Meeting" : "Assessment"
     case 5:
-        return classes[dateToCycleDay[month-1][day]!]![3].starts(with: "Free") ? "Meeting" : "Assessment"
+        if getLunch(day: dateToCycleDay[month-1][day]!, z: 1) == "Lunch"{
+            return "Meeting"
+        } else {
+            return "Assessment"
+        }
     case 6:
-        return classes[dateToCycleDay[month-1][day]!]![4].starts(with: "Free") ? "Meeting" : "Assessment"
-    case 9:
+        if getLunch(day: dateToCycleDay[month-1][day]!, z: 2) == "Lunch"{
+            return "Meeting"
+        } else {
+            return "Assessment"
+        }
+    case 7:
+        return begin[7]! ? "Meeting" : "Assessment"
+    case 8:
         return "Meeting"
     default:
-        return "e"
+        return "Meeting"
     }
 }

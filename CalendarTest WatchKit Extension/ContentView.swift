@@ -10,31 +10,37 @@ import UserNotifications
 func beginningTimeOfBlock() -> DateComponents {
     let cal = Calendar.current
     if nowIsBeforeBlockBegins(block: 0){
-        let comp = DateComponents(calendar: cal, hour: 8, minute: 55, second:00)
+        let comp = DateComponents(calendar: cal, hour: 8, minute: 30, second:00)
         return comp
     } else if nowIsBeforeBlockBegins(block: 1){
-        let comp = DateComponents(calendar: cal, hour: 10, minute: 00, second:00)
+        let comp = DateComponents(calendar: cal, hour: 8, minute: 40, second:00)
         return comp
-    } else if (nowIsBeforeBlockBegins(block: 2)){
-        let comp = DateComponents(calendar: cal, hour: 10, minute: 35, second:00)
+    } else if nowIsBeforeBlockBegins(block: 2){
+        let comp = DateComponents(calendar: cal, hour: 9, minute: 45, second:00)
         return comp
     } else if nowIsBeforeBlockBegins(block: 3){
-        let comp = DateComponents(calendar: cal, hour: 11, minute: 25, second:00)
+        let comp = DateComponents(calendar: cal, hour: 10, minute: 45, second:00)
         return comp
     } else if nowIsBeforeBlockBegins(block: 4){
-        let comp = DateComponents(calendar: cal, hour: 12, minute: 30, second:00)
+        let comp = DateComponents(calendar: cal, hour: 11, minute: 20, second:00)
         return comp
     } else if nowIsBeforeBlockBegins(block: 5){
-        let comp = DateComponents(calendar: cal, hour: 13, minute: 20, second:00)
+        let comp = DateComponents(calendar: cal, hour: 12, minute: 25, second:00)
         return comp
     } else if nowIsBeforeBlockBegins(block: 6){
-        let comp = DateComponents(calendar: cal, hour: 14, minute: 30, second:00)
+        let comp = DateComponents(calendar: cal, hour: 12, minute: 50, second:00)
         return comp
     } else if nowIsBeforeBlockBegins(block: 7){
-        let comp = DateComponents(calendar: cal, hour: 15, minute: 20, second:00)
+        let comp = DateComponents(calendar: cal, hour: 13, minute: 35, second:00)
+        return comp
+    } else if nowIsBeforeBlockBegins(block: 8){
+        let comp = DateComponents(calendar: cal, hour: 14, minute: 40, second:00)
+        return comp
+    } else if nowIsBeforeBlockBegins(block: 9){
+        let comp = DateComponents(calendar: cal, hour: 15, minute: 0, second:00)
         return comp
     } else {
-        let comp = DateComponents(calendar: cal, hour: 8, minute: 55, second:00)
+        let comp = DateComponents(calendar: cal, hour: 0, minute: 00, second:00)
         return comp
     }
 }
@@ -54,75 +60,66 @@ func getTime(dc: DateComponents) -> String {
     }
     
     if globalOffset != 0 {
-        return "eeeeee"
+        return "00:00:00"
     }
     
     return hr + ":" + mn + ":" + sc
 }
 
 func getOrder() -> Text {
-    return getColor(Blk: 0) + Text("-") + getColor(Blk: 2) + Text("-") + getColor(Blk: 3) + Text("-") + getColor(Blk: 5) + Text("-") + getColor(Blk: 6)
+    return getColor(Blk: 1) + Text("-") + getColor(Blk: 2) + Text("-") + getColor(Blk: 4) + Text("-") + getColor(Blk: 5) + Text("-") + getColor(Blk: 6)
 }
 func getColor(Blk: Int) -> Text {
     if globalOffset == 0{
         if nowIsBeforeBlockBegins(block: Blk){
-            return Text(order[cycleDay]![blockToBlock(bb: Blk)]).foregroundColor(.red).fontWeight(.light)
+            return Text(blocks[cycleDay]![Blk]).foregroundColor(.red).fontWeight(.light)
         } else {
-            return Text(order[cycleDay]![blockToBlock(bb: Blk)]).foregroundColor(.blue).fontWeight(.light)
+            return Text(blocks[cycleDay]![Blk]).foregroundColor(.blue).fontWeight(.light)
         }
     } else {
-        return Text(order[cycleDay]![blockToBlock(bb: Blk)]).foregroundColor(.white).fontWeight(.light)
-    }
-}
-func blockToBlock(bb: Int) -> Int {
-    if bb == 0{
-        return 0
-    } else if bb == 2 {
-        return 1
-    } else if bb == 3 {
-        return 2
-    } else if bb == 5 {
-        return 3
-    } else if bb == 6 {
-        return 4
-    } else {
-        return 99
+        return Text(blocks[cycleDay]![Blk]).foregroundColor(.white).fontWeight(.light)
     }
 }
 func getNextClass() -> Text {
     if cycleDay == 0{
-        return Text("")
+        return Text("None").foregroundColor(.green)
     } else if nowIsBeforeBlockBegins(block: 0){
-        return Text("First: ") + Text(classes[cycleDay]![0]).foregroundColor(.green)
+        return Text("First: House").foregroundColor(.green)
     } else if nowIsBeforeBlockBegins(block: 1){
-        return Text("Next: ") + Text(getShortMorningActivity()).foregroundColor(.green)
-    } else if (nowIsBeforeBlockBegins(block: 2)){
-        return Text("Next: ") + Text(classes[cycleDay]![1]).foregroundColor(.green)
+        return Text("Next: \(classes[cycleDay]![0])").foregroundColor(.green)
+    } else if nowIsBeforeBlockBegins(block: 2){
+        return Text("Next: \(classes[cycleDay]![1])").foregroundColor(.green)
     } else if nowIsBeforeBlockBegins(block: 3){
-        return Text("Next: ") + Text(classes[cycleDay]![2]).foregroundColor(.green)
+        return Text("Next: \(getMorningActivity())").foregroundColor(.green)
     } else if nowIsBeforeBlockBegins(block: 4){
-        return Text("Next: ") + Text("Lunch").foregroundColor(.green)
+        return Text("Next: \(classes[cycleDay]![2])").foregroundColor(.green)
     } else if nowIsBeforeBlockBegins(block: 5){
-        return Text("Next: ") + Text(classes[cycleDay]![3]).foregroundColor(.green)
+        if getLunch(day: cycleDay, z: 1) == "Lunch"{
+            return Text("Next: Lunch").foregroundColor(.green)
+        } else {
+            return Text("Next: \(classes[cycleDay]![3])").foregroundColor(.green)
+        }
     } else if nowIsBeforeBlockBegins(block: 6){
-        return Text("Next: ") + Text(classes[cycleDay]![4]).foregroundColor(.green)
+        if getLunch(day: cycleDay, z: 2) == "Lunch"{
+            return Text("Next: Lunch").foregroundColor(.green)
+        } else {
+            return Text("Next: \(classes[cycleDay]![3])").foregroundColor(.green)
+        }
     } else if nowIsBeforeBlockBegins(block: 7){
-        return Text("Next: ") + Text(classes[cycleDay]![5]).foregroundColor(.green)
+        return Text("Next: \(classes[cycleDay]![4])").foregroundColor(.green)
+    } else if nowIsBeforeBlockBegins(block: 8){
+        return Text("Next: Office Hours").foregroundColor(.green)
+    } else if nowIsBeforeBlockBegins(block: 9){
+        return Text("Next: " + sports[cycleDay]).foregroundColor(.green)
     } else {
-        return Text("Next: Go home!")
+        return Text("—").foregroundColor(.green)
     }
 }
-
 func getClasses() -> String {
     if let classList = classes[cycleDay]?.joined(separator: "\n") {
         return classList
     } else { return "e" }
 }
-
-var order: [Int: [String]] = [
-    0:["----No school!","","","",""],
-    1:["C","E","D","A","B"], 2:["F","G","H","A","B"], 3:["C","D","F","E","G"], 4:["H","A","B","C","D"], 5:["G","A","H","E","F"], 6:["B","C","D","E","F"], 7:["A","H","G","B","C"], 8:["D","E","F","G","H"]
-]
 func cycleDayDay() -> Text {
     if cycleDay == 0{
         return Text("No School!")
@@ -176,22 +173,26 @@ struct ContentView: View {
         let date = cal.date(byAdding: .minute, value: Int(floor(minOffset / TIME_TRAVEL_SLOWDOWN_FACTOR)), to: Date())!
         let hr = cal.component(.hour, from: date)
         let min = cal.component(.minute, from: date)
-        if block == 7 {
-            return isAfter(hour1: hr,minute1: min,hour2: 15,minute2: 15)
-        } else if block == 6 {
-            return isAfter(hour1: hr,minute1: min,hour2: 14,minute2: 30)
-        } else if block == 5 { //before
-            return isAfter(hour1: hr,minute1: min,hour2: 13,minute2: 20)
-        } else if block == 4 {//before lunch
-            return isAfter(hour1: hr,minute1: min,hour2: 12,minute2: 30)
-        } else if block == 3 {
-            return isAfter(hour1: hr,minute1: min,hour2: 11,minute2: 25)
-        } else if block == 2 {
-            return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 35)
-        }else if block == 1 {
-            return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 00)
-        } else if block == 0 { //before first block
-            return isAfter(hour1: hr, minute1: min, hour2: 8, minute2: 55)
+        if block == 9 { //before sports or go home
+            return isAfter(hour1: hr,minute1: min,hour2: 15,minute2: 00)
+        } else if block == 8 { //before office hours
+            return isAfter(hour1: hr,minute1: min,hour2: 14,minute2: 40)
+        } else if block == 7 { //before d block on day 1
+            return isAfter(hour1: hr,minute1: min,hour2: 13,minute2: 35)
+        } else if block == 6 { //before Z2
+            return isAfter(hour1: hr,minute1: min,hour2: 12,minute2: 50)
+        } else if block == 5 { //before Z1
+            return isAfter(hour1: hr,minute1: min,hour2: 12,minute2: 25)
+        } else if block == 4 {// before c block
+            return isAfter(hour1: hr,minute1: min,hour2: 11,minute2: 20)
+        } else if block == 3 {// before morning activity
+            return isAfter(hour1: hr,minute1: min,hour2: 10,minute2: 20)
+        } else if block == 2 { //before b block
+            return isAfter(hour1: hr,minute1: min,hour2: 9,minute2: 45)
+        }else if block == 1 { //before a block on day 1
+            return isAfter(hour1: hr,minute1: min,hour2: 8,minute2: 40)
+        } else if block == 0 { //before house
+            return isAfter(hour1: hr, minute1: min, hour2: 8, minute2: 30)
         }
         return false
     }
@@ -204,17 +205,29 @@ struct ContentView: View {
         } else if timeTravelBlockBegin(block: 1){
             return (Text(classes[cycleDay]![0])).foregroundColor(.purple)
         } else if timeTravelBlockBegin(block: 2){
-            return (Text(getMorningActivity())).foregroundColor(.purple)
-        } else if timeTravelBlockBegin(block: 3){
             return (Text(classes[cycleDay]![1])).foregroundColor(.purple)
+        } else if timeTravelBlockBegin(block: 3){
+            return (Text(getMorningActivity())).foregroundColor(.purple)
         } else if timeTravelBlockBegin(block: 4){
             return (Text(classes[cycleDay]![2])).foregroundColor(.purple)
         } else if timeTravelBlockBegin(block: 5){
-            return (Text("Lunch")).foregroundColor(.purple).foregroundColor(.purple)
+            if getLunch(day: cycleDay, z: 1) == "Lunch"{
+                return (Text("Lunch")).foregroundColor(.purple)
+            } else {
+                return (Text("\(classes[cycleDay]![3])")).foregroundColor(.purple)
+            }
         } else if timeTravelBlockBegin(block: 6){
-            return (Text(classes[cycleDay]![3])).foregroundColor(.purple)
+            if getLunch(day: cycleDay, z: 2) == "Lunch"{
+                return (Text("Lunch")).foregroundColor(.purple)
+            } else {
+                return (Text("\(classes[cycleDay]![3])")).foregroundColor(.purple)
+            }
         } else if timeTravelBlockBegin(block: 7){
             return (Text(classes[cycleDay]![4])).foregroundColor(.purple)
+        } else if timeTravelBlockBegin(block: 8){
+            return (Text("Office Hours")).foregroundColor(.purple)
+        } else if timeTravelBlockBegin(block: 9){
+            return (Text(sports[cycleDay])).foregroundColor(.purple)
         } else {
             return Text("After School").foregroundColor(.purple)
         }

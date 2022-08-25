@@ -87,7 +87,7 @@ struct DayView: View {
     }
     
     func scheduleRow(time: String, block: Int, content: String) -> some View {
-        let defaultEventPick =  isMeetingOrAssessment(block, dtcp) == "Meeting" ? "entirety" : "Test"
+        let defaultEventPick =  isMeetingOrAssessment(block, dtcp) == "Meeting" ? "Entirety" : "Test"
         return Group {
             NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp, eventPick: defaultEventPick)}, label: {Text(time).fontWeight(getTimeWeight(block)).foregroundColor(getTimeColor(block))}).buttonStyle(PlainButtonStyle())
             Text(content).foregroundColor(getContentColor(block)).fontWeight(getContentWeight(block))
@@ -106,45 +106,41 @@ struct DayView: View {
                     Divider().padding(.vertical, 0)
                 }
                 Group{
-                scheduleRow(time: "08:55 - 09:55:", block: 0, content: classes[cycleDay]![0])
+                scheduleRow(time: "08:30 - 08:35:", block: 0, content: "House")
                     Spacer()
-                scheduleRow(time: "10:00 - 10:30:", block: 1, content: getMorningActivity())
+                scheduleRow(time: "08:40 - 09:45:", block: 1, content: classes[cycleDay]![0])
                     Spacer()
-                scheduleRow(time: "10:35 - 11:25:", block: 2, content: classes[cycleDay]![1])
-                    Spacer()
-                }
-                Group{
-                    (lunchBlockFirst[cycleDay]! == [true]) ? scheduleRow(time: "11:25 - 12:25:", block: 4, content: "Lunch") : scheduleRow(time: "11:25 - 12:25:", block: 3, content: classes[cycleDay]![2])
-                    Spacer()
-                    (lunchBlockFirst[cycleDay]! == [true]) ? (scheduleRow(time: "12:25 - 13:15:", block: 4, content: classes[cycleDay]![3])) : (scheduleRow(time: "12:25 - 13:15:", block: 4, content: "Lunch"))
+                scheduleRow(time: "09:45 - 10:45:", block: 2, content: classes[cycleDay]![1])
                     Spacer()
                 }
                 Group{
-                    scheduleRow(time: "13:20 - 14:20:", block: 5, content: classes[cycleDay]![3])
+                scheduleRow(time: "10:45 - 11:20:", block: 3, content: getMorningActivity())
                     Spacer()
-                    scheduleRow(time: "14:20 - 14:30:", block: 9, content: "Break") //BLOCK 9 IS THE 10 MINUTE BREAK
+                scheduleRow(time: "11:25 - 12:25:", block: 4, content: classes[cycleDay]![2])
                     Spacer()
-                    scheduleRow(time: "14:30 - 15:15:", block: 6, content: classes[cycleDay]![4])
-                    Spacer()
-                    if (isSports()){
-                        if globalOffset == 0 {
-                            if isNextBlock(bl: 7){
-                                Text("15:30 - 17:30:").fontWeight(.bold).foregroundColor(.red)
-                                Text("Tennis").foregroundColor(.green).fontWeight(.medium)
-                            } else if nowIsBeforeBlockBegins(block: 7){
-                                Text("15:30 - 17:30:").fontWeight(.bold)
-                                Text("Tennis").foregroundColor(.red).fontWeight(.medium)}
-                            else {
-                                Text("15:30 - 17:30:").fontWeight(.medium).foregroundColor(Color(UIColor.lightGray))
-                                Text("Tennis").foregroundColor(.blue).fontWeight(.light)}
-                        } else if globalOffset < 0 {
-                            Text("15:30 - 17:30:").fontWeight(.bold)
-                            Text("Tennis").foregroundColor(.blue).fontWeight(.light)}
-                        else {
-                            Text("15:30 - 17:30:").fontWeight(.bold)
-                            Text("Tennis").foregroundColor(.red).fontWeight(.medium)
-                        }
+                }
+                Group{
+                    if ZLunch[cycleDay] == 3{
+                        scheduleRow(time: "12:25 - 13:30:", block: 5, content: "Lunch")
+                    } else if getLunch(day: cycleDay, z: 1) == "Lunch"{
+                        scheduleRow(time: "12:25 - 13:05:", block: 5, content: "Lunch")
+                        Spacer()
+                        scheduleRow(time: "12:50 - 13:30:", block: 6, content: classes[cycleDay]![3])
+                        Spacer()
+                    } else {
+                        scheduleRow(time: "12:25 - 13:05:", block: 5, content: classes[cycleDay]![3])
+                        Spacer()
+                        scheduleRow(time: "12:50 - 13:30:", block: 6, content: "Lunch")
+                        Spacer()
                     }
+                }
+                Group{
+                    scheduleRow(time: "13:35 - 14:35:", block: 7, content: classes[cycleDay]![4])
+                    Spacer()
+                    scheduleRow(time: "14:45 - 15:00:", block: 8, content: "Office Hours")
+                    Spacer()
+                    scheduleRow(time: "15:30 - 17:00:", block: 9, content: sports[cycleDay])
+                    Spacer()
                 }
             }
         }

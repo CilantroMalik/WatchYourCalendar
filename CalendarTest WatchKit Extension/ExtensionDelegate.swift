@@ -24,16 +24,16 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     
     func applicationDidFinishLaunching() {
         scheduleRefresh()
-        UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert]) { success, error in
-            if success { print("Authorized") } else if let error = error { print(error.localizedDescription) }
-        }
-        let category1 = UNNotificationCategory(identifier: "sports", actions: [], intentIdentifiers: [], options: [])
-        let category2 = UNNotificationCategory(identifier: "lunch", actions: [], intentIdentifiers: [], options: [])
-        let category3 = UNNotificationCategory(identifier: "event", actions: [], intentIdentifiers: [], options: [])
-        UNUserNotificationCenter.current().setNotificationCategories([category1, category2, category3])
-        
-        scheduleSportsNotification()
-        scheduleLunchNotification()
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert]) { success, error in
+//            if success { print("Authorized") } else if let error = error { print(error.localizedDescription) }
+//        }
+//        let category1 = UNNotificationCategory(identifier: "sports", actions: [], intentIdentifiers: [], options: [])
+//        let category2 = UNNotificationCategory(identifier: "lunch", actions: [], intentIdentifiers: [], options: [])
+//        let category3 = UNNotificationCategory(identifier: "event", actions: [], intentIdentifiers: [], options: [])
+//        UNUserNotificationCenter.current().setNotificationCategories([category1, category2, category3])
+//
+//        scheduleSportsNotification()
+//        scheduleLunchNotification() FIXME: Notifications, but later
         let ud = UserDefaults.standard
         guard let temp = ud.stringArray(forKey: "eventsList") else { return }
         print("-- Before --")
@@ -51,10 +51,10 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         print("-- After --")
         print(EventsListObs.evList)
         
-        guard var temp = ud.array(forKey: "firstLunch") else { return }
+        guard var temp = ud.array(forKey: "ZLunch") else { return }
         temp = temp as! [Bool]
-        for i in 0...7 {
-            lunchBlockFirst[i+1] = [temp[i] as! Bool]
+        for i in 0...5 {
+            ZLunch[i] = (temp[i] as! Int)
         }
         guard let temp = ud.stringArray(forKey: "classes") else { return }
         let a = temp[0]
@@ -65,18 +65,22 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         let f = temp[5]
         let g = temp[6]
         let h = temp[7]
-        classes[1] = [c, e, d, a, b, "Sports/Go Home"]
-        classes[2] = [f, g, h, a, b, "Sports/Go Home"]
-        classes[3] = [c, d, f, e, g, "Sports/Go Home"]
-        classes[4] = [h, a, b, c, d, "Sports/Go Home"]
-        classes[5] = [g, a, h, e, f, "Sports/Go Home"]
-        classes[6] = [b, c, d, e, f, "Sports/Go Home"]
-        classes[7] = [a, h, g, b, c, "Sports/Go Home"]
-        classes[8] = [d, e, f, g, h, "Sports/Go Home"]
-        
+        let z1 = temp[8]
+        let z2 = temp[9]
+        classes[1] = [a, b, c, z1, z2, d]
+        classes[2] = [e, f, g, z1, z2, h]
+        classes[3] = [d, a, b, z1, z2, c]
+        classes[4] = [h, e, f, z1, z2, g]
+        classes[5] = [c, d, a, z1, z2, b]
+        classes[6] = [g, h, e, z1, z2, f]
+        guard let temp = ud.stringArray(forKey: "sports") else { return }
+        for i in 0...5 {
+            sports[i] = temp[i] 
+        }
         let userData = UserData()
         userData.updateClasses(classes)
-        userData.updateLunch(lunchBlockFirst)
+        userData.updateLunch(ZLunch)
+        userData.updateSports(sports)
     }
     
     func applicationWillResignActive() {
