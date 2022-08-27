@@ -42,10 +42,10 @@ func createTimelineEntry(complication: CLKComplication, date: Date) -> CLKCompli
         }
     } else if complication.identifier == "DayBlocksClass" {
         if complication.family == CLKComplicationFamily.modularLarge {
-            let template = CLKComplicationTemplateModularLargeStandardBody(headerTextProvider: CLKSimpleTextProvider(text: getCycleDayDay()), body1TextProvider: CLKSimpleTextProvider(text: (school() ? "Blocks: \(order[cycleDay]!.joined(separator: "-"))" : "OFF")), body2TextProvider: CLKSimpleTextProvider(text: compLongNextClass(date: date)))
+            let template = CLKComplicationTemplateModularLargeStandardBody(headerTextProvider: CLKSimpleTextProvider(text: getCycleDayDay()), body1TextProvider: CLKSimpleTextProvider(text: (school() ? "Blocks: \(blocks[cycleDay]!.joined(separator: "-"))" : "OFF")), body2TextProvider: CLKSimpleTextProvider(text: compLongNextClass(date: date)))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         } else if complication.family == CLKComplicationFamily.graphicRectangular {
-            let template = CLKComplicationTemplateGraphicRectangularStandardBody(headerTextProvider: CLKSimpleTextProvider(text: getCycleDayDay()), body1TextProvider: CLKSimpleTextProvider(text: (school() ? "Blocks: \(order[cycleDay]!.joined(separator: "-"))" : "OFF")), body2TextProvider: CLKSimpleTextProvider(text: compLongNextClass(date: date)))
+            let template = CLKComplicationTemplateGraphicRectangularStandardBody(headerTextProvider: CLKSimpleTextProvider(text: getCycleDayDay()), body1TextProvider: CLKSimpleTextProvider(text: (school() ? "Blocks: \(blocks[cycleDay]!.joined(separator: "-"))" : "OFF")), body2TextProvider: CLKSimpleTextProvider(text: compLongNextClass(date: date)))
             return CLKComplicationTimelineEntry(date: date, complicationTemplate: template)
         }
     } else if complication.identifier == "NextClassIn" {

@@ -106,7 +106,8 @@ struct DayView: View {
                     Divider().padding(.vertical, 0)
                 }
                 Group{
-                scheduleRow(time: "08:30 - 08:35:", block: 0, content: "House")
+                    Text("08:30 - 08:35").fontWeight(getTimeWeight(0)).foregroundColor(getTimeColor(0))
+                    Text("House").foregroundColor(getContentColor(0)).fontWeight(getContentWeight(0))
                     Spacer()
                 scheduleRow(time: "08:40 - 09:45:", block: 1, content: classes[cycleDay]![0])
                     Spacer()
@@ -139,8 +140,8 @@ struct DayView: View {
                     Spacer()
                     scheduleRow(time: "14:45 - 15:00:", block: 8, content: "Office Hours")
                     Spacer()
-                    scheduleRow(time: "15:30 - 17:00:", block: 9, content: sports[cycleDay])
-                    Spacer()
+                    Text("15:30 - 17:30").fontWeight(getTimeWeight(9)).foregroundColor(getTimeColor(9))
+                    Text(sports[cycleDay]).foregroundColor(getContentColor(9)).fontWeight(getContentWeight(9))
                 }
             }
         }

@@ -67,7 +67,7 @@ func getTime(dc: DateComponents) -> String {
 }
 
 func getOrder() -> Text {
-    return getColor(Blk: 1) + Text("-") + getColor(Blk: 2) + Text("-") + getColor(Blk: 4) + Text("-") + getColor(Blk: 5) + Text("-") + getColor(Blk: 6)
+    return getColor(Blk: 0) + Text("-") + getColor(Blk: 1) + Text("-") + getColor(Blk: 2) + Text("-") + getColor(Blk: 3) + Text("-") + getColor(Blk: 4)
 }
 func getColor(Blk: Int) -> Text {
     if globalOffset == 0{

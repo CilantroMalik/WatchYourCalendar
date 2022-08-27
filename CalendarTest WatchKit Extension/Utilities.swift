@@ -446,53 +446,149 @@ func isSchoolDay() -> Bool{
     }
 }
 func nowIsAfterBlockEnds(block:Int) -> Bool{
-    if block == 9 { //next: sports
+    switch block{
+    case 9: //next: sports
         return isAfter(hour1: 17,minute1: 00,hour2: getHour(),minute2: getMinute())
-    } else if block == 8 { //next: office hours
+    case 8: //next: office hours
         return isAfter(hour1: 15,minute1: 00,hour2: getHour(),minute2: getMinute())
-    } else if block == 7 { //next: d block on day 1
+    case 7: //next: d block on day 1
         return isAfter(hour1: 14,minute1: 35,hour2: getHour(),minute2: getMinute())
-    } else if block == 6 { //next: Z2
+    case 6: //next: Z2
         return isAfter(hour1: 13,minute1: 30,hour2: getHour(),minute2: getMinute())
-    } else if block == 5 { //next: Z1
+    case 5: //next: Z1
         return isAfter(hour1: 13,minute1: 05,hour2: getHour(),minute2: getMinute())
-    } else if block == 4 {// next: c block
+    case 4: //next: c block
         return isAfter(hour1: 12,minute1: 25,hour2: getHour(),minute2: getMinute())
-    } else if block == 3 {// next: morning activity
+    case 3: //next: morning activity
         return isAfter(hour1: 11,minute1: 20,hour2: getHour(),minute2: getMinute())
-    } else if block == 2 { //next: b block
+    case 2: //next: b block
         return isAfter(hour1: 10,minute1: 45,hour2: getHour(),minute2: getMinute())
-    }else if block == 1 { //next: a block on day 1
+    case 1: //next: a block on day 1
         return isAfter(hour1: 9,minute1: 40,hour2: getHour(),minute2: getMinute())
-    } else if block == 0 { //next: house
+    case 0: //next: house
         return isAfter(hour1: 8, minute1: 35, hour2: getHour(), minute2: getMinute())
+    default:
+        return false
     }
-    return false
 }
 func nowIsBeforeBlockBegins(block: Int) -> Bool{
-    if block == 9 { //before sports or go home
+    switch block{
+    case 9: //before sports or go home
         return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 15,minute2: 00)
-    } else if block == 8 { //before office hours
+    case 8: //before office hours
         return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 40)
-    } else if block == 7 { //before d block on day 1
+    case 7: //before d block on day 1
         return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 35)
-    } else if block == 6 { //before Z2
+    case 6: //before Z2
         return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 12,minute2: 50)
-    } else if block == 5 { //before Z1
+    case 5: //before Z1
         return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 12,minute2: 25)
-    } else if block == 4 {// before c block
+    case 4:// before c block
         return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 11,minute2: 20)
-    } else if block == 3 {// before morning activity
+    case 3:// before morning activity
         return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 20)
-    } else if block == 2 { //before b block
+    case 2: //before b block
         return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 9,minute2: 45)
-    }else if block == 1 { //before a block on day 1
+    case 1: //before a block on day 1
         return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 8,minute2: 40)
-    } else if block == 0 { //before house
+    case 0: //before house
         return isAfter(hour1: getHour(), minute1: getMinute(), hour2: 8, minute2: 30)
+    default: return false
     }
-    return false
 }
+func nowIsBeforeQuarter(block: Int, q: Int) -> Bool { //Now is before the end of the first,second,third,fourth quarter
+    if q == 1{
+            switch block{
+            case 8: //before office hours
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 45)
+            case 7: //before d block on day 1
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 50)
+            case 6: //before Z2
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 00)
+            case 5: //before Z1
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 12,minute2: 35)
+            case 4:// before c block
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 11,minute2: 35)
+            case 3:// before morning activity
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 54)
+            case 2: //before b block
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 00)
+            case 1: //before a block on day 1
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 8,minute2: 55)
+            default:
+                return true
+            }
+        }
+        else if q == 2{
+            switch block{
+            case 8: //before office hours
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 50)
+            case 7: //before d block on day 1
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 05)
+            case 6: //before Z2
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 10)
+            case 5: //before Z1
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 12,minute2: 45)
+            case 4:// before c block
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 11,minute2: 50)
+            case 3:// before morning activity
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 11,minute2: 03)
+            case 2: //before b block
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 15)
+            case 1: //before a block on day 1
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 9,minute2: 10)
+            default:
+                return true
+            }
+            
+        }
+        else if q == 3{
+            switch block{
+            case 8: //before office hours
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 55)
+            case 7: //before d block on day 1
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 20)
+            case 6: //before Z2
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 20)
+            case 5: //before Z1
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 12,minute2: 55)
+            case 4:// before c block
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 12,minute2: 05)
+            case 3:// before morning activity
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 11,minute2: 12)
+            case 2: //before b block
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 30)
+            case 1: //before a block on day 1
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 9,minute2: 25)
+            default:
+                return true
+            }
+        }
+        else if q == 4{
+            switch block{
+            case 7:
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 15,minute2: 00) && isAfter(hour1: 15, minute1: 00, hour2: getHour(), minute2: getMinute())
+            case 6:
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 14,minute2: 35) && isAfter(hour1: 14, minute1: 35, hour2: getHour(), minute2: getMinute())
+            case 9:
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 30) && isAfter(hour1: 13, minute1: 27, hour2: getHour(), minute2: getMinute())
+            case 5:
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 13,minute2: 05) && isAfter(hour1: 13, minute1: 05, hour2: getHour(), minute2: getMinute())
+            case 4:
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 12,minute2: 20) && isAfter(hour1: 12, minute1: 20, hour2: getHour(), minute2: getMinute())
+            case 3:
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 11,minute2: 20) && isAfter(hour1: 11, minute1: 20, hour2: getHour(), minute2: getMinute())
+            case 2:
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 10,minute2: 45) && isAfter(hour1: 10, minute1: 45, hour2: getHour(), minute2: getMinute())
+            case 1:
+                return isAfter(hour1: getHour(),minute1: getMinute(),hour2: 9,minute2: 40) && isAfter(hour1: 9, minute1: 40, hour2: getHour(), minute2: getMinute())
+            default:
+                return true
+            }
+        }
+    return true
+    }
+
 func getMorningActivity() -> String {
     var date = Date()
     let cal = Calendar.current
@@ -582,7 +678,7 @@ func timeIsBeforeBlockBegins(date: Date, block: Int) -> Bool{
         return isAfter(hour1: 11,minute1: 20,hour2: hr,minute2: min)
     } else if block == 2 { //next: b block
         return isAfter(hour1: 10,minute1: 45,hour2: hr,minute2: min)
-    }else if block == 1 { //next: a block on day 1
+    } else if block == 1 { //next: a block on day 1
         return isAfter(hour1: 9,minute1: 40,hour2: hr,minute2: min)
     } else if block == 0 { //next: house
         return isAfter(hour1: 8, minute1: 35, hour2: hr, minute2: min)

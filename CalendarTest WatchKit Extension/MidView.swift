@@ -153,7 +153,7 @@ struct MidView: View {
                     }
                 }
                 Divider().padding(.vertical, 3)
-                if globalOffset < 0 || (globalOffset == 0 && nowIsAfterBlockEnds(block: (block))) || (nowIsBeforeThird(block: block, third: 4)){
+                if globalOffset < 0 || (globalOffset == 0 && nowIsAfterBlockEnds(block: (block))) || (nowIsBeforeQuarter(block: block, q: 4)){
                     Text("You cannot schedule events in the past.").fontWeight(.medium).multilineTextAlignment(.center)
                 } else {
                     Button(action: {
@@ -170,14 +170,16 @@ struct MidView: View {
                         if isMeetingOrAssessment(block, datecomp) == "Meeting" {
                             if isToday() {
                                 if nowIsBeforeBlockBegins(block: (block)) {Text("entirety").tag("entirety")}
-                                if nowIsBeforeThird(block: block, third: 1) {Text("1st third").tag("1st third")}
-                                if nowIsBeforeThird(block: block, third: 2) {Text("2nd third").tag("2nd third")}
-                                if nowIsBeforeThird(block: block, third: 3) {Text("3rd third").tag("3rd third")}
+                                if nowIsBeforeQuarter(block: block, q: 1) {Text("Q1").tag("Q1")}
+                                if nowIsBeforeQuarter(block: block, q: 2) {Text("Q2").tag("Q2")}
+                                if nowIsBeforeQuarter(block: block, q: 3) {Text("Q3").tag("Q3")}
+                                if nowIsBeforeQuarter(block: block, q: 3) {Text("Q4").tag("Q4")}
                             } else {
                                 Text("entirety").tag("entirety")
-                                Text("1st third").tag("1st third")
-                                Text("2nd third").tag("2nd third")
-                                Text("3rd third").tag("3rd third")
+                                Text("Q1").tag("Q1")
+                                Text("Q2").tag("Q2")
+                                Text("Q3").tag("Q3")
+                                Text("Q4").tag("Q4")
                             }
                         } else {
                             Text("Test").tag("Test")
