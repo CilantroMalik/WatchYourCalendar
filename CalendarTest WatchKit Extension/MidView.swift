@@ -38,85 +38,118 @@ struct MidView: View {
         let weekday = cal.component(.weekday, from: date)
         switch blockNum {
         case 0:
-            return blocks[day]![0] + " Block"
+            return "Advisory"
         case 1:
+            return blocks[day]![0] + " Block"
+        case 2:
+            return blocks[day]![1] + " Block"
+        case 3:
             switch weekday {
             case 1:
                 return "None"
             case 2:
-                return "Community Meeting"
+                return "/nCommunity Meeting"
             case 3:
                 return "Clubs"
             case 4:
-                return "Advisory"
-            case 5:
-                return "Clubs"
-            case 6:
                 return "Class Meeting"
+            case 5:
+                return "Advisory"
+            case 6:
+                return "Clubs"
             case 7:
                 return "None"
             default:
-                return "error... lul"
+                return "error"
             }
-        case 2:
-            return blocks[day]![1] + " Block"
-        case 3:
-            return blocks[day]![2] + " Block"
         case 4:
-            return "Lunch"
+            return blocks[day]![2] + " Block"
         case 5:
-            return blocks[day]![3] + " Block"
+            if getLunch(day: cycleDay, z: 1) == "Lunch"{
+                return "Lunch"
+            } else {
+                return blocks[day]![3] + " Block"
+            }
         case 6:
+            if getLunch(day: cycleDay, z: 2) == "Lunch"{
+                return "Lunch"
+            } else {
+                return blocks[day]![3] + " Block"
+            }
+        case 7:
             return blocks[day]![4] + " Block"
+        case 8:
+            return "Office Hours"
         case 9:
-            return "Break"
+            return sports[day]
         default:
             return "e"
         }
     }
     func meetingOrAssessment() -> String {
-        switch block {
-        case 0:
-            return classes[day]![0].starts(with: "Free") ? "Meeting" : "Assessment"
-        case 1:
-//            return weekday == 3 || weekday == 5 ? "Meeting" : "Event"
+        if ZLunch[cycleDay] == 3 && (block == 5 || block == 6){
             return "Meeting"
-        case 2:
-            return classes[day]![1].starts(with: "Free") ? "Meeting" : "Assessment"
-        case 3:
-            return classes[day]![2].starts(with: "Free") ? "Meeting" : "Assessment"
-        case 4:
-            return "Meeting"
-        case 5:
-            return classes[day]![3].starts(with: "Free") ? "Meeting" : "Assessment"
-        case 6:
-            return classes[day]![4].starts(with: "Free") ? "Meeting" : "Assessment"
-        case 9:
-            return "Meeting"
-        default:
-            return "e"
+        } else {
+            switch block {
+            case 0:
+                return "Meeting"
+            case 1:
+                return (classes[day]![0].starts(with: "Free") || classes[day]![0].starts(with: "Study Hall")) ? "Meeting" : "Assessment"
+            case 2:
+                return (classes[day]![1].starts(with: "Free") || classes[day]![1].starts(with: "Study Hall")) ? "Meeting" : "Assessment"
+            case 3:
+                return "Meeting"
+            case 4:
+                return (classes[day]![2].starts(with: "Free") || classes[day]![2].starts(with: "Study Hall")) ? "Meeting" : "Assessment"
+            case 5:
+                if getLunch(day: cycleDay, z: 1) == "Lunch"{
+                    return "Meeting"
+                } else {
+                    return (classes[day]![3].starts(with: "Free") || classes[day]![3].starts(with: "Study Hall")) ? "Meeting" : "Assessment"
+                }
+            case 6:
+                if getLunch(day: cycleDay, z: 2) == "Lunch"{
+                    return "Meeting"
+                } else {
+                    return (classes[day]![3].starts(with: "Free") || classes[day]![3].starts(with: "Study Hall")) ? "Meeting" : "Assessment"
+                }
+            case 7:
+                return (classes[day]![4].starts(with: "Free") || classes[day]![4].starts(with: "Study Hall")) ? "Meeting" : "Assessment"
+            case 8:
+                return "Meeting"
+            default:
+                return "e"
+            }
         }
     }
     func getBlockTime(block: Int) -> String{
-        switch block {
-        case 0:
-            return "08:55 - 09:55"
-        case 1:
-            return "10:00 - 10:30"
-        case 2:
-            return "10:35 - 11:25"
-        case 3:
-            return "11:25 - 12:25"
-        case 4:
-            return "12:25 - 13:15"
-        case 5:
-            return "13:20 - 14:20"
-        case 6:
-            return "14:30 - 15:15"
-        case 9:
-            return "14:20 - 14:30"
-        default:
-            return "e"
+        if ZLunch[cycleDay] == 3 && (block == 5 || block == 6){
+            return "12:25 - 13:30"
+        } else {
+            switch block {
+            case 0:
+                return "08:30 - 08:35"
+            case 1:
+                return "08:40 - 09:40"
+            case 2:
+                return "09:45 - 10:45"
+            case 3:
+                return "10:45 - 11:20"
+            case 4:
+                return "11:20 - 12:20"
+            case 5:
+                return "12:25 - 13:05"
+            case 6:
+                return "12:50 - 13:30"
+            case 7:
+                return "13:35 - 14:35"
+            case 8:
+                return "14:40 - 15:00"
+            case 9:
+                return "15:30 - 17:00"
+            default:
+                return "e"
+            }
         }
     }
     
@@ -158,10 +191,10 @@ struct MidView: View {
                 } else {
                     Button(action: {
                         let n = EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.filter({$0.label.contains(eventPick)}).count + 1
-                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.count+1), isMeetingOrAssessment(block, datecomp) == "Meeting" ? "\(eventPick) of block \(n)" : "\(eventPick) \(n)", true, false)
+                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.count+1), isMeetingOrAssessment(block, datecomp) == "Meeting" ? "\(eventPick) \(n)" : "\(eventPick) \(n)", true, false)
                         
                         eventsListObs.addEvent(ev: temp, month: datecomp.month!-1, day: datecomp.day!)
-                        eventPick = isMeetingOrAssessment(block, datecomp) == "Meeting" ? "entirety" : "Test"
+                        eventPick = isMeetingOrAssessment(block, datecomp) == "Meeting" ? "Entirety of Block" : "Test"
                         print (temp.block)
                     }, label: {
                         Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)
@@ -169,17 +202,17 @@ struct MidView: View {
                     Picker(isMeetingOrAssessment(block, datecomp) == "Meeting" ? "Select Part of Block" : "Select Assessment Type", selection: $eventPick, content: {
                         if isMeetingOrAssessment(block, datecomp) == "Meeting" {
                             if isToday() {
-                                if nowIsBeforeBlockBegins(block: (block)) {Text("entirety").tag("entirety")}
-                                if nowIsBeforeQuarter(block: block, q: 1) {Text("Q1").tag("Q1")}
-                                if nowIsBeforeQuarter(block: block, q: 2) {Text("Q2").tag("Q2")}
-                                if nowIsBeforeQuarter(block: block, q: 3) {Text("Q3").tag("Q3")}
-                                if nowIsBeforeQuarter(block: block, q: 3) {Text("Q4").tag("Q4")}
+                                if nowIsBeforeBlockBegins(block: (block)) {Text("Entirety of Block").tag("Entirety of Block -")}
+                                if nowIsBeforeQuarter(block: block, q: 1) {Text("First Quarter").tag("Q1 -")}
+                                if nowIsBeforeQuarter(block: block, q: 2) {Text("Second Quarter").tag("Q2 -")}
+                                if nowIsBeforeQuarter(block: block, q: 3) {Text("Third Quarter").tag("Q3 -")}
+                                if nowIsBeforeQuarter(block: block, q: 3) {Text("Fourth Quarter").tag("Q4 -")}
                             } else {
-                                Text("entirety").tag("entirety")
-                                Text("Q1").tag("Q1")
-                                Text("Q2").tag("Q2")
-                                Text("Q3").tag("Q3")
-                                Text("Q4").tag("Q4")
+                                Text("Entirety of Block").tag("Entirety of Block -")
+                                Text("First Quarter").tag("Q1 -")
+                                Text("Second Quarter").tag("Q2 -")
+                                Text("Third Quarter").tag("Q3 -")
+                                Text("Fourth Quarter").tag("Q4 -")
                             }
                         } else {
                             Text("Test").tag("Test")

@@ -58,25 +58,41 @@ class blockEvent: Equatable {
     
     func getRoom() -> String{
         if meetingOrAssessment() == "Assessment"{
-            switch block {
-            case 0:
-                return rooms[getDay()]![0]
-            case 1:
+            if ZLunch[cycleDay] == 3 && (block == 5 || block == 6){
                 return "e"
-            case 2:
-                return rooms[getDay()]![1]
-            case 3:
-                return rooms[getDay()]![2]
-            case 4:
-                return "e"
-            case 5:
-                return rooms[getDay()]![3]
-            case 6:
-                return rooms[getDay()]![4]
-            case 9:
-                return "e"
-            default:
-                return "e"
+            } else {
+                switch block {
+                case 0:
+                    return "Homeroom"
+                case 1:
+                    return rooms[getDay()]![0]
+                case 2:
+                    return rooms[getDay()]![1]
+                case 3:
+                    return "e"
+                case 4:
+                    return rooms[getDay()]![2]
+                case 5:
+                    if getLunch(day: cycleDay, z: 1) == "Lunch"{
+                        return "e"
+                    } else {
+                        return rooms[getDay()]![3]
+                    }
+                case 6:
+                    if getLunch(day: cycleDay, z: 2) == "Lunch"{
+                        return "e"
+                    } else {
+                        return rooms[getDay()]![3]
+                    }
+                case 7:
+                    return rooms[getDay()]![4]
+                case 8:
+                    return "e"
+                case 9:
+                    return "e"
+                default:
+                    return "e"
+                }
             }
         } else {
             return "e"
@@ -84,51 +100,72 @@ class blockEvent: Equatable {
         
     }
     func getTime() -> String{
-        switch block {
-        case 0:
-            return "08:55 - 09:55"
-        case 1:
-            return "10:00 - 10:30"
-        case 2:
-            return "10:35 - 11:25"
-        case 3:
-            return "11:25 - 12:25"
-        case 4:
-            return "12:25 - 13:15"
-        case 5:
-            return "13:20 - 14:20"
-        case 6:
-            return "14:30 - 15:15"
-        case 9:
-            return "14:20 - 14:30"
-        default:
-            return "e"
+        if ZLunch[cycleDay] == 3 && (block == 5 || block == 6){
+            return "12:25 - 13:30"
+        } else {
+            switch block {
+            case 0:
+                return "08:30 - 08:35"
+            case 1:
+                return "08:40 - 09:40"
+            case 2:
+                return "09:45 - 10:45"
+            case 3:
+                return "10:45 - 11:20"
+            case 4:
+                return "11:20 - 12:20"
+            case 5:
+                return "12:25 - 13:05"
+            case 6:
+                return "12:50 - 13:30"
+            case 7:
+                return "13:35 - 14:35"
+            case 8:
+                return "14:40 - 15:00"
+            case 9:
+                return "15:30 - 17:00"
+            default:
+                return "e"
+            }
         }
     }
     
     func meetingOrAssessment() -> String{
         let month = time.month!
         let day = time.day!
-        switch block {
-        case 0:
-            return classes[dateToCycleDay[month-1][day]!]![0].starts(with: "Free") ? "Meeting" : "Assessment"
-        case 1:
-//            return weekday == 3 || weekday == 5 ? "Meeting" : "Event"
+        if ZLunch[cycleDay] == 3 && (block == 5 || block == 6){
             return "Meeting"
-        case 2:
-            return classes[dateToCycleDay[month-1][day]!]![1].starts(with: "Free") ? "Meeting" : "Assessment"
-        case 3:
-            return classes[dateToCycleDay[month-1][day]!]![2].starts(with: "Free") ? "Meeting" : "Assessment"
-        case 4:
-            return "Meeting"
-        case 5:
-            return classes[dateToCycleDay[month-1][day]!]![3].starts(with: "Free") ? "Meeting" : "Assessment"
-        case 6:
-            return classes[dateToCycleDay[month-1][day]!]![4].starts(with: "Free") ? "Meeting" : "Assessment"
-        case 9:
-            return "Meeting"
-        default:
-            return "e"
+        } else {
+            switch block {
+            case 0:
+                return "Meeting"
+            case 1:
+                return (classes[dateToCycleDay[month-1][day]!]![0].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![0].starts(with: "Study Hall")) ? "Meeting" : "Assessment"
+            case 2:
+                return (classes[dateToCycleDay[month-1][day]!]![1].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![1].starts(with: "Study Hall")) ? "Meeting" : "Assessment"
+            case 3:
+                return "Meeting"
+            case 4:
+                return (classes[dateToCycleDay[month-1][day]!]![2].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![2].starts(with: "Study Hall")) ? "Meeting" : "Assessment"
+            case 5:
+                if getLunch(day: cycleDay, z: 1) == "Lunch"{
+                    return "Meeting"
+                } else {
+                    return (classes[dateToCycleDay[month-1][day]!]![3].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![3].starts(with: "Study Hall")) ? "Meeting" : "Assessment"
+                }
+            case 6:
+                if getLunch(day: cycleDay, z: 2) == "Lunch"{
+                    return "Meeting"
+                } else {
+                    return (classes[dateToCycleDay[month-1][day]!]![3].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![3].starts(with: "Study Hall")) ? "Meeting" : "Assessment"
+                }
+            case 7:
+                return (classes[dateToCycleDay[month-1][day]!]![4].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![4].starts(with: "Study Hall")) ? "Meeting" : "Assessment"
+            case 8:
+                return "Meeting"
+            default:
+                return "e"
+            }
         }
     }
     
@@ -141,38 +178,50 @@ class blockEvent: Equatable {
         let weekday = cal.component(.weekday, from: date)
         switch block {
         case 0:
-            return blocks[getDay()]![0] + " Block"
+            return "Advisory"
         case 1:
+            return blocks[getDay()]![0] + " Block"
+        case 2:
+            return blocks[getDay()]![1] + " Block"
+        case 3:
             switch weekday {
             case 1:
                 return "None"
             case 2:
-                return "\nCommunity Meeting"
+                return "/nCommunity Meeting"
             case 3:
                 return "Clubs"
             case 4:
-                return "Advisory"
-            case 5:
-                return "Clubs"
-            case 6:
                 return "Class Meeting"
+            case 5:
+                return "Advisory"
+            case 6:
+                return "Clubs"
             case 7:
                 return "None"
             default:
-                return "error... lul"
+                return "error"
             }
-        case 2:
-            return blocks[getDay()]![1] + " Block"
-        case 3:
-            return blocks[getDay()]![2] + " Block"
         case 4:
-            return "Lunch"
+            return blocks[getDay()]![2] + " Block"
         case 5:
-            return blocks[getDay()]![3] + " Block"
+            if getLunch(day: cycleDay, z: 1) == "Lunch"{
+                return "Lunch"
+            } else {
+                return blocks[getDay()]![3] + " Block"
+            }
         case 6:
+            if getLunch(day: cycleDay, z: 2) == "Lunch"{
+                return "Lunch"
+            } else {
+                return blocks[getDay()]![3] + " Block"
+            }
+        case 7:
             return blocks[getDay()]![4] + " Block"
+        case 8:
+            return "Office Hours"
         case 9:
-            return "Break"
+            return sports[getDay()]
         default:
             return "e"
         }
@@ -183,35 +232,59 @@ class blockEvent: Equatable {
     }
 }
 var eventsList: [[Int: [blockEvent]]] = [
-    // January
+    // January 2023
     [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
-    // February
+    // February 2023
     [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[]],
-    // March
+    // March 2023
     [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
-    // April
+    // April 2023
     [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[]],
-    // May
+    // May 2023
     [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
-    // June
-    [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[]]
+    // June 2023
+    [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[]],
+    // July 2022
+    [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
+    // August 2022
+    [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
+    // September 2022
+    [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[]],
+    // October 2022
+    [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
+    // November 2022
+    [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[]],
+    // December 2022
+    [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]]
 ]
 
 
 class EventsListObs: ObservableObject {
     static var evList: [[Int: [blockEvent]]] = [
-        // January
+        // January 2023
         [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
-        // February
+        // February 2023
         [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[]],
-        // March
+        // March 2023
         [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
-        // April
+        // April 2023
         [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[]],
-        // May
+        // May 2023
         [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
-        // June
-        [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[]]
+        // June 2023
+        [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[]],
+        // July 2022
+        [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
+        // August 2022
+        [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
+        // September 2022
+        [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[]],
+        // October 2022
+        [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]],
+        // November 2022
+        [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[]],
+        // December 2022
+        [1:[], 2:[], 3:[], 4:[], 5:[], 6:[], 7:[], 8:[], 9:[], 10:[], 11:[], 12:[], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[], 21:[], 22:[], 23:[], 24:[], 25:[], 26:[], 27:[], 28:[], 29:[], 30:[], 31:[]]
     ]
     
     init() {

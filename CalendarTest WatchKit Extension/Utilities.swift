@@ -324,7 +324,10 @@ func getLunch(day: Int, z: Int) -> String{ //Input day and z block (1 or 2), out
         return classes[day]![3]
     }
 }
-func getClassess(day: Int,block: Int) -> String{ //TODO: input
+func getClassess(day: Int,block: Int) -> String{
+    if ZLunch[cycleDay] == 3 && (block == 5 || block == 6){
+        return "Lunch"
+    } else {
     switch block {
     case 0:
         return "House"
@@ -356,6 +359,7 @@ func getClassess(day: Int,block: Int) -> String{ //TODO: input
         return sports[day]
     default:
         return "eeee"
+    }
     }
 }
 var blocks: [Int: [String]] = [
@@ -764,27 +768,13 @@ func compGetNextBlock(date: Date) -> String{
 func compGetNowBlock(date: Date) -> Int{
     if cycleDay == 0{
         return 0
-    } else if timeIsBeforeBlockBegins(date: date, block: 1){
-        return 0
-    } else if timeIsBeforeBlockBegins(date: date, block: 2){
-        return 1
-    } else if timeIsBeforeBlockBegins(date: date, block: 3){
-        return 2
-    } else if timeIsBeforeBlockBegins(date: date, block: 4){
-        return 3
-    } else if timeIsBeforeBlockBegins(date: date, block: 5){
-        return 4
-    } else if timeIsBeforeBlockBegins(date: date, block: 6){
-        return 5
-    } else if timeIsBeforeBlockBegins(date: date, block: 7){
-        return 6
-    } else if timeIsBeforeBlockBegins(date: date, block: 8){
-        return 7
-    } else if timeIsBeforeBlockBegins(date: date, block: 9){
-        return 8
     } else {
-        return 0
+        for n in 1...9{
+            if timeIsBeforeBlockBegins(date: date, block: n){
+                return n - 1}
+        }
     }
+    return 0
 }
 func compGetNowBlockLetter(date: Date) -> String{
     if cycleDay == 0{
@@ -1060,8 +1050,8 @@ func isMeetingOrAssessment(_ block: Int, _ time: DateComponents) -> String {
         0: classes[dateToCycleDay[month-1][day]!]![0].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![0].starts(with: "Study Hall"),
         1: classes[dateToCycleDay[month-1][day]!]![1].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![1].starts(with: "Study Hall"),
         2: classes[dateToCycleDay[month-1][day]!]![2].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![2].starts(with: "Study Hall"),
-        4: classes[dateToCycleDay[month-1][day]!]![4].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![4].starts(with: "Study Hall"),
-        7: classes[dateToCycleDay[month-1][day]!]![7].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![7].starts(with: "Study Hall")
+        4: classes[dateToCycleDay[month-1][day]!]![3].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![3].starts(with: "Study Hall"),
+        7: classes[dateToCycleDay[month-1][day]!]![4].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![4].starts(with: "Study Hall")
         
     ]
     switch block {
