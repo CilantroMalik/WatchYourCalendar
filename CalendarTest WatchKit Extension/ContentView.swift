@@ -332,7 +332,7 @@ struct ContentView: View {
             let horiz = value.translation.width as CGFloat
             if horiz > 0 {  // right swipe
                 opacity = 0
-                delayWithSeconds(0.3) { minOffset = 0; offset -= 1; globalOffset -= 1 }
+                delayWithSeconds(0.3) { minOffset = 0; offset -= 1; globalOffset -= 1}
             } else {  // left swipe
                 opacity = 0
                 delayWithSeconds(0.3) { minOffset = 0; offset += 1; globalOffset += 1}

@@ -66,15 +66,15 @@ struct MidView: View {
             return blocks[day]![2] + " Block"
         case 5:
             if getLunch(day: cycleDay, z: 1) == "Lunch"{
-                return "Lunch"
+                return "Lunch (Z1)"
             } else {
-                return blocks[day]![3] + " Block"
+                return "Z1"
             }
         case 6:
             if getLunch(day: cycleDay, z: 2) == "Lunch"{
-                return "Lunch"
+                return "Lunch (Z2)"
             } else {
-                return blocks[day]![3] + " Block"
+                return "Z2"
             }
         case 7:
             return blocks[day]![4] + " Block"
@@ -123,9 +123,9 @@ struct MidView: View {
         }
     }
     func getBlockTime(block: Int) -> String{
-        if ZLunch[cycleDay] == 3 && (block == 5 || block == 6){
-            return "12:25 - 13:30"
-        } else {
+//        if ZLunch[cycleDay] == 3 && (block == 5 || block == 6){
+//            return "12:25 - 13:30"
+//        } else {
             switch block {
             case 0:
                 return "08:30 - 08:35"
@@ -150,7 +150,7 @@ struct MidView: View {
             default:
                 return "e"
             }
-        }
+//        }
     }
     
     func eventsThisBlock() -> [blockEvent] {
@@ -185,10 +185,30 @@ struct MidView: View {
                         Button(action: { evEditManager.eventToEdit = item; evEditManager.isEditing.toggle() }, label: { Text(item.label) })
                     }
                 }
-                Divider().padding(.vertical, 3)
-                if globalOffset < 0 || (globalOffset == 0 && nowIsAfterBlockEnds(block: (block))) || (nowIsBeforeQuarter(block: block, q: 4)){
+                Divider().padding(.vertical, 1) //FIXME: PADDING
+                if globalOffset < 0 || (globalOffset == 0 && nowIsAfterBlockEnds(block: (block)))/* || (nowIsBeforeQuarter(block: block, q: 4))*/{
                     Text("You cannot schedule events in the past.").fontWeight(.medium).multilineTextAlignment(.center)
                 } else {
+                    Picker(isMeetingOrAssessment(block, datecomp) == "Meeting" ? "Select Part of Block" : "Select Assessment Type", selection: $eventPick, content: {
+                        if isMeetingOrAssessment(block, datecomp) == "Meeting" {
+                            if isToday() {
+                                if nowIsBeforeBlockBegins(block: (block)) {Text("Entirety of Block").tag("Entirety of Block-")}
+                                if nowIsBeforeQuarter(block: block, q: 1) {Text("First Quarter").tag("Q1-")}
+                                if nowIsBeforeQuarter(block: block, q: 2) {Text("Second Quarter").tag("Q2-")}
+                                if nowIsBeforeQuarter(block: block, q: 3) {Text("Third Quarter").tag("Q3-")}
+                                if nowIsBeforeQuarter(block: block, q: 4) {Text("Fourth Quarter").tag("Q4-")}
+                            } else {
+                                Text("Entirety of Block").tag("Entirety of Block -")
+                                Text("First Quarter").tag("Q1-")
+                                Text("Second Quarter").tag("Q2-")
+                                Text("Third Quarter").tag("Q3-")
+                                Text("Fourth Quarter").tag("Q4-")
+                            }
+                        } else {
+                            Text("Test").tag("Test")
+                            Text("Quiz").tag("Quiz")
+                        }
+                    }).pickerStyle(.wheel).frame(width: WKInterfaceDevice.current().screenBounds.width, height: 50, alignment: .center)
                     Button(action: {
                         let n = EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.filter({$0.label.contains(eventPick)}).count + 1
                         let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.count+1), isMeetingOrAssessment(block, datecomp) == "Meeting" ? "\(eventPick) \(n)" : "\(eventPick) \(n)", true, false)
@@ -199,26 +219,6 @@ struct MidView: View {
                     }, label: {
                         Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)
                     })
-                    Picker(isMeetingOrAssessment(block, datecomp) == "Meeting" ? "Select Part of Block" : "Select Assessment Type", selection: $eventPick, content: {
-                        if isMeetingOrAssessment(block, datecomp) == "Meeting" {
-                            if isToday() {
-                                if nowIsBeforeBlockBegins(block: (block)) {Text("Entirety of Block").tag("Entirety of Block -")}
-                                if nowIsBeforeQuarter(block: block, q: 1) {Text("First Quarter").tag("Q1 -")}
-                                if nowIsBeforeQuarter(block: block, q: 2) {Text("Second Quarter").tag("Q2 -")}
-                                if nowIsBeforeQuarter(block: block, q: 3) {Text("Third Quarter").tag("Q3 -")}
-                                if nowIsBeforeQuarter(block: block, q: 3) {Text("Fourth Quarter").tag("Q4 -")}
-                            } else {
-                                Text("Entirety of Block").tag("Entirety of Block -")
-                                Text("First Quarter").tag("Q1 -")
-                                Text("Second Quarter").tag("Q2 -")
-                                Text("Third Quarter").tag("Q3 -")
-                                Text("Fourth Quarter").tag("Q4 -")
-                            }
-                        } else {
-                            Text("Test").tag("Test")
-                            Text("Quiz").tag("Quiz")
-                        }
-                    }).pickerStyle(.wheel).frame(width: WKInterfaceDevice.current().screenBounds.width, height: 50, alignment: .center)
                 }
             }
         }

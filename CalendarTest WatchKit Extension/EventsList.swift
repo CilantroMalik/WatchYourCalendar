@@ -99,8 +99,95 @@ class blockEvent: Equatable {
         }
         
     }
-    func getTime() -> String{
-        if ZLunch[cycleDay] == 3 && (block == 5 || block == 6){
+    func getTime(label: String) -> String{
+        if label.starts(with: "Q"){
+            if label.starts(with: "Q1"){
+                switch block{
+                case 1:
+                    return "08:40 - 08:55"
+                case 2:
+                    return "09:45 - 11:00"
+                case 3:
+                    return "10:45 - 10:54"
+                case 4:
+                    return "11:20 - 11:35"
+                case 5:
+                    return "12:25 - 12:35"
+                case 6:
+                    return "12:50 - 13:00"
+                case 7:
+                    return "13:35 - 13:50"
+                case 8:
+                    return "14:40 - 14:45"
+                default:
+                    return "e"
+                }
+            } else if label.starts(with: "Q2"){
+                switch block{
+                case 1:
+                    return "08:55 - 09:10"
+                case 2:
+                    return "11:00 - 11:15"
+                case 3:
+                    return "10:54 - 11:03"
+                case 4:
+                    return "11:35 - 11:50"
+                case 5:
+                    return "12:35 - 12:45"
+                case 6:
+                    return "13:00 - 13:10"
+                case 7:
+                    return "13:50 - 14:05"
+                case 8:
+                    return "14:45 - 14:50"
+                default:
+                    return "e"
+                }
+            } else if label.starts(with: "Q3"){
+                switch block{
+                case 1:
+                    return "09:10 - 09:25"
+                case 2:
+                    return "11:15 - 11:30"
+                case 3:
+                    return "11:03 - 11:12"
+                case 4:
+                    return "11:50 - 12:05"
+                case 5:
+                    return "12:45 - 12:55"
+                case 6:
+                    return "13:10 - 13:20"
+                case 7:
+                    return "14:05 - 14:20"
+                case 8:
+                    return "14:50 - 14:55"
+                default:
+                    return "e"
+                }
+            } else if label.starts(with: "Q4"){
+                switch block{
+                case 1:
+                    return "09:25 - 09:40"
+                case 2:
+                    return "11:30 - 11:45"
+                case 3:
+                    return "11:12 - 11:20"
+                case 4:
+                    return "12:05 - 12:20"
+                case 5:
+                    return "12:55 - 13:05"
+                case 6:
+                    return "13:20 - 13:30"
+                case 7:
+                    return "14:20 - 14:35"
+                case 8:
+                    return "14:55 - 15:00"
+                default:
+                    return "e"
+                }
+            }
+            return "e"
+        } else if ZLunch[cycleDay] == 3 && (block == 5 || block == 6){
             return "12:25 - 13:30"
         } else {
             switch block {
@@ -206,15 +293,15 @@ class blockEvent: Equatable {
             return blocks[getDay()]![2] + " Block"
         case 5:
             if getLunch(day: cycleDay, z: 1) == "Lunch"{
-                return "Lunch"
+                return "Lunch (Z1)"
             } else {
-                return blocks[getDay()]![3] + " Block"
+                return "Z1"
             }
         case 6:
             if getLunch(day: cycleDay, z: 2) == "Lunch"{
-                return "Lunch"
+                return "Lunch (Z2)"
             } else {
-                return blocks[getDay()]![3] + " Block"
+                return "Z2"
             }
         case 7:
             return blocks[getDay()]![4] + " Block"

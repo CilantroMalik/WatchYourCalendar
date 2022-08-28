@@ -66,16 +66,13 @@ struct DayView: View {
     
     func getContentColor(_ block: Int) -> Color {
         if globalOffset == 0 {
-//            if !(eventsList[dtcp.month! - 1][dtcp.day!]!.isEmpty) { //FIXME: doth this worketh?
-//                return .orange
-//            } else
             if isNextBlock(bl: block) {  // next block
                 return .green
             } else if isNextBlock(bl: block + 1) {  // now block
-                return .blue
-                //return .purple
+//                return .blue
+                return .purple
             } else if nowIsBeforeBlockBegins(block: block) {  // future block
-                return .red
+                return /*((eventsList[dtcp.month! - 1][dtcp.day!]!.isEmpty)) ? .orange : */.red
             } else {  // past block;
                 return .blue
             }
@@ -122,16 +119,20 @@ struct DayView: View {
                 }
                 Group{
                     if ZLunch[cycleDay] == 3{
-                        scheduleRow(time: "12:25 - 13:30:", block: 5, content: "Lunch")
+//                        scheduleRow(time: "12:25 - 13:30:", block: 5, content: "Lunch")
+                        scheduleRow(time: "12:25 - 13:05:", block: 5, content: "Lunch (Z1)")
+                        Spacer()
+                        scheduleRow(time: "12:50 - 13:30:", block: 6, content: "Lunch (Z2)")
+                        Spacer()
                     } else if getLunch(day: cycleDay, z: 1) == "Lunch"{
-                        scheduleRow(time: "12:25 - 13:05:", block: 5, content: "Lunch")
+                        scheduleRow(time: "12:25 - 13:05:", block: 5, content: "Lunch (Z1)")
                         Spacer()
                         scheduleRow(time: "12:50 - 13:30:", block: 6, content: classes[cycleDay]![3])
                         Spacer()
                     } else {
                         scheduleRow(time: "12:25 - 13:05:", block: 5, content: classes[cycleDay]![3])
                         Spacer()
-                        scheduleRow(time: "12:50 - 13:30:", block: 6, content: "Lunch")
+                        scheduleRow(time: "12:50 - 13:30:", block: 6, content: "Lunch (Z2)")
                         Spacer()
                     }
                 }

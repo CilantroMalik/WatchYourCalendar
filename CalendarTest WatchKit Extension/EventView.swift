@@ -24,7 +24,7 @@ struct EventView: View {
             Group{
                 if ev.hasLabel {Text(ev.label).fontWeight(.heavy).foregroundColor(.orange)}
                 Text("Day \(ev.getDay()), \(ev.getPeriod())").multilineTextAlignment(.center)
-                Text(ev.getTime()).multilineTextAlignment(.center)
+                Text(ev.getTime(label: ev.label)).multilineTextAlignment(.center)
                 if ev.getRoom() != "e" {Text(ev.getRoom()).italic().multilineTextAlignment(.center)}
                 Text(getOffsetDate()).italic().multilineTextAlignment(.center)
                 ev.hasNotification ?  Text("Notifications on").fontWeight(.heavy) : Text("Notifications off").italic().foregroundColor(Color(UIColor.lightGray))
@@ -47,9 +47,9 @@ struct EventView: View {
                         content.title = ("Reminder: " + ev.label[...(ev.label).firstIndex(of: " ")!])
                     } else {content.title = ("Reminder:\nMeeting")}
                     if ev.getRoom() != "e" {
-                        content.subtitle = (ev.label + "\nDay " + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.getTime() + "\n" + ev.getRoom())
+                        content.subtitle = (ev.label + "\nDay " + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.getTime(label: ev.label) + "\n" + ev.getRoom())
                     } else {
-                        content.subtitle = (ev.label + "\nDay " + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.getTime())
+                        content.subtitle = (ev.label + "\nDay " + String(ev.getDay()) + ", " + ev.getPeriod() + "\n" + ev.getTime(label: ev.label))
                     }
                     content.sound = UNNotificationSound.default
                     if #available(watchOSApplicationExtension 8.0, *) {
@@ -60,8 +60,8 @@ struct EventView: View {
                     if ev.meetingOrAssessment() == "Assessment" {
                         content.body = "Reminder: You have a \(detail.joined(separator: " ").lowercased()) this block. Good luck!"
                     } else {
-                        content.body = "Reminder: You have a \(ev.meetingOrAssessment().lowercased()) during the \(detail.joined(separator: " "))."
-                        if detail.joined(separator: " ") == "entirety" { content.body = "Reminder: You have a meeting for the entire block." }
+                        content.body = "Reminder: You have a \(ev.meetingOrAssessment().lowercased()) during the \(detail.joined(separator: " ")) of the block."
+                        if detail.joined(separator: " ") == "Entirety of Block -" { content.body = "Reminder: You have a meeting for the entire block." }
                     }
                     content.categoryIdentifier = "event"
                     
