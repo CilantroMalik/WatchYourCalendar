@@ -47,11 +47,12 @@ import UserNotifications
 var cancellable = Connectivity.shared.$data.sink() {
     var lunches = $0["ZLunch"]! as! [Int]
     var classArr = $0["classes"]! as! [String]
-    var sportsArr = $0["classes"]! as! [String]
+    var sportsArr = $0["sports"]! as! [String]
+    EventsListObs().replaceList(newList: $0["eventsList"] as! [[Int: [blockEvent]]])
     print("Received user data update. THIS MEANS THE DATA REACHED THE WATCH :)")
     for i in 0...5 {
         ZLunch[i+1] = lunches[i]
-        sports[i] = sportsArr[i]
+        sports[i] = sportsArr[i] == "" ? "Go Home!" : sportsArr[i]
     }
     let a = classArr[0]
     let b = classArr[1]
@@ -61,14 +62,13 @@ var cancellable = Connectivity.shared.$data.sink() {
     let f = classArr[5]
     let g = classArr[6]
     let h = classArr[7]
-    let z1 = classArr[8]
-    let z2 = classArr[9]
-    classes[1] = [a, b, c, z1, z2, d]
-    classes[2] = [e, f, g, z1, z2, h]
-    classes[3] = [d, a, b, z1, z2, c]
-    classes[4] = [h, e, f, z1, z2, g]
-    classes[5] = [c, d, a, z1, z2, b]
-    classes[6] = [g, h, e, z1, z2, f]
+    let z = classArr[8]
+    classes[1] = [a, b, c, z, d]
+    classes[2] = [e, f, g, z, h]
+    classes[3] = [d, a, b, z, c]
+    classes[4] = [h, e, f, z, g]
+    classes[5] = [c, d, a, z, b]
+    classes[6] = [g, h, e, z, f]
     
     UserDefaults.standard.set(lunches, forKey: "ZLunch")
     UserDefaults.standard.set(classArr, forKey: "classes")
@@ -93,8 +93,8 @@ class UserData: ObservableObject {
         6: ["(G Block)", "(H Block)", "(E Block)", "(Z)","(F Block)"]
     ]
     
-    static var ZLunch: [Int: Int] = [0: 3, 1: 3, 2: 3, 3: 3, 4:3, 5: 3, 6: 3]//Day : 1 = Z1 lunch, 2 = Z2 lunch, 3 = Both lunch
-    static var sports: [String] = ["XC","XC","XC","XC","XC","XC"]
+    static var ZLunch: [Int: Int] = [0: 3, 1: 3, 2: 3, 3: 3, 4:3, 5: 3, 6: 3]  //Day : 1 = Z1 lunch, 2 = Z2 lunch, 3 = Both lunch
+    static var sports: [String] = ["XC", "XC", "XC", "XC", "XC", "XC"]
     
     func updateClasses(_ new: [Int: [String]]) {
         UserData.classes = new
@@ -1047,12 +1047,10 @@ func isMeetingOrAssessment(_ block: Int, _ time: DateComponents) -> String {
     let month = time.month!
     let day = time.day!
     let begin: [Int: Bool] = [
-        0: classes[dateToCycleDay[month-1][day]!]![0].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![0].starts(with: "Study Hall"),
-        1: classes[dateToCycleDay[month-1][day]!]![1].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![1].starts(with: "Study Hall"),
-        2: classes[dateToCycleDay[month-1][day]!]![2].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![2].starts(with: "Study Hall"),
-        4: classes[dateToCycleDay[month-1][day]!]![3].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![3].starts(with: "Study Hall"),
+        1: classes[dateToCycleDay[month-1][day]!]![0].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![1].starts(with: "Study Hall"),
+        2: classes[dateToCycleDay[month-1][day]!]![1].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![2].starts(with: "Study Hall"),
+        4: classes[dateToCycleDay[month-1][day]!]![2].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![3].starts(with: "Study Hall"),
         7: classes[dateToCycleDay[month-1][day]!]![4].starts(with: "Free") || classes[dateToCycleDay[month-1][day]!]![4].starts(with: "Study Hall")
-        
     ]
     switch block {
     case 0:

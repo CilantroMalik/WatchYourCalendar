@@ -1,8 +1,8 @@
 //
-//  EventsList.swift
-//  CalendarTest WatchKit Extension
+//  MobileEventsList.swift
+//  whatever
 //
-//  Created by Jack de Haan on 2/15/22.
+//  Created by Rohan Malik on 8/29/22.
 //
 
 import Foundation
@@ -12,6 +12,7 @@ import Foundation
 //}
 
 func makeId(block: Int, time: DateComponents, num: Int) -> String{
+    print("making id " + ((String(time.month!).count == 1 ? "0" + String(time.month!) : String(time.month!)) + (String(time.day!).count == 1 ? "0" + String(time.day!) : String(time.day!)) + String(block) + String(num)))
     return ((String(time.month!).count == 1 ? "0" + String(time.month!) : String(time.month!)) + (String(time.day!).count == 1 ? "0" + String(time.day!) : String(time.day!)) + String(block) + String(num))
 }
 class blockEvent: Equatable {
@@ -21,7 +22,7 @@ class blockEvent: Equatable {
     
     var block = 0 //
     var time = DateComponents(calendar: Calendar.current, month: 1, day: 1)
-    var id = "000000" //MM DD B
+    var id = "000000" //MM DD B N
     var label = "Test"
     var hasLabel = false
     var hasNotification = false
@@ -100,93 +101,90 @@ class blockEvent: Equatable {
         
     }
     func getTime(label: String) -> String{
-        if label.starts(with: "Q") && !label.starts(with: "Quiz") {
-            if label.starts(with: "Q1"){
-                switch block{
-                case 1:
-                    return "08:40 - 08:55"
-                case 2:
-                    return "09:45 - 11:00"
-                case 3:
-                    return "10:45 - 10:54"
-                case 4:
-                    return "11:20 - 11:35"
-                case 5:
-                    return "12:25 - 12:35"
-                case 6:
-                    return "12:50 - 13:00"
-                case 7:
-                    return "13:35 - 13:50"
-                case 8:
-                    return "14:40 - 14:45"
-                default:
-                    return "e"
-                }
-            } else if label.starts(with: "Q2"){
-                switch block{
-                case 1:
-                    return "08:55 - 09:10"
-                case 2:
-                    return "11:00 - 11:15"
-                case 3:
-                    return "10:54 - 11:03"
-                case 4:
-                    return "11:35 - 11:50"
-                case 5:
-                    return "12:35 - 12:45"
-                case 6:
-                    return "13:00 - 13:10"
-                case 7:
-                    return "13:50 - 14:05"
-                case 8:
-                    return "14:45 - 14:50"
-                default:
-                    return "e"
-                }
-            } else if label.starts(with: "Q3"){
-                switch block{
-                case 1:
-                    return "09:10 - 09:25"
-                case 2:
-                    return "11:15 - 11:30"
-                case 3:
-                    return "11:03 - 11:12"
-                case 4:
-                    return "11:50 - 12:05"
-                case 5:
-                    return "12:45 - 12:55"
-                case 6:
-                    return "13:10 - 13:20"
-                case 7:
-                    return "14:05 - 14:20"
-                case 8:
-                    return "14:50 - 14:55"
-                default:
-                    return "e"
-                }
-            } else if label.starts(with: "Q4"){
-                switch block{
-                case 1:
-                    return "09:25 - 09:40"
-                case 2:
-                    return "11:30 - 11:45"
-                case 3:
-                    return "11:12 - 11:20"
-                case 4:
-                    return "12:05 - 12:20"
-                case 5:
-                    return "12:55 - 13:05"
-                case 6:
-                    return "13:20 - 13:30"
-                case 7:
-                    return "14:20 - 14:35"
-                case 8:
-                    return "14:55 - 15:00"
-                default:
-                    return "e"
-                }
+        if label.starts(with: "1st"){
+            switch block{
+            case 1:
+                return "08:40 - 08:55"
+            case 2:
+                return "09:45 - 11:00"
+            case 3:
+                return "10:45 - 10:54"
+            case 4:
+                return "11:20 - 11:35"
+            case 5:
+                return "12:25 - 12:35"
+            case 6:
+                return "12:50 - 13:00"
+            case 7:
+                return "13:35 - 13:50"
+            case 8:
+                return "14:40 - 14:45"
+            default:
+                return "e"
             }
-            return "e"
+        } else if label.starts(with: "2nd"){
+            switch block{
+            case 1:
+                return "08:55 - 09:10"
+            case 2:
+                return "11:00 - 11:15"
+            case 3:
+                return "10:54 - 11:03"
+            case 4:
+                return "11:35 - 11:50"
+            case 5:
+                return "12:35 - 12:45"
+            case 6:
+                return "13:00 - 13:10"
+            case 7:
+                return "13:50 - 14:05"
+            case 8:
+                return "14:45 - 14:50"
+            default:
+                return "e"
+            }
+        } else if label.starts(with: "3rd"){
+            switch block{
+            case 1:
+                return "09:10 - 09:25"
+            case 2:
+                return "11:15 - 11:30"
+            case 3:
+                return "11:03 - 11:12"
+            case 4:
+                return "11:50 - 12:05"
+            case 5:
+                return "12:45 - 12:55"
+            case 6:
+                return "13:10 - 13:20"
+            case 7:
+                return "14:05 - 14:20"
+            case 8:
+                return "14:50 - 14:55"
+            default:
+                return "e"
+            }
+        } else if label.starts(with: "4th") {
+            switch block{
+            case 1:
+                return "09:25 - 09:40"
+            case 2:
+                return "11:30 - 11:45"
+            case 3:
+                return "11:12 - 11:20"
+            case 4:
+                return "12:05 - 12:20"
+            case 5:
+                return "12:55 - 13:05"
+            case 6:
+                return "13:20 - 13:30"
+            case 7:
+                return "14:20 - 14:35"
+            case 8:
+                return "14:55 - 15:00"
+            default:
+                return "e"
+            }
         } else if ZLunch[cycleDay] == 3 && (block == 5 || block == 6){
             return "12:25 - 13:30"
         } else {
@@ -380,20 +378,61 @@ class EventsListObs: ObservableObject {
     
     func addEvent(ev: blockEvent, month: Int, day: Int) {
         EventsListObs.evList[month][day]!.append(ev)
-        Connectivity.shared.send(obj: ["eventsList": EventsListObs.evList])
+        var allEvents: [String] = []
+        for (i, month) in (EventsListObs.evList).enumerated() {
+            for key in month.keys {
+                for event in month[key]! {
+                    allEvents.append("\(i)-\(key)-\(event.toString())")
+                }
+            }
+        }
+        UserDefaults.standard.set(allEvents, forKey: "eventsList")
+        Connectivity.shared.send(obj: ["classes": classes, "ZLunch": ZLunch,  "sports": sports, "eventsList": EventsListObs.evList])
         objectWillChange.send()
     }
     
     func delEvent(ev: blockEvent) {
         EventsListObs.evList[ev.time.month!-1][ev.time.day!] = EventsListObs.evList[ev.time.month!-1][ev.time.day!]!.filter { !($0.isEqual(ev)) }
-        Connectivity.shared.send(obj: ["eventsList": EventsListObs.evList])
+        var allEvents: [String] = []
+        for (i, month) in (EventsListObs.evList).enumerated() {
+            for key in month.keys {
+                for event in month[key]! {
+                    allEvents.append("\(i)-\(key)-\(event.toString())")
+                }
+            }
+        }
+        UserDefaults.standard.set(allEvents, forKey: "eventsList")
+        Connectivity.shared.send(obj: ["classes": classes, "ZLunch": ZLunch,  "sports": sports, "eventsList": EventsListObs.evList])
         objectWillChange.send()
     }
     
     func replaceList(newList: [[Int: [blockEvent]]]) {
         EventsListObs.evList = newList
-        Connectivity.shared.send(obj: ["eventsList": EventsListObs.evList])
+        var allEvents: [String] = []
+        for (i, month) in (EventsListObs.evList).enumerated() {
+            for key in month.keys {
+                for event in month[key]! {
+                    allEvents.append("\(i)-\(key)-\(event.toString())")
+                }
+            }
+        }
+        UserDefaults.standard.set(allEvents, forKey: "eventsList")
+        Connectivity.shared.send(obj: ["classes": classes, "ZLunch": ZLunch,  "sports": sports, "eventsList": EventsListObs.evList])
         objectWillChange.send()
     }
     
+    func saveList() {
+        var allEvents: [String] = []
+        for (i, month) in (EventsListObs.evList).enumerated() {
+            for key in month.keys {
+                for event in month[key]! {
+                    allEvents.append("\(i)-\(key)-\(event.toString())")
+                }
+            }
+        }
+        UserDefaults.standard.set(allEvents, forKey: "eventsList")
+        Connectivity.shared.send(obj: ["classes": classes, "ZLunch": ZLunch,  "sports": sports, "eventsList": EventsListObs.evList])
+    }
+    
 }
+
