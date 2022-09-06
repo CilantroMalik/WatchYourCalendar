@@ -23,6 +23,11 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
     }
     
     func applicationDidFinishLaunching() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success { print("All set!") }
+            else if let error = error { print(error.localizedDescription) }
+        }
+        
         scheduleRefresh()
 //        UNUserNotificationCenter.current().requestAuthorization(options: [.sound, .alert]) { success, error in
 //            if success { print("Authorized") } else if let error = error { print(error.localizedDescription) }

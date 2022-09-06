@@ -85,7 +85,7 @@ class UserData: ObservableObject {
     // TODO replace this with generic placeholder
     static var classes: [Int: [String]] = [
         0: ["","","","",""],
-        1: ["(A Block)", "(B Block)", "(C Block)", "(Z)","(D Block)"],
+        1: ["Free", "(B Block)", "(C Block)", "(Z)","(D Block)"],
         2: ["(E Block)", "(F Block)", "(G Block)", "(Z)","(H Block)"],
         3: ["(D Block)", "(A Block)", "(B Block)", "(Z)","(C Block)"],
         4: ["(H Block)", "(E Block)", "(F Block)", "(Z)","(G Block)"],
@@ -298,7 +298,7 @@ func getRelativeDayText() -> String {
     }
 }
 var classes: [Int: [String]] = [
-    1: ["(A Block)", "(B Block)", "(C Block)", "(Z)","(D Block)"],
+    1: ["Free", "(B Block)", "(C Block)", "(Z)","(D Block)"],
     2: ["(E Block)", "(F Block)", "(G Block)", "(Z)","(H Block)"],
     3: ["(D Block)", "(A Block)", "(B Block)", "(Z)","(C Block)"],
     4: ["(H Block)", "(E Block)", "(F Block)", "(Z)","(G Block)"],

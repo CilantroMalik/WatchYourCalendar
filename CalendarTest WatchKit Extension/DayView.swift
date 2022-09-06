@@ -84,7 +84,7 @@ struct DayView: View {
     }
     
     func scheduleRow(time: String, block: Int, content: String) -> some View {
-        let defaultEventPick =  isMeetingOrAssessment(block, dtcp) == "Meeting" ? "Entirety" : "Test"
+        let defaultEventPick =  isMeetingOrAssessment(block, dtcp) == "Meeting" ? "Entire block #" : "Test"
         return Group {
             NavigationLink(destination: {MidView(day: cycleDay, block: block, datecomp: dtcp, eventPick: defaultEventPick)}, label: {Text(time).fontWeight(getTimeWeight(block)).foregroundColor(getTimeColor(block))}).buttonStyle(PlainButtonStyle())
             Text(content).foregroundColor(getContentColor(block)).fontWeight(getContentWeight(block))

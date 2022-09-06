@@ -192,17 +192,17 @@ struct MidView: View {
                     Picker(isMeetingOrAssessment(block, datecomp) == "Meeting" ? "Select Part of Block" : "Select Assessment Type", selection: $eventPick, content: {
                         if isMeetingOrAssessment(block, datecomp) == "Meeting" {
                             if isToday() {
-                                if nowIsBeforeBlockBegins(block: (block)) {Text("Entire Block").tag("Entire block -")}
-                                if nowIsBeforeQuarter(block: block, q: 1) {Text("First Quarter").tag("1st quarter -")}
-                                if nowIsBeforeQuarter(block: block, q: 2) {Text("Second Quarter").tag("2nd quarter -")}
-                                if nowIsBeforeQuarter(block: block, q: 3) {Text("Third Quarter").tag("3rd quarter -")}
-                                if nowIsBeforeQuarter(block: block, q: 4) {Text("Fourth Quarter").tag("4th quarter -")}
+                                if nowIsBeforeBlockBegins(block: (block)) {Text("Entire block").tag("Entire block #")}
+                                if nowIsBeforeQuarter(block: block, q: 1) {Text("1st quarter").tag("1st quarter #")}
+                                if nowIsBeforeQuarter(block: block, q: 2) {Text("2nd quarter").tag("2nd quarter #")}
+                                if nowIsBeforeQuarter(block: block, q: 3) {Text("3rd quarter").tag("3rd quarter #")}
+                                if nowIsBeforeQuarter(block: block, q: 4) {Text("4th quarter").tag("4th quarter #")}
                             } else {
-                                Text("Entire Block").tag("Entire block -")
-                                Text("First Quarter").tag("1st quarter -")
-                                Text("Second Quarter").tag("2nd quarter -")
-                                Text("Third Quarter").tag("3rd quarter -")
-                                Text("Fourth Quarter").tag("4th quarter -")
+                                Text("Entire block").tag("Entire block #")
+                                Text("1st quarter").tag("1st quarter #")
+                                Text("2nd quarter").tag("2nd quarter #")
+                                Text("3rd quarter").tag("3rd quarter #")
+                                Text("4th quarter").tag("4th quarter #")
                             }
                         } else {
                             Text("Test").tag("Test")
@@ -211,10 +211,10 @@ struct MidView: View {
                     }).pickerStyle(.wheel).frame(width: WKInterfaceDevice.current().screenBounds.width, height: 50, alignment: .center)
                     Button(action: {
                         let n = EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.filter({$0.label.contains(eventPick)}).count + 1
-                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.count+1), "\(eventPick) \(n)", true, false)
+                        let temp = blockEvent(block, datecomp, makeId(block: block, time: datecomp, num: EventsListObs.evList[datecomp.month! - 1][datecomp.day!]!.count+1), "\(eventPick)\(n)", true, false)
                         
                         eventsListObs.addEvent(ev: temp, month: datecomp.month!-1, day: datecomp.day!)
-                        eventPick = isMeetingOrAssessment(block, datecomp) == "Meeting" ? "Entire block -" : "Test"
+                        eventPick = isMeetingOrAssessment(block, datecomp) == "Meeting" ? "Entire block #" : "Test"
                         print (temp.block)
                     }, label: {
                         Text("Add Event").fontWeight(.heavy).multilineTextAlignment(.center)

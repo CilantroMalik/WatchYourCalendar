@@ -270,7 +270,7 @@ struct RichEventView: View {
                                         if ev.meetingOrAssessment() == "Assessment" {
                                             content.body = "Reminder: You have a \(String(ev.label.split(separator: " ")[0]).lowercased()) this block. Good luck!"
                                         } else {
-                                            content.body = "Reminder: You have a meeting during the \(String(ev.label.split(separator: " ")[0]).lowercased()) of the block."
+                                            content.body = "Reminder: You have a meeting during the \(String(ev.label.split(separator: "#")[0]).lowercased())of the block."
                                             if String(ev.label.split(separator: " ")[0]).lowercased() == "entire" { content.body = "Reminder: You have a meeting for the entire block." }
                                         }
                                         content.categoryIdentifier = "event"
