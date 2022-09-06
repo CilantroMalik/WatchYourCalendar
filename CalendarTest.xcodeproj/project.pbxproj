@@ -12,6 +12,11 @@
 		15DA717427AD516F00B26BDF /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA717327AD516F00B26BDF /* ExtensionDelegate.swift */; };
 		15DA717627AECA6E00B26BDF /* LunchNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA717527AECA6E00B26BDF /* LunchNotificationController.swift */; };
 		15DA717827AECA8A00B26BDF /* LunchNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15DA717727AECA8A00B26BDF /* LunchNotificationView.swift */; };
+		15E2C9CF28BCF3C800C1DED2 /* RichDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E2C9CE28BCF3C800C1DED2 /* RichDayView.swift */; };
+		15E2C9D128BCF41900C1DED2 /* WatchConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E2C9D028BCF41900C1DED2 /* WatchConfig.swift */; };
+		15E2C9D328BD4B0A00C1DED2 /* MobileUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E2C9D228BD4B0A00C1DED2 /* MobileUtilities.swift */; };
+		15E2C9D528BD90A100C1DED2 /* RichEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E2C9D428BD90A100C1DED2 /* RichEventView.swift */; };
+		15E2C9D728BD918B00C1DED2 /* MobileEventsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E2C9D628BD918B00C1DED2 /* MobileEventsList.swift */; };
 		15E497772812C7A70016D16C /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158165712810FB55000F135D /* Connectivity.swift */; };
 		5C3210A727AF07FB00AD582F /* ScheduleNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3210A627AF07FB00AD582F /* ScheduleNotificationView.swift */; };
 		5C6B675F27BC2F6900DAADE8 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6B675E27BC2F6900DAADE8 /* EventView.swift */; };
@@ -116,6 +121,11 @@
 		15DA717327AD516F00B26BDF /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		15DA717527AECA6E00B26BDF /* LunchNotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchNotificationController.swift; sourceTree = "<group>"; };
 		15DA717727AECA8A00B26BDF /* LunchNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchNotificationView.swift; sourceTree = "<group>"; };
+		15E2C9CE28BCF3C800C1DED2 /* RichDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichDayView.swift; sourceTree = "<group>"; };
+		15E2C9D028BCF41900C1DED2 /* WatchConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConfig.swift; sourceTree = "<group>"; };
+		15E2C9D228BD4B0A00C1DED2 /* MobileUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileUtilities.swift; sourceTree = "<group>"; };
+		15E2C9D428BD90A100C1DED2 /* RichEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichEventView.swift; sourceTree = "<group>"; };
+		15E2C9D628BD918B00C1DED2 /* MobileEventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileEventsList.swift; sourceTree = "<group>"; };
 		5C3210A627AF07FB00AD582F /* ScheduleNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNotificationView.swift; sourceTree = "<group>"; };
 		5C6B675E27BC2F6900DAADE8 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		5C6B676027BC64D400DAADE8 /* EventsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsList.swift; sourceTree = "<group>"; };
@@ -215,6 +225,11 @@
 				5C827AF82812439C004DD3D9 /* ContentView.swift */,
 				5C827AFA281243A0004DD3D9 /* Assets.xcassets */,
 				5C827AFC281243A0004DD3D9 /* Preview Content */,
+				15E2C9CE28BCF3C800C1DED2 /* RichDayView.swift */,
+				15E2C9D028BCF41900C1DED2 /* WatchConfig.swift */,
+				15E2C9D228BD4B0A00C1DED2 /* MobileUtilities.swift */,
+				15E2C9D428BD90A100C1DED2 /* RichEventView.swift */,
+				15E2C9D628BD918B00C1DED2 /* MobileEventsList.swift */,
 			);
 			path = whatever;
 			sourceTree = "<group>";
@@ -612,9 +627,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15E2C9D528BD90A100C1DED2 /* RichEventView.swift in Sources */,
+				15E2C9D128BCF41900C1DED2 /* WatchConfig.swift in Sources */,
+				15E2C9D728BD918B00C1DED2 /* MobileEventsList.swift in Sources */,
 				5C827AF92812439C004DD3D9 /* ContentView.swift in Sources */,
 				5C827AF72812439C004DD3D9 /* whateverApp.swift in Sources */,
 				15E497772812C7A70016D16C /* Connectivity.swift in Sources */,
+				15E2C9D328BD4B0A00C1DED2 /* MobileUtilities.swift in Sources */,
+				15E2C9CF28BCF3C800C1DED2 /* RichDayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,7 +747,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -758,7 +778,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -782,7 +802,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 72S2H2ZD48;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.whateverTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -803,7 +823,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 72S2H2ZD48;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.whateverTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -823,7 +843,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 72S2H2ZD48;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.whateverUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -843,7 +863,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 72S2H2ZD48;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.whateverUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
