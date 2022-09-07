@@ -136,7 +136,7 @@ func getColor(Blk: Int) -> Text {
             return Text(blocks[cycleDay]![Blk]).foregroundColor(.blue).fontWeight(.light)
         }
     } else {
-        return Text(blocks[cycleDay]![Blk]).foregroundColor(.white).fontWeight(.light)
+        return Text(blocks[cycleDay]![Blk]).foregroundColor(.black).fontWeight(.light)
     }
 }
 
